@@ -1,0 +1,28 @@
+* {
+
+}
+
+body {
+    background-color: rgb(43, 43, 43);
+}
+
+#signup-form {
+    position: absolute;
+    margin: 10vh auto auto auto;
+    left: 0;
+    right: 0;
+    width: 70vh;
+    height: 70vh;
+    background-color:rgb(6, 21, 27);
+    color: aliceblue;
+    border-radius: 20px;
+}
+
+@media screen and (max-width: 800px) {
+  #signup-form {
+    margin: 2vh auto auto auto;
+    padding: 2vh 5vh 5vh 5vh;
+    height: 100vh;
+    
+  }
+}
