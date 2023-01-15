@@ -1,0 +1,42 @@
+* {}
+
+body {
+  background-color: rgb(43, 43, 43);
+}
+
+#signup-form {
+  position: relative;
+  margin: 3vh auto auto auto;
+  padding: 2.5vh;
+  left: 0;
+  right: 0;
+  width: 70vh;
+  background-color: #212529;
+  color: aliceblue;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 600px) {
+  #signup-form {
+    margin: 3vh auto auto auto;
+    padding: 2.5vh 5vh 5vh 5vh;
+    width: 65vh;
+  }
+}
+
+a {
+  color: aliceblue;
+  font-size: 15px;
+  text-decoration: none;
+  padding-top: 1vh;
+}
+
+.text-top {
+  color: aliceblue;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+footer {
+  margin-top: 3vh;
+}

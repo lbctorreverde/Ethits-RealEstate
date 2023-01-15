@@ -16,7 +16,8 @@
         <h1>A roster of Real Estate Agents at your fingertips</h1>
         <h3>Hero subtitle example, replace with something remarkable</h3>
     </section>
-
 </body>
 
-</html>
+<?php
+    include_once 'footer.php';
+?>

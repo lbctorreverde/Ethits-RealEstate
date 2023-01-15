@@ -4,6 +4,7 @@
     <?php include 'css/login.css'; ?>
 </style>
 
+
 <div class="container" id="container">
     <div class="form-container sign-up-container">
         <form action="#">
@@ -11,7 +12,9 @@
             <input type="text" placeholder="Name" />
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Password" />
+            <a class="forgot-link" href="#">Forgot your password?</a>
             <button>Log in</button>
+            <a class="signupuser-link" href="signupUser.php">Don't have an account? Sign up now!</a>
         </form>
     </div>
     <div class="form-container sign-in-container">
@@ -21,6 +24,7 @@
             <input type="password" placeholder="Password" />
             <a class="forgot-link" href="#">Forgot your password?</a>
             <button>Log in</button>
+            <a class="signup-link" href="signup.php">Don't have an account? Sign up now!</a>
         </form>
     </div>
     <div class="overlay-container">
@@ -35,9 +39,19 @@
                 <p>Log in as a user now to find the agent of your needs!</p>
                 <button class="ghost" id="signUp">Log in as a User</button>
             </div>
+            
         </div>
     </div>
 </div>
+
+<footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+    <div class=" text-center">
+        <small>Copyright &copy; CS3</small>
+    </div>
+</footer>
+
+
+
 
 <script>
     const signUpButton = document.getElementById('signUp');

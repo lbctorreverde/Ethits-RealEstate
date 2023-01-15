@@ -38,6 +38,20 @@ span {
 	margin: 15px 0;
 }
 
+.signup-link {
+	color: #333;
+	font-size: 14px;
+	text-decoration: none;
+	padding-top: 2.5vh;
+}
+
+.signupuser-link {
+	color: #333;
+	font-size: 14px;
+	text-decoration: none;
+	padding-top: 2.5vh;
+}
+
 button {
 	border-radius: 10px;
 	border: 1px solid #212529;
@@ -89,6 +103,7 @@ input {
 	width: 768px;
 	max-width: 100%;
 	min-height: 480px;
+	
 }
 
 .form-container {
@@ -197,5 +212,9 @@ input {
 
 .container.right-panel-active .overlay-right {
 	transform: translateX(20%);
+}
+
+footer {
+	transform: translateY(100%);
 }
 
