@@ -21,7 +21,7 @@
 <body>
     <nav class="navbar navbar-dark navbar-expand bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">Real Estate</a>
+            <a class="navbar-brand" href="#">Real Estate</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,6 +32,15 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Agents</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Properties</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sell</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Asset Value</a>
                     </li>
 
                 </ul>
@@ -50,15 +59,14 @@
             </li>
             <?php }else{?>
             <button class="btn btn-dark btn-outline-light float-right me-2" onclick="window.location.href='login.php';">Login/Register</button>
-            <!-- <button class="btn btn-dark btn-outline-light float-right" onclick="window.location.href='signup.php';">Register</button> -->
             <?php }?>
         </div>
     </nav>
 
 <?php
-    if(isset($_SESSION['status']))
-    {
-        echo "<p class='alert alert-success'>".$_SESSION['status']."</p>";
-        unset($_SESSION['status']);
-    }
+if(isset($_SESSION['status']))
+{
+    echo "<p class='alert alert-success'>".$_SESSION['status']."</p>";
+    unset($_SESSION['status']);
+}
 ?>

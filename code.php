@@ -1,11 +1,11 @@
 <?php
+use Firebase\Auth\Token\Exception\InvalidToken;
 session_start();
 include ('dbconfig.php');
 
 
 //SIGN UP AGENT
 if(isset($_POST['btn_registerAgent'])){
-
     $fname = $_POST['fname'];
     $mname = $_POST['mname'];
     $lname = $_POST['lname'];
@@ -18,11 +18,9 @@ if(isset($_POST['btn_registerAgent'])){
     $str = $_POST['str'];
     $email = $_POST['email'];
     $pass = $_POST['password'];
-
-    $user = ('some-uid');
+    $type = "Agent";
 
     $userProperties = [
-
         'firstName' => $fname,
         'lastName' => $lname,
         'midName' => $mname,
@@ -37,25 +35,79 @@ if(isset($_POST['btn_registerAgent'])){
         ],
         'email' => $email,
         'password' => $pass,
-        'Status' => ''
-        
+        'Status' => '',
+        "metadata" => [
+            "createdAt" => ['.sv' => 'timestamp'],
+            "lastLoginAt" => "",
+            "passwordUpdatedAt" => "",
+            "lastRefreshAt" => ""
+        ]
     ];
 
+    $ref_table = "agentInfo";
+    $database->getReference($ref_table)->push($userProperties);
+    $uniqueKey = $database->getReference($ref_table)->push($userProperties)->getKey();
+
+    $userEPass = [
+        'uid' => $uniqueKey,
+        'email' => $email,
+        'password' => $pass,
+    ];
     
-    $createdUser = $auth->createUser($userProperties);
-    // $ref_table = "/agentInfo";
-    // $database->getReference($ref_table)->set($userProperties);
+    $createdUser = $auth->createUser($userEPass);
 
     if($createdUser){
-        $_SESSION['status'] = "User Created/Registered Successfully";
+        $_SESSION['status'] = "Account Created/Registered Successfully";
         header('Location: login.php');
         exit;
     }else{
-        $_SESSION['status'] = "User Not Created/Registered";
+        $_SESSION['status'] = "Account Not Created/Registered";
         header('Location: login.php');
         exit;
     }
     
+}elseif (isset($_POST['btn_registerUser'])) {
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $email = $_POST['email'];
+    $pass = $_POST['password'];
+    $type = "Agent";
+
+    $userProperties = [
+        'firstName' => $fname,
+        'lastName' => $lname,
+        'email' => $email,
+        'password' => $pass,
+        'Status' => '',
+        "metadata" => [
+            "createdAt" => ['.sv' => 'timestamp'],
+            "lastLoginAt" => "",
+            "passwordUpdatedAt" => "",
+            "lastRefreshAt" => ""
+        ]
+    ];
+
+    $ref_table = "userInfo";
+    $database->getReference($ref_table)->push($userProperties);
+    $uniqueKey = $database->getReference($ref_table)->push($userProperties)->getKey();
+
+    $userEPass = [
+        'uid' => $uniqueKey,
+        'email' => $email,
+        'password' => $pass,
+    ];
+    
+    $createdUser = $auth->createUser($userEPass);
+
+    if($createdUser){
+        $_SESSION['status'] = "AccountCreated/Registered Successfully";
+        header('Location: login.php');
+        exit;
+    }else{
+        $_SESSION['status'] = "Account Not Created/Registered";
+        header('Location: login.php');
+        exit;
+    }
 }
 
 ?>

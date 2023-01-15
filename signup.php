@@ -1,5 +1,5 @@
 <?php
-include_once 'navbarfresh.php'
+include_once 'navbarfresh.php';
 ?>
 
 <style>
@@ -9,13 +9,14 @@ include_once 'navbarfresh.php'
 <div class="main-div">
     <div>
         <form action="code.php" method="POST" class="container-fluid row g-3" id="signup-form">
+            <div class="text-top text-center">Sign up as an Agent</div>
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Email</label>
                 <input type="email" class="form-control" name="email" placeholder="example@gmail.com">
             </div>
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password">
+                <input type="password" class="form-control" name="password" placeholder="********">
             </div>
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">First Name</label>
@@ -43,7 +44,7 @@ include_once 'navbarfresh.php'
             </div>
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Phone Number</label>
-                <input type="number" class="form-control" name="contact">
+                <input type="text" class="form-control" name="contact" placeholder="0987654321">
             </div>
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Agency</label>
@@ -73,12 +74,12 @@ include_once 'navbarfresh.php'
             <div class="col-6">
                 <input type="text" class="form-control" name="str" placeholder="1234 Main St">
             </div>
-     
+
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">License</label>
                 <input type="file" class="form-control" id="inputCity">
             </div>
-           
+
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Document</label>
                 <input type="file" class="form-control" id="inputZip">
@@ -91,9 +92,19 @@ include_once 'navbarfresh.php'
                     </label>
                 </div>
             </div>
-            <div class="col-12">
+            <div class="d-flex col-12 justify-content-center">
                 <button type="submit" name="btn_registerAgent" class="btn btn-primary">Sign-Up</button>
             </div>
+            <a class="text-center" href="login.php">Already have an account? Sign in!</a>
         </form>
+
     </div>
+
 </div>
+
+<footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+    <div class=" text-center">
+        <small>Copyright &copy; CS3</small>
+    </div>
+</footer>
+
