@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,10 +33,40 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Agents</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Properties</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sell</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Asset Value</a>
+                    </li>
 
                 </ul>
             </div>
-            <button class="btn btn-dark btn-outline-light float-right me-2" onclick="window.location.href='login.php';">Login</button>
-            <button class="btn btn-dark btn-outline-light float-right" onclick="window.location.href='signup.php';">Register</button>
+            <?php if(isset($_SESSION['verified_user_id'])){?>
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Link
+                </a>
+                <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
+                </ul>
+            </li>
+            <?php }else{?>
+            <button class="btn btn-dark btn-outline-light float-right me-2" onclick="window.location.href='login.php';">Login/Register</button>
+            <?php }?>
         </div>
     </nav>
+
+<?php
+if(isset($_SESSION['status']))
+{
+    echo "<p class='alert alert-success'>".$_SESSION['status']."</p>";
+    unset($_SESSION['status']);
+}
+?>
