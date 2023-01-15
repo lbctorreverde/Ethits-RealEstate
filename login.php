@@ -1,12 +1,20 @@
-<?php include_once 'navbarfresh.php'; ?>
+<?php include_once 'navbarfresh.php';?>
 
 <style>
     <?php include 'css/login.css'; ?>
 </style>
 
+<?php
+    if(isset($_SESSION['status']))
+    {
+        echo "<h5 class='alert alert-success'>".$_SESSION['status']."</h5>";
+        unset($_SESSION['status']);
+    }
+?>
+
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form action="#">
+        <form action="logincode.php" method="POST">
             <h1>Sign is as User</h1>
             <input type="text" placeholder="Name" />
             <input type="email" placeholder="Email" />
@@ -15,12 +23,13 @@
         </form>
     </div>
     <div class="form-container sign-in-container">
-        <form action="#">
+        <form action="logincode.php" method="POST">
             <h1>Sign in as Agent</h1>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <input type="email" name="email" placeholder="Email" />
+            <input type="password" name="pass" placeholder="Password" />
             <a class="forgot-link" href="#">Forgot your password?</a>
-            <button>Log in</button>
+            <button type="submit" name="btn_login" class="btn btn-primary">Log-in</button>
+
         </form>
     </div>
     <div class="overlay-container">

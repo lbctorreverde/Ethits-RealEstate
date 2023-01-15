@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (isset($_SESSION['verified_user_id'])) 
+{
+    $_SESSION['status'] = "You are already Logged In";
+    header('Location: index.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
