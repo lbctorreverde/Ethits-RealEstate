@@ -6,7 +6,7 @@ body {
 
 #signup-form {
   position: relative;
-  margin: 3vh auto auto auto;
+  margin: 15vh auto 20.5vh auto;
   padding: 2.5vh;
   left: 0;
   right: 0;
@@ -35,8 +35,4 @@ a {
   color: aliceblue;
   font-size: 25px;
   font-weight: 600;
-}
-
-footer {
-  margin-top: 3vh;
 }
