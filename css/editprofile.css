@@ -10,7 +10,15 @@ body {
     color:rgb(204, 204, 204);
 }
 
+.content-form {
+    margin-left: 1vh;
+}
+
 
 label {
     color: aliceblue;
+}
+
+#savebutton {
+    margin-bottom: 20vh;
 }
