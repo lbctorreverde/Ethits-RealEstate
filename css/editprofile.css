@@ -1,0 +1,24 @@
+body {
+    background-color: rgb(43, 43, 43);
+}
+
+.nav-item>a {
+    color: aliceblue;
+}
+
+.nav-item>a:hover {
+    color:rgb(204, 204, 204);
+}
+
+.content-form {
+    margin-left: 1vh;
+}
+
+
+label {
+    color: aliceblue;
+}
+
+#savebutton {
+    margin-bottom: 20vh;
+}

@@ -28,7 +28,13 @@ section > h1 {
 #sticky-footer {
 
     padding-bottom: 50px;
+<<<<<<< HEAD
+=======
 }
 
+.dropdown-topright {
+    color:aqua;
+>>>>>>> 219d6452c1702e31fbad851dbf4a14214f956371
+}
 
 
