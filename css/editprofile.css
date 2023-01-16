@@ -1,0 +1,16 @@
+body {
+    background-color: rgb(43, 43, 43);
+}
+
+.nav-item>a {
+    color: aliceblue;
+}
+
+.nav-item>a:hover {
+    color:rgb(204, 204, 204);
+}
+
+
+label {
+    color: aliceblue;
+}
