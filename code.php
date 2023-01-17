@@ -45,7 +45,6 @@ if(isset($_POST['btn_registerAgent'])){
     ];
 
     $ref_table = "agentInfo";
-    $database->getReference($ref_table)->push($userProperties);
     $uniqueKey = $database->getReference($ref_table)->push($userProperties)->getKey();
 
     $userEPass = [
@@ -88,7 +87,6 @@ if(isset($_POST['btn_registerAgent'])){
     ];
 
     $ref_table = "userInfo";
-    $database->getReference($ref_table)->push($userProperties);
     $uniqueKey = $database->getReference($ref_table)->push($userProperties)->getKey();
 
     $userEPass = [

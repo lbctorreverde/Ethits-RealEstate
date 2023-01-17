@@ -48,20 +48,26 @@
             <?php if(isset($_SESSION['verified_user_id'])){?>
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
             <li class="nav-item dropdown">
-<<<<<<< HEAD
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Link
-                </a>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-=======
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                        <?php 
+                            include ('dbconfig.php');
+                            $uid = $_SESSION['verified_user_id'];
+                            $user = $auth->getUser($uid); 
+
+                            if ($user->photoUrl != NULL) {
+                                ?>
+                                    <img src="<?=$user->photoUrl?>" width="30" height="30" class="rounded-circle" />
+                                <?php
+                            }else {
+                                ?>
+                                    <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                                <?php
+                            }
+                        ?>
                         <span class="d-none d-sm-inline mx-1">Name</span>
                     </a>
                 <ul class="dropdown-menu dropdown-menu-left dropdown-menu-end">
                 <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofile.php'">Profile</a></li>
->>>>>>> 219d6452c1702e31fbad851dbf4a14214f956371
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
                 </ul>

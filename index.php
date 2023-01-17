@@ -20,8 +20,4 @@
 
 <?php
     include_once 'footer.php';
-<<<<<<< HEAD
 ?>
-=======
-?>
->>>>>>> 219d6452c1702e31fbad851dbf4a14214f956371

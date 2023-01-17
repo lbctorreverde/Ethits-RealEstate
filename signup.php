@@ -74,18 +74,10 @@ include_once 'navbarfresh.php';
             <div class="col-6">
                 <input type="text" class="form-control" name="str" placeholder="1234 Main St">
             </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 219d6452c1702e31fbad851dbf4a14214f956371
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">License</label>
                 <input type="file" class="form-control" id="inputCity">
             </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 219d6452c1702e31fbad851dbf4a14214f956371
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Document</label>
                 <input type="file" class="form-control" id="inputZip">
