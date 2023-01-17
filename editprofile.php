@@ -23,7 +23,7 @@ include_once 'header.php';?>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Option 1</span>
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Documents</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -241,20 +241,20 @@ include_once 'header.php';?>
     }
 
     //To make inputs readOnly
-    function setCancel(){
-        let getControl = document.getElementsByClassName("form-control")
-        let getSelect = document.getElementsByClassName("form-select")
-        document.getElementById("divTitle").innerHTML = "Profile";
-        document.getElementById("custom1").style.display = "none";
-        document.getElementById("btn_Cancel").style.display = "none";
-        document.getElementById("btn_saveChangesAgent").style.display = "none";
-        document.getElementById("btn_Edit").style.display = "block";
-        document.getElementById("divConfirm").style.display = "none";
-        for (let input of getControl){
-            input.readOnly = true;
-        }
-        for (let select of getSelect){
-            select.disabled = true;
-        }
-    }
+    // function setCancel(){
+    //     let getControl = document.getElementsByClassName("form-control")
+    //     let getSelect = document.getElementsByClassName("form-select")
+    //     document.getElementById("divTitle").innerHTML = "Profile";
+    //     document.getElementById("custom1").style.display = "none";
+    //     document.getElementById("btn_Cancel").style.display = "none";
+    //     document.getElementById("btn_saveChangesAgent").style.display = "none";
+    //     document.getElementById("btn_Edit").style.display = "block";
+    //     document.getElementById("divConfirm").style.display = "none";
+    //     for (let input of getControl){
+    //         input.readOnly = true;
+    //     }
+    //     for (let select of getSelect){
+    //         select.disabled = true;
+    //     }
+    // }
 </script>

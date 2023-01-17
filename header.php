@@ -67,7 +67,17 @@
                         <span class="d-none d-sm-inline mx-1">Name</span>
                     </a>
                 <ul class="dropdown-menu dropdown-menu-left dropdown-menu-end">
-                <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofile.php'">Profile</a></li>
+                <?php 
+                    if ($_SESSION['enduser'] == "Agent") {
+                        ?>
+                            <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofile.php'">Profile</a></li>
+                        <?php
+                    }else if($_SESSION['enduser'] == "User"){
+                        ?>
+                            <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofileuser.php'">Profile</a></li>
+                        <?php
+                    }
+                ?>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
                 </ul>
