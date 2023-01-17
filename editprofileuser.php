@@ -84,7 +84,7 @@
         </div>
         <div class="content-form col py-3">
             <div>
-                <form action="editprofilecode.php" method="POST" class="container-fluid row g-3" id="signup-form" enctype="multipart/form-data">
+                <form action="editprofileusercode.php" method="POST" class="container-fluid row g-3" id="signup-form" enctype="multipart/form-data">
                     <?php 
                         if(isset($_SESSION['status']))
                         {
@@ -132,7 +132,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Middle Name</label>
-                        <input type="text" class="form-control" name="mname" value="<?php if (isset($getdata['midName'])) {
+                        <input type="text" class="form-control" name="mname" value="<?php if ($getdata['midName'] != "") {
                             echo $getdata['midName'];} else {echo "-Empty-";}?>" placeholder="Enter Middlename here.." readOnly required>
                     </div>
                     <div class="col-md-6">
@@ -142,13 +142,13 @@
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Birthday</label>
                         <input type="date" class="form-control" name="bday" value="<?php if (isset($getdata['bday'])) {
-                            echo $getdata['bday'];} else {echo "-Empty-";}?>" readonly required>
+                            echo $getdata['bday'];} else {echo "01/01/1900";}?>" readonly required>
                     </div>
                     <div class="col-md-6">
                         <label for="inputState" class="form-label">Sex</label>
                         <select class="form-select" name="sex" id="sex" disabled required>
-                            <option value="<?php if (isset($getdata['sex'])) {echo $getdata['sex'];} else {echo "-Empty-";}?>">
-                                :<?php if (isset($getdata['sex'])) {echo $getdata['sex'];} else {echo "-Empty-";}?>
+                            <option value="<?php if ($getdata['sex'] != "") {echo $getdata['sex'];} else {echo "-Empty-";}?>">
+                                :<?php if ($getdata['sex'] != "") {echo $getdata['sex'];} else {echo "-Empty-";}?>
                             </option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -156,14 +156,14 @@
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" name="contact" value="<?php if (isset($getdata['contactNo'])) {
+                        <input type="text" class="form-control" name="contact" value="<?php if ($getdata['contactNo'] != "") {
                             echo $getdata['contactNo'];} else {echo "-Empty-";}?>" placeholder="Enter phone number" readonly required>
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">City</label>
                         <select class="form-select" name="city" id="city" disabled required>
-                            <option value="<?php if (isset($getloc['city'])) {echo $getdata['city'];} else {echo "-Empty-";}?>">
-                                :<?php if (isset($getdata['city'])) {echo $getdata['city'];} else {echo "-Empty-";}?>
+                            <option value="<?php if ($getloc['city'] != "") {echo $getloc['city'];} else {echo "-Empty-";}?>">
+                                :<?php if ($getloc['city'] != "") {echo $getloc['city'];} else {echo "-Empty-";}?>
                             </option>
                             <option value="Abucay">Abucay</option>
                             <option value="Bagac">Bagac</option>
@@ -181,12 +181,12 @@
                     </div>
                     <div class="col-6">
                         <label for="inputEmail4" class="form-label">Barangay</label>
-                        <input type="text" class="form-control" name="brgy" value="<?php if (isset($getloc['brgy'])) {
+                        <input type="text" class="form-control" name="brgy" value="<?php if ($getloc['brgy'] != "") {
                             echo $getloc['brgy'];} else {echo "-Empty-";}?>" placeholder="Barangay.." readonly required>
                     </div>
                     <div class="col-6">
                         <label for="inputEmail4" class="form-label">Street</label>
-                        <input type="text" class="form-control" name="str" value="<?php if (isset($getloc['str'])) {
+                        <input type="text" class="form-control" name="str" value="<?php if ($getloc['str'] != "") {
                             echo $getloc['str'];} else {echo "-Empty-";}?>" placeholder="1234 Main St" readonly required>
                     </div>
                     <div class="col-md-6">
@@ -204,7 +204,7 @@
                     <div class="col-12">
                     </div>
                     <div class="d-flex col-12 justify-content-center">
-                    <button type="submit" name="btn_saveChangesAgent" id="btn_saveChangesUser" class="btn btn-dark" style="display: none;">Save Changes</button>
+                    <button type="submit" name="btn_saveChangesUser" id="btn_saveChangesUser" class="btn btn-dark" style="display: none;">Save Changes</button>
                     </div>
                 </form>
                 <div class="d-flex col-12 justify-content-center">

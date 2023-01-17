@@ -75,6 +75,15 @@ if(isset($_POST['btn_registerAgent'])){
     $userProperties = [
         'firstName' => $fname,
         'lastName' => $lname,
+        'midName' => '',
+        'bday' => '01/01/1900',
+        'sex' => '',
+        'contactNo' => '',
+        'location' =>[
+            'city' => '',
+            'brgy' => '',
+            'str' => ''
+        ],
         'email' => $email,
         'password' => $pass,
         'Status' => '',
@@ -86,13 +95,13 @@ if(isset($_POST['btn_registerAgent'])){
         ]
     ];
 
-    $ref_table = "userInfo";
+    $ref_table = "userInfo/";
     $uniqueKey = $database->getReference($ref_table)->push($userProperties)->getKey();
 
     $userEPass = [
         'uid' => $uniqueKey,
         'email' => $email,
-        'password' => $pass,
+        'password' => $pass
     ];
     
     $createdUser = $auth->createUser($userEPass);
