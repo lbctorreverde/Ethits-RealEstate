@@ -31,7 +31,7 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Agents</a>
+                        <a class="nav-link" href="#" onclick="window.location.href='agents.php'">Agents</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Properties</a>
