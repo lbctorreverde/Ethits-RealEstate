@@ -60,6 +60,7 @@ svg {
 }
 
 .agentslist-panel {
+    width: 100vw;
     padding-top: 30px;
     background-color: #212529;
     
@@ -68,6 +69,10 @@ svg {
 .card {
     
     
+}
+
+.agentcard {
+    padding: 10px;
 }
 
 @media screen and (max-width: 1000px) {

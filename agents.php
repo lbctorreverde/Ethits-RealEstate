@@ -19,23 +19,28 @@ include_once 'header.php';
 </form>
 
 <section class="secondsection d-flex flex-row">
-    <div class="left-panel border-end">
+    <div class="left-panel">
         <h4>Total agents</h4>
     </div>
     <div class="agentslist-panel">
-        <div class="agent-card card text-white bg-dark mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="..." class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
+        <!-- CARD FOR EACH AGENT -->
+        <div class="agentcard row g-0 mt-2 shadow">
+            <div class="col-md-2">
+                <img src="img/121vrq3gasfdg5.jpg" class="img-fluid rounded-start" alt="..." width="150" height="150">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title mt-2">Full name ng Agent</h5>
+                    <p class="card-text text-muted">Pangalan ng agency na pinapasukan ahaha ;)</p>
+                    <p class="card-title text-muted">Contact: </p>
+                    <p class="card-text"><small class="text-muted lh-sm">09123456789</small></p>
                 </div>
             </div>
         </div>
+
+        
+
+
     </div>
 </section>
+
