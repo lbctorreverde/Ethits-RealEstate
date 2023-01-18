@@ -5,6 +5,7 @@ include ('dbconfig.php');
 
 //SIGN UP AGENT
 if(isset($_POST['btn_registerAgent'])){
+
     $fname = $_POST['fname'];
     $mname = $_POST['mname'];
     $lname = $_POST['lname'];

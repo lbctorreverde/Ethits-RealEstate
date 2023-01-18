@@ -21,7 +21,7 @@
 <body>
     <nav class="navbar navbar-dark navbar-expand bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#" onclick="window.location.href='index.php'">Real Estate</a>
+            <a class="navbar-brand" href="index.php">Real Estate</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -48,26 +48,26 @@
             <?php if(isset($_SESSION['verified_user_id'])){?>
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
             <li class="nav-item dropdown">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                        <span class="d-none d-sm-inline mx-1">Name</span>
-                    </a>
-                <ul class="dropdown-menu dropdown-menu-left dropdown-menu-end">
-                <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofile.php'">Profile</a></li>
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Link
+                </a>
+                <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
                 </ul>
             </li>
             <?php }else{?>
             <button class="btn btn-dark btn-outline-light float-right me-2" onclick="window.location.href='login.php';">Login/Register</button>
+            <!-- <button class="btn btn-dark btn-outline-light float-right" onclick="window.location.href='signup.php';">Register</button> -->
             <?php }?>
         </div>
     </nav>
 
 <?php
-if(isset($_SESSION['status']))
-{
-    echo "<p class='alert alert-success'>".$_SESSION['status']."</p>";
-    unset($_SESSION['status']);
-}
+    if(isset($_SESSION['status']))
+    {
+        echo "<p class='alert alert-success'>".$_SESSION['status']."</p>";
+        unset($_SESSION['status']);
+    }
 ?>

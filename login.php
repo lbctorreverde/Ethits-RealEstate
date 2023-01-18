@@ -1,4 +1,4 @@
-<?php include_once 'navbarfresh.php'; ?>
+<?php include_once 'navbarfresh.php';?>
 
 <style>
     <?php include 'css/login.css'; ?>
@@ -32,17 +32,11 @@
     <div class="form-container sign-in-container">
         <form action="logincode.php" method="POST">
             <h1>Sign in as Agent</h1>
-            <?php
-                if (isset($_SESSION['loginAgent'])) {
-                    echo "<p style = 'color:red;'>" . $_SESSION['loginAgent'] . "</p>";
-                    unset($_SESSION['loginAgent']);
-                }
-            ?>
             <input type="email" name="email" placeholder="Email" />
             <input type="password" name="pass" placeholder="Password" />
             <a class="forgot-link" href="#">Forgot your password?</a>
-            <button type="submit" name="btn_loginAgent">Log in</button>
-            <a class="signup-link" href="signup.php">Don't have an account? Sign up now!</a>
+            <button type="submit" name="btn_login" class="btn btn-primary">Log-in</button>
+
         </form>
     </div>
     <div class="overlay-container">
