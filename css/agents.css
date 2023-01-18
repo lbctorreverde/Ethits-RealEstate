@@ -9,6 +9,7 @@ body {
     position: relative;
 }
 
+
 form {
     background-color: #eeeeee;
     width: 90vh;
@@ -19,7 +20,7 @@ form {
     align-items: center;
     transform: translate(62.5%, -50%);
     position: absolute;
-    
+
 }
 
 input {
@@ -44,6 +45,12 @@ svg {
     height: 44px;
 }
 
+.filter-btn {
+    margin-right: 1vh;
+    width: 20vh;
+
+}
+
 .secondsection {
     height: 100vh;
     background-color: rgb(43, 43, 43);
@@ -56,24 +63,23 @@ svg {
     background-color: #212529;
     height: 100vh;
     width: 75vh;
-    
+
 }
 
 .agentslist-panel {
     width: 100vw;
     padding-top: 30px;
     background-color: #212529;
-    
+
 }
 
-.card {
-    
-    
-}
+.card {}
 
 .agentcard {
     padding: 10px;
 }
+
+
 
 @media screen and (max-width: 1000px) {
     form {
@@ -93,6 +99,8 @@ svg {
         background-color: #212529;
         height: 100vh;
         width: 35vh;
-        
+
     }
+
+
 }
