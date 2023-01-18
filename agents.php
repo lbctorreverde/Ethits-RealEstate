@@ -69,7 +69,7 @@ include_once 'header.php';
                     <label for="inputEmail4" class="form-label">Location</label>
                     <input type="text" class="form-control" name="location" placeholder=" " style="width: 32vh;">
                 </div>
-                <button type="button" class="btn btn-dark mt-3">Reset</button>
+                <button type="button" class="btn btn-dark mt-3">Apply</button>
             </div>
         </div>
     </div>
