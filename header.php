@@ -21,14 +21,14 @@
 <body>
     <nav class="navbar navbar-dark navbar-expand bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">Real Estate</a>
+            <a class="navbar-brand" href="#" onclick="window.location.href='index.php'">Real Estate</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="window.location.href='agents.php'">Agents</a>
@@ -48,11 +48,36 @@
             <?php if(isset($_SESSION['verified_user_id'])){?>
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Link
-                </a>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <?php 
+                            include ('dbconfig.php');
+                            $uid = $_SESSION['verified_user_id'];
+                            $user = $auth->getUser($uid); 
+
+                            if ($user->photoUrl != NULL) {
+                                ?>
+                                    <img src="<?=$user->photoUrl?>" width="30" height="30" class="rounded-circle" />
+                                <?php
+                            }else {
+                                ?>
+                                    <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                                <?php
+                            }
+                        ?>
+                        <span class="d-none d-sm-inline mx-1">Name</span>
+                    </a>
+                <ul class="dropdown-menu dropdown-menu-left dropdown-menu-end">
+                <?php 
+                    if ($_SESSION['enduser'] == "Agent") {
+                        ?>
+                            <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofile.php'">Profile</a></li>
+                        <?php
+                    }else if($_SESSION['enduser'] == "User"){
+                        ?>
+                            <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofileuser.php'">Profile</a></li>
+                        <?php
+                    }
+                ?>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
                 </ul>
@@ -65,9 +90,9 @@
     </nav>
 
 <?php
-    if(isset($_SESSION['status']))
-    {
-        echo "<p class='alert alert-success'>".$_SESSION['status']."</p>";
-        unset($_SESSION['status']);
-    }
+if(isset($_SESSION['status']))
+{
+    echo "<p class='alert alert-success'>".$_SESSION['status']."</p>";
+    unset($_SESSION['status']);
+}
 ?>

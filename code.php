@@ -5,7 +5,6 @@ include ('dbconfig.php');
 
 //SIGN UP AGENT
 if(isset($_POST['btn_registerAgent'])){
-
     $fname = $_POST['fname'];
     $mname = $_POST['mname'];
     $lname = $_POST['lname'];
@@ -18,11 +17,9 @@ if(isset($_POST['btn_registerAgent'])){
     $str = $_POST['str'];
     $email = $_POST['email'];
     $pass = $_POST['password'];
-
-    $user = ('some-uid');
+    $type = "Agent";
 
     $userProperties = [
-
         'firstName' => $fname,
         'lastName' => $lname,
         'midName' => $mname,
@@ -30,21 +27,32 @@ if(isset($_POST['btn_registerAgent'])){
         'sex' => $sex,
         'contactNo' => $contact,
         'agency' => $agency,
-        'agencyLoc' =>[
-            'city' => $city,
-            'brgy' => $brgy,
-            'str' => $str
-        ],
+        'city' => $city,
+        'brgy' => $brgy,
+        'str' => $str,
         'email' => $email,
         'password' => $pass,
-        'Status' => ''
+        'Status' => '',
+        'Uniquekey' => ''
         
     ];
 
+    $ref_table = "agentInfo/";
+    $uniqueKey = $database->getReference($ref_table)->push($userProperties)->getKey();
+
+    $userEPass = [
+        'uid' => $uniqueKey,
+        'email' => $email,
+        'password' => $pass
+    ];
     
-    $createdUser = $auth->createUser($userProperties);
-    // $ref_table = "/agentInfo";
-    // $database->getReference($ref_table)->set($userProperties);
+    $createdUser = $auth->createUser($userEPass);
+
+    $userKey = [
+        'Uniquekey' => $uniqueKey
+    ];
+
+    $database->getReference("agentInfo/".$uniqueKey)->update($userKey);
 
     if($createdUser){
         $_SESSION['status'] = "User Created/Registered Successfully";
@@ -56,6 +64,61 @@ if(isset($_POST['btn_registerAgent'])){
         exit;
     }
     
+}elseif (isset($_POST['btn_registerUser'])) {
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $email = $_POST['email'];
+    $pass = $_POST['password'];
+    $type = "Agent";
+
+    $userProperties = [
+        'firstName' => $fname,
+        'lastName' => $lname,
+        'midName' => '',
+        'bday' => '01/01/1900',
+        'sex' => '',
+        'contactNo' => '',
+        'city' => '',
+        'brgy' => '',
+        'str' => '',
+        'email' => $email,
+        'password' => $pass,
+        'Status' => '',
+        'Uniquekey' => '',
+        "metadata" => [
+            "createdAt" => ['.sv' => 'timestamp'],
+            "lastLoginAt" => "",
+            "passwordUpdatedAt" => "",
+            "lastRefreshAt" => ""
+        ]
+    ];
+
+    $ref_table = "userInfo/";
+    $uniqueKey = $database->getReference($ref_table)->push($userProperties)->getKey();
+
+    $userEPass = [
+        'uid' => $uniqueKey,
+        'email' => $email,
+        'password' => $pass
+    ];
+    
+    $createdUser = $auth->createUser($userEPass);
+
+    $userKey = [
+        'Uniquekey' => $uniqueKey
+    ];
+
+    $database->getReference("userInfo/".$uniqueKey)->update($userKey);
+
+    if($createdUser){
+        $_SESSION['status'] = "AccountCreated/Registered Successfully";
+        header('Location: login.php');
+        exit;
+    }else{
+        $_SESSION['status'] = "Account Not Created/Registered";
+        header('Location: login.php');
+        exit;
+    }
 }
 
 ?>

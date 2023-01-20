@@ -20,7 +20,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Option 1</span>
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Documents</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -84,49 +84,172 @@
         </div>
         <div class="content-form col py-3">
             <div>
-                <form action="code.php" method="POST" class="container-fluid row g-3" id="signup-form">
-                    <div class="text-top text-center text-light fs-2">Edit Profile</div>
+                <form action="editprofileusercode.php" method="POST" class="container-fluid row g-3" id="signup-form" enctype="multipart/form-data">
+                    <?php 
+                        if(isset($_SESSION['status']))
+                        {
+                            echo "<p class='alert alert-success'>".$_SESSION['status']."</p>";
+                            unset($_SESSION['status']);
+                        }
+                    ?>
+                    <div id="divTitle" class="text-top text-center text-light fs-2">Profile</div>
                     <div>
                         <div class="mb-4 d-flex justify-content-center">
-                            <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" style="width: 200px;" />
+                            <?php 
+                                include ('dbconfig.php');
+                                $uid = $_SESSION['verified_user_id'];
+                                $user = $auth->getUser($uid); 
+
+                                if ($user->photoUrl != NULL) {
+                                    ?>
+                                        <img src="<?=$user->photoUrl?>" style="width: 200px;" />
+                                    <?php
+                                }else {
+                                    ?>
+                                        <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" style="width: 200px;" />
+                                    <?php
+                                }
+                            
+                            ?>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <div class="btn btn-dark btn-sm">
-                                <label class="form-label text-white m-1" for="customFile1">Choose file</label>
-                                <input type="file" class="form-control d-none" id="customFile1" />
+                            <div id="custom1" class="btn btn-dark btn-sm" style="display: none;">
+                                <!-- <label class="form-label text-white m-1" for="customFile1">Choose file</label> -->
+                                <input type="file" name="dPhoto" class="form-control" id="customFile1" />
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="inputEmail4" class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email" placeholder="example@gmail.com">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="inputPassword4" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" placeholder="********">
-                    </div>
+                    <?php
+                        $getdata = $database->getReference('userInfo')->getChild($_SESSION['verified_user_id'])->getValue();
+                        $getdata = $database->getReference('userInfo')->getChild($_SESSION['verified_user_id'])->getChild('location')->getValue();
+
+                        if ($getdata > 0) {
+                        ?>
+                    
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">First Name</label>
-                        <input type="text" class="form-control" name="fname" placeholder="Enter Firstname here..">
+                        <input type="text" class="form-control" name="fname" value="<?php echo $getdata['firstName']?>" placeholder="Enter Firstname here.." readonly required>
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Middle Name</label>
-                        <input type="text" class="form-control" name="mname" placeholder="Enter Middlename here..">
+                        <input type="text" class="form-control" name="mname" value="<?php if ($getdata['midName'] != "") {
+                            echo $getdata['midName'];} else {echo "-Empty-";}?>" placeholder="Enter Middlename here.." readOnly required>
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" name="lname" placeholder="Enter Lastname here..">
+                        <input type="text" class="form-control" name="lname" value="<?php echo $getdata['lastName']?>" placeholder="Enter Lastname here.." readOnly required>
                     </div>
-
+                    <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Birthday</label>
+                        <input type="date" class="form-control" name="bday" value="<?php if (isset($getdata['bday'])) {
+                            echo $getdata['bday'];} else {echo "01/01/1900";}?>" readonly required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputState" class="form-label">Sex</label>
+                        <select class="form-select" name="sex" id="sex" disabled required>
+                            <option value="<?php if ($getdata['sex'] != "") {echo $getdata['sex'];} else {echo "-Empty-";}?>">
+                                :<?php if ($getdata['sex'] != "") {echo $getdata['sex'];} else {echo "-Empty-";}?>
+                            </option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" name="contact" value="<?php if ($getdata['contactNo'] != "") {
+                            echo $getdata['contactNo'];} else {echo "-Empty-";}?>" placeholder="Enter phone number" readonly required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">City</label>
+                        <select class="form-select" name="city" id="city" disabled required>
+                            <option value="<?php if ($getdata['city'] != "") {echo $getdata['city'];} else {echo "-Empty-";}?>">
+                                :<?php if ($getdata['city'] != "") {echo $getdata['city'];} else {echo "-Empty-";}?>
+                            </option>
+                            <option value="Abucay">Abucay</option>
+                            <option value="Bagac">Bagac</option>
+                            <option value="Balanga">Balanga</option>
+                            <option value="Dinalupihan">Dinalupihan</option>
+                            <option value="Hermosa">Hermosa</option>
+                            <option value="Limay">Limay</option>
+                            <option value="Mariveles">Mariveles</option>
+                            <option value="Morong">Morong</option>
+                            <option value="Orani">Orani</option>
+                            <option value="Orion">Orion</option>
+                            <option value="Pilar">Pilar</option>
+                            <option value="Samal">Samal</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="inputEmail4" class="form-label">Barangay</label>
+                        <input type="text" class="form-control" name="brgy" value="<?php if ($getdata['brgy'] != "") {
+                            echo $getdata['brgy'];} else {echo "-Empty-";}?>" placeholder="Barangay.." readonly required>
+                    </div>
+                    <div class="col-6">
+                        <label for="inputEmail4" class="form-label">Street</label>
+                        <input type="text" class="form-control" name="str" value="<?php if ($getdata['str'] != "") {
+                            echo $getdata['str'];} else {echo "-Empty-";}?>" placeholder="1234 Main St" readonly required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Email</label>
+                        <input type="email" class="form-control" value="<?php echo $getdata['email']?>" name="email" placeholder="example@gmail.com">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputPassword4" class="form-label">Password</label>
+                        <input type="password" class="form-control" value="<?php echo $getdata['password']?>" name="password" placeholder="********">
+                    </div>
+                    <div class="col-md-6" style="display: none;" id="divConfirm">
+                            <label for="inputPassword4" class="form-label">Current Password</label>
+                            <input type="password" class="form-control" name="passConfirm" id="passConfirm" placeholder="Enter current/old password to proceed update.." required>
+                        </div>
                     <div class="col-12">
                     </div>
                     <div class="d-flex col-12 justify-content-center">
-                        <button type="submit" name="btn_saveChanges" class="btn btn-dark" id="savebutton">Save Changes</button>
+                    <button type="submit" name="btn_saveChangesUser" id="btn_saveChangesUser" class="btn btn-dark" style="display: none;">Save Changes</button>
                     </div>
                 </form>
-
+                <div class="d-flex col-12 justify-content-center">
+                    <button name="btn_Edit" id="btn_Edit" onclick="setDisable()" class="btn btn-dark" style="display: block;">Edit</button>
+                    <button name="btn_Cancel" id="btn_Cancel" onclick="window.location.href='editprofileuser.php';" class="btn btn-dark" style="display: none;">Cancel</button>
+                </div>
+                <?php }?>
             </div>
         </div>
     </div>
 </div>
+<script>
+    //To make inputs editable 
+    function setDisable(){
+        let getControl = document.getElementsByClassName("form-control")
+        let getSelect = document.getElementsByClassName("form-select")
+        document.getElementById("divTitle").innerHTML = "Edit Profile";
+        document.getElementById("custom1").style.display = "block";
+        document.getElementById("btn_Cancel").style.display = "block";
+        document.getElementById("btn_saveChangesUser").style.display = "block";
+        document.getElementById("btn_Edit").style.display = "none";
+        document.getElementById("divConfirm").style.display = "block";
+        for (let input of getControl){
+            input.removeAttribute('readonly');
+        }
+        for (let select of getSelect){
+            select.disabled = false;
+        }
+    }
 
+    //To make inputs readOnly
+    // function setCancel(){
+    //     let getControl = document.getElementsByClassName("form-control")
+    //     let getSelect = document.getElementsByClassName("form-select")
+    //     document.getElementById("divTitle").innerHTML = "Profile";
+    //     document.getElementById("custom1").style.display = "none";
+    //     document.getElementById("btn_Cancel").style.display = "none";
+    //     document.getElementById("btn_saveChangesUser").style.display = "none";
+    //     document.getElementById("btn_Edit").style.display = "block";
+    //     document.getElementById("divConfirm").style.display = "none";
+    //     for (let input of getControl){
+    //         input.readOnly = true;
+    //     }
+    //     for (let select of getSelect){
+    //         select.disabled = true;
+    //     }
+    // }
+</script>
