@@ -3,7 +3,7 @@ include_once 'navbarfresh.php'
 ?>
 
 <style>
-    <?php include 'css/signupUser.css'; ?>
+    <?php include 'css/signup.css'; ?>
 </style>
 
 <div class="main-div">

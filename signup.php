@@ -16,7 +16,7 @@ include_once 'navbarfresh.php';
             </div>
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" placeholder="********">
+                <input type="password" class="form-control" name="password">
             </div>
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">First Name</label>
@@ -90,7 +90,7 @@ include_once 'navbarfresh.php';
                     </label>
                 </div>
             </div>
-            <div class="d-flex col-12 justify-content-center">
+            <div class="col-12">
                 <button type="submit" name="btn_registerAgent" class="btn btn-primary">Sign-Up</button>
             </div>
             <a class="text-center" href="login.php">Already have an account? Sign in!</a>

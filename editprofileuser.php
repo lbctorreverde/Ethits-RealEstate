@@ -121,7 +121,7 @@
                     </div>
                     <?php
                         $getdata = $database->getReference('userInfo')->getChild($_SESSION['verified_user_id'])->getValue();
-                        $getloc = $database->getReference('userInfo')->getChild($_SESSION['verified_user_id'])->getChild('location')->getValue();
+                        $getdata = $database->getReference('userInfo')->getChild($_SESSION['verified_user_id'])->getChild('location')->getValue();
 
                         if ($getdata > 0) {
                         ?>
@@ -162,8 +162,8 @@
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">City</label>
                         <select class="form-select" name="city" id="city" disabled required>
-                            <option value="<?php if ($getloc['city'] != "") {echo $getloc['city'];} else {echo "-Empty-";}?>">
-                                :<?php if ($getloc['city'] != "") {echo $getloc['city'];} else {echo "-Empty-";}?>
+                            <option value="<?php if ($getdata['city'] != "") {echo $getdata['city'];} else {echo "-Empty-";}?>">
+                                :<?php if ($getdata['city'] != "") {echo $getdata['city'];} else {echo "-Empty-";}?>
                             </option>
                             <option value="Abucay">Abucay</option>
                             <option value="Bagac">Bagac</option>
@@ -181,13 +181,13 @@
                     </div>
                     <div class="col-6">
                         <label for="inputEmail4" class="form-label">Barangay</label>
-                        <input type="text" class="form-control" name="brgy" value="<?php if ($getloc['brgy'] != "") {
-                            echo $getloc['brgy'];} else {echo "-Empty-";}?>" placeholder="Barangay.." readonly required>
+                        <input type="text" class="form-control" name="brgy" value="<?php if ($getdata['brgy'] != "") {
+                            echo $getdata['brgy'];} else {echo "-Empty-";}?>" placeholder="Barangay.." readonly required>
                     </div>
                     <div class="col-6">
                         <label for="inputEmail4" class="form-label">Street</label>
-                        <input type="text" class="form-control" name="str" value="<?php if ($getloc['str'] != "") {
-                            echo $getloc['str'];} else {echo "-Empty-";}?>" placeholder="1234 Main St" readonly required>
+                        <input type="text" class="form-control" name="str" value="<?php if ($getdata['str'] != "") {
+                            echo $getdata['str'];} else {echo "-Empty-";}?>" placeholder="1234 Main St" readonly required>
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Email</label>

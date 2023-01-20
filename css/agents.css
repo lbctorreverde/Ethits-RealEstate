@@ -1,0 +1,106 @@
+body {
+    background-color: #1c1c1c;
+}
+
+.topsection {
+    height: 35vh;
+    background-color: #212529;
+    color: rgb(236, 236, 236);
+    position: relative;
+}
+
+
+form {
+    background-color: #eeeeee;
+    width: 90vh;
+    height: 7vh;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transform: translate(62.5%, -50%);
+    position: absolute;
+
+}
+
+input {
+    all: unset;
+    font: 16px system-ui;
+    height: 100%;
+    width: 100%;
+    padding: 6px 10px;
+}
+
+svg {
+    color: rgb(255, 255, 255);
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+}
+
+.searchbtn {
+    all: unset;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+}
+
+.filter-btn {
+    margin-right: 1vh;
+    width: 20vh;
+
+}
+
+.secondsection {
+    height: 100vh;
+    background-color: rgb(43, 43, 43);
+    color: rgb(236, 236, 236);
+}
+
+.left-panel {
+    padding-top: 50px;
+    padding-left: 25vh;
+    background-color: #212529;
+    height: 100vh;
+    width: 75vh;
+
+}
+
+.agentslist-panel {
+    width: 100vw;
+    padding-top: 30px;
+    background-color: #212529;
+
+}
+
+.card {}
+
+.agentcard {
+    padding: 10px;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+    form {
+        background-color: #eeeeee;
+        width: 90vh;
+        height: 7vh;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        transform: translate(5.5vw, -50%);
+    }
+
+    .left-panel {
+        padding-top: 50px;
+        padding-left: 5.5vh;
+        background-color: #212529;
+        height: 100vh;
+        width: 35vh;
+
+    }
+
+
+}

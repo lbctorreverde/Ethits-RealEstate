@@ -28,10 +28,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Agents</a>
+                        <a class="nav-link" href="#" onclick="window.location.href='agents.php'">Agents</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Properties</a>
@@ -84,6 +84,7 @@
             </li>
             <?php }else{?>
             <button class="btn btn-dark btn-outline-light float-right me-2" onclick="window.location.href='login.php';">Login/Register</button>
+            <!-- <button class="btn btn-dark btn-outline-light float-right" onclick="window.location.href='signup.php';">Register</button> -->
             <?php }?>
         </div>
     </nav>

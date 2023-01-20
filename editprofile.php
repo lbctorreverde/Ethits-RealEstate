@@ -125,7 +125,6 @@ include_once 'header.php';?>
                     <?php
 
                         $getdata = $database->getReference('agentInfo')->getChild($_SESSION['verified_user_id'])->getValue();
-                        $getloc = $database->getReference('agentInfo')->getChild($_SESSION['verified_user_id'])->getChild('agencyLoc')->getValue();
                         
                         if ($getdata > 0) {
                     ?>
@@ -165,7 +164,7 @@ include_once 'header.php';?>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Location</label>
                             <select class="form-select" name="city" id="city" disabled required>
-                                <option value="<?php echo $getloc['city']?>">:<?php echo $getloc['city']?></option>
+                                <option value="<?php echo $getdata['city']?>">:<?php echo $getdata['city']?></option>
                                 <option value="Abucay">Abucay</option>
                                 <option value="Bagac">Bagac</option>
                                 <option value="Balanga">Balanga</option>
@@ -181,10 +180,10 @@ include_once 'header.php';?>
                             </select>
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" name="brgy" value="<?php echo $getloc['brgy']?>" placeholder="Barangay" readonly required>
+                            <input type="text" class="form-control" name="brgy" value="<?php echo $getdata['brgy']?>" placeholder="Barangay" readonly required>
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" name="str" value="<?php echo $getloc['str']?>" placeholder="1234 Main St" readonly required>
+                            <input type="text" class="form-control" name="str" value="<?php echo $getdata['str']?>" placeholder="1234 Main St" readonly required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Email</label>

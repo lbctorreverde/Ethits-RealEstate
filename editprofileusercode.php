@@ -32,11 +32,9 @@ if (isset($_POST['btn_saveChangesUser'])) {
             'bday' => $bday,
             'sex' => $sex,
             'contactNo' => $contact,
-            'location' => [
-                'city' => $city,
-                'brgy' => $brgy,
-                'str' => $str
-            ],
+            'city' => $city,
+            'brgy' => $brgy,
+            'str' => $str,
             'email' => $email,
             'password' => $pass,
             'Status' => '',

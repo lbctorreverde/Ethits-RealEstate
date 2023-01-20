@@ -14,7 +14,4 @@ if(isset($_SESSION['expiry_status'])){
 
 header('Location: login.php');
 exit();
-
-
-
 ?>

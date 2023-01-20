@@ -37,11 +37,9 @@ if(isset($_POST['btn_saveChangesAgent'])){
             'sex' => $sex,
             'contactNo' => $contact,
             'agency' => $agency,
-            'agencyLoc' => [
-                'city' => $city,
-                'brgy' => $brgy,
-                'str' => $str
-            ],
+            'city' => $city,
+            'brgy' => $brgy,
+            'str' => $str,
             'email' => $email,
             'password' => $pass,
             'Status' => '',
