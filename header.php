@@ -63,8 +63,14 @@
                                     <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
                                 <?php
                             }
-                        ?>
-                        <span class="d-none d-sm-inline mx-1">Name</span>
+                            ?>
+                            <?php
+                            $name = $database->getReference("agentInfo/" . $uid . "/firstName")->getValue();
+                            ?>
+                                <span class="d-none d-sm-inline mx-1"><?php echo $name?></span>
+                            <?php
+                            
+                            ?>
                     </a>
                 <ul class="dropdown-menu dropdown-menu-left dropdown-menu-end">
                 <?php 

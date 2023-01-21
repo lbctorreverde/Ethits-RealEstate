@@ -39,8 +39,6 @@ include ('dbconfig.php');
     </div>
     <div class="agentslist-panel">
         <?php 
-            $uid = $_SESSION['verified_user_id'];
-            $user = $auth->getUser($uid); 
 
 
             foreach ($_SESSION['searchName'] as $key => $row) {

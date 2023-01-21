@@ -22,13 +22,8 @@ include_once 'header.php';?>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0">
+                        <a href="editprofileUpload.php" class="nav-link align-middle px-0">
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Documents</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Option 2</span>
                         </a>
                     </li>
                     <!-- <li class="nav-item">
@@ -195,11 +190,15 @@ include_once 'header.php';?>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">License</label>
-                            <input type="file" class="form-control" id="inputCity">
+                            <input type="file" class="form-control" id="inputLicense">
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Document</label>
-                            <input type="file" class="form-control" id="inputZip">
+                            <input type="file" class="form-control" id="inputDocu">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputEmail4" class="form-label">Past Deals</label>
+                            <input type="file" class="form-control" id="inputDocu">
                         </div>
                         <div class="col-md-12" style="display: none;" id="divConfirm">
                             <label for="inputPassword4" class="form-label">Current Password</label>
@@ -213,7 +212,7 @@ include_once 'header.php';?>
                 </form>
                 <div class="d-flex col-12 justify-content-center">
                     <button name="btn_Edit" id="btn_Edit" onclick="setDisable()" class="btn btn-dark" style="display: block;">Edit</button>
-                    <button name="btn_Cancel" id="btn_Cancel" onclick="setCancel()" class="btn btn-dark" style="display: none;">Cancel</button>
+                    <button name="btn_Cancel" id="btn_Cancel" onclick="window.location.href='editprofile.php';" class="btn btn-dark" style="display: none;">Cancel</button>
                 </div>
                 <?php }?>
             </div>
@@ -256,4 +255,28 @@ include_once 'header.php';?>
     //         select.disabled = true;
     //     }
     // }
+</script>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCyDWYfM3b4Owdf8DSWY7u_WHggWba7iR4",
+    authDomain: "agentfinderphp.firebaseapp.com",
+    databaseURL: "https://agentfinderphp-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "agentfinderphp",
+    storageBucket: "agentfinderphp.appspot.com",
+    messagingSenderId: "455836025375",
+    appId: "1:455836025375:web:bc5dba0687e3aadb690b2a"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  import {getStorage, ref as sRef, uploadBytesResumable, getDownloadURL}
+  from "https://www.gstatic.com/firebasejs/9.16.0/firebase-storage.js"
 </script>
