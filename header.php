@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +12,7 @@
 
     <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
@@ -45,54 +46,55 @@
 
                 </ul>
             </div>
-            <?php if(isset($_SESSION['verified_user_id'])){?>
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-            <li class="nav-item dropdown">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <?php 
-                            include ('dbconfig.php');
+            <?php if (isset($_SESSION['verified_user_id'])) { ?>
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <?php
+                            include('dbconfig.php');
                             $uid = $_SESSION['verified_user_id'];
-                            $user = $auth->getUser($uid); 
+                            $user = $auth->getUser($uid);
 
                             if ($user->photoUrl != NULL) {
-                                ?>
-                                    <img src="<?=$user->photoUrl?>" width="30" height="30" class="rounded-circle" />
-                                <?php
-                            }else {
-                                ?>
-                                    <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                                <?php
+                            ?>
+                                <img src="<?= $user->photoUrl ?>" width="30" height="30" class="rounded-circle" />
+                            <?php
+                            } else {
+                            ?>
+                                <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <?php
                             }
-                        ?>
-                        <span class="d-none d-sm-inline mx-1">Name</span>
-                    </a>
-                <ul class="dropdown-menu dropdown-menu-left dropdown-menu-end">
-                <?php 
-                    if ($_SESSION['enduser'] == "Agent") {
-                        ?>
-                            <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofile.php'">Profile</a></li>
-                        <?php
-                    }else if($_SESSION['enduser'] == "User"){
-                        ?>
-                            <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofileuser.php'">Profile</a></li>
-                        <?php
-                    }
-                ?>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
-                </ul>
-            </li>
-            <?php }else{?>
-            <button class="btn btn-dark btn-outline-light float-right me-2" onclick="window.location.href='login.php';">Login/Register</button>
-            <!-- <button class="btn btn-dark btn-outline-light float-right" onclick="window.location.href='signup.php';">Register</button> -->
-            <?php }?>
+                            ?>
+                            <span class="d-none d-sm-inline mx-1">Name</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-left dropdown-menu-end">
+                            <?php
+                            if ($_SESSION['enduser'] == "Agent") {
+                            ?>
+                                <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofile.php'">Profile</a></li>
+                            <?php
+                            } else if ($_SESSION['enduser'] == "User") {
+                            ?>
+                                <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofileuser.php'">Profile</a></li>
+                            <?php
+                            }
+                            ?>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
+                        </ul>
+                    </li>
+                <?php } else { ?>
+                    <button class="btn btn-dark btn-outline-light float-right me-2" onclick="window.location.href='login.php';">Login/Register</button>
+                    <!-- <button class="btn btn-dark btn-outline-light float-right" onclick="window.location.href='signup.php';">Register</button> -->
+                <?php } ?>
         </div>
     </nav>
 
-<?php
-if(isset($_SESSION['status']))
-{
-    echo "<p class='alert alert-success'>".$_SESSION['status']."</p>";
-    unset($_SESSION['status']);
-}
-?>
+    <?php
+    if (isset($_SESSION['status'])) {
+        echo "<p class='alert alert-success'>" . $_SESSION['status'] . "</p>";
+        unset($_SESSION['status']);
+    }
+    ?>
