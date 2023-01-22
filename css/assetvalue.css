@@ -4,14 +4,20 @@ body {
 
 .card {
     width: 50vh;
-    background-color: #242424;
+    background-image: linear-gradient(#212529d7,
+            rgba(24, 24, 24, 0.66)), url(img/wp7.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     border: transparent;
-    color:aliceblue;
-    
+    color: aliceblue;
+
 }
 
 .topsection {
-    background-color: #212529;
+    background-image: linear-gradient(#212529,
+            rgba(24, 24, 24, 0.847)), url(img/wp6.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 15vh;
     margin-bottom: 5vh;
     color: aliceblue;

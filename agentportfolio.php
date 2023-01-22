@@ -47,7 +47,7 @@ include('dbconfig.php');
 </section>
 
 <section class="d-flex flex-column justify-content-center align-items-center" id="midsection">
-    <h1 class="display-3 text-light">Properties for sale</h1>
+    <h1 class="display-4 text-light pb-5">Properties for sale</h1>
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators mt-auto mb-0">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -57,21 +57,21 @@ include('dbconfig.php');
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="https://www.wavecity.in/wp-content/uploads/2017/07/shutterstock_297096893.jpg" class="d-block w-100" alt=" ">
-                <div class="info-bottom rounded-bottom bg-dark pt-3 pb-2">
+                <div class="info-bottom rounded-bottom pt-3 pb-2">
                     <p class="text-center text-light fw-bold">Studio Condo in Avida Towers Ardane, Muntinlupa</p>
                     <p class="text-center text-light">National Road, Muntinlupa, Metro Manila</p>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="https://static-ph.lamudi.com/static/media/bm9uZS9ub25l/2x2x5x880x450/e40a1e75b071ab.webp" class="d-block w-100" alt=" ">
-                <div class="info-bottom rounded-bottom bg-dark pt-3 pb-2">
+                <div class="info-bottom rounded-bottom pt-3 pb-2">
                     <p class="text-center text-light fw-bold">L-S-1-201604-13- Acquired Property for Sale</p>
                     <p class="text-center text-light">Block 1, Lot 8, Diamond St., EMERALD COAST EXECUTIVE VILLAGE, Brgy. Peas/Duale, Limay, Bataan - Sub</p>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="https://static-ph.lamudi.com/static/media/bm9uZS9ub25l/2x2x6x1200x900/1f5120507c8f0c.webp" class="d-block w-100" alt=" ">
-                <div class="info-bottom rounded-bottom bg-dark pt-3 pb-2">
+                <div class="info-bottom rounded-bottom pt-3 pb-2">
                     <p class="text-center text-light fw-bold">Brand New 3 Bedroom Two Storey House & Lot for Sale in Balanga, Bataan</p>
                     <p class="text-center text-light">GRAND CANYON AVE TENEJERO, BALANGA</p>
                 </div>
@@ -92,7 +92,7 @@ include('dbconfig.php');
 </section>
 
 <section class="d-flex flex-column justify-content-center align-items-center" id="endsection">
-    <h1 class="display-3 text-light">Sold Properties</h1>
+    <h1 class="display-4 text-light pb-5">Sold Properties</h1>
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -126,4 +126,9 @@ include('dbconfig.php');
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+    <span class="pb-5"></span>
 </section>
+
+<?php
+include_once 'footer.php';
+?>

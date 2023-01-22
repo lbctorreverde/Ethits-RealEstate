@@ -10,7 +10,7 @@ include ('dbconfig.php');
 
 
 <section class="topsection d-flex flex-column text-center justify-content-center align-items-center">
-    <h1>Find your agent on this page</h1>
+    <h1 class="display-5">Find your agent on this page</h1>
 </section>
 
 <form action="agentscode.php" method="POST" role="search" id="form">
@@ -28,7 +28,7 @@ include ('dbconfig.php');
 
 <section class="secondsection d-flex flex-row">
     <div class="left-panel">
-        <h4>Bataan Agents</h4>
+        <h4 class="fw-normal">Bataan Agents</h4>
         <?php
             $x = 0;
             foreach ($_SESSION['searchName'] as $key => $value) {
