@@ -65,30 +65,34 @@ session_start();
                             <?php
                             }
                             ?>
-                            <span class="d-none d-sm-inline mx-1">Name</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-left dropdown-menu-end">
                             <?php
-                            if ($_SESSION['enduser'] == "Agent") {
+                            $name = $database->getReference("agentInfo/" . $uid . "/firstName")->getValue();
                             ?>
-                                <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofile.php'">Profile</a></li>
+                                <span class="d-none d-sm-inline mx-1"><?php echo $name?></span>
                             <?php
-                            } else if ($_SESSION['enduser'] == "User") {
+                            
                             ?>
-                                <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofileuser.php'">Profile</a></li>
-                            <?php
-                            }
-                            ?>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
-                        </ul>
-                    </li>
-                <?php } else { ?>
-                    <button class="btn btn-dark btn-outline-light float-right me-2" onclick="window.location.href='login.php';">Login/Register</button>
-                    <!-- <button class="btn btn-dark btn-outline-light float-right" onclick="window.location.href='signup.php';">Register</button> -->
-                <?php } ?>
+                    </a>
+                <ul class="dropdown-menu dropdown-menu-left dropdown-menu-end">
+                <?php 
+                    if ($_SESSION['enduser'] == "Agent") {
+                        ?>
+                            <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofile.php'">Profile</a></li>
+                        <?php
+                    }else if($_SESSION['enduser'] == "User"){
+                        ?>
+                            <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofileuser.php'">Profile</a></li>
+                        <?php
+                    }
+                ?>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
+                </ul>
+            </li>
+            <?php }else{?>
+            <button class="btn btn-dark btn-outline-light float-right me-2" onclick="window.location.href='login.php';">Login/Register</button>
+            <!-- <button class="btn btn-dark btn-outline-light float-right" onclick="window.location.href='signup.php';">Register</button> -->
+            <?php }?>
         </div>
     </nav>
 

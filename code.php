@@ -33,7 +33,10 @@ if(isset($_POST['btn_registerAgent'])){
         'email' => $email,
         'password' => $pass,
         'Status' => '',
-        'Uniquekey' => ''
+        'Uniquekey' => '',
+        'License' => '',
+        'Documents' => '',
+        'Portfolio' => ''
         
     ];
 
@@ -42,6 +45,7 @@ if(isset($_POST['btn_registerAgent'])){
 
     $userEPass = [
         'uid' => $uniqueKey,
+        'phone' => $contact,
         'email' => $email,
         'password' => $pass
     ];
