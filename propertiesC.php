@@ -10,6 +10,5 @@ if (isset($_POST['btn_hide'])) {
         header("Location: agentportfolio.php");
         exit(0);
     }
-    
 }
 ?>

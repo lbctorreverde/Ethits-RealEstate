@@ -12,10 +12,21 @@ include('dbconfig.php');
     <span class="display-5 mb-4">Listed properties</span>
     <form action="agentscode.php" method="POST" role="search" id="form">
         <input type="search" id="query" name="searchName" placeholder="Search..." aria-label="Search through site content">
-
-        <button type="submit" name="btn_search" class="searchbtn"><svg viewBox="0 0 1024 1024"></svg></button>
-        <!-- Filter Button -->
-        <button type="button" class="filter-btn btn btn-dark" data-bs-toggle="modal" data-bs-target='#exampleModal' onclick="myModal.show()">Filter</button>
+        <?php
+        $_SESSION['agentselected'] = "";
+        if ($_SESSION['searchName'] == "") {
+            $_SESSION['searchName'] = $database->getReference('agentInfo')->orderByChild("lastName")->getValue();
+        }
+        ?>
+        <select class="form-select" name="filter" id="filter" required>
+            <option value="Name">Name</option>
+            <option value="Agency">Agency</option>
+            <option value="City">City</option>
+        </select>
+        <span class="vr me-3"></span>
+        <button type="submit" name="btn_search" class="searchbtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg></button>
     </form>
 </section>
 
@@ -34,7 +45,7 @@ include('dbconfig.php');
                     <img src="<?php echo $row['propertyImg']; ?>" class="card-img-top" alt="...">
                     <div class="card-body shadow">
                         <form method="POST" action="propertiesC.php" class="property-name-post d-flex form-control text-start">
-                            <!-- Sex? -->
+                            <input type="hidden" id="hide" name="hide" value="<?php echo $y;?>">
                             <button class="property-name-button" type="submit" id="btn_hide" name="btn_hide"><h5 class="card-title"><?php echo $row['title']; ?></h5></button>
                         </form>
                         <ul class="list-group list-group-flush">
