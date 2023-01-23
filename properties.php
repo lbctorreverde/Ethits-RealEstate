@@ -1,5 +1,6 @@
 <?php
 include_once 'header.php';
+include('dbconfig.php');
 ?>
 
 <style>
@@ -22,11 +23,12 @@ include_once 'header.php';
     <div class="properties-list container-fluid d-flex flex-column justify-content-center align-items-center">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
             <?php
-                $uid = $_SESSION['verified_user_id'];
-                $loop = $database->getReference('propertyInfo')->getChild($uid)->getValue();
-                if (isset($loop)) {
-                foreach ($loop as $key => $row) {
-            ?>
+                $loop1 = $database->getReference('propertyInfo')->getChildKeys();
+                foreach($loop1 as $x => $y){
+                    $loop = $database->getReference('propertyInfo/'.$y)->getValue();
+                    if (isset($loop)) {
+                        foreach ($loop as $key => $row) {
+                            ?>
             <div class="col">
                 <div class="card ">
                     <img src="<?php echo $row['propertyImg']; ?>" class="card-img-top" alt="...">
@@ -54,7 +56,7 @@ include_once 'header.php';
                     </div>
                 </div>
             </div>
-            <?php }}?>
+            <?php }}}?>
         </div>
     </div>
 </section>
