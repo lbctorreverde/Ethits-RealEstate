@@ -5,13 +5,16 @@ include ('dbconfig.php');
 
 if(isset($_POST["btn_search"])){
     $searchN = $_POST['searchName'];
-
+    $filter = $_POST['filter'];
     $_SESSION['searchName'] = $searchN;
 
 // $getdata = $database->getReference('agentInfo')->orderByChild('firstName')->startAt('Jay')->getValue();
-$getdata = $database->getReference('agentInfo')->orderByChild("lastName")->getValue();
+$getdata = $database->getReference('agentInfo')->orderByChild("lastName")->startAt($searchN)->getValue();
+
 
 $filtered = array_filter($getdata, function (array $userData) {
+    $filter = $_POST['filter'];
+    $searchN = $_POST['searchName'];
     $lastN = $userData['lastName'] ?? '';
     $firstN = $userData['firstName'] ?? '';
     $midN = $userData['midName'] ?? '';
@@ -20,9 +23,13 @@ $filtered = array_filter($getdata, function (array $userData) {
     $brgy = $userData['brgy'] ?? '';
     $city = $userData['city'] ?? '';
 
-    return stripos($lastN, $_SESSION['searchName']) !== false OR stripos($firstN, $_SESSION['searchName']) !== false OR stripos($midN, $_SESSION['searchName']) !== false
-    OR stripos($agency, $_SESSION['agency']) !== false OR stripos($str, $_SESSION['locC']) 
-    !== false OR stripos($brgy, $_SESSION['locC']) !== false OR stripos($city, $_SESSION['locC']) !== false;
+    if ($filter == 'Name') {
+        return stripos($lastN, $searchN) !== false OR stripos($firstN, $searchN) !== false OR stripos($midN, $searchN) !== false;
+    }elseif ($filter == 'Agency') {
+        return stripos($agency, $_SESSION['agency']) !== false;
+    }elseif ($filter == 'Name') {
+        return stripos($str, $_SESSION['locC']) !== false OR stripos($brgy, $_SESSION['locC']) !== false OR stripos($city, $_SESSION['locC']) !== false;
+    }
 });
 
 $_SESSION['searchName'] = $filtered;

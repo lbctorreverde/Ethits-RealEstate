@@ -18,14 +18,16 @@ include('dbconfig.php');
     <?php
     $_SESSION['agentselected'] = "";
     if ($_SESSION['searchName'] == "") {
-
         $_SESSION['searchName'] = $database->getReference('agentInfo')->orderByChild("lastName")->getValue();
     }
     ?>
-    <button type="submit" name="btn_search" class="searchbtn"><svg viewBox="0 0 1024 1024"></svg></button>
-    <!-- Filter Button -->
+    <select class="form-select" name="filter" id="filter" required>
+        <option value="Name">Name</option>
+        <option value="Agency">Agency</option>
+        <option value="City">City</option>
+    </select>
 
-    <button type="button" class="filter-btn btn btn-dark" data-bs-toggle="modal" data-bs-target='#exampleModal' onclick="myModal.show()">Filter</button>
+    <button type="submit" name="btn_search" class="searchbtn"><svg viewBox="0 0 1024 1024"></svg></button>
 </form>
 
 <section class="secondsection d-flex flex-row">
