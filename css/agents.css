@@ -35,10 +35,9 @@ input {
 }
 
 svg {
-    color: rgb(255, 255, 255);
     width: 40px;
     height: 40px;
-    padding: 10px;
+    padding-right: 15px;
 }
 
 .searchbtn {
@@ -64,7 +63,7 @@ svg {
     padding-top: 50px;
     padding-left: 25vh;
     background-color: #212529;
-    
+
     width: 75vh;
 
 }
@@ -97,6 +96,17 @@ svg {
     color: aliceblue;
 }
 
+.form-select {
+    background-color: rgb(43, 43, 43);
+    color: aliceblue;
+    width: 20%;
+    margin-right: 20px;
+}
+
+.form-select>option {
+    background-color: rgb(43, 43, 43);
+    color: aliceblue;
+}
 
 
 @media screen and (max-width: 1000px) {
