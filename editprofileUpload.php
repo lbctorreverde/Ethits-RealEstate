@@ -68,8 +68,18 @@ $id = $_SESSION['verified_user_id'];
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0">
+                        <a href="editprofileUpload.php" class="nav-link align-middle px-0">
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Documents</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="editproperty.php" class="nav-link align-middle px-0">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Properties</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="editcontract.php" class="nav-link align-middle px-0">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Contract Done</span>
                         </a>
                     </li>
                 </ul>
@@ -211,8 +221,6 @@ $id = $_SESSION['verified_user_id'];
    })
    .catch(console.error);
    }
-
-
    function uploadImage2() {
       const ref = firebase.storage().ref();
       const file = document.querySelector("#photo2").files[0];

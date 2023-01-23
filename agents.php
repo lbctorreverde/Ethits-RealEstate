@@ -39,8 +39,6 @@ include ('dbconfig.php');
     </div>
     <div class="agentslist-panel">
         <?php 
-
-
             foreach ($_SESSION['searchName'] as $key => $row) {
                 ?>
                     <!-- CARD FOR EACH AGENT PAR-->
@@ -62,9 +60,11 @@ include ('dbconfig.php');
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <?php ?>
+                                <?php 
+                                $getK = $database->getReference('agentInfo')->getChild($row['Uniquekey'])->getKey();?>
                                 <!-- Paiba nalang, sa notfound.php pa redirect nya eh -->
-                                <a class="text-decoration-none text-reset" onclick="window.location.href='notfound.php';"><?php echo $row['lastName'].", ".$row['firstName']." ".substr($row['midName'], 0, 1)."."?></a>
+                                <a onclick ="<?php $_SESSION['agentselected'] = $row['Uniquekey']?>" href="agentportfolio.php" class="btn btn-dark" style="text-decoration: none;"><?php echo $row['lastName'].", ".$row['firstName']." ".substr($row['midName'], 0, 1)."."?></a>
+                                <a class="text-decoration-none text-reset" onclick="window.location.href='agentportfolio.php';"></a>
                                 <p class="card-text text-muted">Real Estate Professional<br>
                                     <?php $getdata = $database->getReference('agentInfo')->getChild($row['Uniquekey'])->getValue();
                                     echo $row['agency']." - ".$getdata['str'].", ".$getdata['brgy'].", ".$getdata['city'].", Bataan"?>
@@ -72,18 +72,12 @@ include ('dbconfig.php');
 
                                 <p class="card-title text-muted">Contact: </p>
                                 <p class="card-text"><small class="text-muted lh-sm"><?php echo $row['contactNo']?></small></p>
-                                <?php 
-                                
-                                ?>
-                                
                             </div>
                         </div>
                     </div>
                 <?php
             }
         ?>
-        
-
     </div>
 </section>
 
