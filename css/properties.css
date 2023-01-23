@@ -40,10 +40,10 @@ input {
 }
 
 svg {
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     width: 40px;
     height: 40px;
-    padding: 10px;
+    padding-right: 15px;
 }
 
 .searchbtn {
@@ -76,7 +76,7 @@ svg {
     background-color: transparent;
     border: transparent;
     transition-duration: 0.5s;
-    
+
 }
 
 .card:hover {
@@ -90,11 +90,11 @@ svg {
 }
 
 .property-name-post {
-    
+
     background-color: transparent;
     border: none;
     width: 100%;
-    
+
 
 }
 
@@ -102,4 +102,35 @@ svg {
     border: none;
     background-color: transparent;
     color: aliceblue;
+}
+
+.agent-name-post {
+    border: none;
+    background-color: transparent;
+    transform: translate(-2.5vh, 1vh);
+    width: 40vh;
+    height: 10px;
+
+}
+
+.agent-name-button {
+    border: none;
+    background-color: transparent;
+    color: aliceblue;
+}
+
+.form-select {
+    background-color: rgb(43, 43, 43);
+    color: aliceblue;
+    width: 20%;
+    margin-right: 20px;
+}
+
+.form-select>option {
+    background-color: rgb(43, 43, 43);
+    color: aliceblue;
+}
+
+.vr {
+    color:#212529;
 }
