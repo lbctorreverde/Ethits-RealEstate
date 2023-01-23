@@ -18,6 +18,7 @@ include_once 'header.php';
             <div class="d-flex justify-content-center">
                 <div class="card shadow">
                     <div class="card-body text-center">
+                        <form>
                         <div class="row gy-2">
                             <div class="col-6">
                                 <label for="" class="form-label">Square Footage (m²)</label>
@@ -68,6 +69,7 @@ include_once 'header.php';
                         </div>
                         <hr>
                         <button type="button" class="btn btn-outline-light w-100">Calculate</button>
+                        </form>
                     </div>
 
 
