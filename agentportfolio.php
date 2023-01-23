@@ -75,34 +75,40 @@ include('dbconfig.php');
 <section class="d-flex flex-column justify-content-center align-items-center" id="midsection">
     <h1 class="display-4 text-light pb-5">Properties for sale</h1>
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators mt-auto mb-0">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
+        
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://www.wavecity.in/wp-content/uploads/2017/07/shutterstock_297096893.jpg" class="d-block w-100" alt=" ">
-                <div class="info-bottom rounded-bottom pt-3 pb-2">
-                    <p class="text-center text-light fw-bold">Studio Condo in Avida Towers Ardane, Muntinlupa</p>
-                    <p class="text-center text-light">National Road, Muntinlupa, Metro Manila</p>
+            <?php
+                $a = array();
+                $x = 0;
+                $loop1 = $database->getReference('propertyInfo/'.$keys)->getValue();
+                if (!isset($loop1)) {?>
+                    <div class="<?php echo $classname;?>">
+                    <img src="https://t3.ftcdn.net/jpg/01/82/24/68/360_F_182246882_zzaoBR9ei0vAidaau2s66z8Wi4WPlalb.jpg" class="d-block w-100" height="550" alt=" ">
+                    <div class="info-bottom rounded-bottom pt-3 pb-2">
+                        <p class="text-center text-light fw-bold">Empty</p>
+                        <p class="text-center text-light">Empty</p>
+                        </div>
+                    </div>
+                <?php
+                } else {
+                foreach ($loop1 as $var => $row1) {
+                    $x = 1;
+                    if ($x = 1) {
+                        $classname = 'carousel-item active';
+                    } else {
+                        $classname = 'carousel-item';
+                    }
+            ?>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<?php echo $x ?>" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <div class="<?php echo $classname ?>">
+                    <img src="https://www.wavecity.in/wp-content/uploads/2017/07/shutterstock_297096893.jpg" class="d-block w-100" height="550" alt=" ">
+                    <div class="info-bottom rounded-bottom pt-3 pb-2">
+                        <p class="text-center text-light fw-bold"><?php echo $row1['title'] ?></p>
+                        <p class="text-center text-light"><?php echo $row1['location'] ?></p>
+                    </div>
                 </div>
             </div>
-            <div class="carousel-item">
-                <img src="https://static-ph.lamudi.com/static/media/bm9uZS9ub25l/2x2x5x880x450/e40a1e75b071ab.webp" class="d-block w-100" alt=" ">
-                <div class="info-bottom rounded-bottom pt-3 pb-2">
-                    <p class="text-center text-light fw-bold">L-S-1-201604-13- Acquired Property for Sale</p>
-                    <p class="text-center text-light">Block 1, Lot 8, Diamond St., EMERALD COAST EXECUTIVE VILLAGE, Brgy. Peas/Duale, Limay, Bataan - Sub</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="https://static-ph.lamudi.com/static/media/bm9uZS9ub25l/2x2x6x1200x900/1f5120507c8f0c.webp" class="d-block w-100" alt=" ">
-                <div class="info-bottom rounded-bottom pt-3 pb-2">
-                    <p class="text-center text-light fw-bold">Brand New 3 Bedroom Two Storey House & Lot for Sale in Balanga, Bataan</p>
-                    <p class="text-center text-light">GRAND CANYON AVE TENEJERO, BALANGA</p>
-                </div>
-            </div>
-        </div>
+        <?php }}?>
         <div class="d-flex align-middle">
             <button class="carousel-control-prev align-middle" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -119,6 +125,7 @@ include('dbconfig.php');
     <h1 class="display-4 text-light pb-5">Sold Properties</h1>
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
+            
             <div class="carousel-item active">
                 <img src="https://static-ph.lamudi.com/static/media/bm9uZS9ub25l/2x2x6x1200x900/5332b1b54b190c.webp" class="d-block w-100" alt="...">
                 <div class="rounded-bottom bg-dark pt-3 pb-2 px-2">
