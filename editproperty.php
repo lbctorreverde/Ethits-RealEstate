@@ -32,7 +32,7 @@ include_once 'header.php';?>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="editcontract.php" class="nav-link align-middle px-0">
+                        <a href="soldproperty.php" class="nav-link align-middle px-0">
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Contract Done</span>
                         </a>
                     </li>
@@ -133,7 +133,6 @@ include_once 'header.php';?>
                             $loop = $database->getReference('propertyInfo')->getChild($uid)->getValue();
                             if (isset($loop)) {
                             foreach ($loop as $key => $row) {
-
                             ?>
                         <div class="col">
                             <div class="card ">
@@ -143,7 +142,7 @@ include_once 'header.php';?>
                                     <ul class="list-group list-group-flush">
                                         <span class="icon-livingsize"></span>
                                         <li class="list-group-item">
-                                            <span><b>Land Size:</b><?php echo $row['lot']; ?>m²</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span><b>Land Size:</b>&nbsp;<?php echo $row['lot']; ?>m²</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <span ><b >Status:&nbsp;</b><span class="text-success"><?php echo $row['stats']; ?></span></span>
                                         </li>
                                         <li class="list-group-item">

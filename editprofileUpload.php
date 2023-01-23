@@ -78,7 +78,7 @@ $id = $_SESSION['verified_user_id'];
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="editcontract.php" class="nav-link align-middle px-0">
+                        <a href="soldproperty.php" class="nav-link align-middle px-0">
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Contract Done</span>
                         </a>
                     </li>

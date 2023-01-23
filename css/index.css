@@ -1,0 +1,36 @@
+body {
+    background: rgb(43, 43, 43);
+}
+
+section {
+    height: 100vh;
+}
+
+section>h1 {
+    font-weight: 700;
+}
+
+#intro-one {
+    background-image: linear-gradient(#212529,
+            rgba(24, 24, 24, 0.674)), url(img/wp1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    color: rgb(236, 236, 236);
+}
+
+#intro-two {
+    background-image: linear-gradient(rgba(24, 24, 24, 0.849),
+            rgba(24, 24, 24, 0.849)), url(img/wp2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(236, 236, 236);
+}
+
+#intro-three {
+    background-image: linear-gradient(#2c2c2ca3,
+            #212529), url(img/wp3.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(236, 236, 236);
+}

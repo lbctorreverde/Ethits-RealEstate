@@ -35,13 +35,13 @@ session_start();
                         <a class="nav-link" href="#" onclick="window.location.href='agents.php'">Agents</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Properties</a>
+                        <a class="nav-link" href="#" onclick="window.location.href='properties.php'">Properties</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Sell</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Asset Value</a>
+                        <a class="nav-link" href="#" onclick="window.location.href='assetvalue.php'">Asset Value</a>
                     </li>
 
                 </ul>

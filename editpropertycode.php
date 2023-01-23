@@ -25,6 +25,7 @@ if(isset($_POST['btn_saveChangesAgent'])){
     $sf = $_POST['sf'];
     $bath = $_POST['bath'];
     $dp = $_FILES['propertyImg']['tmp_name'];
+    
 
     $userProperties = [
         'title' => $title,
@@ -45,30 +46,58 @@ if(isset($_POST['btn_saveChangesAgent'])){
         ]
     ];
 
-    $ref_table = "propertyInfo/".$_SESSION['verified_user_id'];
-    $check = $database->getReference($ref_table)->push($userProperties)->getKey();
-    
+    if ($stats == "Active") {
+        $ref_table = "propertyInfo/".$_SESSION['verified_user_id'];
+        $check = $database->getReference($ref_table)->push($userProperties)->getKey();
+        
 
-    $object = $bucket->upload(
-        file_get_contents($_FILES['propertyImg']['tmp_name']),
-        [
-            'name' => 'propertyInfo/'.$uid.'/'.$check.'/'.$_FILES['propertyImg']['name']
-        ]
-    );
+        $object = $bucket->upload(
+            file_get_contents($_FILES['propertyImg']['tmp_name']),
+            [
+                'name' => 'propertyInfo/'.$uid.'/'.$check.'/'.$_FILES['propertyImg']['name']
+            ]
+        );
 
-    $url = $object->signedUrl(new \DateTime('31 days'));
+        $url = $object->signedUrl(new \DateTime('31 days'));
 
-    $properties = [
-        'propertyImg' =>  $url
-    ];
-    
-    $ck = $database->getReference($ref_table.'/'.$check)->update($properties);
+        $properties = [
+            'propertyImg' =>  $url
+        ];
+        
+        $ck = $database->getReference($ref_table.'/'.$check)->update($properties);
 
-    if(isset($ck)){
-        $_SESSION['status'] = "Portfolio Updated Successfully";
-        header('Location: editproperty.php');
-        exit;
-    }    
+        if(isset($ck)){
+            $_SESSION['status'] = "Portfolio Updated Successfully";
+            header('Location: editproperty.php');
+            exit;
+        }  
+    }elseif($stats == "Sold"){
+        $ref_table = "soldProperty/".$_SESSION['verified_user_id'];
+        $check = $database->getReference($ref_table)->push($userProperties)->getKey();
+        
+
+        $object = $bucket->upload(
+            file_get_contents($_FILES['propertyImg']['tmp_name']),
+            [
+                'name' => 'soldProperty/'.$uid.'/'.$check.'/'.$_FILES['propertyImg']['name']
+            ]
+        );
+
+        $url = $object->signedUrl(new \DateTime('31 days'));
+
+        $properties = [
+            'propertyImg' =>  $url
+        ];
+        
+        $ck = $database->getReference($ref_table.'/'.$check)->update($properties);
+
+        if(isset($ck)){
+            $_SESSION['status'] = "Portfolio Updated Successfully";
+            header('Location: editproperty.php');
+            exit;
+        }  
+    }
+      
 }
 ?>
 
