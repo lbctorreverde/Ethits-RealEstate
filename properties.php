@@ -33,9 +33,9 @@ include('dbconfig.php');
                 <div class="card ">
                     <img src="<?php echo $row['propertyImg']; ?>" class="card-img-top" alt="...">
                     <div class="card-body shadow">
-                        <form method="POST" action="propertiesC.php" class="agent-name-post d-flex form-control text-start">
-                            <input type="hidden" id="hide" name="hide" value="<?php echo $row['Uniquekey'] ?>">
-                            <button class="agent-name-button" type="submit" id="btn_hide" name="btn_hide"><h5 class="card-title"><?php echo $row['title']; ?></h5></button>
+                        <form method="POST" action="propertiesC.php" class="property-name-post d-flex form-control text-start">
+                            <!-- Sex? -->
+                            <button class="property-name-button" type="submit" id="btn_hide" name="btn_hide"><h5 class="card-title"><?php echo $row['title']; ?></h5></button>
                         </form>
                         <ul class="list-group list-group-flush">
                             <span class="icon-livingsize"></span>
