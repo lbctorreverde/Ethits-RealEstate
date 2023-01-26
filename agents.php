@@ -24,7 +24,7 @@ include('dbconfig.php');
     <select class="form-select" name="filter" id="filter" required>
         <option value="Name">Name</option>
         <option value="Agency">Agency</option>
-        <option value="City">City</option>
+        <option value="Location">Location</option>
     </select>
     <span class="vr me-3"></span>
     <button type="submit" name="btn_search" class="searchbtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -80,8 +80,7 @@ include('dbconfig.php');
                         <a onclick="<?php $_SESSION['agentselected'] = $row['Uniquekey'] ?>" href="agentportfolio.php" class="btn btn-dark" style="text-decoration: none;"></a>
                         <a class="text-decoration-none text-reset" onclick="window.location.href='agentportfolio.php';"></a>
                         <p class="card-text text-muted">Real Estate Professional<br>
-                            <?php $getdata = $database->getReference('agentInfo')->getChild($row['Uniquekey'])->getValue();
-                            echo $row['agency'] . " - " . $getdata['str'] . ", " . $getdata['brgy'] . ", " . $getdata['city'] . ", Bataan" ?>
+                            <?php echo $row['agency'] . " - " . $row['str'] . ", " . $row['brgy'] . ", " . $row['city'] . ", Bataan" ?>
                         </p>
                         <p class="card-title text-muted">Contact: </p>
                         <p class="card-text"><small class="text-muted lh-sm"><?php echo $row['contactNo'] ?></small></p>

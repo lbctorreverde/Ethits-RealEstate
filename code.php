@@ -45,7 +45,6 @@ if(isset($_POST['btn_registerAgent'])){
 
     $userEPass = [
         'uid' => $uniqueKey,
-        'phone' => $contact,
         'email' => $email,
         'password' => $pass
     ];

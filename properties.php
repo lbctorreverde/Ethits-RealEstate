@@ -10,18 +10,20 @@ include('dbconfig.php');
 <section class="topsection d-flex flex-column justify-content-center align-items-center">
     <i class="bi bi-house-door-fill"></i>
     <span class="display-5 mb-4">Listed properties</span>
-    <form action="agentscode.php" method="POST" role="search" id="form">
-        <input type="search" id="query" name="searchName" placeholder="Search..." aria-label="Search through site content">
+    <form action="propertiescode.php" method="POST" role="search" id="form">
+        <input type="search" id="query" name="searchProp" placeholder="Search..." aria-label="Search through site content">
         <?php
         $_SESSION['agentselected'] = "";
-        if ($_SESSION['searchName'] == "") {
-            $_SESSION['searchName'] = $database->getReference('agentInfo')->orderByChild("lastName")->getValue();
+        if ($_SESSION['searchProp'] == "") {
+            $_SESSION['searchProp'] = $database->getReference('propertyInfo')->getValue();
         }
         ?>
         <select class="form-select" name="filter" id="filter" required>
-            <option value="Name">Name</option>
-            <option value="Agency">Agency</option>
-            <option value="City">City</option>
+            <option value="Title">Title</option>
+            <option value="Bath">Bathroom</option>
+            <option value="Bed">Bedroom</option>
+            <option value="Sf">Special Features</option>
+            <option value="Loc">Location</option>
         </select>
         <span class="vr me-3"></span>
         <button type="submit" name="btn_search" class="searchbtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -57,12 +59,12 @@ include('dbconfig.php');
                                             <span><b>Status:&nbsp;</b><span class="text-success"><?php echo $row['stats']; ?></span></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Bathroom:&nbsp;</b> <?php echo $row['lot']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <b>Bedroom:&nbsp;</b> <?php echo $row['lot']; ?>
+                                            <b>Bathroom:&nbsp;</b> <?php echo $row['bath']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <b>Bedroom:&nbsp;</b> <?php echo $row['bed']; ?>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Garage:&nbsp;</b> <?php echo $row['lot']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <b>Basement:&nbsp;</b> <?php echo $row['lot']; ?>
+                                            <b>Garage:&nbsp;</b> <?php echo $row['garage']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <b>Basement:&nbsp;</b> <?php echo $row['basement']; ?>
                                         </li>
                                         <li class="list-group-item"><b>Special Features:&nbsp;</b><?php echo $row['sf']; ?></li>
                                         <li class="list-group-item text-muted">

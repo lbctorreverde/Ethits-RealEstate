@@ -74,22 +74,7 @@ include_once 'navbarfresh.php';
             <div class="col-6">
                 <input type="text" class="form-control" name="str" placeholder="1234 Main St">
             </div>
-            <div class="col-md-6">
-                <label for="inputEmail4" class="form-label">License</label>
-                <input type="file" class="form-control" id="inputCity">
-            </div>
-            <div class="col-md-6">
-                <label for="inputEmail4" class="form-label">Document</label>
-                <input type="file" class="form-control" id="inputZip">
-            </div>
-            <div class="col-12">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                        Check me out
-                    </label>
-                </div>
-            </div>
+       
             <div class="col-12">
                 <button type="submit" name="btn_registerAgent" class="btn btn-primary">Sign-Up</button>
             </div>
