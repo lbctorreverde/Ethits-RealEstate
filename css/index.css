@@ -4,6 +4,7 @@ body {
 
 section {
     min-height: 100vh;
+
 }
 
 section>h1 {
@@ -25,6 +26,7 @@ section>h1 {
     background-repeat: no-repeat;
     background-size: cover;
     color: rgb(236, 236, 236);
+
 }
 
 #intro-three {
@@ -33,12 +35,14 @@ section>h1 {
     background-repeat: no-repeat;
     background-size: cover;
     color: rgb(236, 236, 236);
+
 }
 
 .hidden {
     opacity: 0;
     filter: blur(2px);
     transform: translateX(-5%);
+    text-shadow: 0 3px 3px rgba(0, 0, 0, 0.7);
     transition: all 1s;
 }
 
