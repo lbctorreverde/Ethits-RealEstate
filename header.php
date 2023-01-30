@@ -20,14 +20,14 @@ session_start();
 </head>
 
 <body>
-    <nav class="navbar navbar-dark navbar-expand bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-expand bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#" onclick="window.location.href='index.php'">Real Estate</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ">
+                <ul class="navbar-nav me-auto mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
@@ -68,31 +68,33 @@ session_start();
                             <?php
                             $name = $database->getReference("agentInfo/" . $uid . "/firstName")->getValue();
                             ?>
-                                <span class="d-none d-sm-inline mx-1"><?php echo $name?></span>
+                            <span class="d-none d-sm-inline mx-1"><?php echo $name ?></span>
                             <?php
-                            
+
                             ?>
-                    </a>
-                <ul class="dropdown-menu dropdown-menu-left dropdown-menu-end">
-                <?php 
-                    if ($_SESSION['enduser'] == "Agent") {
-                        ?>
-                            <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofile.php'">Profile</a></li>
-                        <?php
-                    }else if($_SESSION['enduser'] == "User"){
-                        ?>
-                            <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofileuser.php'">Profile</a></li>
-                        <?php
-                    }
-                ?>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
-                </ul>
-            </li>
-            <?php }else{?>
-            <button class="btn btn-dark btn-outline-light float-right me-2" onclick="window.location.href='login.php';">Login/Register</button>
-            <!-- <button class="btn btn-dark btn-outline-light float-right" onclick="window.location.href='signup.php';">Register</button> -->
-            <?php }?>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-left dropdown-menu-end">
+                            <?php
+                            if ($_SESSION['enduser'] == "Agent") {
+                            ?>
+                                <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofile.php'">Profile</a></li>
+                            <?php
+                            } else if ($_SESSION['enduser'] == "User") {
+                            ?>
+                                <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofileuser.php'">Profile</a></li>
+                            <?php
+                            }
+                            ?>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
+                        </ul>
+                    </li>
+                <?php } else { ?>
+                    <button class="btn btn-dark btn-outline-light float-right me-2" onclick="window.location.href='login.php';">Login/Register</button>
+                    <!-- <button class="btn btn-dark btn-outline-light float-right" onclick="window.location.href='signup.php';">Register</button> -->
+                <?php } ?>
         </div>
     </nav>
 

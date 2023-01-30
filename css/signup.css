@@ -1,37 +1,71 @@
-* {
-
-}
+* {}
 
 body {
-    background-color: rgb(43, 43, 43);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #212529;
+}
+
+.main-div {
+  margin: auto;
+  height: 100%;
 }
 
 #signup-form {
-    position: relative;
-    margin: 5vh auto auto auto;
-    padding: 2.5vh;
-    left: 0;
-    right: 0;
-    width: 70vh;
-    background-color:#212529;
-    color: aliceblue;
-    border-radius: 20px;
+  padding-top: 2vh;
+  width: 60%;
+  background-color: rgb(30, 30, 30);
+  color: aliceblue;
+  font-size: smaller;
+  transition-duration: 0.5s;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.227)
+  
+
+
 }
 
-@media screen and (max-width: 800px) {
-  #signup-form {
-    margin: 3vh auto auto auto;
-    padding: 2.5vh 5vh 5vh 5vh;
-    width: 65vh;
-    
-  }
+#signup-form:hover {
+  background-color: rgb(20, 20, 20);
 }
+
+.form-control {
+  font-size: 13px;
+  border-radius: 0 !important;
+}
+
+.form-select {
+  font-size: 13px;
+  border-radius: 0 !important;
+}
+
+.form-control:focus {
+  border-color: #000000dc;
+  box-shadow: none;
+}
+
+
+.rightside {
+  background-color: aqua;
+  height: 100%;
+}
+
 
 a {
   color: aliceblue;
-	font-size: 15px;
-	text-decoration: none;
-	padding-top: 1vh;
+  font-size: 15px;
+  text-decoration: none;
+  padding-top: 1vh;
+  padding-bottom: 2vh;
+  transition-duration: 0.5s;
+}
+
+a:hover {
+  color: #a8bed3;
+}
+
+button {
+  border-radius: 0 !important;
 }
 
 .text-top {
@@ -41,5 +75,12 @@ a {
 }
 
 footer {
-  margin-top: 3vh;
+  margin-top: auto;
+}
+
+@media screen and (max-width: 900px) {
+  #signup-form {
+    width: 80%;
+  }
+
 }
