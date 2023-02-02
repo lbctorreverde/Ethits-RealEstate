@@ -1,6 +1,14 @@
 <?php
 session_start();
 include ('dbconfig.php');
+include_once 'navbarfresh.php';
+?>
+
+<style>
+    <?php include 'css/emailverify.css' ?>
+</style>
+
+<?php
 
 if (isset($_SESSION['status'])) {
     echo "<p class='alert alert-success'>" . $_SESSION['status'] . "</p>";
@@ -30,8 +38,24 @@ if (isset($_POST["verify_email"]))
 
 ?>
 
-<form method="POST">
-    <input type="hidden" name="email" value="<?php echo $_GET['email']; ?>" required>
+<div class="container d-flex flex-column align-items-center justify-content-center">
+    <div class="text-center mb-4">
+        <span class="display-6 px-2">
+            Please enter the verification code that we have sent to you via email
+        </span>
+    </div>
+    <form method="POST">
+    <div class="input-group">
+        <input type="hidden" name="email" value="<?php echo $_GET['email']; ?>" required>
+        <input type="text" class="field form-control" name="token" maxlength="6" id="floatingInput" placeholder="Enter verification code" required />
+        <span class="input-group-text">
+            <input type="submit" name="verify_email" value="Verify Email">
+        </span>
+    </div>
+    </form>
+</div>
+<!-- <form method="POST">
+    <input type="hidden" name="email" value="<?php //echo $_GET['email']; ?>" required>
     <input type="text" name="token" placeholder="Enter verification code" required />
     <input type="submit" name="verify_email" value="Verify Email">
-</form>
+</form> -->

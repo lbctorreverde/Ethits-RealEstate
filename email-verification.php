@@ -51,14 +51,9 @@ if (isset($_POST["verify_email"]))
         </span>
     </div>
     </form>
-
 </div>
 
 <div class="footer">
     <?php include_once 'footer.php' ?>
 </div>
 
-
-    <input type="hidden" name="email" value="<?php echo $_GET['email']; ?>" required>
-    <input type="text" name="token" placeholder="Enter verification code" required />
-    <input type="submit" name="verify_email" value="Verify Email">
