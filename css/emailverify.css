@@ -1,0 +1,56 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #212529;
+}
+
+.container {
+    margin: auto;
+}
+
+input {
+    height: 35px;
+    color: #212529;
+
+}
+
+.form-control:focus {
+    border-color: #ffffff;
+    box-shadow: none;
+}
+
+#rightside {
+    background-color: rgb(10, 96, 96);
+}
+
+.input-group {
+    max-width: 40%;
+}
+
+.input-group-text {
+    height: 35px;
+    background-color: #212529;
+    border: none;
+}
+
+button {
+    width: 15vh;
+}
+
+.display-6 {
+    color: aliceblue;
+    font-size: 20px;
+}
+
+.footer {
+    margin-top: auto;
+}
+
+@media screen and (max-width: 800px) {
+    .input-group {
+        max-width: 70%;
+    }
+
+
+}

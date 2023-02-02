@@ -3,7 +3,8 @@ body {
 }
 
 section {
-    height: 100vh;
+    min-height: 100vh;
+
 }
 
 section>h1 {
@@ -12,7 +13,7 @@ section>h1 {
 
 #intro-one {
     background-image: linear-gradient(#212529,
-            rgba(24, 24, 24, 0.674)), url(img/wp1.jpg);
+            rgba(24, 24, 24, 0.674)), url(img/test2.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -21,16 +22,33 @@ section>h1 {
 
 #intro-two {
     background-image: linear-gradient(rgba(24, 24, 24, 0.849),
-            rgba(24, 24, 24, 0.849)), url(img/wp2.jpg);
+            rgba(24, 24, 24, 0.849)), url(img/test1.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     color: rgb(236, 236, 236);
+
 }
 
 #intro-three {
     background-image: linear-gradient(#2c2c2ca3,
-            #212529), url(img/wp3.jpg);
+            #212529), url(img/test3.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     color: rgb(236, 236, 236);
+
+}
+
+.hidden {
+    opacity: 0;
+    filter: blur(2px);
+    transform: translateX(-5%);
+    text-shadow: 0 3px 3px rgba(0, 0, 0, 0.7);
+    transition: all 1s;
+}
+
+
+.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
 }

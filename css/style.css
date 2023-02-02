@@ -1,7 +1,7 @@
 @import url('http://getbootstrap.com/dist/css/bootstrap.css');
 
-* {
-
+html {
+    scroll-behavior: smooth;
 }
 
 
