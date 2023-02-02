@@ -72,9 +72,9 @@ include('dbconfig.php');
         <div class="carousel-inner">
             <?php
                 $x = 0;
-                $sqll = "SELECT * FROM tbl_property WHERE agent_ID = '$var'";
-                $sel= mysqli_query($connect, $sqll);
-                $rowl = mysqli_fetch_assoc($sel);
+                // $sqll = "SELECT * FROM tbl_property WHERE agent_ID = '$var'";
+                // $sel= mysqli_query($connect, $sqll);
+                // $rowl = mysqli_fetch_assoc($sel);
                 //$varr = $rowl['property_ID'];
 
                 $sqlCa = "SELECT * FROM tbl_property WHERE agent_ID = '$var'";

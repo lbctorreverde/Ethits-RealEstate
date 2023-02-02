@@ -20,6 +20,7 @@ include('dbconfig.php');
             <option value="Bath">Bathroom</option>
             <option value="Bed">Bedroom</option>
             <option value="Sf">Special Features</option>
+            <option value="ptype">Property Type</option>
             <option value="Loc">Location</option>
         </select>
         <span class="vr me-3"></span>
@@ -33,12 +34,42 @@ include('dbconfig.php');
     <div class="properties-list container-fluid d-flex flex-column justify-content-center align-items-center">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
             <?php
-                
-                    $query = "SELECT * FROM tbl_property";
-                    $classadd = 0;
-                    $result = mysqli_query($connect, $query);
-                    while ($rowShow = mysqli_fetch_array($result)) {
-                    $classadd++;
+                $query = "SELECT * FROM tbl_property";
+                $result = mysqli_query($connect, $query);
+                if (isset($_POST['btn_search'])) {
+                    $new = $_POST['myInput'];
+                    $filter = $_POST['filter'];
+
+                    if (!$new) { ?>
+                        <script>
+                            alert('SearchBar is Empty');
+                            exit;
+                        </script>
+                    <?php }
+        
+                    if ($filter == 'Location') {
+                        $query  = "SELECT * from tbl_property WHERE location LIKE '%$new%'";
+                        $result = mysqli_query($connect, $query);
+                    }elseif($filter == 'Bath') {
+                        $query  = "SELECT * from tbl_property WHERE bathroom LIKE '%$new%'";
+                        $result = mysqli_query($connect, $query);
+                    }elseif($filter == 'Bed') {
+                        $query  = "SELECT * from tbl_property WHERE bedroom LIKE '%$new%'";
+                        $result = mysqli_query($connect, $query);
+                    }elseif($filter == 'Title') {
+                        $query  = "SELECT * from tbl_property WHERE title LIKE '%$new%'";
+                        $result = mysqli_query($connect, $query);
+                    }elseif($filter == 'Sf') {
+                        $query  = "SELECT * from tbl_property WHERE specialFeatures LIKE '%$new%'";
+                        $result = mysqli_query($connect, $query);
+                    }elseif($filter == 'ptype') {
+                        $query  = "SELECT * from tbl_property WHERE propertyType LIKE '%$new%'";
+                        $result = mysqli_query($connect, $query);
+                    }
+                }
+                $classadd = 0;
+                while ($rowShow = mysqli_fetch_array($result)) {
+                $classadd++;
                 ?>
             <div class="col">
                 <div class="card ">
@@ -57,7 +88,7 @@ include('dbconfig.php');
                                     }
                             ?>
                             <div class="<?php echo $classname;?>">
-                                <?php echo '<img  src="data:image/jpeg;base64,'.base64_encode($pic['propertyImg']).'" class="d-block w-100" alt="First slide">'; ?>
+                                <?php echo '<img  src="data:image/jpeg;base64,'.base64_encode($pic['propertyImg']).'" width="450" height="200" class="d-block w-100" alt="First slide">'; ?>
                             </div>
                             <?php }?>
                     <div class="card-body shadow">

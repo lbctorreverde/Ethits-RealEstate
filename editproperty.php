@@ -157,7 +157,7 @@ include_once 'header.php';
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
                         <?php
                                 try {
-                                $var = $_SESSION['user_id'];
+                                $var = $_SESSION['user_ID'];
                                 $query = "SELECT * FROM tbl_property WHERE agent_ID = '$var'";
                                 $classadd = 0;
                                 $result = mysqli_query($connect, $query);

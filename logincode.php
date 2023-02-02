@@ -32,7 +32,7 @@ if(isset($_POST['btn_loginAgent'])){
     }
 
     $_SESSION['verified_user_id'] = $email;
-    $_SESSION['user_id'] = $rows['agent_ID'];
+    $_SESSION['user_ID'] = $rows['agent_ID'];
     $_SESSION['enduser'] = 'Agent';
     $_SESSION['status'] = "Login Successfully";
     header('Location: index.php');

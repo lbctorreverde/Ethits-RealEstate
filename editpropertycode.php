@@ -1,7 +1,7 @@
 <?php
 session_start();
 include ('dbconfig.php');
-$var = $_SESSION['user_id'];
+$var = $_SESSION['user_ID'];
 
 if(isset($_POST['btn_saveChangesAgent'])){
         $title = $_POST['title'];

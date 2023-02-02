@@ -35,8 +35,8 @@ $_SESSION['agentselected'] = "";
     <h1 class="display-5">Find your agent on this page</h1>
 </section>
 
-<form action="agentscode.php" method="POST" role="search" id="form">
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..." title="Type in a name" aria-label="Search through site content">
+<form action="agents.php" method="POST" role="search" id="form">
+    <input type="text" id="myInput" name="myInput" placeholder="Search..." title="Type in a name" aria-label="Search through site content">
     <select class="form-select" name="filter" id="filter" required>
         <option value="Name">Name</option>
         <option value="Agency">Agency</option>
@@ -54,6 +54,34 @@ $_SESSION['agentselected'] = "";
         <?php
         $sqlAll = "SELECT * FROM tbl_agent";
         $resAll= mysqli_query($connect, $sqlAll);
+        if (isset($_POST['btn_search'])) {
+            $new = $_POST['myInput'];
+            $filter = $_POST['filter'];
+            if (!$new) { ?>
+                <script>
+                    alert('SearchBar is Empty');
+                    exit;
+                </script>
+            <?php }
+
+            if ($filter == 'Location') {
+                $sqlAll = "SELECT * from tbl_agent WHERE city LIKE '%$new%' OR brgy LIKE '%$new%' OR str LIKE '%$new%'";
+                $resAll = mysqli_query($connect, $sqlAll);
+            }elseif($filter == 'Name') {
+                $sqlAll = "SELECT * from tbl_agent WHERE fName LIKE '%$new%' OR lName LIKE '%$new%'";
+                $resAll = mysqli_query($connect, $sqlAll);
+            }elseif($filter == 'Agency') {
+                $sqlAll = "SELECT * from tbl_agent WHERE agency LIKE '%$new%'";
+                $resAll = mysqli_query($connect, $sqlAll);
+            }else {
+            ?>
+                <script>
+                    alert('SearchBar is Empty');
+                    exit;
+                </script>
+            <?php
+            }
+        }
         ?>
         <p><b><?php echo mysqli_num_rows($resAll)?></b> Results</p>
     </div>
@@ -119,6 +147,5 @@ if (isset($_POST['btn_hide'])) {
         </script>
         <?php
     }
-    
 }
 ?>
