@@ -22,11 +22,12 @@
                     unset($_SESSION['loginUser']);
                 }
             ?>
-            <input type="email" name="email" placeholder="Email" />
-            <input type="password" name="pass" placeholder="Password" />
+            <input type="email" name="email" placeholder="Email" required/>
+            <input type="password" name="password" placeholder="Password" required/>
             <a class="forgot-link" href="#">Forgot your password?</a>
             <button type="submit" name="btn_loginUser">Log in</button>
             <a class="signupuser-link" href="signupUser.php">Don't have an account? Sign up now!</a>
+            <div class="or-container"><div class="line-separator"></div> <div class="or-label">or</div><div class="line-separator"></div></div>
         </form>
     </div>
     <div class="form-container sign-in-container">
@@ -38,11 +39,12 @@
                     unset($_SESSION['loginAgent']);
                 }
             ?>
-            <input type="email" name="email" placeholder="Email" />
-            <input type="password" name="pass" placeholder="Password" />
+            <input type="email" name="email" placeholder="Email" required/>
+            <input type="password" name="password" placeholder="Password" required/>
             <a class="forgot-link" href="#">Forgot your password?</a>
             <button type="submit" name="btn_loginAgent">Log in</button>
             <a class="signup-link" href="signup.php">Don't have an account? Sign up now!</a>
+            <div class="or-container"><div class="line-separator"></div> <div class="or-label">or</div><div class="line-separator"></div></div>
         </form>
     </div>
     <div class="overlay-container">
@@ -67,8 +69,6 @@
         <small>Copyright &copy; CS3</small>
     </div>
 </footer>
-
-
 
 
 <script>

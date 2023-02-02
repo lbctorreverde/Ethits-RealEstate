@@ -42,7 +42,7 @@ include_once 'header.php';?>
         </div>
         <div class="content-form col py-3">
             <div>
-                <form action="editprofilecode.php" method="POST" class="container-fluid row g-3" id="signup-form" enctype="multipart/form-data">
+                <form action="editprofile.php" method="POST" class="container-fluid row g-3" id="signup-form" enctype="multipart/form-data">
                     <?php 
                         if(isset($_SESSION['status']))
                         {
@@ -54,20 +54,15 @@ include_once 'header.php';?>
                     <div>
                         <div class="mb-4 d-flex justify-content-center">
                             <?php 
-                                include ('dbconfig.php');
-                                $uid = $_SESSION['verified_user_id'];
-                                $user = $auth->getUser($uid); 
-
-                                if ($user->photoUrl != NULL) {
+                                if ($row['displayImg']) {
                                     ?>
-                                        <img src="<?=$user->photoUrl?>" style="width: 200px;" />
+                                        <?php echo is_null($row["displayImg"]) ? "-Empty-" : '<img  src="data:image/jpeg;base64,'.base64_encode($row['displayImg']).'" style="width: 200px;">'; ?>
                                     <?php
                                 }else {
                                     ?>
                                         <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" style="width: 200px;" />
                                     <?php
                                 }
-                            
                             ?>
                         </div>
                         <div class="d-flex justify-content-center">
@@ -77,49 +72,46 @@ include_once 'header.php';?>
                             </div>
                         </div>
                     </div>
-                    <?php
-
-                        $getdata = $database->getReference('agentInfo')->getChild($_SESSION['verified_user_id'])->getValue();
-                        
-                        if ($getdata > 0) {
+                    <?php       
+                        if ($row> 0) {
                     ?>
                         
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">First Name</label>
-                            <input type="text" class="form-control" name="fname" value="<?php echo $getdata['firstName']?>" placeholder="Enter Firstname here.." readonly required>
+                            <input type="text" class="form-control" name="fname" value="<?php echo $row['fName']?>" placeholder="Enter Firstname here.." readonly required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Middle Name</label>
-                            <input type="text" class="form-control" name="mname" value="<?php echo $getdata['midName']?>" placeholder="Enter Middlename here.." readonly required>
+                            <input type="text" class="form-control" name="mname" value="<?php echo $row['mName']?>" placeholder="Enter Middlename here.." readonly required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" name="lname" value="<?php echo $getdata['lastName']?>" placeholder="Enter Lastname here.." readonly required>
+                            <input type="text" class="form-control" name="lname" value="<?php echo $row['lName']?>" placeholder="Enter Lastname here.." readonly required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Birthday</label>
-                            <input type="date" class="form-control" name="bday" value="<?php echo $getdata['bday']?>" readonly required>
+                            <input type="date" class="form-control" name="bday" value="<?php echo $row['bday']?>" readonly required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputState" class="form-label">Sex</label>
                             <select class="form-select" name="sex" id="sex" disabled required>
-                                <option value="<?php echo $getdata['sex']?>">:<?php echo $getdata['sex']?></option>
+                                <option value="<?php echo $row['sex']?>">:<?php echo $row['sex']?></option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" name="contact" value="<?php echo $getdata['contactNo']?>" placeholder="0987654321" readonly required>
+                            <input type="text" class="form-control" name="contact" maxlength="11" value="0<?php echo $row['contactNo']?>" placeholder="0987654321" readonly required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Agency</label>
-                            <input type="text" class="form-control" name="agency" value="<?php echo $getdata['agency']?>" placeholder="Enter Agency name here.." readonly required>
+                            <input type="text" class="form-control" name="agency" value="<?php echo $row['agency']?>" placeholder="Enter Agency name here.." readonly required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Location</label>
                             <select class="form-select" name="city" id="city" disabled required>
-                                <option value="<?php echo $getdata['city']?>">:<?php echo $getdata['city']?></option>
+                                <option value="<?php echo $row['city']?>">:<?php echo $row['city']?></option>
                                 <option value="Abucay">Abucay</option>
                                 <option value="Bagac">Bagac</option>
                                 <option value="Balanga">Balanga</option>
@@ -135,23 +127,23 @@ include_once 'header.php';?>
                             </select>
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" name="brgy" value="<?php echo $getdata['brgy']?>" placeholder="Barangay" readonly required>
+                            <input type="text" class="form-control" name="brgy" value="<?php echo $row['brgy']?>" placeholder="Barangay" readonly required>
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" name="str" value="<?php echo $getdata['str']?>" placeholder="1234 Main St" readonly required>
+                            <input type="text" class="form-control" name="str" value="<?php echo $row['str']?>" placeholder="1234 Main St" readonly required>
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" value="<?php echo $getdata['email']?>" readonly required>
-                        </div>
-                        <div class="col-md-6">
+                            <input type="email" class="form-control" name="email" value="<?php echo $row['email']?>" readonly required>
+                        </div> -->
+                        <!-- <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" value="<?php echo $getdata['password']?>" placeholder="********" readonly required>
-                        </div>
+                            <input type="password" class="form-control" name="password" value="<?php password_verify($row['password'], $user->password)?>" placeholder="********" readonly required>
+                        </div> -->
 
                         <div class="col-md-12" style="display: none;" id="divConfirm">
                             <label for="inputPassword4" class="form-label">Current Password</label>
-                            <input type="password" class="form-control" name="passConfirm" id="passConfirm" placeholder="Enter current/old password to proceed update.." required>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter current/old password to proceed update.." required>
                         </div>
                         <div class="col-12">
                         </div>
@@ -205,27 +197,54 @@ include_once 'header.php';?>
     //     }
     // }
 </script>
+<?php
+if (isset($_POST['btn_saveChangesAgent'])) {
+    $fname = $_POST["fname"];
+    $lname = $_POST["lname"];
+    $mname = $_POST["mname"];
+    $bday = $_POST["bday"];
+    $sex = $_POST["sex"];
+    $contact = $_POST["contact"];
+    $agency = $_POST["agency"];
+    $city = $_POST["city"];
+    $brgy = $_POST["brgy"];
+    $str = $_POST["str"];
+    $password = $_POST["password"];
+    $dPhoto = $_FILES['dPhoto']['tmp_name'];
+    $id = $_SESSION['user_ID'];
 
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+    if (!password_verify($password , $row['password']))
+    {
+        $_SESSION['status'] = "Password is incorrect failed to edit";
+        header('Location: editprofile.php');
+        exit();
+    }
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyCyDWYfM3b4Owdf8DSWY7u_WHggWba7iR4",
-    authDomain: "agentfinderphp.firebaseapp.com",
-    databaseURL: "https://agentfinderphp-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "agentfinderphp",
-    storageBucket: "agentfinderphp.appspot.com",
-    messagingSenderId: "455836025375",
-    appId: "1:455836025375:web:bc5dba0687e3aadb690b2a"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-
-  import {getStorage, ref as sRef, uploadBytesResumable, getDownloadURL}
-  from "https://www.gstatic.com/firebasejs/9.16.0/firebase-storage.js"
-</script>
+    if ($dPhoto) {
+        $dPhoto1 = addslashes(file_get_contents($dPhoto)) ?? "";
+        $sql = "UPDATE `tbl_agent` SET fName ='$fname', lName ='$lname', mName ='$mname', bday ='$bday', sex ='$sex', contactNo ='$contact',
+        agency ='$agency', city ='$city', brgy ='$brgy', str ='$str', displayImg = '$dPhoto1' WHERE agent_ID ='$id'";
+        $update = mysqli_query($connect, $sql);
+    }else {
+        $sql = "UPDATE `tbl_agent` SET fName ='$fname', lName ='$lname', mName ='$mname', bday ='$bday', sex ='$sex', contactNo ='$contact',
+        agency ='$agency', city ='$city', brgy ='$brgy', str ='$str' WHERE agent_ID ='$id'";
+        $update = mysqli_query($connect, $sql);
+    }
+    
+    if (isset($update)) {
+        ?>
+        <script>
+            alert('Successfully Update');
+            location = 'editprofile.php';
+            exit;
+        </script>
+        <?php }else{?>
+        <script>
+            alert('Updating Failed');
+            location = 'editprofile.php';
+            exit;
+        </script>
+        <?php
+    }    
+}
+?>

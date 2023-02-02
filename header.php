@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('dbconfig.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +10,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
@@ -48,30 +49,60 @@ session_start();
             </div>
             <?php if (isset($_SESSION['verified_user_id'])) { ?>
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                    <li class="nav-item dropdown">
-                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <?php
-                            include('dbconfig.php');
-                            $uid = $_SESSION['verified_user_id'];
-                            $user = $auth->getUser($uid);
+                    <a style='color:white;' href="#">
 
-                            if ($user->photoUrl != NULL) {
-                            ?>
-                                <img src="<?= $user->photoUrl ?>" width="30" height="30" class="rounded-circle" />
-                            <?php
-                            } else {
-                            ?>
-                                <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                            <?php
+                    </a>    
+                <li class="nav-item dropdown">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <?php 
+                            if ($_SESSION['enduser'] == "Agent") {
+                                ?>
+                                <?php
+                                if (isset($_SESSION['verified_user_id'])) {
+                                    $current = $_SESSION['verified_user_id'];
+                                    $query = "SELECT *  from tbl_agent WHERE email = '$current'";
+                                    $result = mysqli_query($connect, $query);
+                                    $row = mysqli_fetch_assoc($result);
+                                    $user = mysqli_fetch_object($result);
+                                }
+                                
+                                if ($row["displayImg"]) {
+                                ?>
+                                    <?php echo is_null($row["displayImg"]) ? "-Empty-" : '<img  src="data:image/jpeg;base64,'.base64_encode($row['displayImg']).'" width="30" height="30" class="rounded-circle">'; ?>
+                                <?php
+                                } else {
+                                ?>
+                                    <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                                <?php
+                                }
+                                ?>
+                                    <span class="d-none d-sm-inline mx-1"><?php echo $row["fName"]?></span>
+                                <?php
+                            }else if($_SESSION['enduser'] == "User"){
+                                ?>
+                                <?php
+                                if (isset($_SESSION['verified_user_id'])) {
+                                    $current = $_SESSION['verified_user_id'];
+                                    $query = "SELECT *  from tbl_user WHERE email = '$current'";
+                                    $result = mysqli_query($connect, $query);
+                                    $row = mysqli_fetch_assoc($result);
+                                    $user = mysqli_fetch_object($result);
+                                }
+                                
+                                if ($row["displayImg"]) {
+                                ?>
+                                    <?php echo is_null($row["displayImg"]) ? "-Empty-" : '<img  src="data:image/jpeg;base64,'.base64_encode($row['displayImg']).'" width="30" height="30" class="rounded-circle">'; ?>
+                                <?php
+                                } else {
+                                ?>
+                                    <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                                <?php
+                                }
+                                ?>
+                                    <span class="d-none d-sm-inline mx-1"><?php echo $row["fName"]?></span>
+                                <?php
                             }
-                            ?>
-                            <?php
-                            $name = $database->getReference("agentInfo/" . $uid . "/firstName")->getValue();
-                            ?>
-                                <span class="d-none d-sm-inline mx-1"><?php echo $name?></span>
-                            <?php
-                            
-                            ?>
+                        ?>
                     </a>
                 <ul class="dropdown-menu dropdown-menu-left dropdown-menu-end">
                 <?php 
@@ -85,6 +116,8 @@ session_start();
                         <?php
                     }
                 ?>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Asset Cart</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
                 </ul>

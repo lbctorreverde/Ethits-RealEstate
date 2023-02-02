@@ -1,20 +1,9 @@
-<?php
-    require __DIR__."/includes/vendor/autoload.php";
+<?php 
+// $connect = mysqli_connect("sql210.epizy.com","epiz_31445837","viC1YVSVdW","epiz_31445837_rental");
+$connect = mysqli_connect("localhost:3306","root","","agentfinder");
 
-    use Kreait\Firebase\Factory;
-    use Kreait\Firebase\Auth;
-
-    $factory = (new Factory())
-        ->withServiceAccount("includes/agentfinderphp-firebase-adminsdk-x10dy-e517b10813.json")
-        ->withDatabaseUri('https://agentfinderphp-default-rtdb.asia-southeast1.firebasedatabase.app');
-
-    $storage = (new Factory())
-        ->withServiceAccount('includes/agentfinderphp-firebase-adminsdk-x10dy-e517b10813.json')
-        ->withDefaultStorageBucket('agentfinderphp.appspot.com')
-        ->createStorage();
-
-    $bucket = $storage->getBucket();
-
-    $database = $factory->createDatabase();
-    $auth = $factory->createAuth();
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
 ?>

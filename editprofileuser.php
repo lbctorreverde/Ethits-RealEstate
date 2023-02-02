@@ -23,63 +23,13 @@
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Contract Done</span>
                         </a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
-                        <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
-                    </li>
-                    <li>
-                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
-                        <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
-                    </li> -->
                 </ul>
                 <hr>
             </div>
         </div>
         <div class="content-form col py-3">
             <div>
-                <form action="editprofileusercode.php" method="POST" class="container-fluid row g-3" id="signup-form" enctype="multipart/form-data">
+                <form action="editprofileuser.php" method="POST" class="container-fluid row g-3" id="signup-form" enctype="multipart/form-data">
                     <?php 
                         if(isset($_SESSION['status']))
                         {
@@ -91,20 +41,15 @@
                     <div>
                         <div class="mb-4 d-flex justify-content-center">
                             <?php 
-                                include ('dbconfig.php');
-                                $uid = $_SESSION['verified_user_id'];
-                                $user = $auth->getUser($uid); 
-
-                                if ($user->photoUrl != NULL) {
+                                if ($row['displayImg']) {
                                     ?>
-                                        <img src="<?=$user->photoUrl?>" style="width: 200px;" />
+                                        <?php echo is_null($row["displayImg"]) ? "-Empty-" : '<img  src="data:image/jpeg;base64,'.base64_encode($row['displayImg']).'" style="width: 200px;">'; ?>
                                     <?php
                                 }else {
                                     ?>
                                         <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" style="width: 200px;" />
                                     <?php
                                 }
-                            
                             ?>
                         </div>
                         <div class="d-flex justify-content-center">
@@ -115,35 +60,32 @@
                         </div>
                     </div>
                     <?php
-                        $getdata = $database->getReference('userInfo')->getChild($_SESSION['verified_user_id'])->getValue();
-                        $getdata = $database->getReference('userInfo')->getChild($_SESSION['verified_user_id'])->getChild('location')->getValue();
-
-                        if ($getdata > 0) {
+                        if ($row> 0) {
                         ?>
                     
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">First Name</label>
-                        <input type="text" class="form-control" name="fname" value="<?php echo $getdata['firstName']?>" placeholder="Enter Firstname here.." readonly required>
+                        <input type="text" class="form-control" name="fname" value="<?php echo $row['fName']?>" placeholder="Enter Firstname here.." readonly required>
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Middle Name</label>
-                        <input type="text" class="form-control" name="mname" value="<?php if ($getdata['midName'] != "") {
-                            echo $getdata['midName'];} else {echo "-Empty-";}?>" placeholder="Enter Middlename here.." readOnly required>
+                        <input type="text" class="form-control" name="mname" value="<?php if ($row['mName'] != "") {
+                            echo $row['midName'];} else {echo "-Empty-";}?>" placeholder="Enter Middlename here.." readOnly required>
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" name="lname" value="<?php echo $getdata['lastName']?>" placeholder="Enter Lastname here.." readOnly required>
+                        <input type="text" class="form-control" name="lname" value="<?php echo $row['lName']?>" placeholder="Enter Lastname here.." readOnly required>
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Birthday</label>
-                        <input type="date" class="form-control" name="bday" value="<?php if (isset($getdata['bday'])) {
-                            echo $getdata['bday'];} else {echo "01/01/1900";}?>" readonly required>
+                        <input type="date" class="form-control" name="bday" value="<?php if (isset($row['bday'])) {
+                            echo $row['bday'];} else {echo "01/01/1900";}?>" readonly required>
                     </div>
                     <div class="col-md-6">
                         <label for="inputState" class="form-label">Sex</label>
                         <select class="form-select" name="sex" id="sex" disabled required>
-                            <option value="<?php if ($getdata['sex'] != "") {echo $getdata['sex'];} else {echo "-Empty-";}?>">
-                                :<?php if ($getdata['sex'] != "") {echo $getdata['sex'];} else {echo "-Empty-";}?>
+                            <option value="<?php if ($row['sex'] != "") {echo $row['sex'];} else {echo "-Empty-";}?>">
+                                :<?php if ($row['sex'] != "") {echo $row['sex'];} else {echo "-Empty-";}?>
                             </option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -151,14 +93,14 @@
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" name="contact" value="<?php if ($getdata['contactNo'] != "") {
-                            echo $getdata['contactNo'];} else {echo "-Empty-";}?>" placeholder="Enter phone number" readonly required>
+                        <input type="text" class="form-control" name="contact" value="<?php if ($row['contactNo'] != "") {
+                            echo $row['contactNo'];} else {echo "-Empty-";}?>" placeholder="Enter phone number" readonly required>
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">City</label>
                         <select class="form-select" name="city" id="city" disabled required>
-                            <option value="<?php if ($getdata['city'] != "") {echo $getdata['city'];} else {echo "-Empty-";}?>">
-                                :<?php if ($getdata['city'] != "") {echo $getdata['city'];} else {echo "-Empty-";}?>
+                            <option value="<?php if ($row['city'] != "") {echo $row['city'];} else {echo "-Empty-";}?>">
+                                :<?php if ($row['city'] != "") {echo $row['city'];} else {echo "-Empty-";}?>
                             </option>
                             <option value="Abucay">Abucay</option>
                             <option value="Bagac">Bagac</option>
@@ -176,21 +118,13 @@
                     </div>
                     <div class="col-6">
                         <label for="inputEmail4" class="form-label">Barangay</label>
-                        <input type="text" class="form-control" name="brgy" value="<?php if ($getdata['brgy'] != "") {
-                            echo $getdata['brgy'];} else {echo "-Empty-";}?>" placeholder="Barangay.." readonly required>
+                        <input type="text" class="form-control" name="brgy" value="<?php if ($row['brgy'] != "") {
+                            echo $row['brgy'];} else {echo "-Empty-";}?>" placeholder="Barangay.." readonly required>
                     </div>
                     <div class="col-6">
                         <label for="inputEmail4" class="form-label">Street</label>
-                        <input type="text" class="form-control" name="str" value="<?php if ($getdata['str'] != "") {
-                            echo $getdata['str'];} else {echo "-Empty-";}?>" placeholder="1234 Main St" readonly required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="inputEmail4" class="form-label">Email</label>
-                        <input type="email" class="form-control" value="<?php echo $getdata['email']?>" name="email" placeholder="example@gmail.com">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="inputPassword4" class="form-label">Password</label>
-                        <input type="password" class="form-control" value="<?php echo $getdata['password']?>" name="password" placeholder="********">
+                        <input type="text" class="form-control" name="str" value="<?php if ($row['str'] != "") {
+                            echo $row['str'];} else {echo "-Empty-";}?>" placeholder="1234 Main St" readonly required>
                     </div>
                     <div class="col-md-6" style="display: none;" id="divConfirm">
                             <label for="inputPassword4" class="form-label">Current Password</label>
@@ -229,22 +163,56 @@
             select.disabled = false;
         }
     }
-
-    //To make inputs readOnly
-    // function setCancel(){
-    //     let getControl = document.getElementsByClassName("form-control")
-    //     let getSelect = document.getElementsByClassName("form-select")
-    //     document.getElementById("divTitle").innerHTML = "Profile";
-    //     document.getElementById("custom1").style.display = "none";
-    //     document.getElementById("btn_Cancel").style.display = "none";
-    //     document.getElementById("btn_saveChangesUser").style.display = "none";
-    //     document.getElementById("btn_Edit").style.display = "block";
-    //     document.getElementById("divConfirm").style.display = "none";
-    //     for (let input of getControl){
-    //         input.readOnly = true;
-    //     }
-    //     for (let select of getSelect){
-    //         select.disabled = true;
-    //     }
-    // }
 </script>
+<?php
+if (isset($_POST['btn_saveChangesUser'])) {
+    $fname = $_POST["fname"];
+    $lname = $_POST["lname"];
+    $mname = $_POST["mname"];
+    $bday = $_POST["bday"];
+    $sex = $_POST["sex"];
+    $contact = $_POST["contact"];
+    $city = $_POST["city"];
+    $brgy = $_POST["brgy"];
+    $str = $_POST["str"];
+    $password = $_POST["passConfirm"];
+    $dPhoto = $_FILES['dPhoto']['tmp_name'];
+    $id = $_SESSION['user_ID'];
+
+    if (!password_verify($password , $row['password']))
+    {
+        $_SESSION['status'] = "Password is incorrect failed to edit";
+        header('Location: editprofileUser.php');
+        exit();
+    }
+
+    if ($dPhoto) {
+        $dPhoto1 = addslashes(file_get_contents($dPhoto)) ?? "";
+        $sql = "UPDATE `tbl_user` SET `fName`='$fname',`lName`='$lname',`mName`='$mname',`sex`='$sex'
+        ,`bday`='$bday',`city`='$city',`brgy`='$brgy',`str`='$str',`contactNo`='$contact',
+        ,`displayImg`='$dPhoto1' WHERE user_ID ='$id'";
+        $update = mysqli_query($connect, $sql);
+    }else {
+        $sql = "UPDATE `tbl_user` SET `fName`='$fname',`lName`='$lname',`mName`='$mname',`sex`='$sex'
+        ,`bday`='$bday',`city`='$city',`brgy`='$brgy',`str`='$str',`contactNo`='$contact' WHERE user_ID ='$id'";
+        $update = mysqli_query($connect, $sql);
+    }
+    
+    if (isset($update)) {
+        ?>
+        <script>
+            alert('Successfully Update');
+            location = 'editprofileUser.php';
+            exit;
+        </script>
+        <?php }else{?>
+        <script>
+            alert('Updating Failed');
+            location = 'editprofileUser.php';
+            exit;
+        </script>
+        <?php
+    }    
+}
+?>
+

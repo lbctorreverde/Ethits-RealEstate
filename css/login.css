@@ -15,6 +15,8 @@ h1 {
 	margin: 0;
 }
 
+
+
 h2 {
 	text-align: center;
 }
@@ -103,12 +105,30 @@ input {
 	width: 768px;
 	max-width: 100%;
 	min-height: 480px;
-<<<<<<< HEAD
-=======
 	margin-bottom: 0.7vh;
->>>>>>> 219d6452c1702e31fbad851dbf4a14214f956371
 	
 }
+
+.or-container {
+    align-items: center;
+    color: #ccc;
+    display: flex;
+    margin: 25px 0;
+}
+
+.line-separator {
+    background-color: rgb(6, 0, 0);
+    flex-grow: 60;
+    height: 3px;
+}
+
+.or-label {
+    flex-grow: 1;
+    margin: 0 15px;
+    text-align: center;
+}
+
+
 
 .form-container {
 	position: absolute;

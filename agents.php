@@ -2,25 +2,41 @@
 include_once 'header.php';
 
 include('dbconfig.php');
+$_SESSION['agentselected'] = "";
 ?>
 
 <style>
     <?php include 'css/agents.css'; ?>
+    
 </style>
 
+<script>
+    function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("content-table");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+        }       
+    }
+    }
+</script>
 
 <section class="topsection d-flex flex-column text-center justify-content-center align-items-center">
     <h1 class="display-5">Find your agent on this page</h1>
 </section>
 
 <form action="agentscode.php" method="POST" role="search" id="form">
-    <input type="search" id="query" name="searchName" placeholder="Search..." aria-label="Search through site content">
-    <?php
-    $_SESSION['agentselected'] = "";
-    if ($_SESSION['searchName'] == "") {
-        $_SESSION['searchName'] = $database->getReference('agentInfo')->orderByChild("lastName")->getValue();
-    }
-    ?>
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..." title="Type in a name" aria-label="Search through site content">
     <select class="form-select" name="filter" id="filter" required>
         <option value="Name">Name</option>
         <option value="Agency">Agency</option>
@@ -36,49 +52,46 @@ include('dbconfig.php');
     <div class="left-panel">
         <h4 class="fw-normal">Bataan Agents</h4>
         <?php
-        $x = 0;
-        foreach ($_SESSION['searchName'] as $key => $value) {
-            $x++;
-        }
+        $sqlAll = "SELECT * FROM tbl_agent";
+        $resAll= mysqli_query($connect, $sqlAll);
         ?>
-        <p><b><?php echo $x ?></b> Results</p>
+        <p><b><?php echo mysqli_num_rows($resAll)?></b> Results</p>
     </div>
     <div class="agentslist-panel">
 
         <?php
-        foreach ($_SESSION['searchName'] as $key => $row) {
+        while ($row = mysqli_fetch_array($resAll)) {
+            // if ($row['Status'] == "Pending") {
+            //     continue;
+            // }
         ?>
             <!-- CARD FOR EACH AGENT PAR-->
             <div class="agentcard row g-0 mt-2 shadow">
                 <div class="col-md-2">
-                    <?php
-                    $user = $auth->getUser($row['Uniquekey']);
-                    if ($user->photoUrl != NULL) {
-                    ?>
-                        <img src="<?= $user->photoUrl ?>" class="img-fluid rounded-start" alt="..." width="150" height="150" />
-                    <?php
-                    } else {
-                    ?>
-                        <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid rounded-start" alt="..." width="150" height="150" />
-                    <?php
-                    }
+                    <?php 
+                        if (!$row['displayImg']) {
+                            ?>
+                                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid rounded-start" alt="..." width="150" height="150"/>
+                            <?php
+                            } else {
+                            ?>
+                                <?php echo '<img  src="data:image/jpeg;base64,'.base64_encode($row['displayImg']).'" class="img-fluid rounded-start" alt="..." width="150" height="150">'; ?>
+                            <?php
+                        }
                     ?>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <?php
-                        $getK = $database->getReference('agentInfo')->getChild($row['Uniquekey'])->getKey(); ?>
                         <!-- Paiba nalang, sa notfound.php pa redirect nya eh -->
-                        <form method="POST" action="agentC.php" class="agent-name-post d-flex form-control text-start">
-                            <input type="hidden" id="hide" name="hide" value="<?php echo $row['Uniquekey'] ?>">
-                            <button class="agent-name-button" type="submit" id="btn_hide" name="btn_hide"><?php echo $row['lastName'] . ", " . $row['firstName'] . " " . substr($row['midName'], 0, 1) . "." ?></button>
+                        <form method="POST" action="agents.php" class="agent-name-post d-flex form-control text-start">
+                            <input type="hidden" id="hide" name="hide" value="<?php echo $row['agent_ID'] ?>">
+                            <button class="agent-name-button" type="submit" id="btn_hide" name="btn_hide">
+                                <?php echo $row['lName'] . ", " . $row['fName'] . " " . substr($row['mName'], 0, 1) . "." ?>
+                            </button>
                         </form>
-
-                        <!-- <input type="hidden" id="hide" name="hide" value="<?php echo $row['Uniquekey'] ?>">
-                        <a onclick="window.location.href='agentC.php'" type="submit" id="btn_hide" name="btn_hide"><?php echo $row['lastName'] . ", " . $row['firstName'] . " " . substr($row['midName'], 0, 1) . "." ?></a> -->
-
-                        <a onclick="<?php $_SESSION['agentselected'] = $row['Uniquekey'] ?>" href="agentportfolio.php" class="btn btn-dark" style="text-decoration: none;"></a>
-                        <a class="text-decoration-none text-reset" onclick="window.location.href='agentportfolio.php';"></a>
+                        <!-- <input type="hidden" id="hide" name="hide" value="<?php //echo $row['agemt_ID'] ?>">
+                        <a onclick="window.location.href='agentC.php'" type="submit" id="btn_hide" name="btn_hide"><?php //echo $row['lName'] . ", " . $row['fName'] . " " . substr($row['mName'], 0, 1) . "." ?></a> -->
+                        <br>
                         <p class="card-text text-muted">Real Estate Professional<br>
                             <?php echo $row['agency'] . " - " . $row['str'] . ", " . $row['brgy'] . ", " . $row['city'] . ", Bataan" ?>
                         </p>
@@ -94,12 +107,18 @@ include('dbconfig.php');
     </div>
 </section>
 
-<script type="text/javascript">
-    var myModal = new bootstrap.Modal(document.getElementById('myModal'), options)
-</script>
-
 <?php
-$_SESSION['searchName'] = "";
-$_SESSION['agency'] = "";
-$_SESSION['locC'] = "";
+if (isset($_POST['btn_hide'])) {
+    $hide = $_POST['hide'];
+    if (isset($hide)) {
+        $_SESSION['agentselected'] = $hide;
+        ?>
+        <script>
+        location = 'agentportfolio.php';
+        exit;
+        </script>
+        <?php
+    }
+    
+}
 ?>
