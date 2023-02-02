@@ -49,7 +49,14 @@ include('dbconfig.php');
             </div>
             <?php if (isset($_SESSION['verified_user_id'])) { ?>
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                    <a class="pt-1 pe-3 text-decoration-none" onclick="window.location.href='propertycart.php'" style='color:white;' href="#"><i class="bi bi-houses-fill"></i> Deals</a>
+
+                    <a class="dealsbtn pt-1 pe-3 text-decoration-none" onclick="window.location.href='propertycart.php'" style='color:white;' href="#"><i class="bi bi-houses-fill"></i> Deals</a>
+                    <style>
+                        .dealsbtn:hover {
+                            transition-duration: 0.2s;
+                            opacity: 90%;
+                        }
+                    </style>
                     <li class="nav-item dropdown">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <?php
