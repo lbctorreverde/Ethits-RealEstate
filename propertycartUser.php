@@ -17,15 +17,14 @@ include('dbconfig.php');
                 <div class="card rounded">
                     <div class="row g-0">
                         <div class="property-img col-7">
-                            <img src="img/test1.jpg" class="property-img" alt="First slide" width="340" height="400">
+                            <img src="img/wp2.jpg" class="property-img" alt="First slide" width="340" height="400">
                         </div>
                         <div class="col">
                             <div class="card-body container-fluid d-flex flex-column">
                                 <h5 class="card-text">Rfo bungalow house and lot in bataan</h5>
                                 <p class="card-text">Buyer name: <br>[insert Buyer name here]</p>
                                 <p class="card-text"><small class="text-muted">ST. FRANCIS II, LIMAY</small></p>
-                                <button type="button" class="btn-accept btn">Accept</button>
-                                <button type="button" class="btn-reject btn">Reject</button>
+                                <button type="button" class="btn-reject btn">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -142,35 +141,6 @@ include('dbconfig.php');
                         <span class="badge">Pending</span>
                     </td>
 
-                </tr>
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center text-wrap">
-                            <img src="img/test3.jpg" alt="" style="width: 170px; height: 130px" class="" />
-                            <div class="ms-3">
-                                <p class="fw-bold mb-1">Property name</p>
-                                <p class="text-muted mb-0">Property Address</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">Software engineer</p>
-                    </td>
-                    <td>
-                        <span class="badge">Active</span>
-                    </td>
-                    <td>
-                        <span class="badge">Active</span>
-                    </td>
-                    <td>
-                        <span class="badge">YYYY:MM:DD</span>
-                    </td>
-                    <td>
-                        <span class="badge">YYYY:MM:DD</span>
-                    </td>
-                    <td>
-                        <span class="badge">Pending</span>
-                    </td>
                 </tr>
             </tbody>
         </table>
