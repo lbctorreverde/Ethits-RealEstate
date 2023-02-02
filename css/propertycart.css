@@ -1,0 +1,112 @@
+.topsection {
+    height: 55vh;
+    background-image: linear-gradient(#212529,
+            rgba(24, 24, 24, 0.951));
+    color: rgb(236, 236, 236);
+
+}
+
+.card {
+    border: none;
+    background-color: #212529;
+}
+
+.card-body {
+
+    border: none;
+
+}
+
+.card-body>button {
+    width: 50%;
+    color: aliceblue;
+
+}
+
+.card-body>.btn-accept {
+    background-color: rgb(44, 156, 31);
+    margin-bottom: 15px;
+}
+
+.card-body>.btn-reject {
+    background-color: rgb(129, 27, 27);
+}
+
+.carousel-inner {
+    height: 50vh;
+    width: 80vh;
+}
+
+
+.property-img {
+    object-fit: cover;
+}
+
+.table-section {
+    background-color: rgb(36,36,36);
+    padding-top: 1vh;
+    padding-bottom: 20vh;
+}
+
+form {
+    background-color: #ffffffe6;
+    width: 90vh;
+    height: 7vh;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 3vh;
+}
+
+input {
+    all: unset;
+    font: 16px system-ui;
+    color: #1c1c1c;
+    height: 100%;
+    width: 100%;
+    padding: 6px 10px;
+}
+
+svg {
+    color: rgb(0, 0, 0);
+    width: 40px;
+    height: 40px;
+    padding-right: 15px;
+}
+
+.searchbtn {
+    all: unset;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+}
+
+.filter-btn {
+    margin-right: 1vh;
+    width: 20vh;
+
+}
+
+.list-group-flush>.list-group-item {
+    color: aliceblue;
+    background-color: transparent;
+    border: transparent;
+}
+
+.form-select>option {
+    background-color: rgb(43, 43, 43);
+    color: aliceblue;
+}
+
+.form-select {
+    background-color: rgb(43, 43, 43);
+    color: aliceblue;
+    width: 20%;
+    margin-right: 20px;
+}
+
+.table {
+    background-color: transparent;
+    color: aliceblue;
+}

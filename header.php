@@ -49,14 +49,12 @@ include('dbconfig.php');
             </div>
             <?php if (isset($_SESSION['verified_user_id'])) { ?>
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                    <a style='color:white;' href="#">
-
-                    </a>    
-                <li class="nav-item dropdown">
+                    <a class="pt-1 pe-3 text-decoration-none" onclick="window.location.href='propertycart.php'" style='color:white;' href="#"><i class="bi bi-houses-fill"></i> Deals</a>
+                    <li class="nav-item dropdown">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <?php 
+                            <?php
                             if ($_SESSION['enduser'] == "Agent") {
-                                ?>
+                            ?>
                                 <?php
                                 if (isset($_SESSION['verified_user_id'])) {
                                     $current = $_SESSION['verified_user_id'];
@@ -65,10 +63,10 @@ include('dbconfig.php');
                                     $row = mysqli_fetch_assoc($result);
                                     $user = mysqli_fetch_object($result);
                                 }
-                                
+
                                 if ($row["displayImg"]) {
                                 ?>
-                                    <?php echo is_null($row["displayImg"]) ? "-Empty-" : '<img  src="data:image/jpeg;base64,'.base64_encode($row['displayImg']).'" width="30" height="30" class="rounded-circle">'; ?>
+                                    <?php echo is_null($row["displayImg"]) ? "-Empty-" : '<img  src="data:image/jpeg;base64,' . base64_encode($row['displayImg']) . '" width="30" height="30" class="rounded-circle">'; ?>
                                 <?php
                                 } else {
                                 ?>
@@ -76,10 +74,10 @@ include('dbconfig.php');
                                 <?php
                                 }
                                 ?>
-                                    <span class="d-none d-sm-inline mx-1"><?php echo $row["fName"]?></span>
-                                <?php
-                            }else if($_SESSION['enduser'] == "User"){
-                                ?>
+                                <span class="d-none d-sm-inline mx-1"><?php echo $row["fName"] ?></span>
+                            <?php
+                            } else if ($_SESSION['enduser'] == "User") {
+                            ?>
                                 <?php
                                 if (isset($_SESSION['verified_user_id'])) {
                                     $current = $_SESSION['verified_user_id'];
@@ -88,10 +86,10 @@ include('dbconfig.php');
                                     $row = mysqli_fetch_assoc($result);
                                     $user = mysqli_fetch_object($result);
                                 }
-                                
+
                                 if ($row["displayImg"]) {
                                 ?>
-                                    <?php echo is_null($row["displayImg"]) ? "-Empty-" : '<img  src="data:image/jpeg;base64,'.base64_encode($row['displayImg']).'" width="30" height="30" class="rounded-circle">'; ?>
+                                    <?php echo is_null($row["displayImg"]) ? "-Empty-" : '<img  src="data:image/jpeg;base64,' . base64_encode($row['displayImg']) . '" width="30" height="30" class="rounded-circle">'; ?>
                                 <?php
                                 } else {
                                 ?>
@@ -99,33 +97,37 @@ include('dbconfig.php');
                                 <?php
                                 }
                                 ?>
-                                    <span class="d-none d-sm-inline mx-1"><?php echo $row["fName"]?></span>
-                                <?php
+                                <span class="d-none d-sm-inline mx-1"><?php echo $row["fName"] ?></span>
+                            <?php
                             }
-                        ?>
-                    </a>
-                <ul class="dropdown-menu dropdown-menu-left dropdown-menu-end">
-                <?php 
-                    if ($_SESSION['enduser'] == "Agent") {
-                        ?>
-                            <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofile.php'">Profile</a></li>
-                        <?php
-                    }else if($_SESSION['enduser'] == "User"){
-                        ?>
-                            <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofileuser.php'">Profile</a></li>
-                        <?php
-                    }
-                ?>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Asset Cart</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
-                </ul>
-            </li>
-            <?php }else{?>
-            <button class="btn btn-dark btn-outline-light float-right me-2" onclick="window.location.href='login.php';">Login/Register</button>
-            <!-- <button class="btn btn-dark btn-outline-light float-right" onclick="window.location.href='signup.php';">Register</button> -->
-            <?php }?>
+                            ?>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-left dropdown-menu-end">
+                            <?php
+                            if ($_SESSION['enduser'] == "Agent") {
+                            ?>
+                                <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofile.php'">Profile</a></li>
+                            <?php
+                            } else if ($_SESSION['enduser'] == "User") {
+                            ?>
+                                <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofileuser.php'">Profile</a></li>
+                            <?php
+                            }
+                            ?>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Asset Cart</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
+                        </ul>
+                    </li>
+                <?php } else { ?>
+                    <button class="btn btn-dark btn-outline-light float-right me-2" onclick="window.location.href='login.php';">Login/Register</button>
+                    <!-- <button class="btn btn-dark btn-outline-light float-right" onclick="window.location.href='signup.php';">Register</button> -->
+                <?php } ?>
         </div>
     </nav>
 

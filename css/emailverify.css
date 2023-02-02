@@ -9,8 +9,9 @@ body {
     margin: auto;
 }
 
-input {
+#floatingInput {
     height: 35px;
+    width: 20vh;
     color: #212529;
 
 }
@@ -25,7 +26,7 @@ input {
 }
 
 .input-group {
-    max-width: 40%;
+
 }
 
 .input-group-text {
