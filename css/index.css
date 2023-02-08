@@ -1,9 +1,9 @@
 body {
-    background: rgb(43, 43, 43);
+    background: #212529;
 }
 
 section {
-    min-height: 100vh;
+    min-height: 60vh;
 
 }
 
@@ -12,17 +12,15 @@ section>h1 {
 }
 
 #intro-one {
-    background-image: linear-gradient(#212529,
-            rgba(24, 24, 24, 0.674)), url(img/test2.jpg);
+    background-image: linear-gradient(0deg, rgba(33, 37, 41, 1) 0%, rgba(0, 0, 0, 0.516) 50%, rgba(33, 37, 41, 1) 100%), url(img/test4.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-
+    padding-left: 30vh;
     color: rgb(236, 236, 236);
 }
 
 #intro-two {
-    background-image: linear-gradient(rgba(24, 24, 24, 0.849),
-            rgba(24, 24, 24, 0.849)), url(img/test1.jpg);
+    background-image: linear-gradient(0deg, rgba(33, 37, 41, 1) 0%, rgba(0, 0, 0, 0.67) 50%, rgba(33, 37, 41, 1) 100%), url(img/test5.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     color: rgb(236, 236, 236);
@@ -30,10 +28,10 @@ section>h1 {
 }
 
 #intro-three {
-    background-image: linear-gradient(#2c2c2ca3,
-            #212529), url(img/test3.jpg);
+    background-image: linear-gradient(0deg, rgba(33, 37, 41, 1) 0%, rgba(0, 0, 0, 0.516) 50%, rgba(33, 37, 41, 1) 100%), url(img/test6.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    padding-right: 30vh;
     color: rgb(236, 236, 236);
 
 }
@@ -51,4 +49,46 @@ section>h1 {
     opacity: 1;
     filter: blur(0);
     transform: translateX(0);
+}
+
+.second-div {
+    min-height: 60vh;
+    margin-top: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(236, 236, 236);
+}
+
+.image-agent {
+    float: left;
+}
+
+.content-agent {
+    padding-left: 20px;
+    padding-top: 4%;
+    float: left;
+}
+
+.third-div {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(236, 236, 236);
+}
+
+.image-property {
+    float: right;
+}
+
+.content-property {
+    padding-right: 20px;
+    padding-top: 4%;
+    float: right;
+}
+
+.content>button {
+    width: 200px;
+    border-radius: 0 !important;
 }
