@@ -57,7 +57,7 @@ include_once 'header.php';
             </div>
             <div class="content-agent content">
                 <h1>Looking for an agent? Browse here!</h1>
-                <button class="btn btn-outline-light mt-2">View agents</button>
+                <button class="btn btn-outline-light mt-2" href="#" onclick="window.location.href='agents.php'">View agents</button>
             </div>
 
         </div>
@@ -70,7 +70,7 @@ include_once 'header.php';
             </div>
             <div class="content-property content">
                 <h1>Looking for an agent? Browse here!</h1>
-                <button class="btn btn-outline-light mt-2">View properties</button>
+                <button class="btn btn-outline-light mt-2" href="#" onclick="window.location.href='properties.php'">View properties</button>
             </div>
 
         </div>
