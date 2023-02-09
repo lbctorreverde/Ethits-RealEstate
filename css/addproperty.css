@@ -153,11 +153,19 @@ button {
 }
 
 
+.modal-header {
+    color: rgb(34, 34, 34);
+    border-radius: 0;
+    background-color: #dadada00;
+}
+
 .modal-content {
     background-color: rgba(255, 255, 255, 0.907);
 }
 
-
+.btn-close {
+    
+}
 
 
 .image-preview-container {
@@ -193,3 +201,8 @@ button {
     align-items: center;
     justify-content: center;
 }
+
+.edit-btn {
+    width: 100%;
+}
+
