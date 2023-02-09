@@ -206,9 +206,12 @@ if(isset($_POST['page'])){
                             <input type="hidden" id="property" name="property" value="<?php echo $row['property_ID'] ?>">
                             <hr>
                             <div>
-                                <?php
-                                    if ($_SESSION['enduser'] == 'User') {?>
+                            <?php
+                                if ($_SESSION['enduser'] == 'User') {?>
+                                    <div class="card-footer text-muted" >
+                                        <small class="text-muted" style="line-height: 0; font-size: 20px;"><b>&nbsp;&nbsp;&nbsp;₱&nbsp;<?php echo $row['price']?></b></small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <button type="submit" id="btn_hide1" name="btn_hide1" class="btn btn-light" >Buy</button>
+                                    </div>
                                 <?php }?>
                             </div>
                         </form>
@@ -220,11 +223,11 @@ if(isset($_POST['page'])){
                         echo '<tr><td colspan="6">No records found...</td></tr>'; 
                     } 
                 ?>
-                </div>
-                <div class="row">
-                    <?php echo $pagination->createLinks(); ?>
-                </div>
             </div>
+        <div class="row">
+            <?php echo $pagination->createLinks(); ?>
+        </div>
+    </div>
 <?php 
 } 
 ?>
