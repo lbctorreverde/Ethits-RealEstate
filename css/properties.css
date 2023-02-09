@@ -12,9 +12,9 @@ body {
     position: relative;
 }
 
-.properties-section {
+/* .properties-section {
     height: 100vh;
-}
+} */
 
 
 form {
@@ -25,9 +25,76 @@ form {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
 
+.grid-container {
+    display: grid;
+    /* auto the firtst index after making filter */
+    grid-template-columns: 200px auto;
+    grid-template-rows: 1fr;
 
+    gap: 10px;
+    background-color: #f8f8f8;
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  
+  div.b {
+    margin-left: 10px;
+    word-wrap: break-word;
+    height: auto;
+  }
 
+  div.filter {
+    margin-left: 30px;
+  }
+  
+  .grid-container > div {
+    /* background-color: aqua; */
+    padding: 20px 0;
+  }
+
+  .card1 {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 15px;
+    padding: 10px;
+  }
+
+  .btnApply {
+    border-radius: 8px;
+    background-color: #1c1c1c;
+    color:white;
+    width:165px;
+}
+
+p{
+    display:flex;  
+    vertical-align: middle;
+}
+
+.grid-cont{
+    display: grid;
+    grid-template-columns: 100px auto;
+    grid-gap: 5px;
+    padding: 3px;
+    align-items: center;
+}
+  
+.grid-cont> small{
+    padding: 20px 0;
+}
+
+.gcont{
+    display: grid;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    padding: 20px;
+    border: 2px solid black;
+}
+
+.gcont> div{
+    align-items: center;
 }
 
 input {
@@ -59,11 +126,11 @@ svg {
 
 }
 
-.properties-list {
+/* .properties-list {
     padding-top: 10vh;
     padding-left: 10%;
     padding-right: 10%;
-}
+} */
 
 .card-img-top {
     width: 100%;
@@ -72,7 +139,8 @@ svg {
 }
 
 .card {
-    color: aliceblue;
+    /* color: aliceblue; */
+    color: black;
     background-color: transparent;
     border: transparent;
     transition-duration: 0.5s;
@@ -84,7 +152,8 @@ svg {
 }
 
 .list-group-flush>.list-group-item {
-    color: aliceblue;
+    /* color: aliceblue; */
+    color: black;
     background-color: transparent;
     border: transparent;
 }
@@ -101,7 +170,7 @@ svg {
 .property-name-button {
     border: none;
     background-color: transparent;
-    color: aliceblue;
+    color: black;
 }
 
 .agent-name-post {
