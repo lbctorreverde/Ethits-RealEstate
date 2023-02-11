@@ -1,151 +1,290 @@
 <?php
 include_once 'header.php';
 include('dbconfig.php');
+
+// Include pagination library file 
+include_once 'Pagination.class.php'; 
+ 
+// Set some useful configuration 
+$baseURL = 'getData.php'; 
+$limit = 6; 
+ 
+// Count of all records 
+$query   = $connect->query("SELECT COUNT(*) as rowNum FROM tbl_property"); 
+$result  = $query->fetch_assoc(); 
+$rowCount= $result['rowNum']; 
+ 
+// Initialize pagination class 
+$pagConfig = array( 
+    'baseURL' => $baseURL, 
+    'totalRows' => $rowCount, 
+    'perPage' => $limit, 
+    'contentDiv' => 'result', 
+    'link_func' => 'searchFilter' 
+); 
+$pagination =  new Pagination($pagConfig);
+
+$query = $connect->query("SELECT * FROM tbl_property ORDER BY property_ID DESC LIMIT $limit"); 
 ?>
 
 <style>
     <?php include 'css/properties.css' ?>
 </style>
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<?php
+    if (isset($_SESSION['verified_user_id'])) {
+        $var1 = $_SESSION['verified_user_id'];
+        $query1 = "SELECT *  from tbl_user WHERE email = '$var1'";
+        $result1 = mysqli_query($connect, $query1);
+        $row1 = mysqli_fetch_assoc($result1);
+    }
+?>
+<script type="text/javascript">
+        
+    
+    function searchFilter(page_num) {
+        page_num = page_num?page_num:0;
+        $('#clear').click(function(){  
+            $('#pselect').prop('selectedIndex', 0)
+            $('#pdate').prop('selectedIndex', 0)
+            $('#nearby').prop('selectedIndex', 0)
+            $('#city').prop('selectedIndex', 0)
+            $('#style').prop('selectedIndex', 0)
+            $('#bathBy').prop('selectedIndex', 0)
+            $('#bedBy').prop('selectedIndex', 0)
+            $('#pmax').prop('selectedIndex', 0)
+            $('#pmin').prop('selectedIndex', 0)
+            document.getElementById('pmax').value = ''
+            document.getElementById('pmin').value = ''
+        });
+
+        var keywords = $('#keywords').val();
+        var filterBy = $('#city').val();
+        var styleBy = $('#style').val();
+        var bathBy = $('#bathBy').val();
+        var bedBy = $('#bedBy').val();
+        var pmaxBy = $('#pmax').val();
+        var pminBy = $('#pmin').val();
+        var selectBy = $('#pselect').val();
+        var dateBy = $('#pdate').val();
+        var nearBy = $('#nearby').val();
+
+        
+
+        $('#nearby').click(function(){  
+            $('#pselect').prop('selectedIndex', 0)
+            $('#pdate').prop('selectedIndex', 0)
+        });
+
+        $('#pdate').click(function(){  
+            $('#pselect').prop('selectedIndex', 0)
+            $('#nearby').prop('selectedIndex', 0)
+        });
+
+        $('#pselect').click(function(){  
+            $('#pdate').prop('selectedIndex', 0)
+            $('#nearby').prop('selectedIndex', 0)
+        });
+
+    
+        $.ajax({
+            type: 'POST',
+            url: 'getData.php',
+            data:'page='+page_num+'&keywords='+keywords+'&filterBy='+filterBy+'&styleBy='+styleBy+'&bathBy='+bathBy+'&bedBy='+bedBy+'&pmaxBy='+pmaxBy+'&pminBy='+pminBy+'&selectBy='+selectBy+'&dateBy='+dateBy+'&nearBy='+nearBy,
+            beforeSend: function () {
+                $('.loading-overlay').show();
+            },
+            success: function (html) {
+                $('#result').html(html);
+                $('.loading-overlay').fadeOut("slow");
+            }
+        });
+    }
+</script>
 
 <section class="topsection d-flex flex-column justify-content-center align-items-center">
     <i class="bi bi-house-door-fill"></i>
     <span class="display-5 mb-4">Listed properties</span>
-    <form action="propertiescode.php" method="POST" role="search" id="form">
-        <input type="search" id="query" name="searchProp" placeholder="Search..." aria-label="Search through site content">
+    <form action="#" method="POST" role="search" id="form">
+        <input type="search" id="keywords" name="keywords" placeholder="Search..." aria-label="Search through site content" onkeyup="searchFilter();">
         <?php
         $_SESSION['agentselected'] = "";
         ?>
-        <select class="form-select" name="filter" id="filter" required>
-            <option value="Title">Title</option>
-            <option value="Bath">Bathroom</option>
-            <option value="Bed">Bedroom</option>
-            <option value="Sf">Special Features</option>
-            <option value="ptype">Property Type</option>
-            <option value="Loc">Location</option>
-        </select>
         <span class="vr me-3"></span>
-        <button type="submit" name="btn_search" class="searchbtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-            </svg></button>
     </form>
 </section>
 
-<section class="properties-section">
-    <div class="properties-list container-fluid d-flex flex-column justify-content-center align-items-center">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-            <?php
-                $query = "SELECT * FROM tbl_property";
-                $result = mysqli_query($connect, $query);
-                if (isset($_POST['btn_search'])) {
-                    $new = $_POST['myInput'];
-                    $filter = $_POST['filter'];
-
-                    if (!$new) { ?>
-                        <script>
-                            alert('SearchBar is Empty');
-                            exit;
-                        </script>
-                    <?php }
-        
-                    if ($filter == 'Location') {
-                        $query  = "SELECT * from tbl_property WHERE location LIKE '%$new%'";
-                        $result = mysqli_query($connect, $query);
-                    }elseif($filter == 'Bath') {
-                        $query  = "SELECT * from tbl_property WHERE bathroom LIKE '%$new%'";
-                        $result = mysqli_query($connect, $query);
-                    }elseif($filter == 'Bed') {
-                        $query  = "SELECT * from tbl_property WHERE bedroom LIKE '%$new%'";
-                        $result = mysqli_query($connect, $query);
-                    }elseif($filter == 'Title') {
-                        $query  = "SELECT * from tbl_property WHERE title LIKE '%$new%'";
-                        $result = mysqli_query($connect, $query);
-                    }elseif($filter == 'Sf') {
-                        $query  = "SELECT * from tbl_property WHERE specialFeatures LIKE '%$new%'";
-                        $result = mysqli_query($connect, $query);
-                    }elseif($filter == 'ptype') {
-                        $query  = "SELECT * from tbl_property WHERE propertyType LIKE '%$new%'";
-                        $result = mysqli_query($connect, $query);
-                    }
-                }
-                $classadd = 0;
-                while ($rowShow = mysqli_fetch_array($result)) {
-                $classadd++;
-                ?>
-            <div class="col">
-                <div class="card ">
-                            <?php
-                                $var1 = $rowShow['property_ID'];
-                                $picShow = "SELECT * FROM tbl_show WHERE property_ID = '$var1'";
-                                $resShow = mysqli_query($connect, $picShow);
-                                $a = array();
-                                $x = 0;
-                                while ($pic = mysqli_fetch_array($resShow)) {
-                                    $x++;
-                                    if ($x == 1) {
-                                        $classname = 'carousel-item active';
-                                    } else {
-                                        $classname = 'carousel-item';
-                                    }
-                            ?>
-                            <div class="<?php echo $classname;?>">
-                                <?php echo '<img  src="data:image/jpeg;base64,'.base64_encode($pic['propertyImg']).'" width="450" height="200" class="d-block w-100" alt="First slide">'; ?>
-                            </div>
-                            <?php }?>
-                    <div class="card-body shadow">
-                        <form method="POST" action="properties.php" class="property-name-post d-flex form-control text-start">
-                            <input type="hidden" id="hide" name="hide" value="<?php echo $rowShow['agent_ID'] ?>">
-                            <button class="property-name-button" type="submit" id="btn_hide" name="btn_hide">
-                                <h5 class="card-title"><?php echo $rowShow['title']; ?></h5>
-                            </button>
-                        </form>
-                        <ul class="list-group list-group-flush">
-                            <span class="icon-livingsize"></span>
-                            <li class="list-group-item">
-                                <span><b>Land Size:</b>&nbsp;<?php echo $rowShow['lotSize']; ?>m²</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <span ><b >Status:&nbsp;</b><span class="text-success"><?php echo $rowShow['statusProperty']; ?></span></span>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Bathroom:&nbsp;</b> <?php echo $rowShow['bathroom']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <b>Bedroom:&nbsp;</b> <?php echo $rowShow['bedroom']; ?>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Garage:&nbsp;</b> <?php echo $rowShow['garage']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <b>Basement:&nbsp;</b> <?php echo $rowShow['basement']; ?>
-                            </li>
-                            <li class="list-group-item"><b>Special Features:&nbsp;</b><?php echo $rowShow['specialFeatures']; ?></li>
-                            <li class="list-group-item text-muted">
-                                <p class="card-text"><small class="text-muted"><?php echo $rowShow['location']; ?></small></p>
-                            </li>
-                        </ul>
+<div class="grid-container">
+    <div class="filter">
+        <b><label style="font-size: 20px;"><i class='bx bx-filter-alt'></i>&nbsp;&nbsp;Search Filter</label></b><br><br>
+        <button class="btnApply" style="height: 40px;" name="clear" id="clear" onclick="searchFilter();">Clear Filter</button>
+        <hr>
+        <label for="inputEmail4" class="form-label">House Style</label>
+        <select class="form-select" style="width:170px;" name="style" id="style" onchange="searchFilter();">
+            <option value="" selected disabled>Select Style</option>
+            <option value="Modern">Modern</option>
+            <option value="Contemporary">Contemporary</option>
+            <option value="Cottage">Cottage</option>
+            <option value="Bungalow">Bungalow</option>
+            <option value="Rowhouse">Rowhouse</option>
+            <option value="Townhouse">Townhouse</option>
+            <option value="Duplex">Duplex</option>
+        </select>
+        <hr>
+        <label for="inputEmail4" class="form-label">Location</label>
+        <select class="form-select" style="width:170px;" name="city" id="city" onchange="searchFilter();">
+            <option value="" selected disabled>Select City</option>
+            <option value="Abucay">Abucay</option>
+            <option value="Bagac">Bagac</option>
+            <option value="Balanga">Balanga</option>
+            <option value="Dinalupihan">Dinalupihan</option>
+            <option value="Hermosa">Hermosa</option>
+            <option value="Limay">Limay</option>
+            <option value="Mariveles">Mariveles</option>
+            <option value="Morong">Morong</option>
+            <option value="Orani">Orani</option>
+            <option value="Orion">Orion</option>
+            <option value="Pilar">Pilar</option>
+            <option value="Samal">Samal</option>
+        </select>
+        <hr>
+        <label for="inputEmail4" class="form-label">Price</label>
+        <input type="number" class="form-control" style="width:140px; height:20px;"  name="pmax" id="pmax" placeholder="Maximum" onkeyup="searchFilter();">
+        <div style="text-align:center;"><i class='bx bx-move-vertical'></i></div>
+        <input type="number" class="form-control" style="width:140px; height:20px;" name="pmin" id="pmin" placeholder="Minimum" onkeyup="searchFilter();">
+        <hr>
+        <label for="inputEmail4" class="form-label">Bathroom</label>
+        <select class="form-select" style="width:170px;" name="bathBy" id="bathBy" onchange="searchFilter();">
+            <option value="" selected disabled>Select #</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4+</option>
+        </select>
+        <hr>
+        <label for="inputEmail4" class="form-label">Bedroom</label>
+        <select class="form-select" style="width:170px;" name="bedBy" id="bedBy" onchange="searchFilter();">
+            <option value="" selected disabled>Select #</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4+</option>
+        </select>
+    </div>
+    <div class="b">
+        <div class="row">
+            
+            <p><label for="inputEmail4" class="form-label" style="font-size: 25px;"><b>Sort By</b></label></b>&nbsp;&nbsp;
+            <select class="form-select" style="width:170px; height: 40px;" name="nearby" id="nearby" onchange="searchFilter();">
+                <option value="All">All</option>
+                <option value="<?php echo $row1['city'];?>">Nearby</option>
+            </select>
+            <select class="form-select" style="width:170px; height: 40px;" name="pdate" id="pdate" onchange="searchFilter();">
+                <option value="" selected disabled>Date</option>
+                <option value="1">Oldest</option>
+                <option value="2">Latest</option>
+            </select>
+            <select class="form-select" style="width:170px; height: 40px;" name="pselect" id="pselect" onchange="searchFilter();">
+                <option value="" selected disabled>Price</option>
+                <option value="2">High to Low</option>
+                <option value="1">Low to High</option>
+            </select></p>
+        </div>
+        <div id="result" class="row">
+            <div  class="properties-list container-fluid d-flex flex-column justify-content-center align-items-center">
+                <div class="card1">
                         <?php
-                        if (isset($_SESSION['user_ID'])) {
-                            $var = $_SESSION['user_ID'];
-                        }
+                            if($query->num_rows > 0){ $i=0; 
+                                while($row = $query->fetch_assoc()){ $i++;
+                                    $var1 = $row['property_ID'];
+                                    $picShow = "SELECT * FROM tbl_show WHERE property_ID = '$var1'";
+                                    $resShow = mysqli_query($connect, $picShow);
+                                    $a = array();
+                                    $x = 0;
+                                    $pic = mysqli_fetch_assoc($resShow)
                         ?>
-                        <?php
-                            if (!isset($_SESSION['user_ID'])) {?>
-                                <div class="card-footer text-muted" style="text-align: center;">
-                                    <button onclick="window.location.href='login.php';" >Buy</button>
-                                </div>
-                            <?php }else{
-                                $var = $_SESSION['user_ID'];?>
-                        <form method="POST" onsubmit="return confirm('<?php echo 'Are you sure you want to buy '.$rowShow['title'];?>');" action="propertiescode.php" class="property-name-post d-flex form-control text-start">
-                            <input type="hidden" id="user" name="user" value="<?php echo $var?>">
-                            <input type="hidden" id="agent" name="agent" value="<?php echo $rowShow['agent_ID'] ?>">
-                            <input type="hidden" id="property" name="property" value="<?php echo $rowShow['property_ID'] ?>">
-                            <div class="card-footer text-muted" style="text-align: center;">
-                                <button type="submit" id="btn_hide1" name="btn_hide1" class="btn btn-light" >Buy</button>
+                        <div class="card-body shadow">
+                            <div>
+                                <?php 
+                                    if(isset($pic['propertyImg'])){
+                                        echo '<img  src="data:image/jpeg;base64,'.base64_encode($pic['propertyImg']).'" width="450" height="200" class="d-block w-100" alt="First slide">';
+                                } else {
+                                    ?>
+                                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="360" height="200">
+                                <?php
+                                }
+                                ?>        
                             </div>
-                        </form>
-                        <?php }?>
-                    </div>
+                            <form method="POST" action="properties.php" class="property-name-post d-flex form-control text-start">
+                                <input type="hidden" id="hide" name="hide" value="<?php echo $row['agent_ID'] ?>">
+                                <button class="property-name-button" type="submit" id="btn_hide" name="btn_hide">
+                                    <h5 class="card-title"><b><?php echo $row['title']; ?></b></h5>
+                                </button>
+                            </form>
+                            <ul class="list-group list-group-flush" style="line-height: 0; font-size: 14px;">
+                                <span class="icon-livingsize"></span>
+                                <hr>
+                                <li class="list-group-item">
+                                    <span><b>Bedroom:</b>&nbsp;<?php echo $row['bedroom']; ?></span>&nbsp;&nbsp;&nbsp;
+                                    <span><b>Bathroom:</b>&nbsp;<?php echo $row['bathroom']; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span><b>Land Size:</b>&nbsp;<?php echo $row['lotSize']; ?>m²</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span ><b>Garage:&nbsp;</b><span class="text-success"><?php echo $row['garage']; ?></span>&nbsp;&nbsp;&nbsp;
+                                    <span><b>Basement:</b>&nbsp;<?php echo $row['basement']; ?></span>&nbsp;&nbsp;&nbsp;
+                                    <span><b>Floor Area:</b>&nbsp;<?php echo $row['floorArea']; ?>m²</span>
+                                </li>
+                                <hr>
+                                <li class="list-group-item">
+                                    <b>Style:&nbsp;</b><?php echo $row['propertyType']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <b>Special Features:&nbsp;</b><?php echo $row['specialFeatures']; ?>
+                                </li>
+                                <hr>
+                                <li class="list-group-item text-muted">
+                                    <p class="card-text"><small class="text-muted" style="line-height: 0; font-size: 15px;"><?php echo $row['location']?></small></p>
+                                </li>
+                                <hr>
+                            </ul>
+                            <?php
+                                if (!isset($_SESSION['verified_user_id'])) {?>
+                                    <div class="card-footer text-muted" >
+                                        <small class="text-muted" style="line-height: 0; font-size: 20px;"><b>&nbsp;&nbsp;&nbsp;₱&nbsp;<?php echo $row['price']?></b></small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <button onclick="window.location.href='login.php';" >Buy</button>
+                                    </div>
+                                    <br>
+                                <?php }else{
+                                    $var = $_SESSION['user_ID'];?>
+                            <form method="POST" onsubmit="return confirm('<?php echo 'Are you sure you want to buy '.$row['title'];?>');" action="propertiescode.php" class="property-name-post d-flex form-control text-start">
+                                <input type="hidden" id="user" name="user" value="<?php echo $var?>">
+                                <input type="hidden" id="agent" name="agent" value="<?php echo $row['agent_ID'] ?>">
+                                <input type="hidden" id="property" name="property" value="<?php echo $row['property_ID'] ?>">
+                                <hr>
+                                <div>
+                                    <?php
+                                        if ($_SESSION['enduser'] == 'User') {?>
+                                        <div class="card-footer text-muted" >
+                                            <small class="text-muted" style="line-height: 0; font-size: 20px;"><b>&nbsp;&nbsp;&nbsp;₱&nbsp;<?php echo $row['price']?></b></small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <button type="submit" id="btn_hide1" name="btn_hide1" class="btn btn-light" >Buy</button>
+                                        </div>
+                                    <?php }?>
+                                </div>
+                            </form>
+                            <?php }?>
+                        </div>
+                    <?php 
+                            } 
+                        }else{ 
+                            echo '<tr><td colspan="6">No records found...</td></tr>'; 
+                        } 
+                    ?>
                 </div>
+            <div class="row">
+                <?php echo $pagination->createLinks(); ?>
             </div>
-            <?php }?>
         </div>
     </div>
-</section>
-
+</div>
 <?php
 if (isset($_POST['btn_hide'])) {
     $hide = $_POST['hide'];
