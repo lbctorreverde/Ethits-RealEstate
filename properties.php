@@ -24,7 +24,7 @@ $pagConfig = array(
 ); 
 $pagination =  new Pagination($pagConfig);
 
-$query = $connect->query("SELECT * FROM tbl_property ORDER BY property_ID DESC LIMIT $limit"); 
+$query = $connect->query("SELECT * FROM tbl_property LIMIT $limit"); 
 ?>
 
 <style>
@@ -32,6 +32,7 @@ $query = $connect->query("SELECT * FROM tbl_property ORDER BY property_ID DESC L
 </style>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <?php
     if (isset($_SESSION['verified_user_id'])) {
         $var1 = $_SESSION['verified_user_id'];
@@ -111,7 +112,6 @@ $query = $connect->query("SELECT * FROM tbl_property ORDER BY property_ID DESC L
         <?php
         $_SESSION['agentselected'] = "";
         ?>
-        <span class="vr me-3"></span>
     </form>
 </section>
 
@@ -174,9 +174,9 @@ $query = $connect->query("SELECT * FROM tbl_property ORDER BY property_ID DESC L
     </div>
     <div class="b">
         <div class="row">
-            
             <p><label for="inputEmail4" class="form-label" style="font-size: 25px;"><b>Sort By</b></label></b>&nbsp;&nbsp;
             <select class="form-select" style="width:170px; height: 40px;" name="nearby" id="nearby" onchange="searchFilter();">
+                <option value="" selected disabled>Sort</option>
                 <option value="All">All</option>
                 <option value="<?php echo $row1['city'];?>">Nearby</option>
             </select>

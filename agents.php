@@ -3,31 +3,92 @@ include_once 'header.php';
 
 include('dbconfig.php');
 $_SESSION['agentselected'] = "";
+// Include pagination library file 
+include_once 'Pagination.class.php'; 
+ 
+// Set some useful configuration 
+$baseURL = 'agentsearch.php'; 
+$limit = 6; 
+ 
+// Count of all records 
+$query   = $connect->query("SELECT COUNT(*) as rowNum FROM tbl_agent"); 
+$result  = $query->fetch_assoc(); 
+$rowCount= $result['rowNum']; 
+ 
+// Initialize pagination class 
+$pagConfig = array( 
+    'baseURL' => $baseURL, 
+    'totalRows' => $rowCount, 
+    'perPage' => $limit, 
+    'contentDiv' => 'result', 
+    'link_func' => 'searchFilter' 
+); 
+$pagination =  new Pagination($pagConfig);
+
+$query = $connect->query("SELECT * FROM tbl_agent LIMIT $limit"); 
 ?>
 
 <style>
     <?php include 'css/agents.css'; ?>
-    
 </style>
 
-<script>
-    function myFunction() {
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("content-table");
-    tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1];
-        if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-        } else {
-            tr[i].style.display = "none";
-        }
-        }       
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<?php
+    if (isset($_SESSION['verified_user_id'])) {
+        $var1 = $_SESSION['verified_user_id'];
+        $query1 = "SELECT *  from tbl_user WHERE email = '$var1'";
+        $result1 = mysqli_query($connect, $query1);
+        $row1 = mysqli_fetch_assoc($result1);
     }
+?>
+
+<script type="text/javascript">
+    function searchFilter(page_num) {
+        page_num = page_num?page_num:0;
+        var keywords = $('#keywords').val();
+        var filterBy = $('#city').val();
+        var selectBy = $('#prating').val();
+        var dateBy = $('#pdate').val();
+        var nearBy = $('#nearby').val();
+
+        $('#city').click(function(){  
+            $('#prating').prop('selectedIndex', 0)
+            $('#pdate').prop('selectedIndex', 0)
+            $('#prating').prop('selectedIndex', 0)
+        });
+
+        $('#nearby').click(function(){  
+            $('#prating').prop('selectedIndex', 0)
+            $('#pdate').prop('selectedIndex', 0)
+            $('#city').prop('selectedIndex', 0)
+        });
+
+        $('#pdate').click(function(){  
+            $('#prating').prop('selectedIndex', 0)
+            $('#nearby').prop('selectedIndex', 0)
+            $('#city').prop('selectedIndex', 0)
+        });
+
+        $('#prating').click(function(){  
+            $('#pdate').prop('selectedIndex', 0)
+            $('#nearby').prop('selectedIndex', 0)
+            $('#city').prop('selectedIndex', 0)
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: 'agentsearch.php',
+            data:'page='+page_num+'&keywords='+keywords+'&filterBy='+filterBy+'&selectBy='+selectBy+'&dateBy='+dateBy+'&nearBy='+nearBy,
+            beforeSend: function () {
+                $('.loading-overlay').show();
+            },
+            success: function (html) {
+                $('#result').html(html);
+                $('.loading-overlay').fadeOut("slow");
+            }
+        });
     }
 </script>
 
@@ -36,102 +97,106 @@ $_SESSION['agentselected'] = "";
 </section>
 
 <form action="agents.php" method="POST" role="search" id="form">
-    <input type="text" id="myInput" name="myInput" placeholder="Search..." title="Type in a name" aria-label="Search through site content">
-    <select class="form-select" name="filter" id="filter" required>
-        <option value="Name">Name</option>
-        <option value="Agency">Agency</option>
-        <option value="Location">Location</option>
-    </select>
-    <span class="vr me-3"></span>
-    <button type="submit" name="btn_search" class="searchbtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-        </svg></button>
+<input type="search" id="keywords" name="keywords" placeholder="Search..." aria-label="Search through site content" onkeyup="searchFilter();">
+    
 </form>
 
 <section class="secondsection d-flex flex-row">
     <div class="left-panel">
         <h4 class="fw-normal">Bataan Agents</h4>
-        <?php
-        $sqlAll = "SELECT * FROM tbl_agent";
-        $resAll= mysqli_query($connect, $sqlAll);
-        if (isset($_POST['btn_search'])) {
-            $new = $_POST['myInput'];
-            $filter = $_POST['filter'];
-            if (!$new) { ?>
-                <script>
-                    alert('SearchBar is Empty');
-                    exit;
-                </script>
-            <?php }
-
-            if ($filter == 'Location') {
-                $sqlAll = "SELECT * from tbl_agent WHERE city LIKE '%$new%' OR brgy LIKE '%$new%' OR str LIKE '%$new%'";
-                $resAll = mysqli_query($connect, $sqlAll);
-            }elseif($filter == 'Name') {
-                $sqlAll = "SELECT * from tbl_agent WHERE fName LIKE '%$new%' OR lName LIKE '%$new%'";
-                $resAll = mysqli_query($connect, $sqlAll);
-            }elseif($filter == 'Agency') {
-                $sqlAll = "SELECT * from tbl_agent WHERE agency LIKE '%$new%'";
-                $resAll = mysqli_query($connect, $sqlAll);
-            }else {
-            ?>
-                <script>
-                    alert('SearchBar is Empty');
-                    exit;
-                </script>
-            <?php
-            }
-        }
-        ?>
-        <p><b><?php echo mysqli_num_rows($resAll)?></b> Results</p>
+        
+        <p><b><?php echo mysqli_num_rows($query) ?></b>&nbsp;&nbsp;Results</p>
     </div>
     <div class="agentslist-panel">
-
-        <?php
-        while ($row = mysqli_fetch_array($resAll)) {
-            // if ($row['Status'] == "Pending") {
-            //     continue;
-            // }
-        ?>
+        <div class='row'>
+            <p><label for="inputEmail4" class="form-label" style="font-size: 25px;"><b>Sort By</b></label></b>&nbsp;&nbsp;
+            <select class="form-select" style="width:170px; height: 40px;" name="nearby" id="nearby" onchange="searchFilter();">
+                <option value="" selected disabled>Sort</option>
+                <option value="All">All</option>
+                <option value="<?php echo $row1['city']; ?>">Nearby</option>
+            </select>
+            <select class="form-select" style="width:170px; height: 40px;" name="pdate" id="pdate" onchange="searchFilter();">
+                <option value="" selected disabled>Date</option>
+                <option value="1">Oldest</option>
+                <option value="2">Latest</option>
+            </select>
+            <select class="form-select" style="width:170px; height: 40px;" name="prating" id="prating" onchange="searchFilter();">
+                <option value="" selected disabled>Rating</option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+            </select>
+            <select class="form-select" style="width:170px;  height: 40px;" name="city" id="city" onchange="searchFilter();">
+                <option value="" selected disabled>Select City</option>
+                <option value="Abucay">Abucay</option>
+                <option value="Bagac">Bagac</option>
+                <option value="Balanga">Balanga</option>
+                <option value="Dinalupihan">Dinalupihan</option>
+                <option value="Hermosa">Hermosa</option>
+                <option value="Limay">Limay</option>
+                <option value="Mariveles">Mariveles</option>
+                <option value="Morong">Morong</option>
+                <option value="Orani">Orani</option>
+                <option value="Orion">Orion</option>
+                <option value="Pilar">Pilar</option>
+                <option value="Samal">Samal</option>
+            </select>
+        </div>
             <!-- CARD FOR EACH AGENT PAR-->
-            <div class="agentcard row g-0 mt-2 shadow">
-                <div class="col-md-2">
-                    <?php 
+        <div id='result'>
+            <div>
+                <div class="agentcard row g-0 mt-2 shadow">
+                    <?php
+                        if($query->num_rows > 0){ $i=0;
+                        while ($row = $query->fetch_assoc()) {
+                    ?>
+                    <div class="col-md-2">
+                        <?php
                         if (!$row['displayImg']) {
                             ?>
-                                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid rounded-start" alt="..." width="150" height="150"/>
-                            <?php
-                            } else {
+                                    <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid rounded-start" alt="..." width="150" height="150"/>
+                                <?php
+                        } else {
                             ?>
-                                <?php echo '<img  src="data:image/jpeg;base64,'.base64_encode($row['displayImg']).'" class="img-fluid rounded-start" alt="..." width="150" height="150">'; ?>
-                            <?php
+                                    <?php echo '<img  src="data:image/jpeg;base64,' . base64_encode($row['displayImg']) . '" class="img-fluid rounded-start" alt="..." width="150" height="150">'; ?>
+                                <?php
                         }
+                        ?>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <!-- Paiba nalang, sa notfound.php pa redirect nya eh -->
+                            <form method="POST" action="agents.php" class="agent-name-post d-flex form-control text-start">
+                                <input type="hidden" id="hide" name="hide" value="<?php echo $row['agent_ID'] ?>">
+                                <button class="agent-name-button" type="submit" id="btn_hide" name="btn_hide">
+                                    <?php echo $row['lName'] . ", " . $row['fName'] . " " . substr($row['mName'], 0, 1) . "." ?>
+                                </button>
+                            </form>
+                            <!-- <input type="hidden" id="hide" name="hide" value="<?php //echo $row['agemt_ID'] ?>">
+                            <a onclick="window.location.href='agentC.php'" type="submit" id="btn_hide" name="btn_hide"><?php //echo $row['lName'] . ", " . $row['fName'] . " " . substr($row['mName'], 0, 1) . "." ?></a> -->
+                            <br>
+                            <p class="card-text text-muted">Real Estate Professional<br>
+                                <?php echo $row['agency'] . " - " . $row['str'] . ", " . $row['brgy'] . ", " . $row['city'] . ", Bataan" ?>
+                            </p>
+                            <p class="card-title text-muted">Contact: </p>
+                            <p class="card-text"><small class="text-muted lh-sm"><?php echo $row['contactNo'] ?></small></p>
+                        </div>
+                    </div>
+                    <?php 
+                        }
+                    }else{ 
+                        echo '<tr><td colspan="6">No records found...</td></tr>'; 
+                    } 
                     ?>
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <!-- Paiba nalang, sa notfound.php pa redirect nya eh -->
-                        <form method="POST" action="agents.php" class="agent-name-post d-flex form-control text-start">
-                            <input type="hidden" id="hide" name="hide" value="<?php echo $row['agent_ID'] ?>">
-                            <button class="agent-name-button" type="submit" id="btn_hide" name="btn_hide">
-                                <?php echo $row['lName'] . ", " . $row['fName'] . " " . substr($row['mName'], 0, 1) . "." ?>
-                            </button>
-                        </form>
-                        <!-- <input type="hidden" id="hide" name="hide" value="<?php //echo $row['agemt_ID'] ?>">
-                        <a onclick="window.location.href='agentC.php'" type="submit" id="btn_hide" name="btn_hide"><?php //echo $row['lName'] . ", " . $row['fName'] . " " . substr($row['mName'], 0, 1) . "." ?></a> -->
-                        <br>
-                        <p class="card-text text-muted">Real Estate Professional<br>
-                            <?php echo $row['agency'] . " - " . $row['str'] . ", " . $row['brgy'] . ", " . $row['city'] . ", Bataan" ?>
-                        </p>
-                        <p class="card-title text-muted">Contact: </p>
-                        <p class="card-text"><small class="text-muted lh-sm"><?php echo $row['contactNo'] ?></small></p>
-                    </div>
-                </div>
-
             </div>
-        <?php
-        }
-        ?>
+            <br>
+            <div class="row">
+                <?php echo $pagination->createLinks(); ?>
+            </div>
+        </div>
     </div>
 </section>
 

@@ -135,8 +135,13 @@ include('dbconfig.php');
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
+                            <li><a class="dropdown-item" href="#" onclick="window.location.href='addproperty.php'">Add Properties</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
                         </ul>
+                        
                     </li>
                 <?php } else { ?>
                     <button class="btn btn-dark btn-outline-light float-right me-2" onclick="window.location.href='login.php';">Login/Register</button>

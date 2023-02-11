@@ -18,8 +18,8 @@ if(isset($_POST['btn_saveChangesAgent'])){
         $price = $_POST['price'];
         $dp = $_FILES['propertyImg']['name'];
 
-        $queryInsert = "INSERT INTO `tbl_property`(`agent_ID`, `title`, `location`, `propertyType`, `bedroom`, `bathroom`, `basement`, `garage`, `lotSize`, `floorArea`, `specialFeatures`, `price`, `statusProperty`) 
-        VALUES ('$var','$title','$location','$ptype','$bed','$bath','$basement','$garage','$lot','$area','$sf','$price','$stats')";
+        $queryInsert = "INSERT INTO `tbl_property`(`agent_ID`, `title`, `location`, `propertyType`, `bedroom`, `bathroom`, `basement`, `garage`, `lotSize`, `floorArea`, `specialFeatures`, `price`, `statusProperty`, `propertyDate`) 
+        VALUES ('$var','$title','$location','$ptype','$bed','$bath','$basement','$garage','$lot','$area','$sf','$price','$stats',NOW())";
         $resultInsert = mysqli_query($connect, $queryInsert);
         
         $query1 = "SELECT * from tbl_property WHERE title = '$title'";

@@ -9,7 +9,7 @@ include_once 'navbarfresh.php';
 
 <div class="main-div d-flex align-items-center justify-content-center">
     <div>
-    <form action="signcode.php" method="POST" class="container-fluid row g-3" id="signup-form" enctype="multipart/form-data">
+        <form action="signcode.php" method="POST" class="container-fluid row g-3" id="signup-form" enctype="multipart/form-data">
             <div class="row">
                 <div class="col">
 
@@ -102,9 +102,9 @@ include_once 'navbarfresh.php';
                 <div class="container-fluid d-flex flex-column px-4">
 
                     <!-- to yung sa recaptcha -->
-                <div class="g-recaptcha" data-sitekey="6LdomzgkAAAAABrqOnT1rX4Mnw59ezebiMQpSNir"></div>
+                    <div class="g-recaptcha" data-sitekey="6LdomzgkAAAAABrqOnT1rX4Mnw59ezebiMQpSNir"></div>
 
-                <button type="submit" name="btn_registerAgent" class="btn btn-primary">Sign-Up</button>
+                    <button type="submit" name="btn_registerAgent" class="btn btn-primary">Sign-Up</button>
                     <a class="text-center" href="login.php">Already have an account? Sign in!</a>
                 </div>
         </form>

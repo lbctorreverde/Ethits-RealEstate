@@ -43,7 +43,7 @@ include('dbconfig.php');
                 <div class="card rounded">
                     <div class="row g-0">
                         <div class="property-img col-7">
-                            <?php echo '<img  src="data:image/jpeg;base64,'.base64_encode($row4['propertyImg']).'"alt="First slide" width="380" height="400">'; ?>
+                            <?php echo '<img  src="data:image/jpeg;base64,'.base64_encode($row4['propertyImg']).'"alt="First slide" width="340" height="400">'; ?>
                         </div>
                         <div class="col">
                             <div class="card-body container-fluid d-flex flex-column">

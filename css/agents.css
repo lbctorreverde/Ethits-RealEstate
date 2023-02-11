@@ -75,6 +75,11 @@ svg {
 
 }
 
+p{
+    display:flex;  
+    vertical-align: middle;
+}
+
 .card {}
 
 .agentcard {
