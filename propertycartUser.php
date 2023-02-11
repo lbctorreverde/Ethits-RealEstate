@@ -11,12 +11,12 @@ include('dbconfig.php');
     $var = $_SESSION['user_ID'];
     $x = 0;
     $sql = "SELECT 
-    tbl_agent.fName ,tbl_agent.lName, tbl_property.title, tbl_property.location, tbl_transaction.trans_Date, tbl_transaction.trans_ID,
+    tbl_user.fName ,tbl_user.lName, tbl_property.title, tbl_property.location, tbl_transaction.trans_Date, tbl_transaction.trans_ID,
     tbl_transaction.property_ID
      
     FROM ((tbl_transaction
-    INNER JOIN tbl_agent ON tbl_transaction.agent_ID = tbl_agent.agent_ID)
-    INNER JOIN tbl_property ON tbl_transaction.property_ID = tbl_property.property_ID) WHERE user_ID= '$var' AND status_Trans = 'Pending'";
+    INNER JOIN tbl_user ON tbl_transaction.user_ID = tbl_user.user_ID)
+    INNER JOIN tbl_property ON tbl_transaction.property_ID = tbl_property.property_ID) WHERE tbl_transaction.user_ID= '$var' AND status_Trans = 'Pending'";
     $result= mysqli_query($connect, $sql);
     if (mysqli_num_rows($result) != 0) {
 ?>
@@ -112,12 +112,12 @@ include('dbconfig.php');
             <?php 
                 $x = 0;
                 $sql1 = "SELECT 
-                tbl_agent.fName ,tbl_agent.lName, tbl_property.title, tbl_property.location, tbl_transaction.trans_Date, tbl_transaction.property_id,
+                tbl_user.fName ,tbl_user.lName, tbl_property.title, tbl_property.location, tbl_transaction.trans_Date, tbl_transaction.property_id,
                 tbl_transaction.status_Trans, tbl_transaction.trans_Date, tbl_transaction.doneDate, tbl_transaction.rate, tbl_transaction.feedback
                 
                 FROM ((tbl_transaction
-                INNER JOIN tbl_agent ON tbl_transaction.agent_ID = tbl_agent.agent_ID)
-                INNER JOIN tbl_property ON tbl_transaction.property_ID = tbl_property.property_ID) WHERE user_ID= '$var' AND status_Trans = 'Done' OR status_Trans = 'Cancelled'";
+                INNER JOIN tbl_user ON tbl_transaction.user_ID = tbl_user.user_ID)
+                INNER JOIN tbl_property ON tbl_transaction.property_ID = tbl_property.property_ID) WHERE tbl_transaction.user_ID= '$var' AND status_Trans = 'Sold' OR status_Trans = 'Cancelled'";
                 $result1= mysqli_query($connect, $sql1);
 
                 if (mysqli_num_rows($result1) != 0) {

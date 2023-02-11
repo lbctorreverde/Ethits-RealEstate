@@ -104,7 +104,7 @@ $result = mysqli_query($connect, $sql);
             <?php } ?>
             </div>
             
-            <div class="col-6">
+            <div class="col-7">
                 <section class="table-section container-fluid d-flex flex-column justify-content-center align-items-center">
                     <div class="topsearchbar">
                         <form action="propertycart.php" method="POST" role="search" id="form">
