@@ -205,7 +205,7 @@ include_once 'header.php';
 
             <div class="content-property content">
                 <h1>Or maybe finding properties from legitimate agents?</h1>
-                <h3 class="lead">The ultimate destination for your Real Estate Agent searching expedition. We are a comprehensive platform that gives users access to a comprehensive directory list of real estate brokers in Bataan.
+                <h3 class="lead">We ease the process of selecting the right property because it can be time-consuming and overwhelming. We only feature properties sold by licensed real estate agents because we feel interacting with one is the key to a successful and stress-free property search.
                 </h3>
                 <button class="btn btn-outline-light mt-2" href="#" onclick="window.location.href='properties.php'">View properties</button>
             </div>
