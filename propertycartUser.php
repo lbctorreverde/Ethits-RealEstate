@@ -79,7 +79,7 @@ if (mysqli_num_rows($result) != 0) {
             <?php } ?>
 
             </div>
-            <div class="col-6">
+            <div class="col-6 container-fluid d-flex flex-column justify-content-center align-items-center">
 
                 <section class="table-section container-fluid d-flex flex-column justify-content-center align-items-center">
                     <div class="topsearchbar">

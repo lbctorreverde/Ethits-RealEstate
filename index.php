@@ -50,31 +50,140 @@ include_once 'header.php';
         </button>
     </div>
 
-    <div class="container-fluid second-div text-center">
-        <div>
-            <div class="image-agent">
-                <img src="img/small/agent-license-clipart.png" alt="" height="200px">
-            </div>
-            <div class="content-agent content">
-                <h1>Looking for an agent? Browse here!</h1>
-                <button class="btn btn-outline-light mt-2" href="#" onclick="window.location.href='agents.php'">View agents</button>
-            </div>
+    <div class="container-fluid topagents-div">
+        <div id="carouselExampleControls" class=" carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner agents-carousel">
 
+                <!-- FIRST THREE AGENTS -->
+                <div class="carousel-item active">
+                    <div class="row row-cols-3">
+                        <div class="col">
+                            <div class="card agent-card">
+                                <div class="card-body text-center">
+                                    <div class="mt-3 mb-4">
+                                        <img src="img/121vrq3gasfdg5.jpg" class="rounded-circle img-fluid" style="width: 180px;" />
+                                    </div>
+                                    <h4 class="mb-2">Agent's Name</h4>
+                                    <p class="text-muted mb-5">Agency Incorporated Association<br><a href="#!">email@email.com</a></p>
+
+                                    <button type="button" class="btn btn-outline-light rounded-0">
+                                        Go to profile
+                                    </button>
+                                    <div class="d-flex justify-content-center text-center mt-5 mb-2">
+                                        <div>
+                                            <p class="mb-2 h5">87%</p>
+                                            <p class="text-muted mb-0">Rating</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card agent-card">
+                                <div class="card-body text-center">
+                                    <div class="mt-3 mb-4">
+                                        <img src="img/121vrq3gasfdg5.jpg" class="rounded-circle img-fluid" style="width: 180px;" />
+                                    </div>
+                                    <h4 class="mb-2">Agent's Name</h4>
+                                    <p class="text-muted mb-5">Agency Incorporated Association<br><a href="#!">email@email.com</a></p>
+                                    <button type="button" class="btn btn-outline-light rounded-0">
+                                        Go to profile
+                                    </button>
+                                    <div class="d-flex justify-content-center text-center mt-5 mb-2">
+                                        <div>
+                                            <p class="mb-2 h5">87%</p>
+                                            <p class="text-muted mb-0">Rating</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card agent-card">
+                                <div class="card-body text-center">
+                                    <div class="mt-3 mb-4">
+                                        <img src="img/121vrq3gasfdg5.jpg" class="rounded-circle img-fluid" style="width: 180px;" />
+                                    </div>
+                                    <h4 class="mb-2">Agent's Name</h4>
+                                    <p class="text-muted mb-5">Agency Incorporated Association<br><a href="#!">email@email.com</a></p>
+                                    <button type="button" class="btn btn-outline-light rounded-0">
+                                        Go to profile
+                                    </button>
+                                    <div class="d-flex justify-content-center text-center mt-5 mb-2">
+                                        <div>
+                                            <p class="mb-2 h5">87%</p>
+                                            <p class="text-muted mb-0">Rating</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LOOP TO INSERT MORE AGENTS -->
+                <div class="carousel-item">
+                    <div class="row row-cols-3">
+                        <div class="col">
+                            <div class="card agent-card">
+                                <div class="card-body text-center">
+                                    <div class="mt-3 mb-4">
+                                        <img src="img/121vrq3gasfdg5.jpg" class="rounded-circle img-fluid" style="width: 180px;" />
+                                    </div>
+                                    <h4 class="mb-2">Agent's Name</h4>
+                                    <p class="text-muted mb-5">Agency Incorporated Association<br><a href="#!">email@email.com</a></p>
+                                    <button type="button" class="btn btn-outline-light rounded-0">
+                                        Go to profile
+                                    </button>
+                                    <div class="d-flex justify-content-center text-center mt-5 mb-2">
+                                        <div>
+                                            <p class="mb-2 h5">87%</p>
+                                            <p class="text-muted mb-0">Rating</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
-    </div>
 
-    <div class="container-fluid third-div text-center">
-        <div>
-            <div class="image-property">
-                <img src="img/small/property-clipart.png" alt="" height="170px">
-            </div>
-            <div class="content-property content">
-                <h1>Looking for an agent? Browse here!</h1>
-                <button class="btn btn-outline-light mt-2" href="#" onclick="window.location.href='properties.php'">View properties</button>
-            </div>
+        <div class="container-fluid second-div text-center">
+            <div>
+                <div class="image-agent">
+                    <img src="img/small/agent-license-clipart.png" alt="" height="200px">
+                </div>
+                <div class="content-agent content">
+                    <h1>Looking for an agent? Browse here!</h1>
+                    <button class="btn btn-outline-light mt-2" href="#" onclick="window.location.href='agents.php'">View agents</button>
+                </div>
 
+            </div>
         </div>
-    </div>
+
+
+        <div class="container-fluid third-div text-center">
+            <div>
+                <div class="image-property">
+                    <img src="img/small/property-clipart.png" alt="" height="170px">
+                </div>
+                <div class="content-property content">
+                    <h1>Looking for an agent? Browse here!</h1>
+                    <button class="btn btn-outline-light mt-2" href="#" onclick="window.location.href='properties.php'">View properties</button>
+                </div>
+
+            </div>
+        </div>
 
 
 
