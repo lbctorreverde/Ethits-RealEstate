@@ -51,10 +51,19 @@ include_once 'header.php';
     </div>
 
     <div class="container-fluid topagents-div">
+        <h1 class="header">Top Agents</h1>
         <div id="carouselExampleControls" class=" carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner agents-carousel">
 
-                <!-- FIRST THREE AGENTS -->
+                <!-- 
+
+
+                FIRST 
+                THREE 
+                AGENTS 
+
+
+                 -->
                 <div class="carousel-item active">
                     <div class="row row-cols-3">
                         <div class="col">
@@ -121,7 +130,13 @@ include_once 'header.php';
                     </div>
                 </div>
 
-                <!-- LOOP TO INSERT MORE AGENTS -->
+                <!-- 
+                    
+                
+                LOOP TO INSERT MORE AGENTS 
+                
+
+                -->
                 <div class="carousel-item">
                     <div class="row row-cols-3">
                         <div class="col">
@@ -158,32 +173,48 @@ include_once 'header.php';
             </div>
         </div>
 
-        <div class="container-fluid second-div text-center">
+        <div class="container second-div">
             <div>
+
                 <div class="image-agent">
-                    <img src="img/small/agent-license-clipart.png" alt="" height="200px">
+                    <img src="img/small/agent-license-clipart.png" alt="" width="500px">
                 </div>
+
                 <div class="content-agent content">
                     <h1>Looking for an agent? Browse here!</h1>
+                    <h3 class="lead">The ultimate destination for your Real Estate Agent searching expedition. We are a comprehensive platform that gives users access to a comprehensive directory list of real estate brokers in Bataan.
+                    </h3>
                     <button class="btn btn-outline-light mt-2" href="#" onclick="window.location.href='agents.php'">View agents</button>
                 </div>
 
             </div>
+
+
+
         </div>
+    </div>
 
 
-        <div class="container-fluid third-div text-center">
-            <div>
-                <div class="image-property">
-                    <img src="img/small/property-clipart.png" alt="" height="170px">
-                </div>
-                <div class="content-property content">
-                    <h1>Looking for an agent? Browse here!</h1>
-                    <button class="btn btn-outline-light mt-2" href="#" onclick="window.location.href='properties.php'">View properties</button>
-                </div>
 
+
+    <div class="container third-div">
+        <div>
+            <div class="image-property">
+                <img src="img/small/property-clipart.png" alt="" width="500px">
+            </div>
+
+            <div class="content-property content">
+                <h1>Or maybe finding properties from legitimate agents?</h1>
+                <h3 class="lead">The ultimate destination for your Real Estate Agent searching expedition. We are a comprehensive platform that gives users access to a comprehensive directory list of real estate brokers in Bataan.
+                </h3>
+                <button class="btn btn-outline-light mt-2" href="#" onclick="window.location.href='properties.php'">View properties</button>
             </div>
         </div>
+
+
+
+    </div>
+    </div>
 
 
 
