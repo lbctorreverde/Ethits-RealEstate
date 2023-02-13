@@ -30,6 +30,7 @@ $query = $connect->query("SELECT * FROM tbl_property WHERE NOT statusProperty ='
 <style>
     <?php include 'css/properties.css' ?>
 </style>
+
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
