@@ -121,21 +121,21 @@ include('dbconfig.php');
                             if ($_SESSION['enduser'] == "Agent") {
                             ?>
                                 <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofile.php'">Profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" onclick="window.location.href='propertyall.php'">Properties</a></li>
                             <?php
                             } else if ($_SESSION['enduser'] == "User") {
                             ?>
                                 <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofileuser.php'">Profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" onclick="window.location.href='propertyalluser.php'">Properties</a></li>
                             <?php
                             }
                             ?>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Asset Cart</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#" onclick="window.location.href='addproperty.php'">Add Properties</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

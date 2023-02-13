@@ -55,6 +55,7 @@ $result = mysqli_query($connect, $sql);
                                                     <p class="card-text"><small class="text-muted"><?php echo $row['location'] ?></small></p>
                                                     <form method="POST" onsubmit="return confirm('Are you sure you want to Accept the Transaction')" action="propertycart.php" class="property-name-post container-fluid d-flex flex-column">
                                                         <input type="hidden" id="hide" name="hide" value="<?php echo $row['trans_ID'] ?>">
+                                                        <input type="hidden" id="property" name="property" value="<?php echo $row['property_ID'] ?>">
                                                         <button type="submit" id="btn_Accept" name="btn_Accept" class="btn btn-accept">Accept</button>
                                                         <button type="submit" id="btn_Cancel" name="btn_Cancel" class="btn btn-reject">Reject</button>
                                                     </form>
@@ -224,8 +225,12 @@ $result = mysqli_query($connect, $sql);
 
     if (isset($_POST['btn_Cancel'])) {
         $hidden = $_POST['hide'];
+        $property = $_POST['property'];
 
         $sql3 = "UPDATE tbl_transaction SET `status_Trans`='Rejected' WHERE trans_ID='$hidden'";
+        $result3 = mysqli_query($connect, $sql3);
+
+        $sql3 = "UPDATE tbl_property SET `statusProperty`='Active' WHERE property_ID='$property'";
         $result3 = mysqli_query($connect, $sql3);
 
         if (isset($result3)) {
@@ -237,7 +242,7 @@ $result = mysqli_query($connect, $sql);
             </script>
         <?php } else { ?>
             <script>
-                alert('Canceling Failed');
+                alert('Cancelling Failed');
                 location = 'propertycart.php';
                 exit;
             </script>
