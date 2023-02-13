@@ -138,6 +138,13 @@ $id = $_SESSION['verified_user_id'];
         </div>
     </div>
 </div>
+
+<footer id="sticky-footer" class="sticky-footer flex-shrink-0 py-4">
+    <div class=" text-center">
+        <small>Copyright &copy; CS3</small>
+    </div>
+</footer>
+
 <script>
     function setDisable(){
         document.getElementById("custom").style.display = "block";

@@ -1,7 +1,8 @@
 <?php
+
 use Kreait\Firebase\Value\Email;
 
-include_once 'header.php';?>
+include_once 'header.php'; ?>
 
 <style>
     <?php include 'css/editprofile.css' ?>
@@ -43,26 +44,25 @@ include_once 'header.php';?>
         <div class="content-form col py-3">
             <div>
                 <form action="editprofile.php" method="POST" class="container-fluid row g-3" id="signup-form" enctype="multipart/form-data">
-                    <?php 
-                        if(isset($_SESSION['status']))
-                        {
-                            echo "<p class='alert alert-success'>".$_SESSION['status']."</p>";
-                            unset($_SESSION['status']);
-                        }
+                    <?php
+                    if (isset($_SESSION['status'])) {
+                        echo "<p class='alert alert-success'>" . $_SESSION['status'] . "</p>";
+                        unset($_SESSION['status']);
+                    }
                     ?>
                     <div id="divTitle" class="text-top text-center text-light fs-2">Profile</div>
                     <div>
                         <div class="mb-4 d-flex justify-content-center">
-                            <?php 
-                                if ($row['displayImg']) {
-                                    ?>
-                                        <?php echo is_null($row["displayImg"]) ? "-Empty-" : '<img  src="data:image/jpeg;base64,'.base64_encode($row['displayImg']).'" style="width: 200px;">'; ?>
-                                    <?php
-                                }else {
-                                    ?>
-                                        <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" style="width: 200px;" />
-                                    <?php
-                                }
+                            <?php
+                            if ($row['displayImg']) {
+                            ?>
+                                <?php echo is_null($row["displayImg"]) ? "-Empty-" : '<img  src="data:image/jpeg;base64,' . base64_encode($row['displayImg']) . '" style="width: 200px;">'; ?>
+                            <?php
+                            } else {
+                            ?>
+                                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="example placeholder" style="width: 200px;" />
+                            <?php
+                            }
                             ?>
                         </div>
                         <div class="d-flex justify-content-center">
@@ -72,46 +72,46 @@ include_once 'header.php';?>
                             </div>
                         </div>
                     </div>
-                    <?php       
-                        if ($row> 0) {
+                    <?php
+                    if ($row > 0) {
                     ?>
-                        
+
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">First Name</label>
-                            <input type="text" class="form-control" name="fname" value="<?php echo $row['fName']?>" placeholder="Enter Firstname here.." readonly required>
+                            <input type="text" class="form-control" name="fname" value="<?php echo $row['fName'] ?>" placeholder="Enter Firstname here.." readonly required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Middle Name</label>
-                            <input type="text" class="form-control" name="mname" value="<?php echo $row['mName']?>" placeholder="Enter Middlename here.." readonly required>
+                            <input type="text" class="form-control" name="mname" value="<?php echo $row['mName'] ?>" placeholder="Enter Middlename here.." readonly required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" name="lname" value="<?php echo $row['lName']?>" placeholder="Enter Lastname here.." readonly required>
+                            <input type="text" class="form-control" name="lname" value="<?php echo $row['lName'] ?>" placeholder="Enter Lastname here.." readonly required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Birthday</label>
-                            <input type="date" class="form-control" name="bday" value="<?php echo $row['bday']?>" readonly required>
+                            <input type="date" class="form-control" name="bday" value="<?php echo $row['bday'] ?>" readonly required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputState" class="form-label">Sex</label>
                             <select class="form-select" name="sex" id="sex" disabled required>
-                                <option value="<?php echo $row['sex']?>">:<?php echo $row['sex']?></option>
+                                <option value="<?php echo $row['sex'] ?>">:<?php echo $row['sex'] ?></option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" name="contact" maxlength="11" value="0<?php echo $row['contactNo']?>" placeholder="0987654321" readonly required>
+                            <input type="text" class="form-control" name="contact" maxlength="11" value="0<?php echo $row['contactNo'] ?>" placeholder="0987654321" readonly required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Agency</label>
-                            <input type="text" class="form-control" name="agency" value="<?php echo $row['agency']?>" placeholder="Enter Agency name here.." readonly required>
+                            <input type="text" class="form-control" name="agency" value="<?php echo $row['agency'] ?>" placeholder="Enter Agency name here.." readonly required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Location</label>
                             <select class="form-select" name="city" id="city" disabled required>
-                                <option value="<?php echo $row['city']?>">:<?php echo $row['city']?></option>
+                                <option value="<?php echo $row['city'] ?>">:<?php echo $row['city'] ?></option>
                                 <option value="Abucay">Abucay</option>
                                 <option value="Bagac">Bagac</option>
                                 <option value="Balanga">Balanga</option>
@@ -127,18 +127,18 @@ include_once 'header.php';?>
                             </select>
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" name="brgy" value="<?php echo $row['brgy']?>" placeholder="Barangay" readonly required>
+                            <input type="text" class="form-control" name="brgy" value="<?php echo $row['brgy'] ?>" placeholder="Barangay" readonly required>
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" name="str" value="<?php echo $row['str']?>" placeholder="1234 Main St" readonly required>
+                            <input type="text" class="form-control" name="str" value="<?php echo $row['str'] ?>" placeholder="1234 Main St" readonly required>
                         </div>
                         <!-- <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" value="<?php echo $row['email']?>" readonly required>
+                            <input type="email" class="form-control" name="email" value="<?php echo $row['email'] ?>" readonly required>
                         </div> -->
                         <!-- <div class="col-md-6">
                             <label for="inputPassword4" class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" value="<?php password_verify($row['password'], $user->password)?>" placeholder="********" readonly required>
+                            <input type="password" class="form-control" name="password" value="<?php password_verify($row['password'], $user->password) ?>" placeholder="********" readonly required>
                         </div> -->
 
                         <div class="col-md-12" style="display: none;" id="divConfirm">
@@ -155,14 +155,21 @@ include_once 'header.php';?>
                     <button name="btn_Edit" id="btn_Edit" onclick="setDisable()" class="btn btn-dark" style="display: block;">Edit</button>
                     <button name="btn_Cancel" id="btn_Cancel" onclick="window.location.href='editprofile.php';" class="btn btn-dark" style="display: none;">Cancel</button>
                 </div>
-                <?php }?>
+            <?php } ?>
             </div>
         </div>
     </div>
 </div>
+
+<footer id="sticky-footer" class="sticky-footer flex-shrink-0 py-4">
+    <div class=" text-center">
+        <small>Copyright &copy; CS3</small>
+    </div>
+</footer>
+
 <script>
     //To make inputs editable 
-    function setDisable(){
+    function setDisable() {
         let getControl = document.getElementsByClassName("form-control")
         let getSelect = document.getElementsByClassName("form-select")
         document.getElementById("divTitle").innerHTML = "Edit Profile";
@@ -171,10 +178,10 @@ include_once 'header.php';?>
         document.getElementById("btn_saveChangesAgent").style.display = "block";
         document.getElementById("btn_Edit").style.display = "none";
         document.getElementById("divConfirm").style.display = "block";
-        for (let input of getControl){
+        for (let input of getControl) {
             input.removeAttribute('readonly');
         }
-        for (let select of getSelect){
+        for (let select of getSelect) {
             select.disabled = false;
         }
     }
@@ -213,8 +220,7 @@ if (isset($_POST['btn_saveChangesAgent'])) {
     $dPhoto = $_FILES['dPhoto']['tmp_name'];
     $id = $_SESSION['user_ID'];
 
-    if (!password_verify($password , $row['password']))
-    {
+    if (!password_verify($password, $row['password'])) {
         $_SESSION['status'] = "Password is incorrect failed to edit";
         header('Location: editprofile.php');
         exit();
@@ -225,26 +231,26 @@ if (isset($_POST['btn_saveChangesAgent'])) {
         $sql = "UPDATE `tbl_agent` SET fName ='$fname', lName ='$lname', mName ='$mname', bday ='$bday', sex ='$sex', contactNo ='$contact',
         agency ='$agency', city ='$city', brgy ='$brgy', str ='$str', displayImg = '$dPhoto1' WHERE agent_ID ='$id'";
         $update = mysqli_query($connect, $sql);
-    }else {
+    } else {
         $sql = "UPDATE `tbl_agent` SET fName ='$fname', lName ='$lname', mName ='$mname', bday ='$bday', sex ='$sex', contactNo ='$contact',
         agency ='$agency', city ='$city', brgy ='$brgy', str ='$str' WHERE agent_ID ='$id'";
         $update = mysqli_query($connect, $sql);
     }
-    
+
     if (isset($update)) {
-        ?>
+?>
         <script>
             alert('Successfully Update');
             location = 'editprofile.php';
             exit;
         </script>
-        <?php }else{?>
+    <?php } else { ?>
         <script>
             alert('Updating Failed');
             location = 'editprofile.php';
             exit;
         </script>
-        <?php
-    }    
+<?php
+    }
 }
 ?>
