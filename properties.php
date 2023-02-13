@@ -10,7 +10,7 @@ $baseURL = 'getData.php';
 $limit = 6; 
  
 // Count of all records 
-$query   = $connect->query("SELECT COUNT(*) as rowNum FROM tbl_property"); 
+$query   = $connect->query("SELECT COUNT(*) as rowNum FROM tbl_property WHERE NOT statusProperty ='Pending' OR statusProperty ='Sold' OR statusProperty ='Reject'"); 
 $result  = $query->fetch_assoc(); 
 $rowCount= $result['rowNum']; 
  
@@ -24,7 +24,7 @@ $pagConfig = array(
 ); 
 $pagination =  new Pagination($pagConfig);
 
-$query = $connect->query("SELECT * FROM tbl_property LIMIT $limit"); 
+$query = $connect->query("SELECT * FROM tbl_property WHERE NOT statusProperty ='Pending' OR statusProperty ='Sold' OR statusProperty ='Reject' LIMIT $limit"); 
 ?>
 
 <style>

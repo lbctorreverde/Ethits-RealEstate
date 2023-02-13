@@ -23,6 +23,7 @@ if(isset($_POST['page'])){
      
     //Set conditions for search 
     $whereSQL = ''; 
+    $orderSQL = ''; 
     if(!empty($_POST['keywords'])){ 
         $whereSQL = " WHERE (title LIKE '%".$_POST['keywords']."%' OR location LIKE '%".$_POST['keywords']."%' OR propertyType LIKE '%".$_POST['keywords']."%')"; 
     }
@@ -81,7 +82,7 @@ if(isset($_POST['page'])){
 
     if($bath != '' && $bath == '+4'){ 
         $whereSQL .= (strpos($whereSQL, 'WHERE') !== false)?" AND ":" WHERE "; 
-        $whereSQL .= " bathroom NOT IN (1,2,3) AND bathroom= ".$bath; 
+        $whereSQL .= " bathroom >= 4"; 
     }
 
     if($bed != '' && $bed != '+4'){ 
@@ -91,21 +92,27 @@ if(isset($_POST['page'])){
 
     if($bed != '' && $bed == '+4'){ 
         $whereSQL .= (strpos($whereSQL, 'WHERE') !== false)?" AND ":" WHERE "; 
-        $whereSQL .= " bedroom NOT IN (1,2,3) AND bedroom = ".$bed; 
+        $whereSQL .= " bedroom >= 4 "; 
     }
     
     if($pselect == 2){ 
-        $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $whereSQL .= " price DESC"; 
+        $orderSQL .= (strpos($orderSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
+        $orderSQL .= " price DESC"; 
     }elseif($pselect == 1){
-        $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $whereSQL .= " price ASC"; 
+        $whereSQL .= (strpos($orderSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
+        $orderSQL .= " price ASC"; 
     }elseif($pdate == 2){
-        $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $whereSQL .= " propertyDate ASC"; 
+        $orderSQL .= (strpos($orderSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
+        $orderSQL .= " propertyDate ASC"; 
     }elseif($pdate == 1){
-        $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $whereSQL .= " propertyDate DESC"; 
+        $orderSQL .= (strpos($orderSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
+        $orderSQL .= " propertyDate DESC"; 
+    }
+
+    $and = 'WHERE';
+
+    if($whereSQL != ''){
+        $and = 'AND';
     }
 
     // if($_POST['filterBy'] != null){ 
@@ -113,7 +120,7 @@ if(isset($_POST['page'])){
     //     $whereSQL .= " location LIKE '%".$_POST['filterBy']."%'"; 
     // }
     // Count of all records 
-    $query   = $connect->query("SELECT COUNT(*) as rowNum FROM tbl_property ".$whereSQL); 
+    $query   = $connect->query("SELECT COUNT(*) as rowNum FROM tbl_property ".$whereSQL." $and NOT statusProperty ='Pending' OR statusProperty ='Sold' OR statusProperty ='Reject'"); 
     $result  = $query->fetch_assoc(); 
     $rowCount= $result['rowNum']; 
      
@@ -129,7 +136,7 @@ if(isset($_POST['page'])){
     $pagination =  new Pagination($pagConfig);
 
     // Fetch records based on the offset and limit 
-    $query = $connect->query("SELECT * FROM tbl_property $whereSQL LIMIT $offset,$limit");
+    $query = $connect->query("SELECT * FROM tbl_property ".$whereSQL." $and NOT statusProperty ='Pending' OR statusProperty ='Sold' OR statusProperty ='Reject' $orderSQL LIMIT $offset,$limit");
 ?> 
     <!-- Data list container --> 
     <div  class="properties-list container-fluid d-flex flex-column justify-content-center align-items-center">

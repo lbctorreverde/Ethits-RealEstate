@@ -12,16 +12,19 @@ if(isset($_POST["btn_hide1"])){
     VALUES ('$agent','$user','$property',NOW(),'Pending')";
     $result = mysqli_query($connect, $query);
 
+    $query = "UPDATE `tbl_property` SET `statusProperty`='Pending' WHERE property_ID = '$property'";
+    $result = mysqli_query($connect, $query);
+
     if (isset($result)) {
         ?>
         <script>
-            alert('Successfully Update');
+            alert('Transaction Success, wait for the agent to confirm');
             location = 'properties.php';
             exit;
         </script>
         <?php }else{?>
         <script>
-            alert('Updating Failed');
+            alert('Transaction Failed');
             location = 'properties.php';
             exit;
         </script>
