@@ -20,8 +20,6 @@ include_once 'header.php';
         document.getElementById("divConfirm").style.display = "block";
     }
 </script>
-
-
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
@@ -135,8 +133,9 @@ include_once 'header.php';
                                 </div>
                             </div>
                             <div class="row">
+                                <br>
                                 <div class="col">
-                                    <label for="inputEmail4" class="form-label">Property Image</label>
+                                    <br><label for="inputEmail4" class="form-label">Property Image</label>
                                     <input type="file" name="propertyImg[]" class="form-control" id="propertyImg" multiple required/>
                                 </div>
                             </div>

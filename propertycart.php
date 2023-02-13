@@ -18,12 +18,12 @@ $sql = "SELECT
     INNER JOIN tbl_agent ON tbl_transaction.agent_ID = tbl_agent.agent_ID)
     INNER JOIN tbl_property ON tbl_transaction.property_ID = tbl_property.property_ID) WHERE tbl_transaction.agent_ID = '$var' AND status_Trans = 'Pending'";
 $result = mysqli_query($connect, $sql);
-if (mysqli_num_rows($result) != 0) {
-?>
 
+?>
     <div class="container-fluid">
         <div class="row">
             <div class="col">
+                <?php if (mysqli_num_rows($result) != 0) {?>
                 <section class="topsection d-flex justify-content-center align-items-center">
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner rounded-0">
@@ -76,10 +76,35 @@ if (mysqli_num_rows($result) != 0) {
                         </button>
                     </div>
                 </section>
+            <?php }else{?>
+                <section class="topsection d-flex justify-content-center align-items-center">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner rounded-0">
+                            <!-- Carousel for Cards every pending properties -->
+                            <div class="<?php echo $classname; ?>">
+                                <div class="card rounded">
+                                    <div class="row g-0">
+                                        <div class="property-img col-7">
+                                            <img class="pe-3" src="https://t3.ftcdn.net/jpg/01/82/24/68/360_F_182246882_zzaoBR9ei0vAidaau2s66z8Wi4WPlalb.jpg" alt="First slide" width="380" height="400">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <button class="carousel-control carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon me-5" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon ms-5" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </section>
             <?php } ?>
             </div>
             
-            <div class="col-6 container-fluid d-flex flex-column justify-content-center align-items-center">
+            <div class="col-7">
                 <section class="table-section container-fluid d-flex flex-column justify-content-center align-items-center">
                     <div class="topsearchbar">
                         <form action="propertycart.php" method="POST" role="search" id="form">
@@ -171,12 +196,6 @@ if (mysqli_num_rows($result) != 0) {
             </div>
         </div>
     </div>
-
-
-
-
-
-
     <?php
     include_once 'footer.php';
 

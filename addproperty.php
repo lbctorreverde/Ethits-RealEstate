@@ -35,7 +35,7 @@ include('dbconfig.php');
                             </svg>
 
                             <div>
-                                <img src="img/121vrq3gasfdg5.jpg" width="450" height="200" class="card-img-top" alt="First slide">
+                                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" width="760" height="200" class="card-img-top" alt="First slide">
                             </div>
                             <div class="card-body shadow">
                                 <form method="POST" action="properties.php" class="property-name-post d-flex form-control text-start">
@@ -71,10 +71,6 @@ include('dbconfig.php');
                             </div>
                         </div>
                     </div>
-
-
-
-
                 </div>
             </div>
 

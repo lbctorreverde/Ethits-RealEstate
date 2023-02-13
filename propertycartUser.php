@@ -7,18 +7,18 @@ include('dbconfig.php');
     <?php include 'css/propertycart.css' ?>
 </style>
 
-<?php
-$var = $_SESSION['user_ID'];
-$x = 0;
-$sql = "SELECT 
-    tbl_agent.fName ,tbl_agent.lName, tbl_property.title, tbl_property.location, tbl_transaction.trans_Date, tbl_transaction.trans_ID,
+<?php 
+    $var = $_SESSION['user_ID'];
+    $x = 0;
+    $sql = "SELECT 
+    tbl_user.fName ,tbl_user.lName, tbl_property.title, tbl_property.location, tbl_transaction.trans_Date, tbl_transaction.trans_ID,
     tbl_transaction.property_ID
      
     FROM ((tbl_transaction
-    INNER JOIN tbl_agent ON tbl_transaction.agent_ID = tbl_agent.agent_ID)
-    INNER JOIN tbl_property ON tbl_transaction.property_ID = tbl_property.property_ID) WHERE user_ID= '$var' AND status_Trans = 'Pending'";
-$result = mysqli_query($connect, $sql);
-if (mysqli_num_rows($result) != 0) {
+    INNER JOIN tbl_user ON tbl_transaction.user_ID = tbl_user.user_ID)
+    INNER JOIN tbl_property ON tbl_transaction.property_ID = tbl_property.property_ID) WHERE tbl_transaction.user_ID= '$var' AND status_Trans = 'Pending'";
+    $result= mysqli_query($connect, $sql);
+    if (mysqli_num_rows($result) != 0) {
 ?>
 
     <div class="container-fluid">
@@ -27,44 +27,29 @@ if (mysqli_num_rows($result) != 0) {
                 <section class="topsection d-flex justify-content-center align-items-center">
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 
-                        <div class="carousel-inner rounded-2">
-                            <?php
-                            while ($row = mysqli_fetch_array($result)) {
-                                $x++;
-                                if ($x == 1) {
-                                    $classname = 'carousel-item active';
-                                } else {
-                                    $classname = 'carousel-item';
-                                }
-
-                                $propID1 = $row['property_ID'];
-                                $sql4 = "SELECT * FROM `tbl_show` WHERE property_ID='$propID1'";
-                                $result4 = mysqli_query($connect, $sql4);
-                                $row4 = mysqli_fetch_assoc($result4);
-                            ?>
-                                <!-- Carousel for Cards every pending properties -->
-                                <div class="<?php echo $classname; ?>">
-                                    <div class="card rounded">
-                                        <div class="row g-0">
-                                            <div class="property-img col-7">
-                                                <?php echo '<img class="pe-3" src="data:image/jpeg;base64,' . base64_encode($row4['propertyImg']) . '"alt="First slide" width="380" height="400">'; ?>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card-body container-fluid d-flex flex-column">
-                                                    <h5 class="card-text"><?php echo $row['title'] ?></h5>
-                                                    <p class="card-text">Agent: <?php echo $row['lName'] . ', ' . $row['fName'] ?></p>
-                                                    <p class="card-text"><small class="text-muted"><?php echo $row['location'] ?></small></p>
-                                                    <form method="POST" onsubmit="return confirm('Are you sure you want to Cancel')" action="propertycartUser.php" class="property-name-post container-fluid d-flex flex-column">
-                                                        <input type="hidden" id="hide" name="hide" value="<?php echo $row['trans_ID'] ?>">
-                                                        <button type="submit" id="btn_Cancel" name="btn_Cancel" class=" btn btn-reject">Cancel</button>
-                                                    </form>
-                                                    <!-- <button type="button" class="btn-reject btn">Cancel</button> -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php } ?>
+                    $propID1 = $row['property_ID'];
+                    $sql4 = "SELECT * FROM `tbl_show` WHERE property_ID='$propID1'";
+                    $result4= mysqli_query($connect, $sql4);
+                    $row4 = mysqli_fetch_assoc($result4);
+                    ?>
+            <!-- Carousel for Cards every pending properties -->
+            <div class="<?php echo $classname; ?>">
+                <div class="card rounded">
+                    <div class="row g-0">
+                        <div class="property-img col-7">
+                            <?php echo '<img  src="data:image/jpeg;base64,'.base64_encode($row4['propertyImg']).'"alt="First slide" width="340" height="400">'; ?>
+                        </div>
+                        <div class="col">
+                            <div class="card-body container-fluid d-flex flex-column">
+                                <h5 class="card-text"><?php echo $row['title']?></h5>
+                                <p class="card-text">Agent: <?php echo $row['lName'].', '.$row['fName']?></p>
+                                <p class="card-text"><small class="text-muted"><?php echo $row['location']?></small></p>
+                                <form method="POST" onsubmit="return confirm('Are you sure you want to Cancel')" action="propertycartUser.php" class="property-name-post d-flex form-control text-start">
+                                    <input type="hidden" id="hide" name="hide" value="<?php echo $row['trans_ID'] ?>">
+                                    <button type="submit" id="btn_Cancel" name="btn_Cancel" class="btn-reject btn">Cancel</button>
+                                </form>
+                                <!-- <button type="button" class="btn-reject btn">Cancel</button> -->
+                            </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon me-5" aria-hidden="true"></span>
@@ -81,51 +66,50 @@ if (mysqli_num_rows($result) != 0) {
             </div>
             <div class="col-6 container-fluid d-flex flex-column justify-content-center align-items-center">
 
-                <section class="table-section container-fluid d-flex flex-column justify-content-center align-items-center">
-                    <div class="topsearchbar">
-                        <form action="propertycartUser.php" method="POST" role="search" id="form">
-                            <input type="search" id="query" name="searchProp" placeholder="Search..." aria-label="Search through site content">
-                            <?php
-                            $_SESSION['agentselected'] = "";
-                            ?>
-                            <select class="form-select" name="filter" id="filter" required>
-                                <option value="Title">Title</option>
-                                <option value="Bath">Bathroom</option>
-                                <option value="Bed">Bedroom</option>
-                                <option value="Sf">Special Features</option>
-                                <option value="Loc">Location</option>
-                            </select>
-                            <span class="vr me-3"></span>
-                            <button type="submit" name="btn_search" class="searchbtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                </svg></button>
-                        </form>
-                    </div>
-                    <div class="property-table table-responsive">
-                        <table class="table align-middle mb-0 p-2 table-dark table-hover table-borderless rounded">
-                            <thead class="">
-                                <tr>
-                                    <th>Property Info</th>
-                                    <th>Agent</th>
-                                    <th>Feedback</th>
-                                    <th>Rate</th>
-                                    <th>Transaction</th>
-                                    <th>Confirm</th>
-                                    <th>Status</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $x = 0;
-                                $sql1 = "SELECT 
-                tbl_agent.fName ,tbl_agent.lName, tbl_property.title, tbl_property.location, tbl_transaction.trans_Date, tbl_transaction.property_id,
+<section class="table-section container-fluid d-flex flex-column justify-content-center align-items-center">
+    <div class="topsearchbar">
+        <form action="propertycartUser.php" method="POST" role="search" id="form">
+            <input type="search" id="query" name="searchProp" placeholder="Search..." aria-label="Search through site content">
+            <?php
+            $_SESSION['agentselected'] = "";
+            ?>
+            <select class="form-select" name="filter" id="filter" required>
+                <option value="Title">Title</option>
+                <option value="Bath">Bathroom</option>
+                <option value="Bed">Bedroom</option>
+                <option value="Sf">Special Features</option>
+                <option value="Loc">Location</option>
+            </select>
+            <span class="vr me-3"></span>
+            <button type="submit" name="btn_search" class="searchbtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg></button>
+        </form>
+    </div>
+    <div class="property-table table-responsive">
+        <table class="table align-middle mb-0 p-2 table-dark table-hover table-borderless rounded">
+            <thead class="">
+                <tr>
+                    <th>Property Info</th>
+                    <th>Agent</th>
+                    <th>Feedback</th>
+                    <th>Rate</th>
+                    <th>Transaction</th>
+                    <th>Confirm</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php 
+                $x = 0;
+                $sql1 = "SELECT 
+                tbl_user.fName ,tbl_user.lName, tbl_property.title, tbl_property.location, tbl_transaction.trans_Date, tbl_transaction.property_id,
                 tbl_transaction.status_Trans, tbl_transaction.trans_Date, tbl_transaction.doneDate, tbl_transaction.rate, tbl_transaction.feedback
                 
                 FROM ((tbl_transaction
-                INNER JOIN tbl_agent ON tbl_transaction.agent_ID = tbl_agent.agent_ID)
-                INNER JOIN tbl_property ON tbl_transaction.property_ID = tbl_property.property_ID) WHERE user_ID= '$var' AND status_Trans = 'Done' OR status_Trans = 'Cancelled'";
-                                $result1 = mysqli_query($connect, $sql1);
+                INNER JOIN tbl_user ON tbl_transaction.user_ID = tbl_user.user_ID)
+                INNER JOIN tbl_property ON tbl_transaction.property_ID = tbl_property.property_ID) WHERE tbl_transaction.user_ID= '$var' AND status_Trans = 'Sold' OR status_Trans = 'Cancelled'";
+                $result1= mysqli_query($connect, $sql1);
 
                                 if (mysqli_num_rows($result1) != 0) {
                                     while ($row1 = mysqli_fetch_array($result1)) {

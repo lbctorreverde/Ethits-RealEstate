@@ -69,8 +69,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Middle Name</label>
-                        <input type="text" class="form-control" name="mname" value="<?php if ($row['mName'] != "") {
-                            echo $row['midName'];} else {echo "-Empty-";}?>" placeholder="Enter Middlename here.." readOnly required>
+                        <input type="text" class="form-control" name="mname" value="<?php echo is_null($row["mName"]) ? "-Empty-" : $row["mName"];?>" placeholder="Enter Middlename here.." readOnly required>
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Last Name</label>
