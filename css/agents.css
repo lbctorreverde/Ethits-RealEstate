@@ -128,6 +128,24 @@ p {
     box-shadow: none;
 }
 
+.img-col {
+    
+}
+
+.info-col {
+    transform: translateX(-170px);
+}
+
+.bottomside {
+    background-color: aliceblue;
+    height: 25vh;
+}
+
+.sticky-footer {
+    background-color: aliceblue;
+}
+
+
 
 @media screen and (max-width: 1000px) {
     form {

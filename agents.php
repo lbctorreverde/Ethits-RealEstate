@@ -8,7 +8,7 @@ include_once 'Pagination.class.php';
 
 // Set some useful configuration 
 $baseURL = 'agentsearch.php';
-$limit = 6;
+$limit = 5;
 
 // Count of all records 
 $query   = $connect->query("SELECT COUNT(*) as rowNum FROM tbl_agent");
@@ -147,17 +147,17 @@ if (isset($_SESSION['verified_user_id'])) {
         <!-- CARD FOR EACH AGENT PAR-->
         <div id='result'>
             <div>
-                <div class="agentcard row g-0 mt-2 shadow">
+                <div class="agentcard row gy-4 gx-5 mt-2 shadow">
                     <?php
                     if ($query->num_rows > 0) {
                         $i = 0;
                         while ($row = $query->fetch_assoc()) {
                     ?>
-                            <div class="col-md-2">
+                            <div class="col-4 img-col">
                                 <?php
                                 if (!$row['displayImg']) {
                                 ?>
-                                    <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid rounded-start" alt="..." width="150" height="150" />
+                                    <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="rounded-start" alt="..." width="150" height="150" />
                                 <?php
                                 } else {
                                 ?>
@@ -166,7 +166,7 @@ if (isset($_SESSION['verified_user_id'])) {
                                 }
                                 ?>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-7 info-col">
                                 <div class="card-body">
                                     <!-- Paiba nalang, sa notfound.php pa redirect nya eh -->
                                     <form method="POST" action="agents.php" class="agent-name-post d-flex form-control text-start">
@@ -202,6 +202,16 @@ if (isset($_SESSION['verified_user_id'])) {
         </div>
     </div>
 </section>
+
+<section class="bottomside">
+
+</section>
+
+<footer id="sticky-footer" class="sticky-footer flex-shrink-0 py-4">
+    <div class=" text-center">
+        <small>Copyright &copy; CS3</small>
+    </div>
+</footer>
 
 <?php
 if (isset($_POST['btn_hide'])) {
