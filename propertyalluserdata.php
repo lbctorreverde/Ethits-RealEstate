@@ -31,7 +31,7 @@ if(isset($_POST['page'])){
         $whereSQL .= " AND tbl_transaction.status_Trans ='Sold'"; 
     }
     if($filter == 'rate'){ 
-        $whereSQL .= " AND tbl_transaction.rate IS NULL AND tbl_transaction.status_Trans = 'Cancelled' AND tbl_transaction.status_Trans = 'Pending'"; 
+        $whereSQL .= " AND (tbl_transaction.status_Trans = 'Sold' OR tbl_transaction.status_Trans = 'Cancelled') AND tbl_transaction.rate IS NULL"; 
     }
     if($filter == 'cnl'){ 
         $whereSQL .= " AND tbl_transaction.status_Trans ='Cancelled'"; 
@@ -66,7 +66,7 @@ if(isset($_POST['page'])){
     $query = $connect->query("SELECT 
     tbl_agent.fName ,tbl_agent.lName, tbl_property.title, tbl_property.location, tbl_transaction.trans_Date, tbl_transaction.trans_ID,
     tbl_transaction.property_ID, tbl_property.lotSize, tbl_property.floorArea, tbl_property.propertyType, tbl_property.price, tbl_transaction.status_Trans,
-    tbl_user.fName AS userFname ,tbl_user.lName AS userLname, tbl_transaction.rate
+    tbl_user.fName AS userFname ,tbl_user.lName AS userLname, tbl_transaction.rate, tbl_agent.agent_ID
 
     FROM (((tbl_transaction
     INNER JOIN tbl_agent ON tbl_transaction.agent_ID = tbl_agent.agent_ID)
@@ -127,6 +127,7 @@ if(isset($_POST['page'])){
             <div class="csub">
                     <input type="hidden" id="hide" name="hide" value="<?php echo $res['trans_ID'] ?>">
                     <input type="hidden" id="property" name="property" value="<?php echo $res['property_ID'] ?>">
+                    <input type="hidden" id="agent" name="agent" value="<?php echo $res['agent_ID'] ?>">
                     <input type="submit" id="btn_rate" value="Submit" name="btn_rate" class="btn-reject btn" style="background-color: dodgerblue;">
                 </form>
             </div>
@@ -261,9 +262,43 @@ if (isset($_POST['btn_rate'])) {
     $hidden = $_POST['hide'];
     $textA = $_POST['textA'];
     $srate = $_POST['srate'];
+    $agent = $_POST['agent'];
     $sql3 = "UPDATE tbl_transaction SET `rate`= '".$srate."', feedback='".$textA."' WHERE trans_ID='$hidden'";
     $result3 = mysqli_query($connect, $sql3);
 
+    $query1 = $connect->query("SELECT 
+    tbl_agent.fName ,tbl_agent.lName, tbl_property.title, tbl_property.location, tbl_transaction.trans_Date, tbl_transaction.trans_ID,
+    tbl_transaction.property_ID, tbl_property.lotSize, tbl_property.floorArea, tbl_property.propertyType, tbl_property.price, tbl_transaction.status_Trans,
+    tbl_transaction.rate, tbl_agent.agent_ID
+
+    FROM tbl_transaction
+    INNER JOIN tbl_agent ON tbl_transaction.agent_ID = tbl_agent.agent_ID
+    INNER JOIN tbl_property ON tbl_transaction.property_ID = tbl_property.property_ID WHERE tbl_transaction.agent_ID = '".$agent."' AND tbl_transaction.rate IS NOT NULL");
+    
+    $count1 = 0;
+    $count2 = 0;
+    $count3 = 0;
+    $count4 = 0;
+    $count5 = 0;
+    while($res2 = $query1->fetch_assoc()){
+        if($res2['rate'] == 5){
+            $count5++;
+        }elseif($res2['rate'] == 4){
+            $count4++;
+        }elseif($res2['rate'] == 3){
+            $count3++;
+        }elseif($res2['rate'] == 2){
+            $count2++;
+        }elseif($res2['rate'] == 1){
+            $count1++;
+        }
+    }
+    
+    $allrate = $count1+$count2+$count3+$count4+$count5;
+    $rating = ((($count5 * 5)+($count4 * 4)+($count3 * 3)+($count2 * 2)+($count1 * 1))/$allrate);
+    echo $allrate."&".$count5."&".$count4."&".$rating;
+    $sql4 = "UPDATE tbl_agent SET `prate`= '".$rating."', total_rate='".$allrate."' WHERE agent_ID='$agent'";
+    $result4 = mysqli_query($connect, $sql4);
     if (isset($result3)) {
 ?>
         <script>
@@ -285,7 +320,7 @@ if (isset($_POST['btn_Cancel'])) {
     $hidden = $_POST['hide'];
     $property = $_POST['property'];
 
-    $sql3 = "UPDATE tbl_transaction SET `status_Trans`='Rejected' WHERE trans_ID='$hidden'";
+    $sql3 = "UPDATE tbl_transaction SET `status_Trans`='Cancelled' WHERE trans_ID='$hidden'";
     $result3 = mysqli_query($connect, $sql3);
 
     $sql3 = "UPDATE tbl_property SET `statusProperty`='Active' WHERE property_ID='$property'";
@@ -294,7 +329,7 @@ if (isset($_POST['btn_Cancel'])) {
     if (isset($result3)) {
     ?>
         <script>
-            alert('Successfully Rejected');
+            alert('Successfully Cancelled');
             location = 'propertyalluser.php';
             exit;
         </script>
