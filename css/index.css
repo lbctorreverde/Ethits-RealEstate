@@ -3,7 +3,7 @@ body {
 }
 
 section {
-    min-height: 80vh;
+    min-height: 90vh;
 
 }
 
@@ -53,13 +53,20 @@ section>h1 {
 }
 
 .second-div {
+
+
+    background-color: aliceblue;
+}
+
+.agent-hero {
     padding: 0px 100px 0px 100px;
-    min-height: 80vh;
     margin-top: 20vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgb(236, 236, 236);
+    color: rgb(43, 43, 43);
+    background-color: aliceblue;
 }
 
 .image-agent {
@@ -75,13 +82,20 @@ section>h1 {
 }
 
 .third-div {
+    background-color: aliceblue;
+
+}
+
+.property-hero {
     padding: 0px 100px 0px 100px;
-    min-height: 80vh;
+    min-height: 120vh;
+    margin-top: -10vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgb(236, 236, 236);
+    color: rgb(43, 43, 43);
     text-align: end;
+    background-color: aliceblue;
 }
 
 .image-property {
@@ -99,7 +113,7 @@ section>h1 {
 }
 
 .topagents-div {
-    margin-top: 30vh;
+    margin-top: 20vh;
 
 }
 
@@ -130,4 +144,12 @@ p>a {
 
 .second-extra-div {
     color: aliceblue;
+}
+
+.image-clipart {
+    filter: brightness(15%);
+}
+
+.sticky-footer {
+    background-color: aliceblue;
 }

@@ -1,5 +1,7 @@
 
 <?php
+session_start();
+include('dbconfig.php');
 
 if(isset($_POST['page'])){ 
     // Include pagination library file 
@@ -99,8 +101,7 @@ if(isset($_POST['page'])){
         $orderSQL .= (strpos($orderSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
         $orderSQL .= " price DESC"; 
     }elseif($pselect == 1){
-        $whereSQL .= (strpos($orderSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $orderSQL .= " price ASC"; 
+        $orderSQL .= " ORDER BY price ASC"; 
     }elseif($pdate == 2){
         $orderSQL .= (strpos($orderSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
         $orderSQL .= " propertyDate ASC"; 
@@ -108,6 +109,7 @@ if(isset($_POST['page'])){
         $orderSQL .= (strpos($orderSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
         $orderSQL .= " propertyDate DESC"; 
     }
+    echo $whereSQL;
 
     $and = 'WHERE';
 

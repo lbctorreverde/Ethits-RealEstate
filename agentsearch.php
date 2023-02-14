@@ -14,7 +14,7 @@ if(isset($_POST['page'])){
     // Set some useful configuration 
     $baseURL = 'agentsearch.php'; 
     $offset = !empty($_POST['page'])?$_POST['page']:0; 
-    $limit = 6; 
+    $limit = 20; 
      
     //Set conditions for search 
     $whereSQL = ''; 
@@ -53,21 +53,12 @@ if(isset($_POST['page'])){
         $whereSQL .= " city LIKE '%".$nearBy."%'"; 
     }
 
-    if($prating == 5){ 
+    if($prating == 1){ 
         $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $whereSQL .= " rating DESC"; 
-    }elseif($prating == 4){
-        $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $whereSQL .= " rating ASC"; 
-    }elseif($prating == 3){
-        $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $whereSQL .= " rating ASC"; 
+        $whereSQL .= " prate DESC"; 
     }elseif($prating == 2){
         $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $whereSQL .= " rating DESC"; 
-    }elseif($prating == 1){
-        $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $whereSQL .= " rating ASC"; 
+        $whereSQL .= " prate ASC"; 
     }elseif($pdate == 1){
         $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
         $whereSQL .= " email_verified_at DESC"; 
@@ -110,52 +101,53 @@ if(isset($_POST['page'])){
 ?> 
     <!-- Data list container --> 
     <div>
-        <div class="agentcard row g-0 mt-2 shadow">
+        <div class="agentcard row gy-4 gx-5 mt-2 shadow">
             <?php
-                if($query->num_rows > 0){ $i=0;
+            if ($query->num_rows > 0) {
+                $i = 0;
                 while ($row = $query->fetch_assoc()) {
             ?>
-            <div class="col-md-2">
-                <?php
-                if (!$row['displayImg']) {
-                    ?>
-                            <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid rounded-start" alt="..." width="150" height="150"/>
+                    <div class="col-4 img-col">
                         <?php
-                } else {
-                    ?>
+                        if (!$row['displayImg']) {
+                        ?>
+                            <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="rounded-start" alt="..." width="150" height="150" />
+                        <?php
+                        } else {
+                        ?>
                             <?php echo '<img  src="data:image/jpeg;base64,' . base64_encode($row['displayImg']) . '" class="img-fluid rounded-start" alt="..." width="150" height="150">'; ?>
                         <?php
+                        }
+                        ?>
+                    </div>
+                    <div class="col-7 info-col">
+                        <div class="card-body">
+                            <!-- Paiba nalang, sa notfound.php pa redirect nya eh -->
+                            <form method="POST" action="agents.php" class="agent-name-post d-flex form-control text-start">
+                                <input type="hidden" id="hide" name="hide" value="<?php echo $row['agent_ID'] ?>">
+                                <button class="agent-name-button" type="submit" id="btn_hide" name="btn_hide">
+                                    <?php echo $row['lName'] . ", " . $row['fName'] . " " . substr($row['mName'], 0, 1) . "." ?>
+                                </button>
+                            </form>
+                            <!-- <input type="hidden" id="hide" name="hide" value="<?php //echo $row['agemt_ID'] 
+                                                                                    ?>">
+                    <a onclick="window.location.href='agentC.php'" type="submit" id="btn_hide" name="btn_hide"><?php //echo $row['lName'] . ", " . $row['fName'] . " " . substr($row['mName'], 0, 1) . "." 
+                                                                                                                ?></a> -->
+                            <br>
+                            <p class="card-text text-muted">Real Estate Professional<br>
+                                <?php echo $row['agency'] . " - " . $row['str'] . ", " . $row['brgy'] . ", " . $row['city'] . ", Bataan" ?>
+                            </p>
+                            <p class="card-title text-muted">Contact: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rating:&nbsp;<i class='bx bxs-star' style='color:#f9ff00'></i><?php echo $row['prate']?></p>
+                            <p class="card-text"><small class="text-muted lh-sm"><?php echo $row['contactNo'] ?></small></p>
+                        </div>
+                    </div>
+            <?php
                 }
-                ?>
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <!-- Paiba nalang, sa notfound.php pa redirect nya eh -->
-                    <form method="POST" action="agents.php" class="agent-name-post d-flex form-control text-start">
-                        <input type="hidden" id="hide" name="hide" value="<?php echo $row['agent_ID'] ?>">
-                        <button class="agent-name-button" type="submit" id="btn_hide" name="btn_hide">
-                            <?php echo $row['lName'] . ", " . $row['fName'] . " " . substr($row['mName'], 0, 1) . "." ?>
-                        </button>
-                    </form>
-                    <!-- <input type="hidden" id="hide" name="hide" value="<?php //echo $row['agemt_ID'] ?>">
-                    <a onclick="window.location.href='agentC.php'" type="submit" id="btn_hide" name="btn_hide"><?php //echo $row['lName'] . ", " . $row['fName'] . " " . substr($row['mName'], 0, 1) . "." ?></a> -->
-                    <br>
-                    <p class="card-text text-muted">Real Estate Professional<br>
-                        <?php echo $row['agency'] . " - " . $row['str'] . ", " . $row['brgy'] . ", " . $row['city'] . ", Bataan" ?>
-                    </p>
-                    <p class="card-title text-muted">Contact: </p>
-                    <p class="card-text"><small class="text-muted lh-sm"><?php echo $row['contactNo'] ?></small></p>
-                </div>
-            </div>
-            <?php 
-                }
-            }else{ 
-                echo '<tr><td colspan="6">No records found...</td></tr>'; 
-            } 
+            } else {
+                echo '<tr><td colspan="6">No records found...</td></tr>';
+            }
             ?>
-            
         </div>
-        
     </div>
     <br>
     <div class="row">

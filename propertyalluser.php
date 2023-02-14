@@ -32,7 +32,7 @@ $pagination =  new Pagination($pagConfig);
 $query = $connect->query("SELECT 
     tbl_agent.fName ,tbl_agent.lName, tbl_property.title, tbl_property.location, tbl_transaction.trans_Date, tbl_transaction.trans_ID,
     tbl_transaction.property_ID, tbl_property.lotSize, tbl_property.floorArea, tbl_property.propertyType, tbl_property.price, tbl_transaction.status_Trans,
-    tbl_user.fName AS userFname ,tbl_user.lName AS userLname, tbl_transaction.rate
+    tbl_user.fName AS userFname ,tbl_user.lName AS userLname, tbl_transaction.rate, tbl_transaction.agent_ID
 
     FROM (((tbl_transaction
     INNER JOIN tbl_agent ON tbl_transaction.agent_ID = tbl_agent.agent_ID)
@@ -48,7 +48,7 @@ $query = $connect->query("SELECT
     $sql = "SELECT 
         tbl_agent.fName ,tbl_agent.lName, tbl_property.title, tbl_property.location, tbl_transaction.trans_Date, tbl_transaction.trans_ID,
         tbl_transaction.property_ID, tbl_property.lotSize, tbl_property.floorArea, tbl_property.propertyType, tbl_property.price, tbl_transaction.status_Trans,
-        tbl_user.fName AS userFname ,tbl_user.lName AS userLname, tbl_transaction.trans_ID, tbl_transaction.rate
+        tbl_user.fName AS userFname ,tbl_user.lName AS userLname, tbl_transaction.trans_ID, tbl_transaction.rate, tbl_transaction.agent_ID
         
         FROM (((tbl_transaction
         INNER JOIN tbl_agent ON tbl_transaction.agent_ID = tbl_agent.agent_ID)
@@ -185,7 +185,7 @@ $query = $connect->query("SELECT
 
     <section class="midsection">
         <div style="padding-top:20px;">
-            <div class="pclass">
+            <div class="pclass" style='box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);'>
                 <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="50" height="50" class="rounded-circle">
                 <div class="flex-container">
                     <b><?php echo $row["fName"].', '.$row["lName"] ?></b>
@@ -247,15 +247,21 @@ $query = $connect->query("SELECT
                         <img style='border-radius:10px;' src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="40" height="40" class="card-img-top">
                     </div>
                     <div class="grid-item item3">
+                        <form method="POST" action="propertyalluser.php">
+                                <input type="hidden" id="hide" name="hide" value="<?php echo $res['agent_ID'] ?>">
                         <div class="rCont">
-                            <button class="btnView">View Agent</button>
+                                <button class="btnView" type="submit" id="btn_hide" name="btn_hide">
+                                    View Agent
+                                </button>
                             <button class="btnView">Chat</button>
+                            
                             <?php if($res['rate'] != null){?>
-                                <div style="font-size:15px; color:blue;">Rating:&nbsp;<b><?php echo $res['rate']?></b></div>
+                                <div style="font-size:15px; color:blue;">Rating:&nbsp;<b><i class='bx bxs-star' style='color:#f9ff00'></i><?php echo $res['rate']?></b></div>
                             <?php }else{?>
                                 <div style="font-size:15px; color:gray;"><b>No rating received</b></div>
                             <?php }?>
                         </div>
+                        </form>
                     </div>  
                     <div class="grid-item item4">
                         <div style="display:flex; gap:10px; text-align: center;">
@@ -263,7 +269,9 @@ $query = $connect->query("SELECT
                                 <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="50" height="50" class="rounded-circle">
                                 <div class="flexcont">
                                     <b><?php echo $res["lName"].', '.$res["fName"] ?>&nbsp;</b>
-                                    <div style="color:#90ee90;";><b>AGENT</b></div>
+                                    <div style="color:#90ee90;";>
+                                        <b>AGENT</b>
+                                    </div>
                                 </div>
                             </div>
                             <div class="pclass">
@@ -304,7 +312,21 @@ $query = $connect->query("SELECT
         </div>
     </section>
 </main>
-<?php 
+<?php
+
+    if (isset($_POST['btn_hide'])) {
+        $hide = $_POST['hide'];
+        if (isset($hide)) {
+            $_SESSION['agentselected'] = $hide;
+    ?>
+            <script>
+                location = 'agentportfolio.php';
+                exit;
+            </script>
+    <?php
+        }
+    }
+
     if (isset($_POST['btn_Cancel'])) {
         $hidden = $_POST['hide'];
         $property = $_POST['property'];

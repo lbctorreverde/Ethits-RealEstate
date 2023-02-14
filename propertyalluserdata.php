@@ -92,8 +92,12 @@ if(isset($_POST['page'])){
             <img style='border-radius:10px;' src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="40" height="40" class="card-img-top">
         </div>
         <div class="grid-item item3">
+            <form method="POST" action="propertyalluserdata.php">
+                <input type="hidden" id="hide" name="hide" value="<?php echo $res['agent_ID'] ?>">
             <div class="rCont">
-                <button class="btnView">View Agent</button>
+                <button class="btnView" type="submit" id="btn_hide" name="btn_hide">
+                    View Agent
+                </button>
                 <button class="btnView">Chat</button>
                 <div style="font-size:15px; color:gray;">
                     <select class="form-select" style="width:170px; background-color:lightblue; font-size:15px" name="srate" id="srate" required>
@@ -106,6 +110,7 @@ if(isset($_POST['page'])){
                     </select>
                 </div>
             </div>
+            </form>
         </div>  
         <div class="grid-item item4">
             <div style="display:flex; gap:10px; text-align: center;">
@@ -151,7 +156,7 @@ if(isset($_POST['page'])){
             while($res = $query->fetch_assoc()){
         //}
     ?>
-    <form method="POST" onsubmit="return confirm('Are you sure you want to cancel?')" action="propertyalluserdata.php">
+    <form method="POST" action="propertyalluserdata.php">
     <div class="boxx1">
         <div class="boxx2">
             <div class="gridItem content1">
@@ -164,7 +169,7 @@ if(isset($_POST['page'])){
                 Style:&nbsp;<i class='bx bx-home-smile'></i><b><?php echo $res['propertyType']?></b>
             </div>  
             <div class="gridItem content4">
-                <b>₱&nbsp;<?php echo $res['price']?></b>
+                Price:&nbsp;<b>₱&nbsp;<?php echo $res['price']?></b>
             </div>
             <div class="gridItem content5">
                 Lot Size:&nbsp;<i class='bx bx-area'></i><b><?php echo $res['lotSize']?></b>
@@ -180,15 +185,21 @@ if(isset($_POST['page'])){
             <img style='border-radius:10px;' src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="40" height="40" class="card-img-top">
         </div>
         <div class="grid-item item3">
+            <form method="POST" action="propertyalluserdata.php">
+                    <input type="hidden" id="hide" name="hide" value="<?php echo $res['agent_ID'] ?>">
             <div class="rCont">
-                <button class="btnView">View Agent</button>
+                    <button class="btnView" type="submit" id="btn_hide" name="btn_hide">
+                        View Agent
+                    </button>
                 <button class="btnView">Chat</button>
+                
                 <?php if($res['rate'] != null){?>
-                    <div style="font-size:15px; color:blue;">Rating:&nbsp;<b><?php echo $res['rate']?></b></div>
+                    <div style="font-size:15px; color:blue;">Rating:&nbsp;<b><i class='bx bxs-star' style='color:#f9ff00'></i><?php echo $res['rate']?></b></div>
                 <?php }else{?>
                     <div style="font-size:15px; color:gray;"><b>No rating received</b></div>
                 <?php }?>
             </div>
+            </form>
         </div>  
         <div class="grid-item item4">
             <div style="display:flex; gap:10px; text-align: center;">
@@ -235,6 +246,19 @@ if(isset($_POST['page'])){
 
 <?php 
 }
+if (isset($_POST['btn_hide'])) {
+    $hide = $_POST['hide'];
+    if (isset($hide)) {
+        $_SESSION['agentselected'] = $hide;
+?>
+        <script>
+            location = 'agentportfolio.php';
+            exit;
+        </script>
+<?php
+    }
+}
+
 if (isset($_POST['btn_Accept'])) {
     $hidden = $_POST['hide'];
 
@@ -297,6 +321,7 @@ if (isset($_POST['btn_rate'])) {
     $allrate = $count1+$count2+$count3+$count4+$count5;
     $rating = ((($count5 * 5)+($count4 * 4)+($count3 * 3)+($count2 * 2)+($count1 * 1))/$allrate);
     echo $allrate."&".$count5."&".$count4."&".$rating;
+    $rating = number_format((float)$rating, 2, '.', '');
     $sql4 = "UPDATE tbl_agent SET `prate`= '".$rating."', total_rate='".$allrate."' WHERE agent_ID='$agent'";
     $result4 = mysqli_query($connect, $sql4);
     if (isset($result3)) {

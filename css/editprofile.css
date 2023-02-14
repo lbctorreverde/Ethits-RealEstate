@@ -22,3 +22,16 @@ label {
 #savebutton {
     margin-bottom: 20vh;
 }
+
+.form-control {
+    border-radius: 0 !important;
+}
+
+.form-select {
+    border-radius: 0 !important;
+}
+
+.sticky-footer {
+    background-color: #212529;
+    color: aliceblue;
+}

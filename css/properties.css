@@ -1,5 +1,5 @@
 body {
-    background-color: #1c1c1c;
+    background-color: aliceblue;
 }
 
 .topsection {
@@ -34,58 +34,62 @@ form {
     grid-template-rows: 1fr;
 
     gap: 10px;
-    background-color: #f8f8f8;
+    background-color: aliceblue;
     padding-left: 100px;
     padding-right: 100px;
-  }
-  
-  div.b {
+}
+
+button {
+    border-radius: 0 !important;
+}
+
+div.b {
     margin-left: 10px;
     word-wrap: break-word;
     height: auto;
-  }
+}
 
-  div.filter {
+div.filter {
     margin-left: 30px;
-  }
-  
-  .grid-container > div {
+}
+
+.grid-container>div {
     /* background-color: aqua; */
     padding: 20px 0;
-  }
+}
 
-  .card1 {
+.card1 {
     display: grid;
     grid-template-columns: auto auto auto;
     grid-gap: 15px;
     padding: 10px;
-  }
-
-  .btnApply {
-    border-radius: 8px;
-    background-color: #1c1c1c;
-    color:white;
-    width:165px;
 }
 
-p{
-    display:flex;  
+.btnApply {
+    border-radius: 8px;
+    background-color: #1c1c1c;
+    color: white;
+    width: 165px;
+}
+
+p {
+    display: flex;
     vertical-align: middle;
 }
 
-.grid-cont{
+.grid-cont {
     display: grid;
     grid-template-columns: 100px auto;
     grid-gap: 5px;
     padding: 3px;
     align-items: center;
 }
-  
-.grid-cont> small{
+
+.grid-cont>small {
     padding: 20px 0;
 }
 
-.gcont{
+.gcont {
     display: grid;
     grid-template-rows: auto;
     grid-gap: 20px;
@@ -93,7 +97,7 @@ p{
     border: 2px solid black;
 }
 
-.gcont> div{
+.gcont>div {
     align-items: center;
 }
 
@@ -111,6 +115,10 @@ svg {
     width: 40px;
     height: 40px;
     padding-right: 15px;
+}
+
+.searchbar {
+    
 }
 
 .searchbtn {
@@ -189,17 +197,23 @@ svg {
 }
 
 .form-select {
-    background-color: rgb(43, 43, 43);
-    color: aliceblue;
+    background-color: rgba(255, 255, 255, 0.597);
+    color: rgb(43, 43, 43);
     width: 20%;
     margin-right: 20px;
+    border-radius: 0 !important;
+}
+
+.form-select:focus {
+    border-color: #21252942;
+    box-shadow: none;
 }
 
 .form-select>option {
-    background-color: rgb(43, 43, 43);
-    color: aliceblue;
+    background-color: rgba(255, 255, 255, 0.597);
+    color: rgb(43, 43, 43);
 }
 
 .vr {
-    color:#212529;
+    color: #212529;
 }
