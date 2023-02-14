@@ -1,3 +1,14 @@
+function reset() {
+    var sqm = parseInt(document.getElementById('sqm').value);
+    var years = parseInt(document.getElementById('years').value);
+    var garage = parseInt(document.getElementById('garage').value);
+    var bedroom = parseInt(document.getElementById('bedroom').value);
+    var bathroom = parseInt(document.getElementById('bathroom').value);
+    var mun = document.getElementById('mun').value;
+
+    
+}
+
 function calculate() {
     var sqm = parseInt(document.getElementById('sqm').value);
     var years = parseInt(document.getElementById('years').value);
@@ -11,22 +22,12 @@ function calculate() {
     var bedrval = 12500;
 
 
-    const isEveryInputEmpty = () => {
-        if (sqm == null || sqm == '' || sqm == '0',
-            years == null || years == '' || years == '0',
-            mun === 'Municipality') {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     if (Number.isNaN(sqm) || sqm == null || sqm == '' || sqm == '0' ||
         Number.isNaN(years) || years == null || years == '' || years == '0' ||
-        Number.isNaN(garage) || garage == null ||  
-        Number.isNaN(bedroom) || bedroom == null || 
-        Number.isNaN(bathroom) || bathroom == null || 
-        mun === 'Select Municipality') {
+        Number.isNaN(garage) || garage == null ||
+        Number.isNaN(bedroom) || bedroom == null ||
+        Number.isNaN(bathroom) || bathroom == null ||
+        mun==='Select Municipality') {
         var x = document.getElementById("snackbar");
         x.className = "show";
         setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
@@ -124,6 +125,5 @@ function calculate() {
         var res = document.getElementById('result').textContent = "₱ " + solve.toLocaleString("en-US");
 
     }
-
 
 }

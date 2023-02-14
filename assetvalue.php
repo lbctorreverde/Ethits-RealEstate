@@ -79,7 +79,8 @@ include_once 'header.php';
                                 </select>
                             </div>
                             <hr>
-                            <button type="button" class="btn btn-dark w-100" onclick="calculate()">Calculate</button>
+                            <button type="button" class="btn btn-dark w-100 mb-2" onclick="calculate()">Calculate</button>
+                            <button type="reset" class="btn btn-outline-dark w-100" onclick="">Reset</button>
                         </form>
                     </div>
 
