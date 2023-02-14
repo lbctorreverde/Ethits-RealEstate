@@ -8,7 +8,7 @@ include_once 'header.php';
 
 <div class="topsection">
     <div class="d-flex justify-content-center align-items-center text-center">
-        <span class="result display-4 pt-2">Property Value Prediction</span>
+        <span class="result display-4 pt-4">Property Value Prediction</span>
     </div>
 </div>
 
@@ -63,7 +63,7 @@ include_once 'header.php';
                             <hr>
                             <div class="municipality">
                                 <select id="mun" class="form-select">
-                                    <option selected>Select Municipality</option>
+                                    <option value="default" selected>Select Municipality</option>
                                     <option value="Abucay">Abucay</option>
                                     <option value="Bagac">Bagac</option>
                                     <option value="Balanga">Balanga</option>
@@ -94,12 +94,14 @@ include_once 'header.php';
         <div class="d-flex justify-content-center align-items-center">
             <div class="card shadow rounded-0">
                 <div class="card-body text-center">
-                    <span class="fs-2" id="result">Result</span>
+                    <span class="fs-2" id="result">&nbsp;</span>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div id="snackbar" class="toasterror">Invalid Input</div>
 
 <script>
     <?php require_once 'js/assetvalue.js' ?>

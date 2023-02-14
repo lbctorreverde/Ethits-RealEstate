@@ -15,9 +15,9 @@ body {
             rgba(24, 24, 24, 0.847)), url(img/wp6.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 15vh;
+    height: 20vh;
     margin-bottom: 5vh;
-    color: aliceblue;
+    color: rgb(236, 236, 236);
 }
 
 .result {}
@@ -35,6 +35,8 @@ button {
 }
 
 .form-select {
+    background-color: aliceblue;
+    border-color: #969696dc;
     padding-left: 30px;
     text-align: center;
     font-size: smaller;
@@ -42,6 +44,7 @@ button {
 }
 
 .form-select:focus {
+    background-color: rgb(237, 246, 255);
     border-color: #000000dc;
     box-shadow: none;
 }
@@ -51,11 +54,84 @@ button {
     text-align: center;
     font-size: small;
     height: 90%;
+    background-color: aliceblue;
     border-radius: 0 !important;
     border-color: #969696dc;
 }
 
 .form-control:focus {
+    background-color: rgb(237, 246, 255);
     border-color: #000000dc;
     box-shadow: none;
+}
+
+/* Error Toast */
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #212529;
+    color: aliceblue;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 50px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 50px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 50px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 50px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 50px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
 }

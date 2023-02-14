@@ -55,18 +55,19 @@ section>h1 {
 .second-div {
 
 
-    background-color: aliceblue;
+    background-image: linear-gradient(#21252980 0%, 1%, aliceblue);
 }
 
 .agent-hero {
     padding: 0px 100px 0px 100px;
     margin-top: 20vh;
-    min-height: 100vh;
+    margin-bottom: 10vh;
+    min-height: 120vh;
     display: flex;
     align-items: center;
     justify-content: center;
     color: rgb(43, 43, 43);
-    background-color: aliceblue;
+    
 }
 
 .image-agent {
@@ -82,7 +83,7 @@ section>h1 {
 }
 
 .third-div {
-    background-color: aliceblue;
+    background-image: linear-gradient(rgb(219, 227, 233) 0%, 1%, aliceblue);
 
 }
 
@@ -95,7 +96,7 @@ section>h1 {
     justify-content: center;
     color: rgb(43, 43, 43);
     text-align: end;
-    background-color: aliceblue;
+    
 }
 
 .image-property {
@@ -113,7 +114,8 @@ section>h1 {
 }
 
 .topagents-div {
-    margin-top: 20vh;
+    padding-top: 5vh;
+    margin-top: 15vh;
 
 }
 
@@ -137,6 +139,21 @@ section>h1 {
     border: none;
 }
 
+.fourth-div {
+    background-image: linear-gradient(rgb(219, 227, 233) 0%, 1%, aliceblue);
+}
+
+.predict-hero {
+    padding: 0px 100px 0px 100px;
+    min-height: 120vh;
+    margin-top: -10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(43, 43, 43);
+    text-align: center;
+}
+
 p>a {
     color: rgb(104, 157, 255);
     text-decoration: none;
@@ -152,4 +169,8 @@ p>a {
 
 .sticky-footer {
     background-color: aliceblue;
+}
+
+button {
+    border-radius: 0 !important;
 }
