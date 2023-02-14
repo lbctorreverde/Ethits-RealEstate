@@ -127,6 +127,8 @@ include_once 'header.php';
     </div>
 </div>
 
+<div class="bottomdiv"></div>
+
 <div id="snackbar" class="toasterror">Invalid Input</div>
 
 <script>

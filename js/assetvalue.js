@@ -46,7 +46,7 @@ function calculate() {
         x.className = "show";
         setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
     } else {
-        
+
         // 10 % of 2, 178, 734 = 217, 863.4
         // 5 years x 217, 863.4 = 1, 089, 317
         // 1, 089, 317(yung 10 % increase for 5 years) x 2, 178, 634 = 3, 267, 951
@@ -154,7 +154,7 @@ function calculate() {
         solve = solve + propertytypetotal + totalMisc + perunitfloor;
 
 
-        var res = document.getElementById('result').textContent = "₱ " + solve.toLocaleString("en-US");
+        var res = document.getElementById('result').textContent = "₱ " + solve.toLocaleString("en-US") + "\nis the value of your property";
 
     }
 
