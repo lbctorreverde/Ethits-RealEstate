@@ -36,12 +36,28 @@ include_once 'header.php';
                                 </div>
                             </div>
 
+                            <hr>
+
+                            <div class="row mb-2">
+                                <div class="form-check form-switch d-flex justify-content-center">
+                                    <input class="form-check-input me-2" type="checkbox" id="ifResidence">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Residence</label>
+                                </div>
+                            </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <label for="" class="form-label">Garages:</label>
+                                    <label for="" class="form-label">Floors:</label>
                                 </div>
                                 <div class="col">
-                                    <input type="number" id="garage" class="form-control" aria-label="Square Footage" value="0">
+                                    <input type="number" id="floors" class="form-control" aria-label="Square Footage" value="0" disabled>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="" class="form-label">Car Spaces:</label>
+                                </div>
+                                <div class="col">
+                                    <input type="number" id="garage" class="form-control" aria-label="Square Footage" value="0" disabled>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -49,7 +65,7 @@ include_once 'header.php';
                                     <label for="" class="form-label">Bedrooms:</label>
                                 </div>
                                 <div class="col">
-                                    <input type="number" id="bedroom" class="form-control" aria-label="Square Footage" value="0">
+                                    <input type="number" id="bedroom" class="form-control" aria-label="Square Footage" value="0" disabled>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -57,8 +73,16 @@ include_once 'header.php';
                                     <label for="" class="form-label">Bathrooms:</label>
                                 </div>
                                 <div class="col">
-                                    <input type="number" id="bathroom" class="form-control" aria-label="Square Footage" value="0">
+                                    <input type="number" id="bathroom" class="form-control" aria-label="Square Footage" value="0" disabled>
                                 </div>
+                            </div>
+                            <div class="propertytype mt-2">
+                                <select id="propertytype" onchange="duplex(event)" class="form-select" disabled>
+                                    <option value="default" selected>Select Type</option>
+                                    <option value="Bungalow">Bungalow</option>
+                                    <option value="Single-attached">Single-attached</option>
+                                    <option value="Duplex">Duplex</option>
+                                </select>
                             </div>
                             <hr>
                             <div class="municipality">
@@ -78,6 +102,7 @@ include_once 'header.php';
                                     <option value="Samal">Samal</option>
                                 </select>
                             </div>
+
                             <hr>
                             <button type="button" class="btn btn-dark w-100 mb-2" onclick="calculate()">Calculate</button>
                             <button type="reset" class="btn btn-outline-dark w-100" onclick="">Reset</button>
