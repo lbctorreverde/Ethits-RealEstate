@@ -30,7 +30,7 @@ include('dbconfig.php');
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                        <a class="nav-link" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="window.location.href='agents.php'">Agents</a>
@@ -51,10 +51,10 @@ include('dbconfig.php');
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <?php 
                         if ($_SESSION['enduser'] == 'Agent') { ?>
-                                <a class="dealsbtn pt-1 pe-3 text-decoration-none" onclick="window.location.href='propertycart.php'" style='color:white;' href="#"><i class="bi bi-houses-fill"></i> Deals</a>
+                                <a class="dealsbtn pt-1 pe-3 text-decoration-none" onclick="window.location.href='propertyall.php'" style='color:white;' href="#"><i class="bi bi-houses-fill"></i> Deals</a>
                            <?php
                         }else { ?>
-                                <a class="dealsbtn pt-1 pe-3 text-decoration-none" onclick="window.location.href='propertycartUser.php'" style='color:white;' href="#"><i class="bi bi-houses-fill"></i> Deals</a>
+                                <a class="dealsbtn pt-1 pe-3 text-decoration-none" onclick="window.location.href='propertyalluser.php'" style='color:white;' href="#"><i class="bi bi-houses-fill"></i> Deals</a>
                             <?php
                         }
                     ?>

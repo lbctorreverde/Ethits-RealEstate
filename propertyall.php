@@ -329,7 +329,13 @@ $query = $connect->query("SELECT
     if (isset($_POST['btn_Accept'])) {
         $hidden = $_POST['hide'];
 
+        $hidden = $_POST['hide'];
+        $property = $_POST['property'];
+
         $sql3 = "UPDATE tbl_transaction SET `status_Trans`='Sold' WHERE trans_ID='$hidden'";
+        $result3 = mysqli_query($connect, $sql3);
+
+        $sql3 = "UPDATE tbl_property SET `statusProperty`='Sold' WHERE property_ID='$property'";
         $result3 = mysqli_query($connect, $sql3);
 
         if (isset($result3)) {

@@ -112,7 +112,7 @@ include_once 'header.php';
     <div class="third-div">
         <div class="container property-hero">
             <div class="content-property content">
-                <h1>Or maybe finding properties from legitimate agents?</h1>
+                <h1>Finding properties from legitimate agents?</h1>
                 <h3 class="lead">We ease the process of selecting the right property because it can be time-consuming and overwhelming. We only feature properties sold by licensed real estate agents because we feel interacting with one is the key to a successful and stress-free property search.
                 </h3>
                 <button class="btn btn-outline-dark mt-2" href="#" onclick="window.location.href='properties.php'">View properties</button>
@@ -122,6 +122,26 @@ include_once 'header.php';
             </div>
         </div>
     </div>
+<<<<<<< HEAD
+=======
+
+    <div class="fourth-div">
+        <div class="container predict-hero">
+            <div class="content-predict content">
+                <h1>Or maybe you want to know your property's value?</h1>
+                <h3 class="lead">Curious about the value of your property in the near future? Well, that is one of the features included in our website which is the Property Value Prediction. Whether you are buying, selling, or simply curious about the value of your home, our tool can provide you with valuable insights to help you make informed decisions.
+                </h3>
+                <button class="btn btn-outline-dark mt-2" href="#" onclick="window.location.href='assetvalue.php'">Try it now!</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+>>>>>>> 12aad4afe388b7d8b1f682d6be351b65254cc405
 </main>
 
 

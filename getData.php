@@ -99,15 +99,17 @@ if(isset($_POST['page'])){
     
     if($pselect == 2){ 
         $orderSQL .= (strpos($orderSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $orderSQL .= " price DESC"; 
+        $orderSQL .= " ORDER BYprice DESC"; 
     }elseif($pselect == 1){
         $orderSQL .= " ORDER BY price ASC"; 
     }elseif($pdate == 2){
         $orderSQL .= (strpos($orderSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $orderSQL .= " propertyDate ASC"; 
+        $orderSQL .= " property_ID DESC"; 
     }elseif($pdate == 1){
         $orderSQL .= (strpos($orderSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $orderSQL .= " propertyDate DESC"; 
+        $orderSQL .= " property_ID ASC"; 
+    }else{
+        $orderSQL .= " ORDER BY property_ID DESC"; 
     }
 
     $and = 'WHERE';
@@ -179,8 +181,8 @@ if(isset($_POST['page'])){
                                 <span><b>Land Size:</b>&nbsp;<?php echo $row['lotSize']; ?>m²</span>
                             </li>
                             <li class="list-group-item">
-                                <span ><b>Garage:&nbsp;</b><span class="text-success"><?php echo $row['garage']; ?></span>&nbsp;&nbsp;&nbsp;
-                                <span><b>Basement:</b>&nbsp;<?php echo $row['basement']; ?></span>&nbsp;&nbsp;&nbsp;
+                                <span ><b>Garage:&nbsp;</b><span class="text-success"><?php echo $row['garage']; ?></span>&nbsp;
+                                <span><b>Basement:</b>&nbsp;<?php echo $row['basement']; ?></span>&nbsp;&nbsp;
                                 <span><b>Floor Area:</b>&nbsp;<?php echo $row['floorArea']; ?>m²</span>
                             </li>
                             <hr>

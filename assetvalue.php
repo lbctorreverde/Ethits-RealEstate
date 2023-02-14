@@ -8,67 +8,79 @@ include_once 'header.php';
 
 <div class="topsection">
     <div class="d-flex justify-content-center align-items-center text-center">
-        <span class="result display-4 pt-2">Property Value Prediction</span>
+        <span class="result display-4 pt-4">Property Value Prediction</span>
     </div>
 </div>
 
 <div class="container-fluid">
-    <div class="d-flex flex-row justify-content-center">
+    <div class="d-flex flex-row justify-content-center ">
         <div class="row mx-2">
-            <div class="d-flex justify-content-center">
-                <div class="card shadow">
-                    <div class="card-body text-center">
+            <div class="d-flex justify-content-center align-content-center">
+                <div class="card shadow rounded-0">
+                    <div class="card-body">
                         <form>
-                        <div class="row gy-2">
-                            <div class="col-6">
-                                <label for="" class="form-label">Square Footage (m²)</label>
-                                <input type="number" class="form-control" aria-label="Square Footage">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="" class="form-label">Square Footage (m²):</label>
+                                </div>
+                                <div class="col">
+                                    <input type="number" id="sqm" class="form-control" aria-label="Square Footage" value="0">
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <label for="" class="form-label">Lot size (m²)</label>
-                                <input type="number" class="form-control" aria-label="Lot size">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="" class="form-label">Years:</label>
+                                </div>
+                                <div class="col">
+                                    <input type="number" id="years" class="form-control" aria-label="First name" value="0">
+                                </div>
                             </div>
-                            <div class="d-flex flex-column text-center justify-content-center align-items-center">
-                                <label for="exampleInputEmail1" class="form-label">Age (Years)</label>
-                                <input type="number" class="form-control w-25" aria-label="First name">
+
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="" class="form-label">Garages:</label>
+                                </div>
+                                <div class="col">
+                                    <input type="number" id="garage" class="form-control" aria-label="Square Footage" value="0">
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="disabledSelect" class="form-label">Municipality</label>
-                                <select id="disabledSelect" class="form-select">
-                                    <option selected>Select Municipality</option>
-                                    <option>Abucay</option>
-                                    <option>Bagac</option>
-                                    <option>Balanga</option>
-                                    <option>Dinalupihan</option>
-                                    <option>Hermosa</option>
-                                    <option>Limay</option>
-                                    <option>Mariveles</option>
-                                    <option>Morong</option>
-                                    <option>Orani</option>
-                                    <option>Orion</option>
-                                    <option>Pilar</option>
-                                    <option>Samal</option>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="" class="form-label">Bedrooms:</label>
+                                </div>
+                                <div class="col">
+                                    <input type="number" id="bedroom" class="form-control" aria-label="Square Footage" value="0">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="" class="form-label">Bathrooms:</label>
+                                </div>
+                                <div class="col">
+                                    <input type="number" id="bathroom" class="form-control" aria-label="Square Footage" value="0">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="municipality">
+                                <select id="mun" class="form-select">
+                                    <option value="default" selected>Select Municipality</option>
+                                    <option value="Abucay">Abucay</option>
+                                    <option value="Bagac">Bagac</option>
+                                    <option value="Balanga">Balanga</option>
+                                    <option value="Dinalupihan">Dinalupihan</option>
+                                    <option value="Hermosa">Hermosa</option>
+                                    <option value="Limay">Limay</option>
+                                    <option value="Mariveles">Mariveles</option>
+                                    <option value="Morong">Morong</option>
+                                    <option value="Orani">Orani</option>
+                                    <option value="Orion">Orion</option>
+                                    <option value="Pilar">Pilar</option>
+                                    <option value="Samal">Samal</option>
                                 </select>
                             </div>
-                        </div>
-                        <hr>
-                        <span>Number of: </span>
-                        <div class="row">
-                            <div class="col">
-                                <label for="" class="form-label">Garages</label>
-                                <input type="number" class="form-control" aria-label="Square Footage">
-                            </div>
-                            <div class="col">
-                                <label for="" class="form-label">Bedrooms</label>
-                                <input type="number" class="form-control" aria-label="Square Footage">
-                            </div>
-                            <div class="col">
-                                <label for="" class="form-label">Bathrooms</label>
-                                <input type="number" class="form-control" aria-label="Square Footage">
-                            </div>
-                        </div>
-                        <hr>
-                        <button type="button" class="btn btn-outline-light w-100">Calculate</button>
+                            <hr>
+                            <button type="button" class="btn btn-dark w-100 mb-2" onclick="calculate()">Calculate</button>
+                            <button type="reset" class="btn btn-outline-dark w-100" onclick="">Reset</button>
                         </form>
                     </div>
 
@@ -81,11 +93,17 @@ include_once 'header.php';
             <h1 class="text-light">=</h1>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-            <div class="card shadow">
+            <div class="card shadow rounded-0">
                 <div class="card-body text-center">
-                    <span class="fs-2">Result</span>
+                    <span class="fs-2" id="result">&nbsp;</span>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div id="snackbar" class="toasterror">Invalid Input</div>
+
+<script>
+    <?php require_once 'js/assetvalue.js' ?>
+</script>

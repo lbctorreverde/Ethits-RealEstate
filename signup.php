@@ -6,6 +6,12 @@ include_once 'navbarfresh.php';
 <style>
     <?php include 'css/signup.css'; ?>
 </style>
+<?php 
+  if (isset($_SESSION['status'])) {
+    echo "<p class='alert alert-success'>" . $_SESSION['status'] . "</p>";
+    unset($_SESSION['status']);
+    }
+?>
 
 <div class="main-div d-flex align-items-center justify-content-center">
     <div>
@@ -102,7 +108,7 @@ include_once 'navbarfresh.php';
                 <div class="container-fluid d-flex flex-column px-4">
 
                     <!-- to yung sa recaptcha -->
-                    <div class="g-recaptcha" data-sitekey="6LdomzgkAAAAABrqOnT1rX4Mnw59ezebiMQpSNir"></div>
+                    <div class="g-recaptcha" data-sitekey="6LdomzgkAAAAABrqOnT1rX4Mnw59ezebiMQpSNir" aria-required="true"></div>
 
                     <button type="submit" name="btn_registerAgent" class="btn btn-primary">Sign-Up</button>
                     <a class="text-center" href="login.php">Already have an account? Sign in!</a>
