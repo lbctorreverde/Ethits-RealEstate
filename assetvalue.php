@@ -24,23 +24,15 @@ include_once 'header.php';
                                     <label for="" class="form-label">Square Footage (m²):</label>
                                 </div>
                                 <div class="col">
-                                    <input type="number" class="form-control" aria-label="Square Footage" value="0">
+                                    <input type="number" id="sqm" class="form-control" aria-label="Square Footage" value="0">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <label for="" class="form-label">Lot size (m²):</label>
+                                    <label for="" class="form-label">Years:</label>
                                 </div>
                                 <div class="col">
-                                    <input type="number" class="form-control" aria-label="Lot size" value="0">
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <label for="" class="form-label">Age (Years):</label>
-                                </div>
-                                <div class="col">
-                                    <input type="number" class="form-control" aria-label="First name" value="0">
+                                    <input type="number" id="years" class="form-control" aria-label="First name" value="0">
                                 </div>
                             </div>
 
@@ -49,7 +41,7 @@ include_once 'header.php';
                                     <label for="" class="form-label">Garages:</label>
                                 </div>
                                 <div class="col">
-                                    <input type="number" class="form-control" aria-label="Square Footage" value="0">
+                                    <input type="number" id="garage" class="form-control" aria-label="Square Footage" value="0">
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -57,7 +49,7 @@ include_once 'header.php';
                                     <label for="" class="form-label">Bedrooms:</label>
                                 </div>
                                 <div class="col">
-                                    <input type="number" class="form-control" aria-label="Square Footage" value="0">
+                                    <input type="number" id="bedroom" class="form-control" aria-label="Square Footage" value="0">
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -65,29 +57,29 @@ include_once 'header.php';
                                     <label for="" class="form-label">Bathrooms:</label>
                                 </div>
                                 <div class="col">
-                                    <input type="number" class="form-control" aria-label="Square Footage" value="0">
+                                    <input type="number" id="bathroom" class="form-control" aria-label="Square Footage" value="0">
                                 </div>
                             </div>
                             <hr>
                             <div class="municipality">
-                                <select id="disabledSelect" class="form-select">
+                                <select id="mun" class="form-select">
                                     <option selected>Select Municipality</option>
-                                    <option>Abucay</option>
-                                    <option>Bagac</option>
-                                    <option>Balanga</option>
-                                    <option>Dinalupihan</option>
-                                    <option>Hermosa</option>
-                                    <option>Limay</option>
-                                    <option>Mariveles</option>
-                                    <option>Morong</option>
-                                    <option>Orani</option>
-                                    <option>Orion</option>
-                                    <option>Pilar</option>
-                                    <option>Samal</option>
+                                    <option value="Abucay">Abucay</option>
+                                    <option value="Bagac">Bagac</option>
+                                    <option value="Balanga">Balanga</option>
+                                    <option value="Dinalupihan">Dinalupihan</option>
+                                    <option value="Hermosa">Hermosa</option>
+                                    <option value="Limay">Limay</option>
+                                    <option value="Mariveles">Mariveles</option>
+                                    <option value="Morong">Morong</option>
+                                    <option value="Orani">Orani</option>
+                                    <option value="Orion">Orion</option>
+                                    <option value="Pilar">Pilar</option>
+                                    <option value="Samal">Samal</option>
                                 </select>
                             </div>
                             <hr>
-                            <button type="button" class="btn btn-dark w-100">Calculate</button>
+                            <button type="button" class="btn btn-dark w-100" onclick="calculate()">Calculate</button>
                         </form>
                     </div>
 
@@ -100,11 +92,15 @@ include_once 'header.php';
             <h1 class="text-light">=</h1>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-            <div class="card shadow">
+            <div class="card shadow rounded-0">
                 <div class="card-body text-center">
-                    <span class="fs-2">Result</span>
+                    <span class="fs-2" id="result">Result</span>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    <?php require_once 'js/assetvalue.js' ?>
+</script>
