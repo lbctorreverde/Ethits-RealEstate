@@ -1,11 +1,11 @@
 body {
-    background-color: #1c1c1c;
+    background-color: aliceblue;
 }
 
 .card {
     width: 50vh;
-    background-image: linear-gradient(#212529d7,
-            rgba(24, 24, 24, 0.66)), url(img/wp7.jpg);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.979),
+            #f0f8ff), url(img/wp7.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     border: transparent;
@@ -26,6 +26,39 @@ body {
 .result {}
 
 label {
-    font-size: 12px;
-    font-weight: 600;
+    font-weight: 400;
+}
+
+button {
+    border-radius: 0 !important;
+}
+
+.card {
+    color: #1c1c1c;
+}
+
+.form-select {
+    padding-left: 30px;
+    text-align: center;
+    font-size: smaller;
+    border-radius: 0 !important;
+}
+
+.form-select:focus {
+    border-color: #000000dc;
+    box-shadow: none;
+}
+
+.form-control {
+    padding-left: 20px;
+    text-align: center;
+    font-size: small;
+    height: 90%;
+    border-radius: 0 !important;
+    border-color: #969696dc;
+}
+
+.form-control:focus {
+    border-color: #000000dc;
+    box-shadow: none;
 }
