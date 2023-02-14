@@ -109,7 +109,6 @@ if(isset($_POST['page'])){
         $orderSQL .= (strpos($orderSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
         $orderSQL .= " propertyDate DESC"; 
     }
-    echo $whereSQL;
 
     $and = 'WHERE';
 
@@ -122,7 +121,7 @@ if(isset($_POST['page'])){
     //     $whereSQL .= " location LIKE '%".$_POST['filterBy']."%'"; 
     // }
     // Count of all records 
-    $query   = $connect->query("SELECT COUNT(*) as rowNum FROM tbl_property ".$whereSQL." $and NOT statusProperty ='Pending' OR statusProperty ='Sold' OR statusProperty ='Reject'"); 
+    $query   = $connect->query("SELECT COUNT(*) as rowNum FROM tbl_property ".$whereSQL." $and  statusProperty ='Active'"); 
     $result  = $query->fetch_assoc(); 
     $rowCount= $result['rowNum']; 
      
@@ -138,7 +137,7 @@ if(isset($_POST['page'])){
     $pagination =  new Pagination($pagConfig);
 
     // Fetch records based on the offset and limit 
-    $query = $connect->query("SELECT * FROM tbl_property ".$whereSQL." $and NOT statusProperty ='Pending' OR statusProperty ='Sold' OR statusProperty ='Reject' $orderSQL LIMIT $offset,$limit");
+    $query = $connect->query("SELECT * FROM tbl_property ".$whereSQL." $and statusProperty ='Active' $orderSQL LIMIT $offset,$limit");
 ?> 
     <!-- Data list container --> 
     <div  class="properties-list container-fluid d-flex flex-column justify-content-center align-items-center">

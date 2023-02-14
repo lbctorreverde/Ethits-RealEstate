@@ -12,6 +12,7 @@ body {
     position: relative;
 }
 
+
 .midsection {
     height: 100%;
     padding-bottom: 2vh;
@@ -309,6 +310,8 @@ input[type=submit]{
 .card-img-top {
     height: 30vh;
     object-fit: cover;
+    width: 280px;
+    border-radius: 10px;
 }
 
 .card {

@@ -36,7 +36,15 @@ include('dbconfig.php');
             <div class="toptext">
                 <h1 class="agent-name"><?php echo $rowAgent['lName'].", ".$rowAgent['fName']." ".substr($rowAgent['mName'], 0, 1)."."?></h1>
                 <h3><small class="text-muted">Real Estate Professional</small></h3>
-                <h4>Rating:&nbsp;<i class='bx bxs-star' style='color:#f9ff00'></i>&nbsp;<?php echo $rowAgent['prate'];?></h4>
+                <h4>Rating:&nbsp;<i class='bx bxs-star' style='color:#f9ff00'></i>&nbsp;
+                    <?php
+                    if(isset($rowAgent['prate'])){
+                        echo $rowAgent['prate'];?>&nbsp;(<?php echo $rowAgent['total_rate']?>)
+
+                    <?php }else{
+                        echo '--';
+                    }?> 
+                </h4>
             </div>
             <div class="container">
                 <div class="row align-items-start">

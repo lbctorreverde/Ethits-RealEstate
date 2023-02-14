@@ -32,7 +32,7 @@ $pagination =  new Pagination($pagConfig);
 $query = $connect->query("SELECT 
     tbl_agent.fName ,tbl_agent.lName, tbl_property.title, tbl_property.location, tbl_transaction.trans_Date, tbl_transaction.trans_ID,
     tbl_transaction.property_ID, tbl_property.lotSize, tbl_property.floorArea, tbl_property.propertyType, tbl_property.price, tbl_transaction.status_Trans,
-    tbl_user.fName AS userFname ,tbl_user.lName AS userLname, tbl_transaction.rate, tbl_transaction.agent_ID
+    tbl_user.fName AS userFname ,tbl_user.lName AS userLname, tbl_transaction.rate, tbl_transaction.agent_ID, tbl_agent.displayImg as Img, tbl_user.displayImg
 
     FROM (((tbl_transaction
     INNER JOIN tbl_agent ON tbl_transaction.agent_ID = tbl_agent.agent_ID)
@@ -48,7 +48,7 @@ $query = $connect->query("SELECT
     $sql = "SELECT 
         tbl_agent.fName ,tbl_agent.lName, tbl_property.title, tbl_property.location, tbl_transaction.trans_Date, tbl_transaction.trans_ID,
         tbl_transaction.property_ID, tbl_property.lotSize, tbl_property.floorArea, tbl_property.propertyType, tbl_property.price, tbl_transaction.status_Trans,
-        tbl_user.fName AS userFname ,tbl_user.lName AS userLname, tbl_transaction.trans_ID, tbl_transaction.rate, tbl_transaction.agent_ID
+        tbl_user.fName AS userFname ,tbl_user.lName AS userLname, tbl_transaction.trans_ID, tbl_transaction.rate, tbl_transaction.agent_ID, tbl_agent.displayImg as Img, tbl_user.displayImg
         
         FROM (((tbl_transaction
         INNER JOIN tbl_agent ON tbl_transaction.agent_ID = tbl_agent.agent_ID)
@@ -186,7 +186,12 @@ $query = $connect->query("SELECT
     <section class="midsection">
         <div style="padding-top:20px;">
             <div class="pclass" style='box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);'>
-                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="50" height="50" class="rounded-circle">
+                <?php 
+                if(isset($row['displayImg'])){
+                    echo '<img src="data:image/jpeg;base64,'.base64_encode($row['displayImg']).'" width="50" height="50" class="rounded-circle">';
+                }else{
+                    echo '<img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="50" height="50" class="rounded-circle">';
+                }?>
                 <div class="flex-container">
                     <b><?php echo $row["fName"].', '.$row["lName"] ?></b>
                     <div style="color:#90ee90;";>Status: Verified</div>
@@ -244,7 +249,12 @@ $query = $connect->query("SELECT
                         </div>
                     </div>
                     <div class="grid-item item2">
-                        <img style='border-radius:10px;' src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="40" height="40" class="card-img-top">
+                        <?php
+                            $var3 = $res['property_ID'];
+                            $query1 = $connect->query("SELECT * FROM tbl_show WHERE property_ID = $var3");
+                            $result1  = $query1->fetch_assoc(); 
+                            echo '<img src="data:image/jpeg;base64,'.base64_encode($result1['propertyImg']).'" alt="hugenerd" class="card-img-top">';
+                        ?>
                     </div>
                     <div class="grid-item item3">
                         <form method="POST" action="propertyalluser.php">
@@ -266,16 +276,24 @@ $query = $connect->query("SELECT
                     <div class="grid-item item4">
                         <div style="display:flex; gap:10px; text-align: center;">
                             <div class="pclass">
-                                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="50" height="50" class="rounded-circle">
+                                <?php 
+                                    if(isset($res['displayImg'])){
+                                        echo '<img src="data:image/jpeg;base64,'.base64_encode($res['Img']).'" width="50" height="50" class="rounded-circle">';
+                                    }else{
+                                        echo '<img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="50" height="50" class="rounded-circle">';
+                                }?>
                                 <div class="flexcont">
                                     <b><?php echo $res["lName"].', '.$res["fName"] ?>&nbsp;</b>
-                                    <div style="color:#90ee90;";>
-                                        <b>AGENT</b>
-                                    </div>
+                                    <div style="color:#90ee90;";><b>AGENT</b></div>
                                 </div>
                             </div>
                             <div class="pclass">
-                                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="50" height="50" class="rounded-circle">
+                                <?php 
+                                    if(isset($res['Img'])){
+                                        echo '<img src="data:image/jpeg;base64,'.base64_encode($res['displayImg']).'" width="50" height="50" class="rounded-circle">';
+                                    }else{
+                                        echo '<img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="50" height="50" class="rounded-circle">';
+                                }?>
                                 <div class="flexcont">
                                     <b><?php echo $res["userFname"].', '.$res["userLname"] ?>&nbsp;</b>
                                     <div style="color:#90ee90;";><b>CLIENT</b></div>

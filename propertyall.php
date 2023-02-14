@@ -249,7 +249,12 @@ $query = $connect->query("SELECT
                         </div>
                     </div>
                     <div class="grid-item item2">
-                        <img style='border-radius:10px;' src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="hugenerd" width="40" height="40" class="card-img-top">
+                        <?php
+                            $var3 = $res['property_ID'];
+                            $query1 = $connect->query("SELECT * FROM tbl_show WHERE property_ID = $var3");
+                            $result1  = $query1->fetch_assoc(); 
+                                echo '<img src="data:image/jpeg;base64,'.base64_encode($result1['propertyImg']).'" alt="hugenerd" class="card-img-top">';
+                        ?>
                     </div>
                     <div class="grid-item item3">
                         <div class="rCont">

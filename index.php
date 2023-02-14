@@ -82,8 +82,8 @@ include_once 'header.php';
                                 </form>
                                 <div class="d-flex justify-content-center text-center mt-5 mb-2">
                                     <div>
-                                        <p class="mb-2 h5"><i class='bx bxs-star' style='color:#f9ff00'></i>&nbsp;<?php echo $res['prate'];?></p>
-                                        <p class="text-muted mb-0">Rating</p>
+                                        <p class="mb-2 h5"><i class='bx bxs-star' style='color:#f9ff00'></i>&nbsp;<?php echo $res['prate'];?>&nbsp;(<?php echo $res['total_rate'];?>)</p>
+                                        <p class="text-muted mb-0">Rating & Reviews</p>
                                     </div>
                                 </div>
                             </div>
