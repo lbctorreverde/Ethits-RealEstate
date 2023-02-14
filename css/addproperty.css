@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(242, 242, 242);
+    background-color: aliceblue;
 }
 
 .topsection {
@@ -12,10 +12,11 @@ body {
     position: relative;
 }
 
+
 .midsection {
     height: 100%;
     padding-bottom: 2vh;
-    background-color: rgb(242, 242, 242);
+    background-color: aliceblue;
     display: grid;
     grid-template-columns: 200px auto;
     gap: 10px;
@@ -105,6 +106,7 @@ a{
     font-size: 17px;
     border-radius: 10px;
     background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .form{
@@ -308,6 +310,8 @@ input[type=submit]{
 .card-img-top {
     height: 30vh;
     object-fit: cover;
+    width: 280px;
+    border-radius: 10px;
 }
 
 .card {

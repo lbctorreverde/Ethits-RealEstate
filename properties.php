@@ -10,7 +10,7 @@ $baseURL = 'getData.php';
 $limit = 6;
 
 // Count of all records 
-$query   = $connect->query("SELECT COUNT(*) as rowNum FROM tbl_property WHERE NOT statusProperty ='Pending' OR statusProperty ='Sold' OR statusProperty ='Reject'"); 
+$query   = $connect->query("SELECT COUNT(*) as rowNum FROM tbl_property WHERE statusProperty ='Active'"); 
 $result  = $query->fetch_assoc(); 
 $rowCount= $result['rowNum']; 
  
@@ -24,7 +24,7 @@ $pagConfig = array(
 );
 $pagination =  new Pagination($pagConfig);
 
-$query = $connect->query("SELECT * FROM tbl_property WHERE NOT statusProperty ='Pending' OR statusProperty ='Sold' OR statusProperty ='Reject' LIMIT $limit"); 
+$query = $connect->query("SELECT * FROM tbl_property WHERE statusProperty ='Active' LIMIT $limit"); 
 ?>
 
 <style>
@@ -37,7 +37,7 @@ $query = $connect->query("SELECT * FROM tbl_property WHERE NOT statusProperty ='
 <?php
 if (isset($_SESSION['verified_user_id'])) {
     $var1 = $_SESSION['verified_user_id'];
-    $query1 = "SELECT *  from tbl_user WHERE email = '$var1'";
+    $query1 = "SELECT *  from tbl_agent WHERE email = '$var1'";
     $result1 = mysqli_query($connect, $query1);
     $row1 = mysqli_fetch_assoc($result1);
 }

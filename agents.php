@@ -8,7 +8,7 @@ include_once 'Pagination.class.php';
 
 // Set some useful configuration 
 $baseURL = 'agentsearch.php';
-$limit = 5;
+$limit = 20;
 
 // Count of all records 
 $query   = $connect->query("SELECT COUNT(*) as rowNum FROM tbl_agent");
@@ -53,8 +53,15 @@ if (isset($_SESSION['verified_user_id'])) {
         var dateBy = $('#pdate').val();
         var nearBy = $('#nearby').val();
 
-        $('#city').click(function() {
+        $('#clear').click(function() {
+            $('#nearby').prop('selectedIndex', 0)
+            $('#pdate').prop('selectedIndex', 0)
             $('#prating').prop('selectedIndex', 0)
+            $('#city').prop('selectedIndex', 0)
+        });
+
+        $('#city').click(function() {
+            $('#nearby').prop('selectedIndex', 0)
             $('#pdate').prop('selectedIndex', 0)
             $('#prating').prop('selectedIndex', 0)
         });
@@ -122,11 +129,8 @@ if (isset($_SESSION['verified_user_id'])) {
                 </select>
                 <select class="form-select" style="width:170px; height: 40px;" name="prating" id="prating" onchange="searchFilter();">
                     <option value="" selected disabled>Rating</option>
-                    <option value="5">5</option>
-                    <option value="4">4</option>
-                    <option value="3">3</option>
-                    <option value="2">2</option>
-                    <option value="1">1</option>
+                    <option value="1">Highest to Lowest</option>
+                    <option value="2">Lowest to Highest</option>
                 </select>
                 <select class="form-select" style="width:170px;  height: 40px;" name="city" id="city" onchange="searchFilter();">
                     <option value="" selected disabled>Select City</option>
@@ -143,6 +147,9 @@ if (isset($_SESSION['verified_user_id'])) {
                     <option value="Pilar">Pilar</option>
                     <option value="Samal">Samal</option>
                 </select>
+                <button class="btnClear" style="width:170px;  height: 40px;" name="clear" id="clear" onclick="searchFilter();">
+                    Clear Filter
+                </button>
         </div>
         <!-- CARD FOR EACH AGENT PAR-->
         <div id='result'>
@@ -183,7 +190,7 @@ if (isset($_SESSION['verified_user_id'])) {
                                     <p class="card-text text-muted">Real Estate Professional<br>
                                         <?php echo $row['agency'] . " - " . $row['str'] . ", " . $row['brgy'] . ", " . $row['city'] . ", Bataan" ?>
                                     </p>
-                                    <p class="card-title text-muted">Contact: </p>
+                                    <p class="card-title text-muted">Contact: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rating:&nbsp;<i class='bx bxs-star' style='color:#f9ff00'></i><?php echo $row['prate']?></p>
                                     <p class="card-text"><small class="text-muted lh-sm"><?php echo $row['contactNo'] ?></small></p>
                                 </div>
                             </div>

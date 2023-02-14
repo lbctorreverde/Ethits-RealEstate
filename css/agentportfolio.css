@@ -1,9 +1,6 @@
 body {
-    background: #212529;
+    background: #1d1d1d;
 }
-
-
-
 
 #topsection {
     background-image: linear-gradient(#212529,
@@ -11,11 +8,9 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     height: 45vh;
-    color: aliceblue;
+    color: white;
     padding-left: 30vh;
     padding-right: 30vh;
-
-
 }
 
 .agent-picture {
@@ -33,11 +28,42 @@ h3 {
     margin-bottom: 6vh;
 }
 
-
-
 #midsection {
-    background-image: linear-gradient(180deg, rgb(27, 27, 27), #1d1d1d);
+    background-image: #1d1d1d;
     height: 105vh;
+}
+
+.boxcont {
+    display: grid;
+    padding-left: 20px;
+    padding-right: 20px;
+    grid-template-columns: auto 350px;
+    color: white;
+}
+
+.cole1{
+    background-color:whitesmoke; 
+    color:black; 
+    height: 50%; 
+    padding:10px; 
+    border-radius:10px;
+    gap: 100px;
+}
+
+.pclass{
+    display:flex;  
+    background-color: white;
+    border-radius: 20px;
+    padding: 5px;
+    font-size: 17px;
+}
+
+.cole{
+    background-color: rgb(209, 206, 206);
+    padding: 10px;
+    border-radius: 10px;
+    height: 160px;
+
 }
 
 .carousel {
@@ -56,7 +82,7 @@ h3 {
 }
 
 #endsection {
-    background-image: linear-gradient(180deg, #1d1d1d, #212529);
+    background-image: #1d1d1d;
     height: 105vh;
 
 }
