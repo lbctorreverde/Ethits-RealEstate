@@ -47,7 +47,8 @@ if(isset($_POST['page'])){
         $whereSQL .= (strpos($whereSQL, 'WHERE') !== false)?" AND ":" WHERE "; 
         $whereSQL .= " city LIKE '%".$filter."%'"; 
     }elseif ($nearBy == 'All') {
-        $whereSQL .= ""; 
+        $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
+        $whereSQL .= " lName"; 
     }elseif ($nearBy != '') {
         $whereSQL .= (strpos($whereSQL, 'WHERE') !== false)?" AND ":" WHERE "; 
         $whereSQL .= " city LIKE '%".$nearBy."%'"; 
@@ -61,19 +62,14 @@ if(isset($_POST['page'])){
         $whereSQL .= " prate ASC"; 
     }elseif($pdate == 1){
         $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $whereSQL .= " email_verified_at DESC"; 
+        $whereSQL .= " email_verified_at ASC"; 
     }elseif($pdate == 2){
         $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $whereSQL .= " email_verified_at ASC"; 
-    }elseif($pdate == 1){
-        $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $whereSQL .= " propertyDate DESC"; 
-    }elseif($pdate == 1){
-        $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $whereSQL .= " propertyDate DESC"; 
-    }elseif($pdate == 1){
-        $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $whereSQL .= " propertyDate DESC"; 
+        $whereSQL .= " email_verified_at DESC"; 
+    }
+
+    if($whereSQL == ''){
+        $whereSQL .= " ORDER BY lName";
     }
 
     // if($_POST['filterBy'] != null){ 

@@ -6,6 +6,10 @@ body {
     color: aliceblue;
 }
 
+.card > img{
+    width: 200px;
+}
+
 .nav-item>a:hover {
     color:rgb(204, 204, 204);
 }

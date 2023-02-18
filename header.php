@@ -51,10 +51,10 @@ include('dbconfig.php');
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <?php 
                         if ($_SESSION['enduser'] == 'Agent') { ?>
-                                <a class="dealsbtn pt-1 pe-3 text-decoration-none" onclick="window.location.href='propertycart.php'" style='color:white;' href="#"><i class="bi bi-houses-fill"></i> Deals</a>
+                                <a class="dealsbtn pt-1 pe-3 text-decoration-none" onclick="window.location.href='propertyall.php'" style='color:white;' href="#"><i class="bi bi-houses-fill"></i> Deals</a>
                            <?php
                         }else { ?>
-                                <a class="dealsbtn pt-1 pe-3 text-decoration-none" onclick="window.location.href='propertycartUser.php'" style='color:white;' href="#"><i class="bi bi-houses-fill"></i> Deals</a>
+                                <a class="dealsbtn pt-1 pe-3 text-decoration-none" onclick="window.location.href='propertyalluser.php'" style='color:white;' href="#"><i class="bi bi-houses-fill"></i> Deals</a>
                             <?php
                         }
                     ?>

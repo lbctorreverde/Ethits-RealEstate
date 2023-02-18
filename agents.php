@@ -25,7 +25,7 @@ $pagConfig = array(
 );
 $pagination =  new Pagination($pagConfig);
 
-$query = $connect->query("SELECT * FROM tbl_agent LIMIT $limit");
+$query = $connect->query("SELECT * FROM tbl_agent ORDER BY lName LIMIT $limit");
 ?>
 
 <style>

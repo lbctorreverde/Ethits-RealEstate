@@ -78,7 +78,16 @@ include_once 'header.php';
                             <div class="row">
                                 <div class="col-sm-4 p-2 g-col">
                                     <label for="inputEmail4" class="form-label">Property Type</label>
-                                    <input type="text" class="form-control" name="ptype" id="ptype" placeholder="Enter special features..">
+                                    <select class="form-select" name="ptype" id="ptype" required>
+                                        <option value="" selected disabled>Select Style</option>
+                                        <option value="Bungalow">Bungalow</option>
+                                        <option value="Contemporary">Contemporary</option>
+                                        <option value="Cottage">Cottage</option>
+                                        <option value="Duplex">Duplex</option>
+                                        <option value="Modern">Modern</option>
+                                        <option value="Rowhouse">Rowhouse</option>
+                                        <option value="Townhouse">Townhouse</option>
+                                    </select>
                                 </div>
                                 <div class="col-sm-4 p-2 g-col">
                                     <label for="inputEmail4" class="form-label">Special Features</label>

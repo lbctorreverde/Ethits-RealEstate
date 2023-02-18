@@ -143,7 +143,7 @@ include('dbconfig.php');
                 <?php
                     $a = array();
                     $x = 0;
-                    $sqlCa = "SELECT * FROM tbl_property WHERE agent_ID = '$var' AND statusProperty = 'Sold' ";
+                    $sqlCa = "SELECT * FROM tbl_property WHERE agent_ID = '".$var."' AND statusProperty = 'Sold' ";
                     $resCa= mysqli_query($connect, $sqlCa);
                     if (mysqli_num_rows($resCa)  == 0) {?>
                         <div class="<?php echo $classname;?>">

@@ -24,7 +24,7 @@ $pagConfig = array(
 );
 $pagination =  new Pagination($pagConfig);
 
-$query = $connect->query("SELECT * FROM tbl_property WHERE statusProperty ='Active' LIMIT $limit"); 
+$query = $connect->query("SELECT * FROM tbl_property WHERE statusProperty ='Active' ORDER BY property_ID DESC LIMIT $limit"); 
 ?>
 
 <style>
@@ -233,8 +233,8 @@ if (isset($_SESSION['verified_user_id'])) {
                                         <span><b>Land Size:</b>&nbsp;<?php echo $row['lotSize']; ?>m²</span>
                                     </li>
                                     <li class="list-group-item">
-                                        <span><b>Garage:&nbsp;</b><span class="text-success"><?php echo $row['garage']; ?></span>&nbsp;&nbsp;&nbsp;
-                                            <span><b>Basement:</b>&nbsp;<?php echo $row['basement']; ?></span>&nbsp;&nbsp;&nbsp;
+                                        <span><b>Garage:&nbsp;</b><span class="text-success"><?php echo $row['garage']; ?></span>&nbsp;&nbsp;
+                                            <span><b>Basement:</b>&nbsp;<?php echo $row['basement']; ?></span>&nbsp;&nbsp;
                                             <span><b>Floor Area:</b>&nbsp;<?php echo $row['floorArea']; ?>m²</span>
                                     </li>
                                     <hr>
