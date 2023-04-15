@@ -2,6 +2,7 @@
 
 function opened($id_1, $connect, $chats){
 	$count = count($chats);
+	echo $count;
 	$i = 0;
 	while ($i != $count){
     	if ($chats['opened'] == "0") {
@@ -13,7 +14,9 @@ function opened($id_1, $connect, $chats){
     		        WHERE from_ID= '".$id_1."'
     		        AND conver_ID = '".$chat_id."'";
             $stmt = $connect->query($sql);
-    	}
+    	}else {
+			break;
+		}
 		$i++;
     }
 }

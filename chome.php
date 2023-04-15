@@ -62,6 +62,8 @@
 		right: 15px;
 		z-index: 9;
 		}
+
+		
 	</style>
 	<body>
 	<div id='result'>
@@ -74,9 +76,11 @@
     			<input type="text"
     			       placeholder="Search..."
     			       id="searchText"
-    			       class="form-control">
+    			       class="form-control"
+					   onkeyup="searchFil()">
     			<button class="btn btn-primary" 
-    			        id="serachBtn">
+    			        id="serachBtn"
+						onclick="searchFil();">
     			        <i class="fa fa-search"></i>	
     			</button>       
     		</div>
@@ -86,7 +90,7 @@
     			    foreach ($conversations as $conversation){ 
 						$i++;
 					?>
-	    			<li class="list-group-item">
+	    			<li style="background-color:#f8f4f4;" class="list-group-item">
 						<!-- <a href="chat.php?user=<?//=$conversation['fName']?>" class="d-flex justify-content-between align-items-center p-2"> -->
 						<button class="btnAll" name="all" id="all" value="<?=$conversation['fName']?>" onclick="chat('<?=$conversation['fName']?>')">
 	    					<div class="d-flex
@@ -96,14 +100,33 @@
 										?>
 	    					    <h3 style="text-align: left;" class="fs-xs m-2">
 	    					    	<?=$conversation['lName']?><br>
-                      <small>
+                      <small id="small">
                         <?php
+						
 							if($_SESSION['enduser']=='User'){
 								$text = lastChat($_SESSION['user_ID'], $conversation['agent_ID'], $connect);
+								$agent = $conversation['agent_ID'];
+								$selectSql = $connect->query( "SELECT from_ID, to_ID FROM tbl_messages WHERE (from_ID=$id AND to_ID=$agent) OR (to_ID=$id AND from_ID=$agent) ORDER BY conver_ID DESC LIMIT 1");
+								$resSql = $selectSql->fetch_assoc();
+								if ($resSql['to_ID'] == $conversation['agent_ID']) {
+									$textY = "You: ";
+								}else {
+									$textY = "";
+								}
+								echo $textY;
 								if (strlen($text) > 0 )
 									echo mb_strimwidth($text, 0, 30, "...");
 							}else{
 								$text = lastChat($_SESSION['user_ID'], $conversation['user_ID'], $connect);
+								$agent = $conversation['user_ID'];
+								$selectSql = $connect->query( "SELECT from_ID, to_ID FROM tbl_messages WHERE (from_ID=$id AND to_ID=$agent) OR (to_ID=$id AND from_ID=$agent) ORDER BY conver_ID DESC LIMIT 1");
+								$resSql = $selectSql->fetch_assoc();
+								if ($resSql['to_ID'] == $conversation['user_ID']) {
+									$textY = "You: ";
+								}else {
+									$textY = "";
+								}
+								echo $textY;
 								if (strlen($text) > 0 )
 									echo mb_strimwidth($text, 0, 30, "...");
 							}
@@ -136,20 +159,67 @@
 
 
 <script>
+	function searchFil() {
+			key = $('#searchText').val();
+			if(key == ""){
+				$.ajax({
+				type: 'POST',	
+				url: 'chome.php',
+				success: function (html) {
+					$('#result').html(html);
+					document.getElementById("chatForm").style.display = "block";
+				}
+				});
+			}else{
+				$.ajax({
+				type: 'POST',
+				url: 'csearch.php',
+				data: 'key=' + key,
+				success: function(html) {
+					$('#chatList').html(html);
+				}
+				});
+			}
+		}
 	$(document).ready(function(){
-      
-      // Search
-       $("#searchText").on("input", function(){
-       	 var searchText = $(this).val();
-         if(searchText == "") return;
-         $.post('csearch.php', 
-         	     {
-         	     	key: searchText
-         	     },
-         	   function(data, status){
-                  $("#chatList").html(data);
-         	   });
-       });
+		// console.log(change);
+		// let rInterval = function ready() {
+		// 	console.log("success");
+		// 	if (document.getElementById("chatForm").style.display == "block") {
+		// 		$.ajax({
+		// 			type: 'POST',	
+		// 			url: 'chome.php',
+		// 			success: function (html) {
+		// 				$('#result').html(html);
+		// 				document.getElementById("chatForm").style.display = "block";
+		// 			}
+		// 		});
+		// 	}else{
+		// 		$.ajax({
+		// 			type: 'POST',	
+		// 			url: 'chome.php',
+		// 			success: function (html) {
+		// 				$('#result').html(html);
+		// 				document.getElementById("chatForm").style.display = "none";
+		// 			}
+		// 		});
+		// 	}
+		// }
+		// if (change == "") {
+	
+		// 	setInterval(rInterval, 100000);
+		// }
+    //    $("#searchText").on("input", function(){
+    //    	 var searchText = $(this).val();
+    //      if(searchText == "") return;
+    //      $.post('csearch.php', 
+    //      	     {
+    //      	     	key: searchText
+    //      	     },
+    //      	   function(data, status){
+    //               $("#chatList").html(data);
+    //      	   });
+    //    });
 
        // Search using the button
        $("#serachBtn").on("click", function(){
@@ -177,7 +247,7 @@
       auto update last seen 
       every 10 sec
       **/
-      setInterval(lastSeenUpdate, 500);
+      setInterval(lastSeenUpdate, 10000);
 
     });
 
@@ -188,6 +258,8 @@
 	function closeForm() {
 	document.getElementById("chatForm").style.display = "none";
 	}
+
+
 </script>
 </body>
 </html>

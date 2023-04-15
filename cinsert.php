@@ -62,7 +62,7 @@ if (isset($_SESSION['user_ID'])) {
 		<p class="rtext align-self-end
 		          border rounded p-2 mb-1">
 		    <?=$message?>  
-		    <small class="d-block"><?=$time?></small>      	
+		    <small style="color: #bbb; font-size: 0.7rem; text-align: right;" class="d-block"><?=$time?></small>      	
 		</p>
 
     <?php 

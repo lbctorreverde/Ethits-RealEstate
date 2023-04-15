@@ -2,12 +2,25 @@
 include_once 'header.php';
 
 include('dbconfig.php');
-
+include 'chome.php';
 ?>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <style>
     <?php include 'css/agentportfolio.css'; ?>
 </style>
+<script type="text/javascript">
+    function chat(filter) {
+        // let filter = $('#all').val();
+        $.ajax({
+        type: 'POST',
+        url: 'chat.php',
+        data:'filter='+filter,
+        success: function (html) {
+            $('#result').html(html);
+        }
+        });
+    }
+</script>
 
 <section class="container-fluid d-flex align-items-center " id="topsection">
     <?php
@@ -52,7 +65,7 @@ include('dbconfig.php');
                         </h4>
                     </div>
                     <div class="col text-end">
-                        <button type="submit" id="btn_hide" name="btn_hide" class="btn btn-primary rounded-0" onclick="window.location.href='chat/home.php';">Chat</button>
+                        <button type="submit" id="btn_hide" name="btn_hide" class="btn btn-primary rounded-0" onclick="chat('<?=$rowAgent['fName']?>')">Chat</button>
                     </div>
                 </div>
                 <div class="row align-items-start">

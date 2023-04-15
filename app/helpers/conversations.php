@@ -8,11 +8,11 @@ function getConversation($user_id, $connect){
     if ($_SESSION['enduser'] == 'User') {
       $sql = "SELECT * FROM tbl_chats
       WHERE usermsg_ID=$user_id
-      ORDER BY chat_ID DESC";
+      ORDER BY createdAt DESC";
     }else {
       $sql = "SELECT * FROM tbl_chats
       WHERE agentmsg_ID=$user_id
-      ORDER BY chat_ID DESC";
+      ORDER BY createdAt DESC";
     }
     
 

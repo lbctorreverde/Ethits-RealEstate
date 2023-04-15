@@ -104,9 +104,6 @@ if (!isset($_SESSION['enduser'])) {
             type: 'POST',
             url: 'agentsearch.php',
             data: 'page=' + page_num + '&keywords=' + keywords + '&filterBy=' + filterBy + '&selectBy=' + selectBy + '&dateBy=' + dateBy + '&nearBy=' + nearBy,
-            beforeSend: function() {
-                $('.loading-overlay').show();
-            },
             success: function(html) {
                 $('#result').html(html);
                 $('.loading-overlay').fadeOut("slow");

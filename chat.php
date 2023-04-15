@@ -33,7 +33,7 @@ if(isset($_POST['filter'])){
 	if($_SESSION['enduser']=='User'){
 		$chats = getChats($_SESSION['user_ID'], $chatWith['agent_ID'], $connect);
 		$count = count($chats);
-		//opened($chatWith['user_ID'], $connect, $chats);
+		//opened($chatWith['agent_ID'], $connect, $chats);
 	}else{
 		$chats = getChats($_SESSION['user_ID'], $chatWith['user_ID'], $connect);
 		$count = count($chats);
@@ -41,15 +41,8 @@ if(isset($_POST['filter'])){
 	}
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Chat App</title>
 
 	<link rel="icon" href="img/logo.png">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript">
 		function chat() {
@@ -59,6 +52,7 @@ if(isset($_POST['filter'])){
 			url: 'chome.php',
 			success: function (html) {
 				$('#result').html(html);
+				document.getElementById("chatForm").style.display = "block";
 			}
 			});
 		}
@@ -66,10 +60,6 @@ if(isset($_POST['filter'])){
 	<link rel="stylesheet" href="css/chatstyle.css">
 	<link rel="stylesheet" href="css/chat.css">
 	<style>
-		p{
-			overflow-wrap: anywhere;
-			font-size: 15px;
-		}
 
 		/* The popup chat - hidden by default */
 		.chat-popup {
@@ -79,8 +69,10 @@ if(isset($_POST['filter'])){
 		right: 15px;
 		z-index: 9;
 		}
+
+		
 	</style>
-</head>
+
 <body>
 <div id='result'>
 <button class="btn_open" onclick="openForm()">Chat</button>
@@ -103,9 +95,9 @@ if(isset($_POST['filter'])){
                         if (last_seen($chatWith['last_seen']) == "Active") {
                	    ?>
                	        <div class="online"></div>
-               	        <small class="d-block p-1">Online</small>
+               	        <small id="small" class="d-block p-1">Online</small>
                	  	<?php }else{ ?>
-               	         <small class="d-block p-1">
+               	         <small id="small" class="d-block p-1">
                	         	Last seen:
                	         	<?=last_seen($chatWith['last_seen'])?>
                	         </small>
@@ -126,15 +118,15 @@ if(isset($_POST['filter'])){
 							<p style="overflow-wrap: anywhere;" id="rightChat" class="rtext align-self-end
 									border rounded p-2 mb-1">
 								<?=$chat[3]?> 
-								<small class="d-block">
+								<small id="small" class="d-block">
 									<?php echo date("d-m-Y h:i a", strtotime($chat[5]))?>
 								</small>      	
 							</p>
 						<?php }else{ ?>
-						<p style="overflow-wrap: anywhere;" class="ltext border 
+						<p style="overflow-wrap: anywhere;" id="leftChat" class="ltext border 
 								rounded p-2 mb-1">
 							<?=$chat[3]?> 
-							<small class="d-block">
+							<small id="small" class="d-block">
 								<?php echo date("d-m-Y h:i a", strtotime($chat[5]))?>
 							</small>      	
 						</p>
@@ -222,7 +214,7 @@ if(isset($_POST['filter'])){
       auto update last seen 
       every 0.5 sec
       **/
-      setInterval(fechData, 500);
+      setInterval(fechData, 5000);
     
     });
 

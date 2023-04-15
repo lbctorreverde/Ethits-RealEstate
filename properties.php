@@ -53,9 +53,9 @@ if ($_SESSION['enduser'] == 'Agent') {
 
 ?>
 <script type="text/javascript">
-    function searchFilter(page_num) {
+    function searchFilter(page_num, clear_Data) {
         page_num = page_num ? page_num : 0;
-        $('#clear').click(function() {
+        if (clear_Data == 'clear') {
             $('#pselect').prop('selectedIndex', 0)
             $('#pdate').prop('selectedIndex', 0)
             $('#nearby').prop('selectedIndex', 0)
@@ -67,7 +67,7 @@ if ($_SESSION['enduser'] == 'Agent') {
             $('#pmin').prop('selectedIndex', 0)
             document.getElementById('pmax').value = ''
             document.getElementById('pmin').value = ''
-        });
+        }
 
         var keywords = $('#keywords').val();
         var filterBy = $('#city').val();
@@ -127,7 +127,7 @@ if ($_SESSION['enduser'] == 'Agent') {
 <div class="grid-container">
     <div class="filter">
         <b><label style="font-size: 20px;"><i class='bx bx-filter-alt'></i>&nbsp;&nbsp;Search Filter</label></b><br><br>
-        <button class="btnApply" style="height: 40px;" name="clear" id="clear" onclick="searchFilter();">Clear Filter</button>
+        <button class="btnApply" style="height: 40px;" name="clear" id="clear" onclick="searchFilter('','clear');">Clear Filter</button>
         <hr>
         <label for="inputEmail4" class="form-label">House Style</label>
         <select class="form-select" style="width:170px;" name="style" id="style" onchange="searchFilter();">

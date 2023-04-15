@@ -1,3 +1,16 @@
+<script type="text/javascript">
+	function chat(filter) {
+		// let filter = $('#all').val();
+		$.ajax({
+		type: 'POST',
+		url: 'chat.php',
+		data:'filter='+filter,
+		success: function (html) {
+			$('#result').html(html);
+		}
+		});
+	}
+</script>
 <?php
 
 session_start();
@@ -5,13 +18,11 @@ session_start();
 # check if the user is logged in
 if (isset($_SESSION['user_ID'])) {
     # check if the key is submitted
-    if(isset($_POST['key'])){
        # database connection file
 	   include_once 'dbconfig.php';
 
 	   # creating simple search algorithm :) 
 		$key = "%{$_POST['key']}%";
-		
 	   	if($_SESSION['enduser'] =='User'){
 			$sql = "SELECT * FROM tbl_agent
 			WHERE fName LIKE '".$key."' OR lName LIKE '".$key."' LIMIT 4";
@@ -28,11 +39,9 @@ if (isset($_SESSION['user_ID'])) {
          //$users = $stmt->fetch_all();
 		 while($users = mysqli_fetch_assoc($stmt)) {
        ?>
-       <li class="list-group-item">
 	   
-	   <?php 
-	   ?>
-		<a href="chat.php?user=<?=$users['fName']?>"
+       <li style="background-color:#f8f4f4;" class="list-group-item">
+		<button class="btnAll" name="all" id="all" value="<?=$users['fName']?>" onclick="chat('<?=$users['fName']?>')"
 		   class="d-flex
 		          justify-content-between
 		          align-items-center p-2">
@@ -46,8 +55,9 @@ if (isset($_SESSION['user_ID'])) {
 			    	<?=$users['lName'].", ".$users['fName']?>
 			    </h3>            	
 			</div>
-		 </a>
+		 </button>
 	   </li>
+		 </ul>
        <?php  }}else { ?>
          <div class="alert alert-info 
     				 text-center">
@@ -56,5 +66,4 @@ if (isset($_SESSION['user_ID'])) {
            is  not found.
 		</div>
     <?php }
-    }
 }

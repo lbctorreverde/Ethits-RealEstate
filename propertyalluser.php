@@ -66,16 +66,9 @@ $query = $connect->query("SELECT
 
 
 
-    function searchFilter(page_num) {
+    function searchFilter(page_num, btn_Data) {
         page_num = page_num?page_num:0;
-
-        var all = "";
-        var pend = "";
-        var sold = "";
-        var rate = "";
-        var cnl = "";
-        var rej = "";
-
+        console.log(btn_Data);
 
         // $('#all').click(All)
         // $('#pend').click(Pend)
@@ -83,98 +76,90 @@ $query = $connect->query("SELECT
         // $('#rate').click(Rate)
         // $('#cnl').click(Cnl)
         // $('#rej').click(Rej)
-        $('#all, #pend, #sold, #rate, #cnl, #rej').click(function () {
-            if (this.id == 'all') {
-                var filter = this.id
-                $.ajax({
-                    type: 'POST',
-                    url: 'propertyalluserdata.php',
-                    data:'page='+page_num+'&filter='+filter,
-                    beforeSend: function () {
-                        $('.loading-overlay').show();
-                    },
-                    success: function (html) {
-                        $('#result').html(html);
-                        $('.loading-overlay').fadeOut("slow");
-                    }
-                });
-            }
-            else if (this.id == 'pend') {
-                var filter = this.id
-                $.ajax({
-                    type: 'POST',
-                    url: 'propertyalluserdata.php',
-                    data:'page='+page_num+'&filter='+filter,
-                    beforeSend: function () {
-                        $('.loading-overlay').show();
-                    },
-                    success: function (html) {
-                        $('#result').html(html);
-                        $('.loading-overlay').fadeOut("slow");
-                    }
-                });
-            }
-            else if (this.id == 'sold') {
-                var filter = this.id
-                $.ajax({
-                    type: 'POST',
-                    url: 'propertyalluserdata.php',
-                    data:'page='+page_num+'&filter='+filter,
-                    beforeSend: function () {
-                        $('.loading-overlay').show();
-                    },
-                    success: function (html) {
-                        $('#result').html(html);
-                        $('.loading-overlay').fadeOut("slow");
-                    }
-                });
-            }
-            else if (this.id == 'rate') {
-                var filter = this.id
-                $.ajax({
-                    type: 'POST',
-                    url: 'propertyalluserdata.php',
-                    data:'page='+page_num+'&filter='+filter,
-                    beforeSend: function () {
-                        $('.loading-overlay').show();
-                    },
-                    success: function (html) {
-                        $('#result').html(html);
-                        $('.loading-overlay').fadeOut("slow");
-                    }
-                });
-            }
-            else if (this.id == 'cnl') {
-                var filter = this.id
-                $.ajax({
-                    type: 'POST',
-                    url: 'propertyalluserdata.php',
-                    data:'page='+page_num+'&filter='+filter,
-                    beforeSend: function () {
-                        $('.loading-overlay').show();
-                    },
-                    success: function (html) {
-                        $('#result').html(html);
-                        $('.loading-overlay').fadeOut("slow");
-                    }
-                });
-            }
-            else if (this.id == 'rej') {
-                var filter = this.id
-                $.ajax({
-                    type: 'POST',
-                    url: 'propertyalluserdata.php',
-                    data:'page='+page_num+'&filter='+filter,
-                    beforeSend: function () {
-                        $('.loading-overlay').show();
-                    },
-                    success: function (html) {
-                        $('#result').html(html);
-                        $('.loading-overlay').fadeOut("slow");
-                    }
-                });
-            }
-        });
+        if (btn_Data == 'all') {
+            $.ajax({
+                type: 'POST',
+                url: 'propertyalluserdata.php',
+                data:'page='+page_num+'&filter='+btn_Data,
+                beforeSend: function () {
+                    $('.loading-overlay').show();
+                },
+                success: function (html) {
+                    $('#result').html(html);
+                    $('.loading-overlay').fadeOut("slow");
+                }
+            });
+        }
+        else if (btn_Data == 'pend') {
+            $.ajax({
+                type: 'POST',
+                url: 'propertyalluserdata.php',
+                data:'page='+page_num+'&filter='+btn_Data,
+                beforeSend: function () {
+                    $('.loading-overlay').show();
+                },
+                success: function (html) {
+                    $('#result').html(html);
+                    $('.loading-overlay').fadeOut("slow");
+                }
+            });
+        }
+        else if (btn_Data == 'sold') {
+            $.ajax({
+                type: 'POST',
+                url: 'propertyalluserdata.php',
+                data:'page='+page_num+'&filter='+btn_Data,
+                beforeSend: function () {
+                    $('.loading-overlay').show();
+                },
+                success: function (html) {
+                    $('#result').html(html);
+                    $('.loading-overlay').fadeOut("slow");
+                }
+            });
+        }
+        else if (btn_Data == 'rate') {
+            $.ajax({
+                type: 'POST',
+                url: 'propertyalluserdata.php',
+                data:'page='+page_num+'&filter='+btn_Data,
+                beforeSend: function () {
+                    $('.loading-overlay').show();
+                },
+                success: function (html) {
+                    $('#result').html(html);
+                    $('.loading-overlay').fadeOut("slow");
+                }
+            });
+        }
+        else if (btn_Data == 'cnl') {
+            $.ajax({
+                type: 'POST',
+                url: 'propertyalluserdata.php',
+                data:'page='+page_num+'&filter='+btn_Data,
+                beforeSend: function () {
+                    $('.loading-overlay').show();
+                },
+                success: function (html) {
+                    $('#result').html(html);
+                    $('.loading-overlay').fadeOut("slow");
+                }
+            });
+        }
+        else if (btn_Data == 'rej') {
+            $.ajax({
+                type: 'POST',
+                url: 'propertyalluserdata.php',
+                data:'page='+page_num+'&filter='+btn_Data,
+                beforeSend: function () {
+                    $('.loading-overlay').show();
+                },
+                success: function (html) {
+                    $('#result').html(html);
+                    $('.loading-overlay').fadeOut("slow");
+                }
+            });
+        }
     }
 </script>
 <main role="main" class='main'>
@@ -211,12 +196,12 @@ $query = $connect->query("SELECT
         </div>
         <div class="card2">
             <ul class="ulclass">
-                <li><button class="btnAll" name="all" id="all" value="all" onclick="searchFilter();">All</button></li>
-                <li><button class="btnPending" name="pend" id="pend" value="pend" onclick="searchFilter();">Pending</button></li>
-                <li><button class="btnSold" name="sold" id="sold" value="sold" onclick="searchFilter();">Sold</button></li>
-                <li><button class="btnRate" name="rate" id="rate" value="rate" onclick="searchFilter();">To Rate</button></li>
-                <li><button class="btnCnl" name="cnl" id="cnl" value="cnl" onclick="searchFilter();">Cancelled</button></li>
-                <li><button class="btnRej" name="rej" id="rej" value="rej" onclick="searchFilter();">Reject</button></li>
+                <li><button class="btnAll" name="all" id="all" value="all" onclick="searchFilter('','all');">All</button></li>
+                <li><button class="btnPending" name="pend" id="pend" value="pend" onclick="searchFilter('','pend');">Pending</button></li>
+                <li><button class="btnSold" name="sold" id="sold" value="sold" onclick="searchFilter('','sold');">Sold</button></li>
+                <li><button class="btnRate" name="rate" id="rate" value="rate" onclick="searchFilter('','rate');">To Rate</button></li>
+                <li><button class="btnCnl" name="cnl" id="cnl" value="cnl" onclick="searchFilter('','cnl');">Cancelled</button></li>
+                <li><button class="btnRej" name="rej" id="rej" value="rej" onclick="searchFilter('','rej');">Reject</button></li>
             </ul>
             <div id= "result" class="boxx">
                 <?php 
