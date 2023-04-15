@@ -1,6 +1,6 @@
 <?php
 include_once 'header.php';
-
+include 'chome.php';
 include('dbconfig.php');
 $_SESSION['agentselected'] = "";
 // Include pagination library file 
@@ -36,12 +36,28 @@ $query = $connect->query("SELECT * FROM tbl_agent ORDER BY lName LIMIT $limit");
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <?php
-if (isset($_SESSION['verified_user_id'])) {
-    $var1 = $_SESSION['verified_user_id'];
-    $query1 = "SELECT *  from tbl_user WHERE email = '$var1'";
-    $result1 = mysqli_query($connect, $query1);
-    $row1 = mysqli_fetch_assoc($result1);
+if (!isset($_SESSION['enduser'])) {
+    $near = "  ";
+}else{
+    if ($_SESSION['enduser'] == 'Agent') {
+        if (isset($_SESSION['user_ID'])) {
+            $var1 = $_SESSION['user_ID'];
+            $query1 = "SELECT *  from tbl_agent WHERE agent_ID = '$var1'";
+            $result1 = mysqli_query($connect, $query1);
+            $row1 = mysqli_fetch_assoc($result1);
+            $near = $row1['city'];
+        }
+    }else {
+        if (isset($_SESSION['user_ID'])) {
+            $var1 = $_SESSION['user_ID'];
+            $query1 = "SELECT *  from tbl_user WHERE user_ID = '$var1'";
+            $result1 = mysqli_query($connect, $query1);
+            $row1 = mysqli_fetch_assoc($result1);
+            $near = $row1['city'];
+        }
+    }
 }
+
 ?>
 
 <script type="text/javascript">
@@ -120,7 +136,7 @@ if (isset($_SESSION['verified_user_id'])) {
                 <select class="form-select" style="width:170px; height: 40px;" name="nearby" id="nearby" onchange="searchFilter();">
                     <option value="" selected disabled>Sort</option>
                     <option value="All">All</option>
-                    <option value="<?php echo $row1['city']; ?>">Nearby</option>
+                    <option value="<?php echo $near;?>">Nearby</option>
                 </select>
                 <select class="form-select" style="width:170px; height: 40px;" name="pdate" id="pdate" onchange="searchFilter();">
                     <option value="" selected disabled>Date</option>
@@ -194,6 +210,7 @@ if (isset($_SESSION['verified_user_id'])) {
                                     <p class="card-text"><small class="text-muted lh-sm"><?php echo $row['contactNo'] ?></small></p>
                                 </div>
                             </div>
+                            <hr>
                     <?php
                         }
                     } else {
@@ -214,11 +231,11 @@ if (isset($_SESSION['verified_user_id'])) {
 
 </section>
 
-<footer id="sticky-footer" class="sticky-footer flex-shrink-0 py-4">
+<!-- <footer id="sticky-footer" class="sticky-footer flex-shrink-0 py-4">
     <div class=" text-center">
         <small>Copyright &copy; CS3</small>
     </div>
-</footer>
+</footer> -->
 
 <?php
 if (isset($_POST['btn_hide'])) {

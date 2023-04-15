@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION['verified_user_id'])) 
 {
-    $_SESSION['status'] = "You are already Logged In";
+    $_SESSION['status'] = "Login Successfully";
     header('Location: index.php');
     exit();
 }

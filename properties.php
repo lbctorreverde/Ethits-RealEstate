@@ -35,12 +35,22 @@ $query = $connect->query("SELECT * FROM tbl_property WHERE statusProperty ='Acti
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <?php
-if (isset($_SESSION['verified_user_id'])) {
-    $var1 = $_SESSION['verified_user_id'];
-    $query1 = "SELECT *  from tbl_agent WHERE email = '$var1'";
-    $result1 = mysqli_query($connect, $query1);
-    $row1 = mysqli_fetch_assoc($result1);
+if ($_SESSION['enduser'] == 'Agent') {
+    if (isset($_SESSION['user_ID'])) {
+        $var1 = $_SESSION['user_ID'];
+        $query1 = "SELECT *  from tbl_agent WHERE agent_ID = '$var1'";
+        $result1 = mysqli_query($connect, $query1);
+        $row1 = mysqli_fetch_assoc($result1);
+    }
+}else {
+    if (isset($_SESSION['user_ID'])) {
+        $var1 = $_SESSION['user_ID'];
+        $query1 = "SELECT *  from tbl_user WHERE user_ID = '$var1'";
+        $result1 = mysqli_query($connect, $query1);
+        $row1 = mysqli_fetch_assoc($result1);
+    }
 }
+
 ?>
 <script type="text/javascript">
     function searchFilter(page_num) {
@@ -228,18 +238,18 @@ if (isset($_SESSION['verified_user_id'])) {
                                     <span class="icon-livingsize"></span>
                                     <hr>
                                     <li class="list-group-item">
-                                        <span><b>Bedroom:</b>&nbsp;<?php echo $row['bedroom']; ?></span>&nbsp;&nbsp;&nbsp;
-                                        <span><b>Bathroom:</b>&nbsp;<?php echo $row['bathroom']; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span><b>Bedroom:</b>&nbsp;<?php echo $row['bedroom']; ?></span>&nbsp;
+                                        <span><b>Bathroom:</b>&nbsp;<?php echo $row['bathroom']; ?></span>&nbsp;&nbsp;&nbsp;
                                         <span><b>Land Size:</b>&nbsp;<?php echo $row['lotSize']; ?>m²</span>
                                     </li>
                                     <li class="list-group-item">
-                                        <span><b>Garage:&nbsp;</b><span class="text-success"><?php echo $row['garage']; ?></span>&nbsp;&nbsp;
-                                            <span><b>Basement:</b>&nbsp;<?php echo $row['basement']; ?></span>&nbsp;&nbsp;
+                                        <span><b>Garage:&nbsp;</b><span class="text-success"><?php echo $row['garage']; ?></span>
+                                            <span><b>Basement:</b>&nbsp;<?php echo $row['basement']; ?></span>&nbsp;
                                             <span><b>Floor Area:</b>&nbsp;<?php echo $row['floorArea']; ?>m²</span>
                                     </li>
                                     <hr>
                                     <li class="list-group-item">
-                                        <b>Style:&nbsp;</b><?php echo $row['propertyType']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <b>Style:&nbsp;</b><?php echo $row['propertyType']; ?>&nbsp;&nbsp;&nbsp;
                                         <b>Special Features:&nbsp;</b><?php echo $row['specialFeatures']; ?>
                                     </li>
                                     <hr>

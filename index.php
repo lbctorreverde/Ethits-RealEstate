@@ -1,5 +1,11 @@
 <?php
 include_once 'header.php';
+// if (isset($_GET['user'])) {
+//     include 'chat.php';
+// }else {
+    
+// }
+include 'chome.php';
 ?>
 
 <style>
@@ -122,8 +128,6 @@ include_once 'header.php';
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-=======
 
     <div class="fourth-div">
         <div class="container predict-hero">
@@ -135,13 +139,6 @@ include_once 'header.php';
             </div>
         </div>
     </div>
-
-
-
-
-
-
->>>>>>> 12aad4afe388b7d8b1f682d6be351b65254cc405
 </main>
 
 
@@ -150,20 +147,6 @@ include_once 'header.php';
     <?php require_once 'js/index.js' ?>
 </script>
 
-<?php
-if (isset($_POST['btn_hide'])) {
-    $hide = $_POST['hide'];
-    if (isset($hide)) {
-        $_SESSION['agentselected'] = $hide;
-        ?>
-        <script>
-        location = 'agentportfolio.php';
-        exit;
-        </script>
-        <?php
-    }
-}
-?>
 <footer id="sticky-footer" class="sticky-footer flex-shrink-0 py-4">
     <div class=" text-center">
         <small>Copyright &copy; CS3</small>

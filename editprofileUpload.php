@@ -74,12 +74,7 @@ $id = $_SESSION['verified_user_id'];
                     </li>
                     <li class="nav-item">
                         <a href="editproperty.php" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Properties</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="soldproperty.php" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Contract Done</span>
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Add Properties</span>
                         </a>
                     </li>
                 </ul>

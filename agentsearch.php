@@ -136,7 +136,7 @@ if(isset($_POST['page'])){
                             <p class="card-title text-muted">Contact: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rating:&nbsp;<i class='bx bxs-star' style='color:#f9ff00'></i><?php echo $row['prate']?></p>
                             <p class="card-text"><small class="text-muted lh-sm"><?php echo $row['contactNo'] ?></small></p>
                         </div>
-                    </div>
+                    </div><hr>
             <?php
                 }
             } else {

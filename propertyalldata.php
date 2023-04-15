@@ -34,7 +34,7 @@ if(isset($_POST['page'])){
         $whereSQL .= " AND tbl_transaction.status_Trans ='Sold'"; 
     }
     if($filter == 'rate'){ 
-        $whereSQL .= " AND tbl_transaction.status_Trans ='Sold' OR tbl_transaction.status_Trans = 'Rejected'"; 
+        $whereSQL .= " AND (tbl_transaction.status_Trans ='Sold' OR tbl_transaction.status_Trans = 'Rejected')"; 
     }
     if($filter == 'cnl'){ 
         $whereSQL .= " AND tbl_transaction.status_Trans ='Cancelled'"; 

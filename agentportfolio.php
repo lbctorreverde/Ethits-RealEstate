@@ -2,6 +2,7 @@
 include_once 'header.php';
 
 include('dbconfig.php');
+
 ?>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <style>
@@ -10,7 +11,6 @@ include('dbconfig.php');
 
 <section class="container-fluid d-flex align-items-center " id="topsection">
     <?php
-    include('dbconfig.php');
     if (!isset($_SESSION['agentselected'])) {
         $_SESSION['status']  = "Pick an agent/properties";
         header('Location: index.php');
@@ -36,17 +36,25 @@ include('dbconfig.php');
             <div class="toptext">
                 <h1 class="agent-name"><?php echo $rowAgent['lName'].", ".$rowAgent['fName']." ".substr($rowAgent['mName'], 0, 1)."."?></h1>
                 <h3><small class="text-muted">Real Estate Professional</small></h3>
-                <h4>Rating:&nbsp;<i class='bx bxs-star' style='color:#f9ff00'></i>&nbsp;
-                    <?php
-                    if(isset($rowAgent['prate'])){
-                        echo $rowAgent['prate'];?>&nbsp;(<?php echo $rowAgent['total_rate']?>)
-
-                    <?php }else{
-                        echo '--';
-                    }?> 
-                </h4>
+                
             </div>
             <div class="container">
+                <div class="row align-items-start">
+                    <div class="col mb-3">
+                        <h4>Rating:&nbsp;<i class='bx bxs-star' style='color:#f9ff00'></i>&nbsp;
+                            <?php
+                            if(isset($rowAgent['prate'])){
+                                echo $rowAgent['prate'];?>&nbsp;(<?php echo $rowAgent['total_rate']?>)
+
+                            <?php }else{
+                                echo '--';
+                            }?> 
+                        </h4>
+                    </div>
+                    <div class="col text-end">
+                        <button type="submit" id="btn_hide" name="btn_hide" class="btn btn-primary rounded-0" onclick="window.location.href='chat/home.php';">Chat</button>
+                    </div>
+                </div>
                 <div class="row align-items-start">
                     <div class="col mb-3">
                         <i class="bi bi-building-fill me-2"></i>
@@ -71,6 +79,7 @@ include('dbconfig.php');
                 </div>
             </div>
         </div>
+        &nbsp;
     </div>
 </section>
 
@@ -220,8 +229,9 @@ include('dbconfig.php');
                     </div>
                 </div>
                 <div style='text-align:left; padding-left:10px; padding-top:10px'>
-                    <h8><b>Feedback:&nbsp; </b></h8>"<?php echo $res['feedback']?>"<br>
-                    <h9><b>Rating:&nbsp;<i class='bx bxs-star' style='color:#f9ff00'></i>&nbsp; <?php echo $res['rate']?></b></h9>
+                    <h8><b>Feedback:&nbsp;<br> </b></h8>"<?php echo $res['feedback']?>"<br>
+                    <h9><b>Rating:&nbsp;<i class='bx bxs-star' style='color:#f9ff00'></i>&nbsp; <?php echo $res['rate']?></b></h9><br>
+                    <h8><b>Transaction:&nbsp; </b></h8><?php echo $res['status_Trans']?>
                 </div>
             </div>
             <br>

@@ -303,7 +303,7 @@ $query = $connect->query("SELECT
                         <div class="csub">
                             <?php 
                                 if($res['status_Trans'] == "Pending"){
-                            ?><form method="POST" onsubmit="return confirm('Are you sure you want to cancel?')" action="propertyall.php">
+                            ?><form method="POST" onsubmit="return confirm('Are you sure you want to cancel?')" action="propertyalluser.php">
                                 <input type="hidden" id="property" name="property" value="<?php echo $res['property_ID'] ?>">
                                 <input type="hidden" id="hide" name="hide" value="<?php echo $res['trans_ID'] ?>">
                                 <input type="submit" id="btn_Cancel" value="Cancel" name="btn_Cancel" class="btn-reject btn" style="background-color: red;">
@@ -358,14 +358,14 @@ $query = $connect->query("SELECT
         if (isset($result3)) {
         ?>
             <script>
-                alert('Successfully Rejected');
-                location = 'propertyall.php';
+                alert('Successfully Cancelled');
+                location = 'propertyalluser.php';
                 exit;
             </script>
         <?php } else { ?>
             <script>
                 alert('Transaction Failed');
-                location = 'propertyall.php';
+                location = 'propertyalluser.php';
                 exit;
             </script>
     <?php
