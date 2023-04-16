@@ -61,27 +61,26 @@ if (!isset($_SESSION['enduser'])) {
 ?>
 
 <script type="text/javascript">
-    function searchFilter(page_num) {
+    function searchFilter(page_num, clear_Data) {
         page_num = page_num ? page_num : 0;
+        if (clear_Data == 'clear') {
+            $('#nearby').prop('selectedIndex', 0)
+            $('#pdate').prop('selectedIndex', 0)
+            $('#prating').prop('selectedIndex', 0)
+            $('#city').prop('selectedIndex', 0)
+        }
         var keywords = $('#keywords').val();
         var filterBy = $('#city').val();
         var selectBy = $('#prating').val();
         var dateBy = $('#pdate').val();
         var nearBy = $('#nearby').val();
 
-        $('#clear').click(function() {
-            $('#nearby').prop('selectedIndex', 0)
-            $('#pdate').prop('selectedIndex', 0)
-            $('#prating').prop('selectedIndex', 0)
-            $('#city').prop('selectedIndex', 0)
-        });
-
         $('#city').click(function() {
             $('#nearby').prop('selectedIndex', 0)
             $('#pdate').prop('selectedIndex', 0)
             $('#prating').prop('selectedIndex', 0)
         });
-
+        
         $('#nearby').click(function() {
             $('#prating').prop('selectedIndex', 0)
             $('#pdate').prop('selectedIndex', 0)
@@ -91,13 +90,11 @@ if (!isset($_SESSION['enduser'])) {
         $('#pdate').click(function() {
             $('#prating').prop('selectedIndex', 0)
             $('#nearby').prop('selectedIndex', 0)
-            $('#city').prop('selectedIndex', 0)
         });
 
         $('#prating').click(function() {
             $('#pdate').prop('selectedIndex', 0)
             $('#nearby').prop('selectedIndex', 0)
-            $('#city').prop('selectedIndex', 0)
         });
 
         $.ajax({
@@ -106,7 +103,6 @@ if (!isset($_SESSION['enduser'])) {
             data: 'page=' + page_num + '&keywords=' + keywords + '&filterBy=' + filterBy + '&selectBy=' + selectBy + '&dateBy=' + dateBy + '&nearBy=' + nearBy,
             success: function(html) {
                 $('#result').html(html);
-                $('.loading-overlay').fadeOut("slow");
             }
         });
     }
@@ -160,7 +156,7 @@ if (!isset($_SESSION['enduser'])) {
                     <option value="Pilar">Pilar</option>
                     <option value="Samal">Samal</option>
                 </select>
-                <button class="btnClear" style="width:170px;  height: 40px;" name="clear" id="clear" onclick="searchFilter();">
+                <button class="btnClear" style="width:170px;  height: 40px;" name="clear" id="clear" onclick="searchFilter('','clear');">
                     Clear Filter
                 </button>
         </div>

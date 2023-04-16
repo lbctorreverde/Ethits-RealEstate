@@ -1,5 +1,6 @@
 <?php
 include_once 'header.php';
+include 'chome.php';
 include('dbconfig.php');
 
 // Include pagination library file 
@@ -64,11 +65,8 @@ $query = $connect->query("SELECT
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 
-
-
     function searchFilter(page_num, btn_Data) {
         page_num = page_num?page_num:0;
-        console.log(btn_Data);
 
         // $('#all').click(All)
         // $('#pend').click(Pend)
@@ -161,6 +159,19 @@ $query = $connect->query("SELECT
             });
         }
     }
+
+    function chat(dataF) {
+        // let filter = $('#all').val();
+        console.log(dataF);
+        $.ajax({
+        type: 'POST',
+        url: 'chat.php',
+        data:'filter='+dataF,
+        success: function (html) {
+            $('#chatResult').html(html);
+        }
+        });
+    }
 </script>
 <main role="main" class='main'>
     <section class="topsection d-flex flex-column justify-content-center align-items-center">
@@ -242,21 +253,23 @@ $query = $connect->query("SELECT
                         ?>
                     </div>
                     <div class="grid-item item3">
+                        <div class="rCont">
+
                         <form method="POST" action="propertyalluser.php">
                                 <input type="hidden" id="hide" name="hide" value="<?php echo $res['agent_ID'] ?>">
-                        <div class="rCont">
-                                <button class="btnView" type="submit" id="btn_hide" name="btn_hide">
+                                
+                                <button style="width:180px;" class="btnView" type="submit" id="btn_hide" name="btn_hide">
                                     View Agent
                                 </button>
-                            <button class="btnView">Chat</button>
-                            
+                        </form>
+                        
+                            <button id="btn_chat" name="btn_chat" class="btnView" onclick="chat('<?=$res['fName']?>')">Chat</button>
                             <?php if($res['rate'] != null){?>
                                 <div style="font-size:15px; color:blue;">Rating:&nbsp;<b><i class='bx bxs-star' style='color:#f9ff00'></i><?php echo $res['rate']?></b></div>
                             <?php }else{?>
                                 <div style="font-size:15px; color:gray;"><b>No rating received</b></div>
                             <?php }?>
                         </div>
-                        </form>
                     </div>  
                     <div class="grid-item item4">
                         <div style="display:flex; gap:10px; text-align: center;">

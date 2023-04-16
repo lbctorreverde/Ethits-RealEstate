@@ -94,7 +94,7 @@ if(isset($_POST['page'])){
                 Style:&nbsp;<i class='bx bx-home-smile'></i><b><?php echo $res['propertyType']?></b>
             </div>  
             <div class="gridItem content4">
-                <b>₱&nbsp;<?php echo $res['price']?></b>
+                Price:&nbsp;<b>₱&nbsp;<?php echo $res['price']?></b>
             </div>
             <div class="gridItem content5">
                 Lot Size:&nbsp;<i class='bx bx-area'></i><b><?php echo $res['lotSize']?></b>

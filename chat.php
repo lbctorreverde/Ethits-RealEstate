@@ -51,7 +51,7 @@ if(isset($_POST['filter'])){
 			type: 'POST',	
 			url: 'chome.php',
 			success: function (html) {
-				$('#result').html(html);
+				$('#chatResult').html(html);
 				document.getElementById("chatForm").style.display = "block";
 			}
 			});
@@ -60,7 +60,6 @@ if(isset($_POST['filter'])){
 	<link rel="stylesheet" href="css/chatstyle.css">
 	<link rel="stylesheet" href="css/chat.css">
 	<style>
-
 		/* The popup chat - hidden by default */
 		.chat-popup {
 		display: block;
@@ -69,12 +68,10 @@ if(isset($_POST['filter'])){
 		right: 15px;
 		z-index: 9;
 		}
-
-		
 	</style>
 
 <body>
-<div id='result'>
+<div id='chatResult'>
 <button class="btn_open" onclick="openForm()">Chat</button>
 
 <div class="chat-popup" id="chatForm">

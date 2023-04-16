@@ -168,7 +168,7 @@ if(isset($_POST['page'])){
                         <form method="POST" action="properties.php" class="property-name-post d-flex form-control text-start">
                             <input type="hidden" id="hide" name="hide" value="<?php echo $row['agent_ID'] ?>">
                             <button class="property-name-button" type="submit" id="btn_hide" name="btn_hide">
-                                <h5 class="card-title"><b><?php echo $row['title']; ?></b></h5>
+                                <h6 class="card-title"><b><?php echo $row['title']; ?></b></h5>
                             </button>
                         </form>
                         <ul class="list-group list-group-flush" style="line-height: 0; font-size: 14px;">

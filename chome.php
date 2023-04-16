@@ -48,7 +48,7 @@
 			url: 'chat.php',
 			data:'filter='+filter,
 			success: function (html) {
-				$('#result').html(html);
+				$('#chatResult').html(html);
 			}
 			});
 		}
@@ -66,7 +66,7 @@
 		
 	</style>
 	<body>
-	<div id='result'>
+	<div id='chatResult'>
 	<button class="btn_open" onclick="openForm()">Chat</button>
 
 	<div class="chat-popup" id="chatForm">
@@ -166,7 +166,7 @@
 				type: 'POST',	
 				url: 'chome.php',
 				success: function (html) {
-					$('#result').html(html);
+					$('#chatResult').html(html);
 					document.getElementById("chatForm").style.display = "block";
 				}
 				});
