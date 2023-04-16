@@ -1,12 +1,29 @@
 <?php
 include_once 'header.php';
+include 'chome.php';
+// if (isset($_GET['user'])) {
+//     include 'chat.php';
+// }else {
+    
+// }
 ?>
 
 <style>
     <?php include 'css/index.css' ?>
 </style>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet"  href="css/nested.scss">
+<script type="text/javascript">
+    $(document).ready(function() {
+    // Gets the span width of the filled-ratings span
+    // this will be the same for each rating
+    var star_rating_width = $('.fill-ratings span').width();
+    // Sets the container of the ratings to span width
+    // thus the percentages in mobile will never be wrong
+    $('.star-ratings').width(star_rating_width);
+    });
 
+</script>
 <main role="main">
 
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -81,9 +98,22 @@ include_once 'header.php';
                                     </button>
                                 </form>
                                 <div class="d-flex justify-content-center text-center mt-5 mb-2">
-                                    <div>
-                                        <p class="mb-2 h5"><i class='bx bxs-star' style='color:#f9ff00'></i>&nbsp;<?php echo $res['prate'];?>&nbsp;(<?php echo $res['total_rate'];?>)</p>
-                                        <p class="text-muted mb-0">Rating & Reviews</p>
+                                    <div class="row align-items-start">
+                                        <div class="col mb-3">
+                                            <?php $numRate = (round(200 * ($res['prate'] / 5))/200)*100?>
+                                            <div style="display: flex;">
+                                                <div style="font-size: 20px;">User Rating:&nbsp;&nbsp;</div>
+                                                <div class="star-ratings">
+                                                    <p class="fill-ratings" style="width: <?=$numRate?>%;">
+                                                        <span>★★★★★</span>
+                                                    </p>
+                                                    <p class="empty-ratings">
+                                                        <span>★★★★★</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="text-muted"><?=$res['prate']?>  average based on <?=$res['total_rate']?> reviews.</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -133,12 +163,6 @@ include_once 'header.php';
             </div>
         </div>
     </div>
-
-
-
-
-
-
 </main>
 
 
@@ -147,20 +171,6 @@ include_once 'header.php';
     <?php require_once 'js/index.js' ?>
 </script>
 
-<?php
-if (isset($_POST['btn_hide'])) {
-    $hide = $_POST['hide'];
-    if (isset($hide)) {
-        $_SESSION['agentselected'] = $hide;
-        ?>
-        <script>
-        location = 'agentportfolio.php';
-        exit;
-        </script>
-        <?php
-    }
-}
-?>
 <footer id="sticky-footer" class="sticky-footer flex-shrink-0 py-4">
     <div class=" text-center">
         <small>Copyright &copy; CS3</small>

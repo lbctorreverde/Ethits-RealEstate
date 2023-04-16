@@ -363,9 +363,9 @@ input[type=submit]{
     color: rgb(44, 44, 44);
 }
 
-button {
+/* button {
     border-radius: 0 !important;
-}
+} */
 
 .form-control {
     font-size: 13px;

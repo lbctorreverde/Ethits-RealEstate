@@ -98,8 +98,7 @@ if(isset($_POST['page'])){
     }
     
     if($pselect == 2){ 
-        $orderSQL .= (strpos($orderSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $orderSQL .= " ORDER BYprice DESC"; 
+        $orderSQL .= " ORDER BY price DESC"; 
     }elseif($pselect == 1){
         $orderSQL .= " ORDER BY price ASC"; 
     }elseif($pdate == 2){
@@ -169,30 +168,30 @@ if(isset($_POST['page'])){
                         <form method="POST" action="properties.php" class="property-name-post d-flex form-control text-start">
                             <input type="hidden" id="hide" name="hide" value="<?php echo $row['agent_ID'] ?>">
                             <button class="property-name-button" type="submit" id="btn_hide" name="btn_hide">
-                                <h5 class="card-title"><b><?php echo $row['title']; ?></b></h5>
+                                <h6 class="card-title"><b><?php echo $row['title']; ?></b></h5>
                             </button>
                         </form>
                         <ul class="list-group list-group-flush" style="line-height: 0; font-size: 14px;">
                             <span class="icon-livingsize"></span>
                             <hr>
                             <li class="list-group-item">
-                                <span><b>Bedroom:</b>&nbsp;<?php echo $row['bedroom']; ?></span>&nbsp;&nbsp;&nbsp;
-                                <span><b>Bathroom:</b>&nbsp;<?php echo $row['bathroom']; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span><b>Bedroom:</b>&nbsp;<?php echo $row['bedroom']; ?></span>&nbsp;
+                                <span><b>Bathroom:</b>&nbsp;<?php echo $row['bathroom']; ?></span>&nbsp;&nbsp;&nbsp;
                                 <span><b>Land Size:</b>&nbsp;<?php echo $row['lotSize']; ?>m²</span>
                             </li>
                             <li class="list-group-item">
-                                <span ><b>Garage:&nbsp;</b><span class="text-success"><?php echo $row['garage']; ?></span>&nbsp;
-                                <span><b>Basement:</b>&nbsp;<?php echo $row['basement']; ?></span>&nbsp;&nbsp;
-                                <span><b>Floor Area:</b>&nbsp;<?php echo $row['floorArea']; ?>m²</span>
+                                <span><b>Garage:&nbsp;</b><span class="text-success"><?php echo $row['garage']; ?></span>
+                                    <span><b>Basement:</b>&nbsp;<?php echo $row['basement']; ?></span>&nbsp;
+                                    <span><b>Floor Area:</b>&nbsp;<?php echo $row['floorArea']; ?>m²</span>
                             </li>
                             <hr>
                             <li class="list-group-item">
-                                <b>Style:&nbsp;</b><?php echo $row['propertyType']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <b>Style:&nbsp;</b><?php echo $row['propertyType']; ?>&nbsp;&nbsp;&nbsp;
                                 <b>Special Features:&nbsp;</b><?php echo $row['specialFeatures']; ?>
                             </li>
                             <hr>
                             <li class="list-group-item text-muted">
-                                <p class="card-text"><small class="text-muted" style="line-height: 0; font-size: 15px;"><?php echo $row['location']?></small></p>
+                                <p class="card-text"><small class="text-muted" style="line-height: 0; font-size: 15px;"><?php echo $row['location'] ?></small></p>
                             </li>
                             <hr>
                         </ul>

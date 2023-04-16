@@ -1,5 +1,6 @@
 <?php
 include_once 'header.php';
+include 'chome.php';
 include('dbconfig.php');
 
 // Include pagination library file 
@@ -35,17 +36,27 @@ $query = $connect->query("SELECT * FROM tbl_property WHERE statusProperty ='Acti
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <?php
-if (isset($_SESSION['verified_user_id'])) {
-    $var1 = $_SESSION['verified_user_id'];
-    $query1 = "SELECT *  from tbl_agent WHERE email = '$var1'";
-    $result1 = mysqli_query($connect, $query1);
-    $row1 = mysqli_fetch_assoc($result1);
+if ($_SESSION['enduser'] == 'Agent') {
+    if (isset($_SESSION['user_ID'])) {
+        $var1 = $_SESSION['user_ID'];
+        $query1 = "SELECT *  from tbl_agent WHERE agent_ID = '$var1'";
+        $result1 = mysqli_query($connect, $query1);
+        $row1 = mysqli_fetch_assoc($result1);
+    }
+}else {
+    if (isset($_SESSION['user_ID'])) {
+        $var1 = $_SESSION['user_ID'];
+        $query1 = "SELECT *  from tbl_user WHERE user_ID = '$var1'";
+        $result1 = mysqli_query($connect, $query1);
+        $row1 = mysqli_fetch_assoc($result1);
+    }
 }
+
 ?>
 <script type="text/javascript">
-    function searchFilter(page_num) {
+    function searchFilter(page_num, clear_Data) {
         page_num = page_num ? page_num : 0;
-        $('#clear').click(function() {
+        if (clear_Data == 'clear') {
             $('#pselect').prop('selectedIndex', 0)
             $('#pdate').prop('selectedIndex', 0)
             $('#nearby').prop('selectedIndex', 0)
@@ -57,7 +68,7 @@ if (isset($_SESSION['verified_user_id'])) {
             $('#pmin').prop('selectedIndex', 0)
             document.getElementById('pmax').value = ''
             document.getElementById('pmin').value = ''
-        });
+        }
 
         var keywords = $('#keywords').val();
         var filterBy = $('#city').val();
@@ -117,7 +128,7 @@ if (isset($_SESSION['verified_user_id'])) {
 <div class="grid-container">
     <div class="filter">
         <b><label style="font-size: 20px;"><i class='bx bx-filter-alt'></i>&nbsp;&nbsp;Search Filter</label></b><br><br>
-        <button class="btnApply" style="height: 40px;" name="clear" id="clear" onclick="searchFilter();">Clear Filter</button>
+        <button class="btnApply" style="height: 40px;" name="clear" id="clear" onclick="searchFilter('','clear');">Clear Filter</button>
         <hr>
         <label for="inputEmail4" class="form-label">House Style</label>
         <select class="form-select" style="width:170px;" name="style" id="style" onchange="searchFilter();">
@@ -221,25 +232,25 @@ if (isset($_SESSION['verified_user_id'])) {
                                 <form method="POST" action="properties.php" class="property-name-post d-flex form-control text-start">
                                     <input type="hidden" id="hide" name="hide" value="<?php echo $row['agent_ID'] ?>">
                                     <button class="property-name-button" type="submit" id="btn_hide" name="btn_hide">
-                                        <h5 class="card-title"><b><?php echo $row['title']; ?></b></h5>
+                                        <h6 class="card-title"><b><?php echo $row['title']; ?></b></h5>
                                     </button>
                                 </form>
                                 <ul class="list-group list-group-flush" style="line-height: 0; font-size: 14px;">
                                     <span class="icon-livingsize"></span>
                                     <hr>
                                     <li class="list-group-item">
-                                        <span><b>Bedroom:</b>&nbsp;<?php echo $row['bedroom']; ?></span>&nbsp;&nbsp;&nbsp;
-                                        <span><b>Bathroom:</b>&nbsp;<?php echo $row['bathroom']; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span><b>Bedroom:</b>&nbsp;<?php echo $row['bedroom']; ?></span>&nbsp;
+                                        <span><b>Bathroom:</b>&nbsp;<?php echo $row['bathroom']; ?></span>&nbsp;&nbsp;&nbsp;
                                         <span><b>Land Size:</b>&nbsp;<?php echo $row['lotSize']; ?>m²</span>
                                     </li>
                                     <li class="list-group-item">
-                                        <span><b>Garage:&nbsp;</b><span class="text-success"><?php echo $row['garage']; ?></span>&nbsp;&nbsp;
-                                            <span><b>Basement:</b>&nbsp;<?php echo $row['basement']; ?></span>&nbsp;&nbsp;
+                                        <span><b>Garage:&nbsp;</b><span class="text-success"><?php echo $row['garage']; ?></span>
+                                            <span><b>Basement:</b>&nbsp;<?php echo $row['basement']; ?></span>&nbsp;
                                             <span><b>Floor Area:</b>&nbsp;<?php echo $row['floorArea']; ?>m²</span>
                                     </li>
                                     <hr>
                                     <li class="list-group-item">
-                                        <b>Style:&nbsp;</b><?php echo $row['propertyType']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <b>Style:&nbsp;</b><?php echo $row['propertyType']; ?>&nbsp;&nbsp;&nbsp;
                                         <b>Special Features:&nbsp;</b><?php echo $row['specialFeatures']; ?>
                                     </li>
                                     <hr>

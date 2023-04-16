@@ -27,7 +27,7 @@ if (isset($_POST["verify_email"])) {
         exit();
     }
 
-    $_SESSION['status'] = "User successfully registered and verified";
+    $_SESSION['status'] = "Agent successfully registered and verified";
     header('Location: login.php');
     exit();
 }

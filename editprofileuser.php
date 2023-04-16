@@ -222,7 +222,7 @@ if (isset($_POST['btn_saveChangesUser'])) {
         $dPhoto1 = addslashes(file_get_contents($dPhoto)) ?? "";
         $sql = "UPDATE `tbl_user` SET `fName`='$fname',`lName`='$lname',`mName`='$mname',`sex`='$sex'
         ,`bday`='$bday',`city`='$city',`brgy`='$brgy',`str`='$str',`contactNo`='$contact',
-        ,`displayImg`='$dPhoto1' WHERE user_ID ='$id'";
+        displayImg='".$dPhoto1."' WHERE user_ID ='$id'";
         $update = mysqli_query($connect, $sql);
     } else {
         $sql = "UPDATE `tbl_user` SET `fName`='$fname',`lName`='$lname',`mName`='$mname',`sex`='$sex'

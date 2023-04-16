@@ -1,5 +1,6 @@
 <?php
 include_once 'header.php';
+include 'chome.php';
 include('dbconfig.php');
 
 // Include pagination library file 
@@ -64,18 +65,8 @@ $query = $connect->query("SELECT
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 
-
-
-    function searchFilter(page_num) {
+    function searchFilter(page_num, btn_Data) {
         page_num = page_num?page_num:0;
-
-        var all = "";
-        var pend = "";
-        var sold = "";
-        var rate = "";
-        var cnl = "";
-        var rej = "";
-
 
         // $('#all').click(All)
         // $('#pend').click(Pend)
@@ -83,97 +74,102 @@ $query = $connect->query("SELECT
         // $('#rate').click(Rate)
         // $('#cnl').click(Cnl)
         // $('#rej').click(Rej)
-        $('#all, #pend, #sold, #rate, #cnl, #rej').click(function () {
-            if (this.id == 'all') {
-                var filter = this.id
-                $.ajax({
-                    type: 'POST',
-                    url: 'propertyalluserdata.php',
-                    data:'page='+page_num+'&filter='+filter,
-                    beforeSend: function () {
-                        $('.loading-overlay').show();
-                    },
-                    success: function (html) {
-                        $('#result').html(html);
-                        $('.loading-overlay').fadeOut("slow");
-                    }
-                });
-            }
-            else if (this.id == 'pend') {
-                var filter = this.id
-                $.ajax({
-                    type: 'POST',
-                    url: 'propertyalluserdata.php',
-                    data:'page='+page_num+'&filter='+filter,
-                    beforeSend: function () {
-                        $('.loading-overlay').show();
-                    },
-                    success: function (html) {
-                        $('#result').html(html);
-                        $('.loading-overlay').fadeOut("slow");
-                    }
-                });
-            }
-            else if (this.id == 'sold') {
-                var filter = this.id
-                $.ajax({
-                    type: 'POST',
-                    url: 'propertyalluserdata.php',
-                    data:'page='+page_num+'&filter='+filter,
-                    beforeSend: function () {
-                        $('.loading-overlay').show();
-                    },
-                    success: function (html) {
-                        $('#result').html(html);
-                        $('.loading-overlay').fadeOut("slow");
-                    }
-                });
-            }
-            else if (this.id == 'rate') {
-                var filter = this.id
-                $.ajax({
-                    type: 'POST',
-                    url: 'propertyalluserdata.php',
-                    data:'page='+page_num+'&filter='+filter,
-                    beforeSend: function () {
-                        $('.loading-overlay').show();
-                    },
-                    success: function (html) {
-                        $('#result').html(html);
-                        $('.loading-overlay').fadeOut("slow");
-                    }
-                });
-            }
-            else if (this.id == 'cnl') {
-                var filter = this.id
-                $.ajax({
-                    type: 'POST',
-                    url: 'propertyalluserdata.php',
-                    data:'page='+page_num+'&filter='+filter,
-                    beforeSend: function () {
-                        $('.loading-overlay').show();
-                    },
-                    success: function (html) {
-                        $('#result').html(html);
-                        $('.loading-overlay').fadeOut("slow");
-                    }
-                });
-            }
-            else if (this.id == 'rej') {
-                var filter = this.id
-                $.ajax({
-                    type: 'POST',
-                    url: 'propertyalluserdata.php',
-                    data:'page='+page_num+'&filter='+filter,
-                    beforeSend: function () {
-                        $('.loading-overlay').show();
-                    },
-                    success: function (html) {
-                        $('#result').html(html);
-                        $('.loading-overlay').fadeOut("slow");
-                    }
-                });
-            }
+        if (btn_Data == 'all') {
+            $.ajax({
+                type: 'POST',
+                url: 'propertyalluserdata.php',
+                data:'page='+page_num+'&filter='+btn_Data,
+                beforeSend: function () {
+                    $('.loading-overlay').show();
+                },
+                success: function (html) {
+                    $('#result').html(html);
+                    $('.loading-overlay').fadeOut("slow");
+                }
+            });
+        }
+        else if (btn_Data == 'pend') {
+            $.ajax({
+                type: 'POST',
+                url: 'propertyalluserdata.php',
+                data:'page='+page_num+'&filter='+btn_Data,
+                beforeSend: function () {
+                    $('.loading-overlay').show();
+                },
+                success: function (html) {
+                    $('#result').html(html);
+                    $('.loading-overlay').fadeOut("slow");
+                }
+            });
+        }
+        else if (btn_Data == 'sold') {
+            $.ajax({
+                type: 'POST',
+                url: 'propertyalluserdata.php',
+                data:'page='+page_num+'&filter='+btn_Data,
+                beforeSend: function () {
+                    $('.loading-overlay').show();
+                },
+                success: function (html) {
+                    $('#result').html(html);
+                    $('.loading-overlay').fadeOut("slow");
+                }
+            });
+        }
+        else if (btn_Data == 'rate') {
+            $.ajax({
+                type: 'POST',
+                url: 'propertyalluserdata.php',
+                data:'page='+page_num+'&filter='+btn_Data,
+                beforeSend: function () {
+                    $('.loading-overlay').show();
+                },
+                success: function (html) {
+                    $('#result').html(html);
+                    $('.loading-overlay').fadeOut("slow");
+                }
+            });
+        }
+        else if (btn_Data == 'cnl') {
+            $.ajax({
+                type: 'POST',
+                url: 'propertyalluserdata.php',
+                data:'page='+page_num+'&filter='+btn_Data,
+                beforeSend: function () {
+                    $('.loading-overlay').show();
+                },
+                success: function (html) {
+                    $('#result').html(html);
+                    $('.loading-overlay').fadeOut("slow");
+                }
+            });
+        }
+        else if (btn_Data == 'rej') {
+            $.ajax({
+                type: 'POST',
+                url: 'propertyalluserdata.php',
+                data:'page='+page_num+'&filter='+btn_Data,
+                beforeSend: function () {
+                    $('.loading-overlay').show();
+                },
+                success: function (html) {
+                    $('#result').html(html);
+                    $('.loading-overlay').fadeOut("slow");
+                }
+            });
+        }
+    }
+
+    function chat(dataF) {
+        // let filter = $('#all').val();
+        console.log(dataF);
+        $.ajax({
+        type: 'POST',
+        url: 'chat.php',
+        data:'filter='+dataF,
+        success: function (html) {
+            $('#chatResult').html(html);
+        }
         });
     }
 </script>
@@ -211,12 +207,12 @@ $query = $connect->query("SELECT
         </div>
         <div class="card2">
             <ul class="ulclass">
-                <li><button class="btnAll" name="all" id="all" value="all" onclick="searchFilter();">All</button></li>
-                <li><button class="btnPending" name="pend" id="pend" value="pend" onclick="searchFilter();">Pending</button></li>
-                <li><button class="btnSold" name="sold" id="sold" value="sold" onclick="searchFilter();">Sold</button></li>
-                <li><button class="btnRate" name="rate" id="rate" value="rate" onclick="searchFilter();">To Rate</button></li>
-                <li><button class="btnCnl" name="cnl" id="cnl" value="cnl" onclick="searchFilter();">Cancelled</button></li>
-                <li><button class="btnRej" name="rej" id="rej" value="rej" onclick="searchFilter();">Reject</button></li>
+                <li><button class="btnAll" name="all" id="all" value="all" onclick="searchFilter('','all');">All</button></li>
+                <li><button class="btnPending" name="pend" id="pend" value="pend" onclick="searchFilter('','pend');">Pending</button></li>
+                <li><button class="btnSold" name="sold" id="sold" value="sold" onclick="searchFilter('','sold');">Sold</button></li>
+                <li><button class="btnRate" name="rate" id="rate" value="rate" onclick="searchFilter('','rate');">To Rate</button></li>
+                <li><button class="btnCnl" name="cnl" id="cnl" value="cnl" onclick="searchFilter('','cnl');">Cancelled</button></li>
+                <li><button class="btnRej" name="rej" id="rej" value="rej" onclick="searchFilter('','rej');">Reject</button></li>
             </ul>
             <div id= "result" class="boxx">
                 <?php 
@@ -257,21 +253,23 @@ $query = $connect->query("SELECT
                         ?>
                     </div>
                     <div class="grid-item item3">
+                        <div class="rCont">
+
                         <form method="POST" action="propertyalluser.php">
                                 <input type="hidden" id="hide" name="hide" value="<?php echo $res['agent_ID'] ?>">
-                        <div class="rCont">
-                                <button class="btnView" type="submit" id="btn_hide" name="btn_hide">
+                                
+                                <button style="width:180px;" class="btnView" type="submit" id="btn_hide" name="btn_hide">
                                     View Agent
                                 </button>
-                            <button class="btnView">Chat</button>
-                            
+                        </form>
+                        
+                            <button id="btn_chat" name="btn_chat" class="btnView" onclick="chat('<?=$res['fName']?>')">Chat</button>
                             <?php if($res['rate'] != null){?>
                                 <div style="font-size:15px; color:blue;">Rating:&nbsp;<b><i class='bx bxs-star' style='color:#f9ff00'></i><?php echo $res['rate']?></b></div>
                             <?php }else{?>
                                 <div style="font-size:15px; color:gray;"><b>No rating received</b></div>
                             <?php }?>
                         </div>
-                        </form>
                     </div>  
                     <div class="grid-item item4">
                         <div style="display:flex; gap:10px; text-align: center;">
@@ -303,7 +301,7 @@ $query = $connect->query("SELECT
                         <div class="csub">
                             <?php 
                                 if($res['status_Trans'] == "Pending"){
-                            ?><form method="POST" onsubmit="return confirm('Are you sure you want to cancel?')" action="propertyall.php">
+                            ?><form method="POST" onsubmit="return confirm('Are you sure you want to cancel?')" action="propertyalluser.php">
                                 <input type="hidden" id="property" name="property" value="<?php echo $res['property_ID'] ?>">
                                 <input type="hidden" id="hide" name="hide" value="<?php echo $res['trans_ID'] ?>">
                                 <input type="submit" id="btn_Cancel" value="Cancel" name="btn_Cancel" class="btn-reject btn" style="background-color: red;">
@@ -358,14 +356,14 @@ $query = $connect->query("SELECT
         if (isset($result3)) {
         ?>
             <script>
-                alert('Successfully Rejected');
-                location = 'propertyall.php';
+                alert('Successfully Cancelled');
+                location = 'propertyalluser.php';
                 exit;
             </script>
         <?php } else { ?>
             <script>
                 alert('Transaction Failed');
-                location = 'propertyall.php';
+                location = 'propertyalluser.php';
                 exit;
             </script>
     <?php

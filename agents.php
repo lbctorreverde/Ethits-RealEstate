@@ -1,6 +1,6 @@
 <?php
 include_once 'header.php';
-
+include 'chome.php';
 include('dbconfig.php');
 $_SESSION['agentselected'] = "";
 // Include pagination library file 
@@ -36,36 +36,51 @@ $query = $connect->query("SELECT * FROM tbl_agent ORDER BY lName LIMIT $limit");
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <?php
-if (isset($_SESSION['verified_user_id'])) {
-    $var1 = $_SESSION['verified_user_id'];
-    $query1 = "SELECT *  from tbl_user WHERE email = '$var1'";
-    $result1 = mysqli_query($connect, $query1);
-    $row1 = mysqli_fetch_assoc($result1);
+if (!isset($_SESSION['enduser'])) {
+    $near = "  ";
+}else{
+    if ($_SESSION['enduser'] == 'Agent') {
+        if (isset($_SESSION['user_ID'])) {
+            $var1 = $_SESSION['user_ID'];
+            $query1 = "SELECT *  from tbl_agent WHERE agent_ID = '$var1'";
+            $result1 = mysqli_query($connect, $query1);
+            $row1 = mysqli_fetch_assoc($result1);
+            $near = $row1['city'];
+        }
+    }else {
+        if (isset($_SESSION['user_ID'])) {
+            $var1 = $_SESSION['user_ID'];
+            $query1 = "SELECT *  from tbl_user WHERE user_ID = '$var1'";
+            $result1 = mysqli_query($connect, $query1);
+            $row1 = mysqli_fetch_assoc($result1);
+            $near = $row1['city'];
+        }
+    }
 }
+
 ?>
 
 <script type="text/javascript">
-    function searchFilter(page_num) {
+    function searchFilter(page_num, clear_Data) {
         page_num = page_num ? page_num : 0;
+        if (clear_Data == 'clear') {
+            $('#nearby').prop('selectedIndex', 0)
+            $('#pdate').prop('selectedIndex', 0)
+            $('#prating').prop('selectedIndex', 0)
+            $('#city').prop('selectedIndex', 0)
+        }
         var keywords = $('#keywords').val();
         var filterBy = $('#city').val();
         var selectBy = $('#prating').val();
         var dateBy = $('#pdate').val();
         var nearBy = $('#nearby').val();
 
-        $('#clear').click(function() {
-            $('#nearby').prop('selectedIndex', 0)
-            $('#pdate').prop('selectedIndex', 0)
-            $('#prating').prop('selectedIndex', 0)
-            $('#city').prop('selectedIndex', 0)
-        });
-
         $('#city').click(function() {
             $('#nearby').prop('selectedIndex', 0)
             $('#pdate').prop('selectedIndex', 0)
             $('#prating').prop('selectedIndex', 0)
         });
-
+        
         $('#nearby').click(function() {
             $('#prating').prop('selectedIndex', 0)
             $('#pdate').prop('selectedIndex', 0)
@@ -75,25 +90,19 @@ if (isset($_SESSION['verified_user_id'])) {
         $('#pdate').click(function() {
             $('#prating').prop('selectedIndex', 0)
             $('#nearby').prop('selectedIndex', 0)
-            $('#city').prop('selectedIndex', 0)
         });
 
         $('#prating').click(function() {
             $('#pdate').prop('selectedIndex', 0)
             $('#nearby').prop('selectedIndex', 0)
-            $('#city').prop('selectedIndex', 0)
         });
 
         $.ajax({
             type: 'POST',
             url: 'agentsearch.php',
             data: 'page=' + page_num + '&keywords=' + keywords + '&filterBy=' + filterBy + '&selectBy=' + selectBy + '&dateBy=' + dateBy + '&nearBy=' + nearBy,
-            beforeSend: function() {
-                $('.loading-overlay').show();
-            },
             success: function(html) {
                 $('#result').html(html);
-                $('.loading-overlay').fadeOut("slow");
             }
         });
     }
@@ -120,7 +129,7 @@ if (isset($_SESSION['verified_user_id'])) {
                 <select class="form-select" style="width:170px; height: 40px;" name="nearby" id="nearby" onchange="searchFilter();">
                     <option value="" selected disabled>Sort</option>
                     <option value="All">All</option>
-                    <option value="<?php echo $row1['city']; ?>">Nearby</option>
+                    <option value="<?php echo $near;?>">Nearby</option>
                 </select>
                 <select class="form-select" style="width:170px; height: 40px;" name="pdate" id="pdate" onchange="searchFilter();">
                     <option value="" selected disabled>Date</option>
@@ -147,7 +156,7 @@ if (isset($_SESSION['verified_user_id'])) {
                     <option value="Pilar">Pilar</option>
                     <option value="Samal">Samal</option>
                 </select>
-                <button class="btnClear" style="width:170px;  height: 40px;" name="clear" id="clear" onclick="searchFilter();">
+                <button class="btnClear" style="width:170px;  height: 40px;" name="clear" id="clear" onclick="searchFilter('','clear');">
                     Clear Filter
                 </button>
         </div>
@@ -194,6 +203,7 @@ if (isset($_SESSION['verified_user_id'])) {
                                     <p class="card-text"><small class="text-muted lh-sm"><?php echo $row['contactNo'] ?></small></p>
                                 </div>
                             </div>
+                            <hr>
                     <?php
                         }
                     } else {
@@ -214,11 +224,11 @@ if (isset($_SESSION['verified_user_id'])) {
 
 </section>
 
-<footer id="sticky-footer" class="sticky-footer flex-shrink-0 py-4">
+<!-- <footer id="sticky-footer" class="sticky-footer flex-shrink-0 py-4">
     <div class=" text-center">
         <small>Copyright &copy; CS3</small>
     </div>
-</footer>
+</footer> -->
 
 <?php
 if (isset($_POST['btn_hide'])) {

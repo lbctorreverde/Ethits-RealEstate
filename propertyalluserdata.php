@@ -340,7 +340,7 @@ if (isset($_POST['btn_rate'])) {
     
     $allrate = $count1+$count2+$count3+$count4+$count5;
     $rating = ((($count5 * 5)+($count4 * 4)+($count3 * 3)+($count2 * 2)+($count1 * 1))/$allrate);
-    echo $allrate."&".$count5."&".$count4."&".$rating;
+    
     $rating = number_format((float)$rating, 2, '.', '');
     $sql4 = "UPDATE tbl_agent SET `prate`= '".$rating."', total_rate='".$allrate."' WHERE agent_ID='$agent'";
     $result4 = mysqli_query($connect, $sql4);

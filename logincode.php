@@ -2,6 +2,8 @@
 session_start();
 include ('dbconfig.php');
 //LOGIN AGENT
+unset($_SESSION['status']);
+
 if(isset($_POST['btn_loginAgent'])){
    
     $email = $_POST["email"];

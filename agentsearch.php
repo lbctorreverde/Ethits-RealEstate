@@ -43,18 +43,13 @@ if(isset($_POST['page'])){
         $whereSQL .= " city LIKE '%".$filter."%'"; 
     }
 
-    if($filter != ''){ 
-        $whereSQL .= (strpos($whereSQL, 'WHERE') !== false)?" AND ":" WHERE "; 
-        $whereSQL .= " city LIKE '%".$filter."%'"; 
-    }elseif ($nearBy == 'All') {
+    if ($nearBy == 'All') {
         $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
         $whereSQL .= " lName"; 
     }elseif ($nearBy != '') {
         $whereSQL .= (strpos($whereSQL, 'WHERE') !== false)?" AND ":" WHERE "; 
         $whereSQL .= " city LIKE '%".$nearBy."%'"; 
-    }
-
-    if($prating == 1){ 
+    }else if($prating == 1){ 
         $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
         $whereSQL .= " prate DESC"; 
     }elseif($prating == 2){
@@ -71,7 +66,6 @@ if(isset($_POST['page'])){
     if($whereSQL == ''){
         $whereSQL .= " ORDER BY lName";
     }
-
     // if($_POST['filterBy'] != null){ 
     //     $whereSQL .= (strpos($whereSQL, 'WHERE') !== false)?" AND ":" WHERE "; 
     //     $whereSQL .= " location LIKE '%".$_POST['filterBy']."%'"; 
@@ -136,7 +130,7 @@ if(isset($_POST['page'])){
                             <p class="card-title text-muted">Contact: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rating:&nbsp;<i class='bx bxs-star' style='color:#f9ff00'></i><?php echo $row['prate']?></p>
                             <p class="card-text"><small class="text-muted lh-sm"><?php echo $row['contactNo'] ?></small></p>
                         </div>
-                    </div>
+                    </div><hr>
             <?php
                 }
             } else {

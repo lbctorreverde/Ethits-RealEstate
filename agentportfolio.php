@@ -1,16 +1,41 @@
 <?php
 include_once 'header.php';
+include 'chome.php';
 
 include('dbconfig.php');
 ?>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet"  href="css/nested.scss">
 <style>
     <?php include 'css/agentportfolio.css'; ?>
+    
 </style>
+<script type="text/javascript">
+    function chat(dataF) {
+        // let filter = $('#all').val();
+        console.log(dataF);
+        $.ajax({
+        type: 'POST',
+        url: 'chat.php',
+        data:'filter='+dataF,
+        success: function (html) {
+            $('#chatResult').html(html);
+        }
+        });
+    }
+
+    // $(document).ready(function() {
+    // // Gets the span width of the filled-ratings span
+    // // this will be the same for each rating
+    // var star_rating_width = $('.fill-ratings span').width();
+    // // Sets the container of the ratings to span width
+    // // thus the percentages in mobile will never be wrong
+    // $('.star-ratings').width(star_rating_width);
+    // });
+</script>
 
 <section class="container-fluid d-flex align-items-center " id="topsection">
     <?php
-    include('dbconfig.php');
     if (!isset($_SESSION['agentselected'])) {
         $_SESSION['status']  = "Pick an agent/properties";
         header('Location: index.php');
@@ -36,17 +61,34 @@ include('dbconfig.php');
             <div class="toptext">
                 <h1 class="agent-name"><?php echo $rowAgent['lName'].", ".$rowAgent['fName']." ".substr($rowAgent['mName'], 0, 1)."."?></h1>
                 <h3><small class="text-muted">Real Estate Professional</small></h3>
-                <h4>Rating:&nbsp;<i class='bx bxs-star' style='color:#f9ff00'></i>&nbsp;
-                    <?php
-                    if(isset($rowAgent['prate'])){
-                        echo $rowAgent['prate'];?>&nbsp;(<?php echo $rowAgent['total_rate']?>)
-
-                    <?php }else{
-                        echo '--';
-                    }?> 
-                </h4>
+                
             </div>
             <div class="container">
+                <div class="row align-items-start">
+                    <div class="col mb-3">
+                        <?php $numRate = (round(200 * ($rowAgent['prate'] / 5))/200)*100?>
+                        <div style="display: flex;">
+                            <div style="font-size: 20px;">User Rating:&nbsp;&nbsp;</div>
+                            <div class="star-ratings">
+                                <div class="fill-ratings" style="width: <?=$numRate?>%;">
+                                    <span >★★★★★</span>
+                                </div>
+                                <div class="empty-ratings">
+                                    <span >★★★★★</span>
+                                </div>
+                                </div>
+                                <div id="rating1" class="rating"></div>
+                            </div>
+                        <div class="text-muted"><?=$rowAgent['prate']?>  average based on <?=$rowAgent['total_rate']?> reviews.</div>
+                    </div>
+                    <div class="col text-end">
+                        <?php 
+                        if ($_SESSION['enduser'] == 'User') {?>
+                            <button id="btn_chat" name="btn_chat" class="btnView" class="btn btn-primary" onclick="chat('<?=$rowAgent['fName']?>')"><i class='bx bx-conversation'></i></button>
+                        <?php } 
+                        ?>
+                    </div>
+                </div>
                 <div class="row align-items-start">
                     <div class="col mb-3">
                         <i class="bi bi-building-fill me-2"></i>
@@ -71,6 +113,7 @@ include('dbconfig.php');
                 </div>
             </div>
         </div>
+        &nbsp;
     </div>
 </section>
 
@@ -220,8 +263,9 @@ include('dbconfig.php');
                     </div>
                 </div>
                 <div style='text-align:left; padding-left:10px; padding-top:10px'>
-                    <h8><b>Feedback:&nbsp; </b></h8>"<?php echo $res['feedback']?>"<br>
-                    <h9><b>Rating:&nbsp;<i class='bx bxs-star' style='color:#f9ff00'></i>&nbsp; <?php echo $res['rate']?></b></h9>
+                    <h8><b>Feedback:&nbsp;<br> </b></h8>"<?php echo $res['feedback']?>"<br>
+                    <h9><b>Rating:&nbsp;<i class='bx bxs-star' style='color:#f9ff00'></i>&nbsp; <?php echo $res['rate']?></b></h9><br>
+                    <h8><b>Transaction:&nbsp; </b></h8><?php echo $res['status_Trans']?>
                 </div>
             </div>
             <br>
