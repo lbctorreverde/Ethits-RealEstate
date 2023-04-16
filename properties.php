@@ -267,7 +267,7 @@ if (isset($_SESSION['verified_user_id'])) {
                                             if ($_SESSION['enduser'] == 'User') { ?>
                                                 <div class="card-footer text-muted">
                                                     <small class="text-muted" style="line-height: 0; font-size: 20px;"><b>&nbsp;&nbsp;&nbsp;₱&nbsp;<?php echo $row['price'] ?></b></small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <button type="submit" id="btn_hide1" name="btn_hide1" class="buybtn btn btn-light">Buy</button>
+                                                    <button type="submit" id="btn_hide1" name="btn_hide1" class="buybtn btn btn-dark">Buy</button>
                                                 </div>
                                             <?php } ?>
                                         </div>

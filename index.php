@@ -122,8 +122,6 @@ include_once 'header.php';
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-=======
 
     <div class="fourth-div">
         <div class="container predict-hero">
@@ -141,7 +139,6 @@ include_once 'header.php';
 
 
 
->>>>>>> 12aad4afe388b7d8b1f682d6be351b65254cc405
 </main>
 
 
