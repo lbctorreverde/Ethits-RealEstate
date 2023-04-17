@@ -1,8 +1,16 @@
 <?php
 include_once 'header.php';
-include 'chome.php';
 
 include('dbconfig.php');
+if (!isset($_GET['agent'])) {
+    $_SESSION['status']  = "Pick an agent/properties";
+    header('Location: index.php');
+    exit();
+}
+$var= $_GET['agent'];
+$sql = $connect->query("UPDATE tbl_agent SET visits = visits + .01 WHERE agent_ID= '$var'");
+include 'chome.php';
+
 ?>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <link rel="stylesheet"  href="css/nested.scss">
@@ -36,12 +44,7 @@ include('dbconfig.php');
 
 <section class="container-fluid d-flex align-items-center " id="topsection">
     <?php
-    if (!isset($_SESSION['agentselected'])) {
-        $_SESSION['status']  = "Pick an agent/properties";
-        header('Location: index.php');
-        exit();
-    }
-    $var = $_SESSION['agentselected'];
+    
     $sqlAgent = "SELECT * FROM tbl_agent WHERE agent_ID = '$var'";
     $resAgent= mysqli_query($connect, $sqlAgent);
     $rowAgent = mysqli_fetch_assoc($resAgent);

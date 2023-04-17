@@ -14,8 +14,10 @@ if(isset($_POST['page'])){
     // Set some useful configuration 
     $baseURL = 'agentsearch.php'; 
     $offset = !empty($_POST['page'])?$_POST['page']:0; 
-    $limit = 20; 
-     
+    $limit = 20;
+
+    
+
     //Set conditions for search 
     $whereSQL = ''; 
     if(!empty($_POST['keywords'])){ 
@@ -46,6 +48,9 @@ if(isset($_POST['page'])){
     if ($nearBy == 'All') {
         $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
         $whereSQL .= " lName"; 
+    }elseif ($nearBy == 'Popular') {
+        $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
+        $whereSQL .= " visits DESC, lName"; 
     }elseif ($nearBy != '') {
         $whereSQL .= (strpos($whereSQL, 'WHERE') !== false)?" AND ":" WHERE "; 
         $whereSQL .= " city LIKE '%".$nearBy."%'"; 

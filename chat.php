@@ -75,7 +75,7 @@ if(isset($_POST['filter'])){
 <button class="btn_open" onclick="openForm()">Chat</button>
 
 <div class="chat-popup" id="chatForm">
-<div class="form-container">
+<div id="form-container" class="form-container">
     <div class="w-300 rounded">
 		   <button class="btnAll" style="background-color: white;" name="all" id="all" onclick="chat()"><i class='bx bx-arrow-back'></i></button>
     	   <div class="d-flex align-items-center">

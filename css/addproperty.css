@@ -101,12 +101,17 @@ a{
 }
 
 .sidebox{
-    padding: 20px;
+    padding: 10px;
     line-height: 50px;
     font-size: 17px;
     border-radius: 10px;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#btn_a:hover{
+    background-color: #333;
+    color:white;
 }
 
 .form{
@@ -140,7 +145,9 @@ a{
     font-size: 15px;
     padding-left: 20px;
 }
-
+.btnView:hover{
+    color: white;
+}
 .btnView{
     background-color: #4CAF50; /* Green */
     border: none;

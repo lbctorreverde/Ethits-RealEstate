@@ -254,15 +254,7 @@ $query = $connect->query("SELECT
                     </div>
                     <div class="grid-item item3">
                         <div class="rCont">
-
-                        <form method="POST" action="propertyalluser.php">
-                                <input type="hidden" id="hide" name="hide" value="<?php echo $res['agent_ID'] ?>">
-                                
-                                <button style="width:180px;" class="btnView" type="submit" id="btn_hide" name="btn_hide">
-                                    View Agent
-                                </button>
-                        </form>
-                        
+                            <a style="text-decoration: none;" class="btnView" href='agentportfolio.php?agent=<?=$res['agent_ID']?>'>View Agent</a>
                             <button id="btn_chat" name="btn_chat" class="btnView" onclick="chat('<?=$res['fName']?>')">Chat</button>
                             <?php if($res['rate'] != null){?>
                                 <div style="font-size:15px; color:blue;">Rating:&nbsp;<b><i class='bx bxs-star' style='color:#f9ff00'></i><?php echo $res['rate']?></b></div>

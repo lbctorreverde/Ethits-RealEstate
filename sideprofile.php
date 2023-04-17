@@ -173,10 +173,10 @@ $query = $connect->query("SELECT
             <br>
             <div class='sidebox'>
                 <!-- &nbsp;&nbsp;<i class='bx bxs-user'></i><a href="#">My Account</a> -->
-                &nbsp;<a style="width:150px; text-align:left;" id="btn_a" class="btn btn-white" href="#"><i class='bx bxs-home' ></i>&nbsp;My Account</a><br>
-                &nbsp;<a style="width:150px; text-align:left;" id="btn_a" class="btn btn-white" href="#"><i class='bx bxs-building-house'></i>&nbsp;My Properties</a><br>
-                &nbsp;<a style="width:150px; text-align:left;" id="btn_a" class="btn btn-white" href="#"><i class='bx bxs-spreadsheet'></i></i>&nbsp;Transaction</a><br>
-                &nbsp;<a style="width:150px; text-align:left;" id="btn_a" class="btn btn-white" href="#"><i class='bx bxs-bell'></i>&nbsp;Notifications</a><br>
+                &nbsp;&nbsp;<a style="width:162px; text-align:left;" id="btn_a" class="btn btn-white" href="#"><i class='bx bxs-home' ></i>&nbsp;My Account</a><br>
+                &nbsp;&nbsp;<a style="width:162px; text-align:left;" id="btn_a" class="btn btn-white" href="#"><i class='bx bxs-building-house'></i>&nbsp;My Properties</a><br>
+                &nbsp;&nbsp;<a style="width:162px; text-align:left;" id="btn_a" class="btn btn-white" href="#"><i class='bx bxs-spreadsheet'></i></i>&nbsp;Transaction</a><br>
+                &nbsp;&nbsp;<a style="width:162px; text-align:left;" id="btn_a" class="btn btn-white" href="#"><i class='bx bxs-bell'></i>&nbsp;Notifications</a><br>
                 <!-- <div class='ccontainer'>
                     <div>&nbsp;&nbsp;<i class='bx bx-bookmark-heart'></i>Favorites</div>
                     <a href="#">&nbsp;&nbsp;Properties</a><br>
@@ -185,14 +185,6 @@ $query = $connect->query("SELECT
             </div>
         </div>
         <div class="card2">
-            <ul class="ulclass">
-                <li><button class="btnAll" name="all" id="all" value="all" onclick="searchFilter('','all');">All</button></li>
-                <li><button class="btnPending" name="pend" id="pend" value="pend" onclick="searchFilter('','pend');">Pending</button></li>
-                <li><button class="btnSold" name="sold" id="sold" value="sold" onclick="searchFilter('','sold');">Sold</button></li>
-                <li><button class="btnRate" name="rate" id="rate" value="rate" onclick="searchFilter('','rate');">To Rate</button></li>
-                <li><button class="btnCnl" name="cnl" id="cnl" value="cnl" onclick="searchFilter('','cnl');">Cancelled</button></li>
-                <li><button class="btnRej" name="rej" id="rej" value="rej" onclick="searchFilter('','rej');">Reject</button></li>
-            </ul>
             <div id= "result" class="boxx">
                 <?php 
                     if($query->num_rows > 0){

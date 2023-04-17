@@ -130,6 +130,7 @@ if (!isset($_SESSION['enduser'])) {
                     <option value="" selected disabled>Sort</option>
                     <option value="All">All</option>
                     <option value="<?php echo $near;?>">Nearby</option>
+                    <option value="Popular">Popularity</option>
                 </select>
                 <select class="form-select" style="width:170px; height: 40px;" name="pdate" id="pdate" onchange="searchFilter();">
                     <option value="" selected disabled>Date</option>
@@ -185,12 +186,9 @@ if (!isset($_SESSION['enduser'])) {
                             <div class="col-7 info-col">
                                 <div class="card-body">
                                     <!-- Paiba nalang, sa notfound.php pa redirect nya eh -->
-                                    <form method="POST" action="agents.php" class="agent-name-post d-flex form-control text-start">
-                                        <input type="hidden" id="hide" name="hide" value="<?php echo $row['agent_ID'] ?>">
-                                        <button class="agent-name-button" type="submit" id="btn_hide" name="btn_hide">
+                                        <a style="text-decoration:none;" class="agent-name-button" href='agentportfolio.php?agent=<?=$row['agent_ID']?>'>
                                             <?php echo $row['lName'] . ", " . $row['fName'] . " " . substr($row['mName'], 0, 1) . "." ?>
-                                        </button>
-                                    </form>
+                                        </a>
                                     <!-- <input type="hidden" id="hide" name="hide" value="<?php //echo $row['agemt_ID'] 
                                                                                             ?>">
                             <a onclick="window.location.href='agentC.php'" type="submit" id="btn_hide" name="btn_hide"><?php //echo $row['lName'] . ", " . $row['fName'] . " " . substr($row['mName'], 0, 1) . "." 
@@ -229,18 +227,3 @@ if (!isset($_SESSION['enduser'])) {
         <small>Copyright &copy; CS3</small>
     </div>
 </footer> -->
-
-<?php
-if (isset($_POST['btn_hide'])) {
-    $hide = $_POST['hide'];
-    if (isset($hide)) {
-        $_SESSION['agentselected'] = $hide;
-?>
-        <script>
-            location = 'agentportfolio.php';
-            exit;
-        </script>
-<?php
-    }
-}
-?>

@@ -70,7 +70,7 @@
 	<button class="btn_open" onclick="openForm()">Chat</button>
 
 	<div class="chat-popup" id="chatForm">
-    <div class="form-container">
+    <div id="form-container" class="form-container">
     	<div>
     		<div class="input-group mb-3">
     			<input type="text"

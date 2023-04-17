@@ -91,12 +91,8 @@ include 'chome.php';
                                 </div>
                                 <h4 class="mb-2"><?php echo $res['lName'].', '.$res['fName'];?></h4>
                                 <p class="text-muted mb-5"><?php echo $res['agency'];?>&nbsp;Agency Inc.<br><?php echo $res['str'].', '.$res['brgy'].', '.$res['city'];?><br><a href="#!"><?php echo $res['email'];?></a></p>
-                                <form method="POST" action="index.php">
-                                    <input type="hidden" id="hide" name="hide" value="<?php echo $res['agent_ID'];?>">
-                                    <button type="submit" id="btn_hide" name="btn_hide" class="btn btn-outline-light rounded-0">
-                                        Go to profile
-                                    </button>
-                                </form>
+                                <a class="btn btn-outline-light rounded-0" href='agentportfolio.php?agent=<?=$res['agent_ID']?>'>Go to profile</a>
+                                        
                                 <div class="d-flex justify-content-center text-center mt-5 mb-2">
                                     <div class="row align-items-start">
                                         <div class="col mb-3">
@@ -176,17 +172,3 @@ include 'chome.php';
         <small>Copyright &copy; CS3</small>
     </div>
 </footer>
-
-<?php
-if (isset($_POST['btn_hide'])) {
-    $hide = $_POST['hide'];
-    if (isset($hide)) {
-        $_SESSION['agentselected'] = $hide;
-        ?>
-        <script>
-        location = 'agentportfolio.php';
-        exit;
-        </script>
-        <?php
-    }
-}
