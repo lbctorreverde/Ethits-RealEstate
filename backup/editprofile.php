@@ -1,16 +1,11 @@
 <?php
-
-use Kreait\Firebase\Value\Email;
-
 include_once 'header.php'; ?>
 
 <style>
     <?php include 'css/editprofile.css' ?>
 </style>
 
-<script>
-    <?php require_once 'js/editprofile.js' ?>
-</script>
+
 
 <div class="container-fluid">
     <div class="row flex-nowrap">
@@ -97,7 +92,7 @@ include_once 'header.php'; ?>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" name="contact" maxlength="11" value="0<?php echo $row['contactNo'] ?>" placeholder="0987654321" readonly required>
+                            <input type="text" class="form-control" name="contact" maxlength="11" value="<?php echo $row['contactNo'] ?>" placeholder="0987654321" readonly required>
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Agency</label>

@@ -173,10 +173,19 @@ $query = $connect->query("SELECT
             <br>
             <div class='sidebox'>
                 <!-- &nbsp;&nbsp;<i class='bx bxs-user'></i><a href="#">My Account</a> -->
-                &nbsp;<a style="width:150px; text-align:left;" id="btn_a" class="btn btn-white" href="#"><i class='bx bxs-home' ></i>&nbsp;My Account</a><br>
-                &nbsp;<a style="width:150px; text-align:left;" id="btn_a" class="btn btn-white" href="#"><i class='bx bxs-building-house'></i>&nbsp;My Properties</a><br>
-                &nbsp;<a style="width:150px; text-align:left;" id="btn_a" class="btn btn-white" href="#"><i class='bx bxs-spreadsheet'></i></i>&nbsp;Transaction</a><br>
-                &nbsp;<a style="width:150px; text-align:left;" id="btn_a" class="btn btn-white" href="#"><i class='bx bxs-bell'></i>&nbsp;Notifications</a><br>
+                <div class="dropdown">
+                    &nbsp;&nbsp;<a class="btn btn-white dropdown-toggle" id="btn_a" href="#" role="button" style="width: 180px;text-align: left; border-radius:10px;" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown link
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="sideprofile.php">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Documents</a></li>
+                        <li><a class="dropdown-item" href="#">Change Password</a></li>
+                    </ul>
+                </div>
+                &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left; border-radius:10px;" class="btn btn-white" href="#"><i class='bx bxs-building-house'></i>&nbsp;My Properties</a><br>
+                &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left;border-radius:10px;" class="btn btn-white" href="propertyall.php"><i class='bx bxs-spreadsheet'></i></i>&nbsp;Transaction</a><br>
+                &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left;border-radius:10px;" class="btn btn-white" href="#"><i class='bx bxs-bell'></i>&nbsp;Notifications</a><br>
                 <!-- <div class='ccontainer'>
                     <div>&nbsp;&nbsp;<i class='bx bx-bookmark-heart'></i>Favorites</div>
                     <a href="#">&nbsp;&nbsp;Properties</a><br>
@@ -275,6 +284,7 @@ $query = $connect->query("SELECT
                                 if($res['status_Trans'] == "Pending"){
                             ?><form method="POST" onsubmit="return confirm('Are you sure?')" action="propertyall.php">
                                 <input type="hidden" id="hide" name="hide" value="<?php echo $res['trans_ID'] ?>">
+                                <input type="hidden" id="agentID" name="agentID" value="<?php echo $res['agent_ID'] ?>">
                                 <input type="hidden" id="property" name="property" value="<?php echo $res['property_ID'] ?>">
                                 <input type='submit' name='btn_Accept' id='btn_Accept' value="Accept" class="btn-reject btn" style="background-color: green;">
                                 <input type='submit' name='btn_Cancel' id='btn_Cancel' value="Reject" class="btn-reject btn" style="background-color: red;">
@@ -304,12 +314,12 @@ $query = $connect->query("SELECT
 <?php 
     if (isset($_POST['btn_Accept'])) {
         $hidden = $_POST['hide'];
-
-        $hidden = $_POST['hide'];
+        $agentID = $_POST['agentID'];
         $property = $_POST['property'];
 
         $sql3 = "UPDATE tbl_transaction SET `status_Trans`='Sold' WHERE trans_ID='$hidden'";
         $result3 = mysqli_query($connect, $sql3);
+        $sql = $connect->query("UPDATE tbl_agent SET visits = visits + .9 WHERE agent_ID= '$agentID'");
 
         $sql3 = "UPDATE tbl_property SET `statusProperty`='Sold' WHERE property_ID='$property'";
         $result3 = mysqli_query($connect, $sql3);
@@ -338,6 +348,8 @@ $query = $connect->query("SELECT
         $sql3 = "UPDATE tbl_transaction SET `status_Trans`='Rejected' WHERE trans_ID='$hidden'";
         $result3 = mysqli_query($connect, $sql3);
 
+        $sql = $connect->query("UPDATE tbl_agent SET visits = visits + .3 WHERE agent_ID= '$agentID'");
+
         $sql3 = "UPDATE tbl_property SET `statusProperty`='Active' WHERE property_ID='$property'";
         $result3 = mysqli_query($connect, $sql3);
 
@@ -352,19 +364,6 @@ $query = $connect->query("SELECT
             <script>
                 alert('Transaction Failed');
                 location = 'propertyall.php';
-                exit;
-            </script>
-    <?php
-        }
-    }
-
-    if (isset($_POST['btn_hide'])) {
-        $hide = $_POST['hide'];
-        if (isset($hide)) {
-            $_SESSION['agentselected'] = $hide;
-    ?>
-            <script>
-                location = 'agentportfolio.php';
                 exit;
             </script>
     <?php

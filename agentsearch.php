@@ -15,8 +15,7 @@ if(isset($_POST['page'])){
     $baseURL = 'agentsearch.php'; 
     $offset = !empty($_POST['page'])?$_POST['page']:0; 
     $limit = 20;
-
-    
+    $selectSql = "";
 
     //Set conditions for search 
     $whereSQL = ''; 
@@ -49,8 +48,9 @@ if(isset($_POST['page'])){
         $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
         $whereSQL .= " lName"; 
     }elseif ($nearBy == 'Popular') {
+        $selectSql = ",IFNULL(visits/prate, 0) as Results";
         $whereSQL .= (strpos($whereSQL, 'ORDER BY') !== false)?" ":" ORDER BY "; 
-        $whereSQL .= " visits DESC, lName"; 
+        $whereSQL .= " Results DESC"; 
     }elseif ($nearBy != '') {
         $whereSQL .= (strpos($whereSQL, 'WHERE') !== false)?" AND ":" WHERE "; 
         $whereSQL .= " city LIKE '%".$nearBy."%'"; 
@@ -76,7 +76,7 @@ if(isset($_POST['page'])){
     //     $whereSQL .= " location LIKE '%".$_POST['filterBy']."%'"; 
     // }
     // Count of all records
-    $query   = $connect->query("SELECT COUNT(*) as rowNum FROM tbl_agent ".$whereSQL); 
+    $query   = $connect->query("SELECT COUNT(*) as rowNum$selectSql FROM tbl_agent ".$whereSQL); 
     $result  = $query->fetch_assoc(); 
     $rowCount= $result['rowNum']; 
      
@@ -92,7 +92,7 @@ if(isset($_POST['page'])){
     $pagination =  new Pagination($pagConfig);
 
     // Fetch records based on the offset and limit 
-    $query = $connect->query("SELECT * FROM tbl_agent $whereSQL LIMIT $offset,$limit");
+    $query = $connect->query("SELECT * $selectSql FROM tbl_agent $whereSQL LIMIT $offset,$limit");
 ?> 
     <!-- Data list container --> 
     <div>

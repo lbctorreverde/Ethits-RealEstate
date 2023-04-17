@@ -84,7 +84,7 @@ a{
 .pclass{
     display:flex;  
     background-color: white;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 5px;
     font-size: 17px;
 }
@@ -101,13 +101,22 @@ a{
 }
 
 .sidebox{
-    padding: 10px;
-    line-height: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-size: 17px;
-    border-radius: 10px;
+    border-radius:10px;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+/* #btn_a{
+    width: 162px;
+    padding: 14px;
+    background-color:  #333;
+    text-align: left;
+    color:white;
+    text-decoration: none;
+} */
 
 #btn_a:hover{
     background-color: #333;
@@ -158,7 +167,7 @@ a{
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    border-radius: 12px;
+    border-radius: 10px;
 }
 
   .grid-item {

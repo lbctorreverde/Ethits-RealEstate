@@ -195,14 +195,19 @@ $query = $connect->query("SELECT
             </div>
             <br>
             <div class='sidebox'>
-                <!-- &nbsp;&nbsp;<i class='bx bxs-user'></i><a href="#">My Account</a> -->
-                &nbsp;&nbsp;<i class='bx bxs-home' ></i><a href="#">My Property</a>
-                <br>
-                <div class='ccontainer'>
-                    <div>&nbsp;&nbsp;<i class='bx bx-bookmark-heart'></i>Favorites</div>
-                    <a href="#">&nbsp;&nbsp;Properties</a><br>
-                    <a href="#">&nbsp;&nbsp;Agent</a>
+                <div class="dropdown">
+                    &nbsp;&nbsp;<a class="btn btn-white dropdown-toggle" id="btn_a" href="#" role="button" style="width: 180px;text-align: left; border-radius:10px;" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown link
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="sideprofile.php">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Documents</a></li>
+                        <li><a class="dropdown-item" href="#">Change Password</a></li>
+                    </ul>
                 </div>
+                &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left; border-radius:10px;" class="btn btn-white" href="#"><i class='bx bxs-building-house'></i>&nbsp;My Properties</a><br>
+                &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left;border-radius:10px;" class="btn btn-white" href="#"><i class='bx bxs-spreadsheet'></i></i>&nbsp;Transaction</a><br>
+                &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left;border-radius:10px;" class="btn btn-white" href="#"><i class='bx bxs-bell'></i>&nbsp;Notifications</a><br>
             </div>
         </div>
         <div class="card2">

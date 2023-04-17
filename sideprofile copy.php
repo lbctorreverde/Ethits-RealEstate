@@ -259,44 +259,32 @@ if (isset($_POST['btn_saveChangesAgent'])) {
     $bday = $_POST["bday"];
     $sex = $_POST["sex"];
     $contact = $_POST["contact"];
-    
+    if ($_SESSION['enduser'] != 'User') {
+        $agency = $_POST["agency"];
+    }
     $city = $_POST["city"];
     $brgy = $_POST["brgy"];
     $str = $_POST["str"];
     $dPhoto = $_FILES['dPhoto']['tmp_name'];
     $id = $_SESSION['user_ID'];
 
-    if ($_SESSION['enduser'] != 'User') {
-        $agency = $_POST["agency"];
-        if ($dPhoto) {
-            $dPhoto1 = addslashes(file_get_contents($dPhoto)) ?? "";
-            $sql = "UPDATE `tbl_agent` SET fName ='$fname', lName ='$lname', mName ='$mname', bday ='$bday', sex ='$sex', contactNo ='$contact',
-            agency ='$agency', city ='$city', brgy ='$brgy', str ='$str', displayImg = '$dPhoto1' WHERE agent_ID ='$id'";
-            $update = mysqli_query($connect, $sql);
-        } else {
-            $sql = "UPDATE `tbl_agent` SET fName ='$fname', lName ='$lname', mName ='$mname', bday ='$bday', sex ='$sex', contactNo ='$contact',
-            agency ='$agency', city ='$city', brgy ='$brgy', str ='$str' WHERE agent_ID ='$id'";
-            $update = mysqli_query($connect, $sql);
-        }
-    }else {
-        if ($dPhoto) {
-            $dPhoto1 = addslashes(file_get_contents($dPhoto)) ?? "";
-            $sql = "UPDATE `tbl_user` SET fName ='$fname', lName ='$lname', mName ='$mname', bday ='$bday', sex ='$sex', contactNo ='$contact',
-            city ='$city', brgy ='$brgy', str ='$str', displayImg = '$dPhoto1' WHERE user_ID ='$id'";
-            $update = mysqli_query($connect, $sql);
-        } else {
-            $sql = "UPDATE `tbl_user` SET fName ='$fname', lName ='$lname', mName ='$mname', bday ='$bday', sex ='$sex', contactNo ='$contact',
-            city ='$city', brgy ='$brgy', str ='$str' WHERE user_ID ='$id'";
-            $update = mysqli_query($connect, $sql);
-        }
+    if ($dPhoto) {
+        $dPhoto1 = addslashes(file_get_contents($dPhoto)) ?? "";
+        $sql = "UPDATE `tbl_agent` SET fName ='$fname', lName ='$lname', mName ='$mname', bday ='$bday', sex ='$sex', contactNo ='$contact',
+        agency ='$agency', city ='$city', brgy ='$brgy', str ='$str', displayImg = '$dPhoto1' WHERE agent_ID ='$id'";
+        $update = mysqli_query($connect, $sql);
+    } else {
+        $sql = "UPDATE `tbl_agent` SET fName ='$fname', lName ='$lname', mName ='$mname', bday ='$bday', sex ='$sex', contactNo ='$contact',
+        agency ='$agency', city ='$city', brgy ='$brgy', str ='$str' WHERE agent_ID ='$id'";
+        $update = mysqli_query($connect, $sql);
     }
 
     if (isset($update)) {
 ?>
         <script>
-            $.alert({
-                title: 'Successfully Updated',
-                content: '',
+            $.confirm({
+                title: 'Successfully ',
+                content: 'Personal information failed to update!',
                 buttons: {
                     ok: {
                         keys: ['esc', 'alt', 'space'],
@@ -310,9 +298,9 @@ if (isset($_POST['btn_saveChangesAgent'])) {
         </script>
     <?php } else { ?>
         <script>
-            $.alert({
+            $.confirm({
                 title: 'Password is incorrect',
-                content: '',
+                content: 'Personal information failed to update!',
                 buttons: {
                     ok: {
                         keys: ['esc', 'alt', 'space'],
