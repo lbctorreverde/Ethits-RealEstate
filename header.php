@@ -20,7 +20,13 @@ include('dbconfig.php');
 
     <title>CS3 Thesis</title>
 </head>
-
+<script>
+  function myFunction() {
+  	var name = document.getElementById("alert")
+    name.style.opacity = "0";
+    setTimeout(function(){ name.style.display = "none"; }, 600);
+  }
+</script>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-expand bg-dark">
         <div style="margin-left:10px; margin-right:10px;"  class="container-fluid">
@@ -121,7 +127,7 @@ include('dbconfig.php');
                             <?php
                             if ($_SESSION['enduser'] == "Agent") {
                             ?>
-                                <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofile.php'">Profile</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="window.location.href='sideprofile.php'">Profile</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -129,7 +135,7 @@ include('dbconfig.php');
                             <?php
                             } else if ($_SESSION['enduser'] == "User") {
                             ?>
-                                <li><a class="dropdown-item" href="#" onclick="window.location.href='editprofileuser.php'">Profile</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="window.location.href='sideprofile.php'">Profile</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -138,7 +144,7 @@ include('dbconfig.php');
                             }
                             ?>
                             <li>
-                                <hr class="dropdown-divider">
+                             <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
                         </ul>
@@ -152,8 +158,13 @@ include('dbconfig.php');
     </nav>
 
     <?php
-    if (isset($_SESSION['status'])) {
-        echo "<p class='alert alert-success'>" . $_SESSION['status'] . "</p>";
-        unset($_SESSION['status']);
-    }
+        if (isset($_SESSION['status'])) {?>
+            <div style="position: absolute; z-index:1; width: auto; left:50%; transform: translate(-50%, -50%);" class="alert alert-warning alert-dismissible fade show" role="alert" id="alert">
+                <?php echo $_SESSION['status'];?>
+                <button type="button" class="close" data-dismiss="alert" onclick="myFunction()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <?php unset($_SESSION['status']);
+        }
     ?>

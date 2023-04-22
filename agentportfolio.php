@@ -9,7 +9,9 @@ if (!isset($_GET['agent'])) {
 }
 $var= $_GET['agent'];
 $sql = $connect->query("UPDATE tbl_agent SET visits = visits + .01 WHERE agent_ID= '$var'");
-include 'chome.php';
+if (isset($_SESSION["enduser"])) {
+    include 'chome.php';
+}
 
 ?>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -85,11 +87,10 @@ include 'chome.php';
                         <div class="text-muted"><?=$rowAgent['prate']?>  average based on <?=$rowAgent['total_rate']?> reviews.</div>
                     </div>
                     <div class="col text-end">
-                        <?php 
-                        if ($_SESSION['enduser'] == 'User') {?>
-                            <button id="btn_chat" name="btn_chat" class="btnView" class="btn btn-primary" onclick="chat('<?=$rowAgent['fName']?>')"><i class='bx bx-conversation'></i></button>
-                        <?php } 
-                        ?>
+                        <?php if (isset($_SESSION['enduser'])) {
+                            if ($_SESSION['enduser'] == 'User') {?>
+                                <button id="btn_chat" name="btn_chat" class="btnView" class="btn btn-primary" onclick="chat('<?=$rowAgent['fName']?>')"><i class='bx bx-conversation'></i></button>
+                        <?php }} ?>
                     </div>
                 </div>
                 <div class="row align-items-start">
@@ -179,6 +180,7 @@ include 'chome.php';
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
+        </div>
     </section>
 
 

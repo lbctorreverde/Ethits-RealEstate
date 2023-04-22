@@ -1,13 +1,13 @@
 <?php
 include_once 'header.php';
-;?>
+include "dbconfig.php";
+?>
 
 <style>
     <?php include 'css/editprofile.css' ?>
 </style>
 
 <script>
-    <?php require_once 'js/editprofile.js' ?>
 </script>
 <script>
     //To make inputs editable 
@@ -57,7 +57,7 @@ include_once 'header.php';
                                     <input type="text" class="form-control" name="title" id="title" placeholder="Enter Title here.." required>
                                 </div>
                                 <div class="p-2 g-col col-lg-3">
-                                    <label for="inputState" class="form-label">Status</label>
+                                <label for="inputState" class="form-label">Status</label>
                                     <select class="form-select" name="stats" id="stats" required>
                                         <option value="Active">Active</option>
                                         <option value="Sold">Sold</option>

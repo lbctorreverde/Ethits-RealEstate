@@ -1,6 +1,8 @@
 <?php
 include_once 'header.php';
-include 'chome.php';
+if (isset($_SESSION["enduser"])) {
+    include 'chome.php';
+}
 include('dbconfig.php');
 $_SESSION['agentselected'] = "";
 // Include pagination library file 

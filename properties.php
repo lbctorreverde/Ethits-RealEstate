@@ -1,6 +1,8 @@
 <?php
 include_once 'header.php';
-include 'chome.php';
+if (isset($_SESSION["enduser"])) {
+    include 'chome.php';
+}
 include('dbconfig.php');
 
 // Include pagination library file 
@@ -36,6 +38,8 @@ $query = $connect->query("SELECT * FROM tbl_property WHERE statusProperty ='Acti
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <?php
+
+if(isset($_SESSION['enduser'])){
 if ($_SESSION['enduser'] == 'Agent') {
     if (isset($_SESSION['user_ID'])) {
         $var1 = $_SESSION['user_ID'];
@@ -50,6 +54,7 @@ if ($_SESSION['enduser'] == 'Agent') {
         $result1 = mysqli_query($connect, $query1);
         $row1 = mysqli_fetch_assoc($result1);
     }
+}
 }
 
 ?>
@@ -229,12 +234,9 @@ if ($_SESSION['enduser'] == 'Agent') {
                                     }
                                     ?>
                                 </div>
-                                <form method="POST" action="properties.php" class="property-name-post d-flex form-control text-start">
-                                    <input type="hidden" id="hide" name="hide" value="<?php echo $row['agent_ID'] ?>">
-                                    <button class="property-name-button" type="submit" id="btn_hide" name="btn_hide">
+                                    <button class="property-name-button" onclick="window.location.href='agentportfolio.php?agent=<?=$row['agent_ID']?>'" id="btn_hide" name="btn_hide">
                                         <h6 class="card-title"><b><?php echo $row['title']; ?></b></h5>
                                     </button>
-                                </form>
                                 <ul class="list-group list-group-flush" style="line-height: 0; font-size: 14px;">
                                     <span class="icon-livingsize"></span>
                                     <hr>
@@ -299,17 +301,3 @@ if ($_SESSION['enduser'] == 'Agent') {
             </div>
         </div>
     </div>
-    <?php
-    if (isset($_POST['btn_hide'])) {
-        $hide = $_POST['hide'];
-        if (isset($hide)) {
-            $_SESSION['agentselected'] = $hide;
-    ?>
-            <script>
-                location = 'agentportfolio.php';
-                exit;
-            </script>
-    <?php
-        }
-    }
-    ?>

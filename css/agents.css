@@ -30,6 +30,10 @@ form {
 
 }
 
+#keywords{
+    width: 1108px;
+}
+
 input {
     all: unset;
     font: 16px system-ui;

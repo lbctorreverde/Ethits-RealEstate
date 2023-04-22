@@ -11,6 +11,7 @@ include 'chome.php';
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <main role="main" class='main'>
     <section class="topsection d-flex flex-column justify-content-center align-items-center">
         <i class="bi bi-house-door-fill"></i>
@@ -35,8 +36,8 @@ include 'chome.php';
             <div class='sidebox'>
                 <!-- &nbsp;&nbsp;<i class='bx bxs-user'></i><a href="#">My Account</a> -->
                 <div class="dropdown">
-                    &nbsp;&nbsp;<a class="btn btn-white dropdown-toggle" id="btn_a" href="#" role="button" style="width: 180px;text-align: left; border-radius:10px;" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown link
+                    &nbsp;&nbsp;<a class="btn btn-dark dropdown-toggle" id="btn_prof" href="#" role="button" style="width: 180px;text-align: left; border-radius:10px;" data-bs-toggle="dropdown" aria-expanded="false">
+                        My Account
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="sideprofile.php">Profile</a></li>
@@ -44,8 +45,14 @@ include 'chome.php';
                         <li><a class="dropdown-item" href="#">Change Password</a></li>
                     </ul>
                 </div>
-                &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left; border-radius:10px;" class="btn btn-white" href="#"><i class='bx bxs-building-house'></i>&nbsp;My Properties</a><br>
-                &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left;border-radius:10px;" class="btn btn-white" href="propertyall.php"><i class='bx bxs-spreadsheet'></i></i>&nbsp;Transaction</a><br>
+                <?php if ($_SESSION['enduser'] != 'User') {?>
+                    &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left; border-radius:10px;" class="btn btn-white" href="sideproperty.php"><i class='bx bxs-building-house'></i>&nbsp;My Properties</a><br>
+                <?php }
+                if ($_SESSION['enduser'] == 'User') {?>
+                    &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left;border-radius:10px;" class="btn btn-white" href="propertyalluser.php"><i class='bx bxs-spreadsheet'></i></i>&nbsp;Transaction</a><br>
+                <?php }else{?>
+                    &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left;border-radius:10px;" class="btn btn-white" href="propertyall.php"><i class='bx bxs-spreadsheet'></i></i>&nbsp;Transaction</a><br>
+                <?php }?>
                 &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left;border-radius:10px;" class="btn btn-white" href="#"><i class='bx bxs-bell'></i>&nbsp;Notifications</a><br>
                 <!-- <div class='ccontainer'>
                     <div>&nbsp;&nbsp;<i class='bx bx-bookmark-heart'></i>Favorites</div>
@@ -60,13 +67,7 @@ include 'chome.php';
                 <div class="boxx1">
                     <div class="box">
                         <h5 style="font-weight:620;">Manage and protect your account</h5><hr>
-                        <form action="sideprofile.php" method="POST" class="container-fluid row g-3" id="signup-form" enctype="multipart/form-data">
-                            <?php
-                                if (isset($_SESSION['status'])) {
-                                    echo "<p class='alert alert-success'>" . $_SESSION['status'] . "</p>";
-                                    unset($_SESSION['status']);
-                                }
-                            ?>
+                        <form action="sideprofile.php" method="POST" class="container-fluid row g-3" id="signup-form" enctype="multipart/form-data">                          
                             <div class="gcontainer">
                                 <div>
                                     <div class="ginput">
@@ -177,7 +178,7 @@ include 'chome.php';
                                     <div class="d-flex justify-content-center">
                                         <div id="custom1" class="btn btn-dark" style="display: none; width:70%;">
                                             <!-- <label class="form-label text-white m-1" for="customFile1">Choose file</label> -->
-                                            <input type="file" name="dPhoto" class="form-control" id="customFile1" />
+                                            <input type="file" accept="image/*" name="dPhoto" class="form-control" id="customFile1" />
                                         </div>
                                     </div>
                                 </div>
@@ -234,22 +235,11 @@ include 'chome.php';
 <?php
 if (isset($_POST['btn_saveChangesAgent'])) {
     $password = $_POST["password"];
-    if (!password_verify($password, $row['password'])) {?>
+    if (!password_verify($password, $row['password'])) {
+        $_SESSION['status'] = "Password is incorrect";?>
         <script>
-            $.confirm({
-                title: 'Password is incorrect',
-                content: 'Personal information failed to update!',
-                buttons: {
-                    ok: {
-                        keys: ['esc', 'alt', 'space'],
-                        action: function(){
-                            location = 'sideprofile.php';
-                            exit;
-                        }
-                    }
-                }
-            });
-            // alert('Password is incorrect failed to edit');
+            location = 'sideprofile.php';
+            exit;
         </script>
     <?php }else{
 
@@ -292,37 +282,17 @@ if (isset($_POST['btn_saveChangesAgent'])) {
     }
 
     if (isset($update)) {
-?>
+
+        $_SESSION['status'] = "Profile Successfully Updated";?>
         <script>
-            $.alert({
-                title: 'Successfully Updated',
-                content: '',
-                buttons: {
-                    ok: {
-                        keys: ['esc', 'alt', 'space'],
-                        action: function(){
-                            location = 'sideprofile.php';
-                            exit;
-                        }
-                    }
-                }
-            });
+            location = 'sideprofile.php';
+            exit;
         </script>
-    <?php } else { ?>
+    <?php } else {
+         $_SESSION['status'] = "Profile Failed to Update";?>
         <script>
-            $.alert({
-                title: 'Password is incorrect',
-                content: '',
-                buttons: {
-                    ok: {
-                        keys: ['esc', 'alt', 'space'],
-                        action: function(){
-                            location = 'sideprofile.php';
-                            exit;
-                        }
-                    }
-                }
-            });
+            location = 'sideprofile.php';
+            exit;
         </script>
 <?php
     }

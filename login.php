@@ -3,12 +3,26 @@
 <style>
     <?php include 'css/login.css'; ?>
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+  function myFunction() {
+  	var name = document.getElementById("alert")
+    name.style.opacity = "0";
+    setTimeout(function(){ name.style.display = "none"; }, 600);
+  }
+</script>
 <?php
-    if(isset($_SESSION['status']))
-    {
-        echo "<h5 class='alert alert-success'>".$_SESSION['status']."</h5>";
-        unset($_SESSION['status']);
+    if (isset($_SESSION['status'])) {?>
+        <div style="position: absolute; z-index:1; width: auto; left:50%; transform: translate(-50%, -50%);" class="alert alert-warning alert-dismissible fade show" role="alert" id="alert">
+            <?php echo $_SESSION['status'];?>
+                <button type="button" class="close" data-dismiss="alert" onclick="myFunction()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <?php unset($_SESSION['status']);
     }
 ?>
 
@@ -25,7 +39,7 @@
             <input type="email" name="email" placeholder="Email" required/>
             <input type="password" name="password" placeholder="Password" required/>
             <a class="forgot-link" href="#">Forgot your password?</a>
-            <button type="submit" name="btn_loginUser">Log in</button>
+            <button id="btn" type="submit" name="btn_loginUser">Log in</button>
             <a class="signupuser-link" href="signupUser.php">Don't have an account? Sign up now!</a>
             <div class="or-container"><div class="line-separator"></div> <div class="or-label">or</div><div class="line-separator"></div></div>
         </form>
@@ -42,7 +56,7 @@
             <input type="email" name="email" placeholder="Email" required/>
             <input type="password" name="password" placeholder="Password" required/>
             <a class="forgot-link" href="#">Forgot your password?</a>
-            <button type="submit" name="btn_loginAgent">Log in</button>
+            <button id="btn" type="submit" name="btn_loginAgent">Log in</button>
             <a class="signup-link" href="signup.php">Don't have an account? Sign up now!</a>
             <div class="or-container"><div class="line-separator"></div> <div class="or-label">or</div><div class="line-separator"></div></div>
         </form>
@@ -52,12 +66,12 @@
             <div class="overlay-panel overlay-left">
                 <h1>Are you an Agent?</h1>
                 <p>Log in as an agent now to connect with clients!</p>
-                <button class="ghost" id="signIn">Log in as an agent</button>
+                <button id="btn" class="ghost" id="signIn">Log in as an agent</button>
             </div>
             <div class="overlay-panel overlay-right">
                 <h1>Are you a user?</h1>
                 <p>Log in as a user now to find the agent of your needs!</p>
-                <button class="ghost" id="signUp">Log in as a User</button>
+                <button id="btn" class="ghost" id="signUp">Log in as a User</button>
             </div>
             
         </div>

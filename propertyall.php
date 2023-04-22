@@ -174,8 +174,8 @@ $query = $connect->query("SELECT
             <div class='sidebox'>
                 <!-- &nbsp;&nbsp;<i class='bx bxs-user'></i><a href="#">My Account</a> -->
                 <div class="dropdown">
-                    &nbsp;&nbsp;<a class="btn btn-white dropdown-toggle" id="btn_a" href="#" role="button" style="width: 180px;text-align: left; border-radius:10px;" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown link
+                    &nbsp;&nbsp;<a class="btn btn-dark dropdown-toggle" id="btn_prof" href="#" role="button" style="width: 180px;text-align: left; border-radius:10px;" data-bs-toggle="dropdown" aria-expanded="false">
+                        My Account            
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="sideprofile.php">Profile</a></li>
@@ -183,8 +183,12 @@ $query = $connect->query("SELECT
                         <li><a class="dropdown-item" href="#">Change Password</a></li>
                     </ul>
                 </div>
-                &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left; border-radius:10px;" class="btn btn-white" href="#"><i class='bx bxs-building-house'></i>&nbsp;My Properties</a><br>
-                &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left;border-radius:10px;" class="btn btn-white" href="propertyall.php"><i class='bx bxs-spreadsheet'></i></i>&nbsp;Transaction</a><br>
+                &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left; border-radius:10px;" class="btn btn-white" href="sideproperty.php"><i class='bx bxs-building-house'></i>&nbsp;My Properties</a><br>
+                <?php if ($_SESSION['enduser'] == 'User') {?>
+                    &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left;border-radius:10px;" class="btn btn-white" href="propertyalluser.php"><i class='bx bxs-spreadsheet'></i></i>&nbsp;Transactions</a><br>
+                <?php }else{?>
+                    &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left;border-radius:10px;" class="btn btn-white" href="propertyall.php"><i class='bx bxs-spreadsheet'></i></i>&nbsp;Transactions</a><br>
+                <?php }?>
                 &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left;border-radius:10px;" class="btn btn-white" href="#"><i class='bx bxs-bell'></i>&nbsp;Notifications</a><br>
                 <!-- <div class='ccontainer'>
                     <div>&nbsp;&nbsp;<i class='bx bx-bookmark-heart'></i>Favorites</div>
