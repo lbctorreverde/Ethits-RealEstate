@@ -180,7 +180,7 @@ $query = $connect->query("SELECT
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="sideprofile.php">Profile</a></li>
                         <li><a class="dropdown-item" href="#">Documents</a></li>
-                        <li><a class="dropdown-item" href="#">Change Password</a></li>
+                        <li><a class="dropdown-item" href="sidepassword.php">Change Password</a></li>
                     </ul>
                 </div>
                 &nbsp;&nbsp;<a id="btn_a" style="width: 180px;text-align: left; border-radius:10px;" class="btn btn-white" href="sideproperty.php"><i class='bx bxs-building-house'></i>&nbsp;My Properties</a><br>

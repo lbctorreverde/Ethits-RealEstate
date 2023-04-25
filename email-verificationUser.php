@@ -5,9 +5,8 @@ include_once 'navbarfresh.php';
     <?php include 'css/emailverify.css' ?>
 </style>
 <?php
-session_start();
 include ('dbconfig.php');
-
+$getemail = $_GET['email'];
 ?>
 
 
@@ -23,7 +22,7 @@ if (isset($_POST["verify_email"]))
 {
     $email = $_POST["email"];
     $token = $_POST["token"];
-
+echo $token;
     // mark email as verified
     $sql = "UPDATE tbl_user SET email_verified_at = NOW() WHERE email = '$email' AND token = '$token'";
     mysqli_query($connect, $sql);
@@ -31,7 +30,7 @@ if (isset($_POST["verify_email"]))
     if (mysqli_affected_rows($connect) == 0)
     {
         $_SESSION['status'] = "Verification Failed";
-        header("Location: email-verificationUser.php?email=" . $email);
+        header("Location: email-verificationUser.php?email=".$getemail);
         exit(); 
     }
 
@@ -50,8 +49,8 @@ if (isset($_POST["verify_email"]))
     </div>
     <form method="POST">
     <div class="input-group">
-        <input type="hidden" name="email" value="<?php echo $_GET['email']; ?>" required>
-        <input type="text" class="field form-control" name="token" maxlength="6" id="floatingInput" placeholder="Enter verification code" required />
+        <input type="hidden" id="email" name="email" value="<?php echo $_GET['email']; ?>" required>
+        <input type="text" class="field form-control" name="token" maxlength="6" id="token" placeholder="Enter verification code" required />
         <span class="input-group-text">
             <input type="submit" name="verify_email" value="Verify Email">
         </span>

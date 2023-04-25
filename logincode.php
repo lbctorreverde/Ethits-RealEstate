@@ -7,7 +7,7 @@ unset($_SESSION['status']);
 if(isset($_POST['btn_loginAgent'])){
    
     $email = $_POST["email"];
-    $password = $_POST["password"];
+    $password = $_POST["passAgent"];
 
     // check if credentials are okay, and email is verified
     $sql = "SELECT * FROM tbl_agent WHERE email = '$email'";
@@ -30,22 +30,28 @@ if(isset($_POST['btn_loginAgent'])){
 
     if ($rows['email_verified_at'] == null)
     {
-        die("Please verify your email <a href='email-verification.php?email=".$email."'>from here</a>");
+        //die("Please verify your email <a href='email-verification.php?email=".$email."'>from here</a>");
+        ?>
+        <script>
+            location = 'email-verificationUser.php?email=<?=$email?>';
+            exit;
+        </script>
+        <?php
+    }else{
+        $_SESSION['verified_user_id'] = $email;
+        $_SESSION['user_ID'] = $rows['agent_ID'];
+        $_SESSION['enduser'] = 'Agent';
+        $_SESSION['status'] = "Login Successfully";
+        header('Location: index.php');
+        exit();
     }
-
-    $_SESSION['verified_user_id'] = $email;
-    $_SESSION['user_ID'] = $rows['agent_ID'];
-    $_SESSION['enduser'] = 'Agent';
-    $_SESSION['status'] = "Login Successfully";
-    header('Location: index.php');
-    exit(); 
 }
 
 //LOGIN USER
 if(isset($_POST['btn_loginUser'])){
 
     $email = $_POST["email"];
-    $password = $_POST["password"];
+    $password = $_POST["passUser"];
 
     // check if credentials are okay, and email is verified
     $sql = "SELECT * FROM tbl_user WHERE email = '$email'";
@@ -70,16 +76,21 @@ if(isset($_POST['btn_loginUser'])){
 
     if ($row['email_verified_at'] == null)
     {
-        die("Please verify your email <a href='email-verificationUser.php?email=".$email."'>from here</a>");
+        // die("Please verify your email <a href='email-verificationUser.php?email=".$email."'>from here</a>");
+        ?>
+        <script>
+            location = 'email-verificationUser.php?email=<?=$email?>';
+            exit;
+        </script>
+        <?php
+    }else{
+        $_SESSION['verified_user_id'] = $email;
+        $_SESSION['user_ID'] = $row['user_ID'];
+        $_SESSION['enduser'] = 'User';
+        $_SESSION['status'] = "Login Successfully";
+        header('Location: login.php');
+        exit(); 
     }
 
-    $_SESSION['verified_user_id'] = $email;
-    $_SESSION['user_ID'] = $row['user_ID'];
-    $_SESSION['enduser'] = 'User';
-    $_SESSION['status'] = "Login Successfully";
-    header('Location: login.php');
-    exit(); 
+    
 }
-
-?>
-

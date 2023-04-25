@@ -54,7 +54,7 @@ span {
 	padding-top: 2.5vh;
 }
 
-#btn {
+#btn_loginUser, #btn_loginAgent {
 	border-radius: 10px;
 	border: 1px solid #212529;
 	background-color: #212529;
@@ -65,20 +65,50 @@ span {
 	transition: transform 80ms ease-in;
 }
 
-#btn:active {
+#btn_loginUser:active, #btn_loginAgent:active {
 	transform: scale(0.95);
 }
 
-#btn:focus {
+#btn_loginUser:focus, #btn_loginAgent:focus {
 	outline: none;
 }
 
-#btn.ghost {
+h2{
+	margin-bottom:10px;
+	font-size: 37px;
+}
+
+.gridhz{
+	display: grid;
+	grid-template-columns: auto auto;
+	gap: 35px;
+}
+
+.ghost {
+	border-radius: 10px;
+	border: 1px solid #212529;
+	background-color: #212529;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	transition: transform 80ms ease-in;
+}
+
+.ghost:active {
+	transform: scale(0.95);
+}
+
+.ghost:focus {
+	outline: none;
+}
+
+.ghost {
 	background-color: transparent;
 	border-color: #FFFFFF;
 }
 
-form {
+.form-container {
 	background-color: #FFFFFF;
 	display: flex;
 	align-items: center;
@@ -89,7 +119,17 @@ form {
 	text-align: center;
 }
 
-input {
+.formcss {
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+	width: 300px;
+}
+
+input[type=email], input[type=password], input[type=text]{
 	background-color: #eee;
 	border: none;
 	padding: 12px 15px;

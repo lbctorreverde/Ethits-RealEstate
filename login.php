@@ -1,12 +1,167 @@
 <?php include_once 'navbarfresh.php'; ?>
-
+<?php include_once 'dbconfig.php'; 
+?>
 <style>
-    <?php include 'css/login.css'; ?>
+    <?php include 'css/login.css'; ?> 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function showPass() {
+        var aPass = document.getElementById("passAgent");
+        var uPass = document.getElementById("passUser");
+        if (aPass.type == "password" || uPass.type == "password" ) {
+            aPass.type = "text";
+            uPass.type = "text";
+        } else {
+            aPass.type = "password";
+            uPass.type = "password";
+        }
+    }
+</script>
 
+<?php
+require 'google-api/vendor/autoload.php';
+// Creating new google client instance
+$client = new Google_Client();
+// Enter your Client ID
+$client->setClientId('819580286574-2u0sq7n53l1bbdfkiiv8oohuumir2a80.apps.googleusercontent.com');
+// Enter your Client Secrect
+$client->setClientSecret('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');
+// Enter the Redirect URL
+$client->setRedirectUri('http://localhost/agentFinder/Ethits-RealEState/login.php');
+// Adding those scopes which we want to get (email & profile Information)
+$client->addScope("email");
+$client->addScope("profile");
+
+if(isset($_POST['btn_Agent'])){
+    $_SESSION['session'] = 'tbl_agent';
+    $_SESSION['counter'] = 'tbl_user';?>
+    <script>
+        location.href = '<?=$client->createAuthUrl();?>';
+    </script>
+<?php }
+
+if(isset($_POST['btn_User'])){
+    $_SESSION['session'] = 'tbl_user';
+    $_SESSION['counter'] = 'tbl_agent';?>
+    <script>
+        location.href = '<?=$client->createAuthUrl();?>';
+    </script>
+<?php }
+
+
+
+if(isset($_GET['code'])):
+    $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+    if(!isset($token["error"])){
+        $client->setAccessToken($token['access_token']);
+        // getting profile information
+        $google_oauth = new Google_Service_Oauth2($client);
+        $google_account_info = $google_oauth->userinfo->get();
+    
+        // Storing data into database
+        $id = mysqli_real_escape_string($connect, $google_account_info->id);
+        $full_name = mysqli_real_escape_string($connect, trim($google_account_info->name));
+        $email = mysqli_real_escape_string($connect, $google_account_info->email);
+        $profile_pic = mysqli_real_escape_string($connect, $google_account_info->picture);
+        // checking user already exists or not
+        $table = $_SESSION['session'];
+        $counter = $_SESSION['counter'];
+        $get_user = $connect->query("SELECT google_id,email FROM $table WHERE google_id=$id OR email='$email'");
+        $result  = $get_user->num_rows; 
+
+        $get_num = $connect->query("SELECT google_id,email FROM $counter WHERE google_id=$id OR email='$email'");
+        $result1  = $get_num->num_rows;
+        
+        echo $result;
+        echo $result1;
+        if($result1 != 0){
+            if($table == 'tbl_agent'){
+                $_SESSION['status'] = "Account is already registered as customer";
+            }else{
+                $_SESSION['status'] = "Account is already registered as agent";
+            }
+            ?>
+            <script>
+                location = 'login.php';
+                exit;
+            </script>
+        <?php 
+        }else if($result != 0){
+            $_SESSION['login_id'] = $id;
+            $sql = "SELECT * FROM $table WHERE email = '$email'";
+            $result = mysqli_query($connect, $sql);
+            $row = mysqli_fetch_assoc($result); 
+            $_SESSION['verified_user_id'] = $email;
+            if ($_SESSION['session'] == 'tbl_agent') {
+                $_SESSION['user_ID'] = $row['agent_ID'];
+                $_SESSION['enduser'] = 'Agent';
+            }else{  
+                $_SESSION['user_ID'] = $row['user_ID'];
+                $_SESSION['enduser'] = 'User';
+            }
+            $_SESSION['status'] = "Login Successfully";?>
+            <script>
+                location = 'index.php';
+                exit;
+            </script>
+        <?php           
+        }else{
+            // if user not exists we will insert the user
+            $insert = mysqli_query($connect, "INSERT INTO $table (`google_id`,`fName`,`email`,`displayImg`) 
+            VALUES('$id','$full_name','$email','$profile_pic')");
+            echo $id;
+            if($insert){
+                $_SESSION['login_id'] = $id;
+                $sql = "SELECT * FROM $table WHERE email = '$email'";
+                $result = mysqli_query($connect, $sql);
+                $row = mysqli_fetch_assoc($result); 
+                $_SESSION['verified_user_id'] = $email;
+                if ($_SESSION['session'] == 'tbl_agent') {
+                    $_SESSION['user_ID'] = $row['agent_ID'];
+                    $_SESSION['enduser'] = 'Agent';
+                }else{  
+                    $_SESSION['user_ID'] = $row['user_ID'];
+                    $_SESSION['enduser'] = 'User';
+                }
+                $_SESSION['status'] = "Login Successfully";?>
+                <script>
+                    location = 'index.php';
+                    exit;
+                </script>
+            <?php }
+            else{
+                echo "Sign up failed!(Something went wrong).";
+            }
+        }
+    }
+    else{
+        header('Location: login.php');
+        exit;
+    }
+    
+else: 
+    // Google Login Url = $client->createAuthUrl(); 
+
+
+
+?>
+<style>
+    .myInput {
+        width: 285px; /* Full-width */
+        font-size: 15px; /* Increase font-size */
+        padding: 10px;
+        border-radius: 10px;
+        background-color: white; 
+        border: 1px solid #ddd;
+    }
+
+    .myInput:hover{
+        background-color: whitesmoke;
+    }
+</style>
 <script>
   function myFunction() {
   	var name = document.getElementById("alert")
@@ -28,37 +183,60 @@
 
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form action="logincode.php" method="POST">
-            <h1>Sign is as User</h1>
-            <?php
-                if(isset($_SESSION['loginUser'])){
-                    echo "<p style = 'color:red;'>".$_SESSION['loginUser']."</p>";
-                    unset($_SESSION['loginUser']);
-                }
-            ?>
+        <h2><b>Sign is as User</b></h2>
+        <?php
+            if(isset($_SESSION['loginUser'])){
+                echo "<p style = 'color:red;'>".$_SESSION['loginUser']."</p>";
+                unset($_SESSION['loginUser']);
+            }
+        ?>
+        <form action="logincode.php" class="formcss" method="POST">
             <input type="email" name="email" placeholder="Email" required/>
-            <input type="password" name="password" placeholder="Password" required/>
-            <a class="forgot-link" href="#">Forgot your password?</a>
-            <button id="btn" type="submit" name="btn_loginUser">Log in</button>
+            <input type="password" name="passUser" id="passUser" placeholder="Password" required/>
+            <div class="gridhz">
+                <div style="display:flex; margin-top:1px; font-size:14px;">
+                    <input type="checkbox" style="width:15px; cursor: pointer;" id="checkU" onclick="showPass()">&nbsp;&nbsp;
+                    <div style="margin-top: 14px;">Show Password</div>
+                </div>
+                <a class="forgot-link" style="font-size:14px;" href="reset.php">Forgot your password?</a>
+            </div>
+            <button id="btn_loginUser" class="ghost" type="submit" name="btn_loginUser">Log in</button>
             <a class="signupuser-link" href="signupUser.php">Don't have an account? Sign up now!</a>
-            <div class="or-container"><div class="line-separator"></div> <div class="or-label">or</div><div class="line-separator"></div></div>
         </form>
+        <div style="margin-top:10px; margin-bottom:10px; color:gray;">or</div>
+        <form action="login.php" method="POST">
+            <button class="myInput" style="text-decoration: none; color: black; " id="btn_User" name="btn_User" type="submit">
+                <div><img src="img/gIcon.png" style="object-fit:fill; width: 25px; height: 25px; transform:translate(-50px,0);">Sign in with Google</div>
+            </button>
+        </form>
+                
     </div>
     <div class="form-container sign-in-container">
-        <form action="logincode.php" method="POST">
-            <h1>Sign in as Agent</h1>
-            <?php
-                if (isset($_SESSION['loginAgent'])) {
-                    echo "<p style = 'color:red;'>" . $_SESSION['loginAgent'] . "</p>";
-                    unset($_SESSION['loginAgent']);
-                }
-            ?>
+        <h2><b>Sign in as Agent</b></h2>
+        <?php
+            if (isset($_SESSION['loginAgent'])) {
+                echo "<p style = 'color:red;'>" . $_SESSION['loginAgent'] . "</p>";
+                unset($_SESSION['loginAgent']);
+            }
+        ?>
+        <form action="logincode.php" class="formcss" method="POST">
             <input type="email" name="email" placeholder="Email" required/>
-            <input type="password" name="password" placeholder="Password" required/>
-            <a class="forgot-link" href="#">Forgot your password?</a>
-            <button id="btn" type="submit" name="btn_loginAgent">Log in</button>
+            <input type="password" name="passAgent" id="passAgent" placeholder="Password" required/>
+            <div class="gridhz">
+                <div style="display:flex; margin-top:1px; font-size:14px;">
+                    <input type="checkbox" style="width:15px; cursor: pointer;" id="checkA" onclick="showPass()">&nbsp;&nbsp;
+                    <div style="margin-top: 14px;">Show Password</div>
+                </div>
+                <a class="forgot-link" style="font-size:14px;" href="reset.php">Forgot your password?</a>
+            </div>
+            <button id="btn_loginAgent" class="ghost" type="submit" name="btn_loginAgent">Log in</button>
             <a class="signup-link" href="signup.php">Don't have an account? Sign up now!</a>
-            <div class="or-container"><div class="line-separator"></div> <div class="or-label">or</div><div class="line-separator"></div></div>
+        </form>
+        <div style="margin-top:10px; margin-bottom:10px; color:gray;">or</div>
+        <form action="login.php" method="POST">
+            <button class="myInput" style="text-decoration: none; color: black; " id="btn_Agent" name="btn_Agent" type="submit">
+                <div><img src="img/gIcon.png" style="object-fit:fill; width: 25px; height: 25px; transform:translate(-50px,0);">Sign in with Google</div>
+            </button>
         </form>
     </div>
     <div class="overlay-container">
@@ -66,12 +244,12 @@
             <div class="overlay-panel overlay-left">
                 <h1>Are you an Agent?</h1>
                 <p>Log in as an agent now to connect with clients!</p>
-                <button id="btn" class="ghost" id="signIn">Log in as an agent</button>
+                <button  class="ghost" id="signIn">Log in as an agent</button>
             </div>
             <div class="overlay-panel overlay-right">
                 <h1>Are you a user?</h1>
                 <p>Log in as a user now to find the agent of your needs!</p>
-                <button id="btn" class="ghost" id="signUp">Log in as a User</button>
+                <button  class="ghost" id="signUp">Log in as a User</button>
             </div>
             
         </div>
@@ -90,11 +268,19 @@
     const signInButton = document.getElementById('signIn');
     const container = document.getElementById('container');
 
-    signUpButton.addEventListener('click', () => {
+
+    $('#signUp').click(function() {
         container.classList.add("right-panel-active");
+        document.getElementById("checkA").checked = false;
+        document.getElementById("checkU").checked = false;
     });
 
-    signInButton.addEventListener('click', () => {
+    $('#signIn').click(function() {
         container.classList.remove("right-panel-active");
+        document.getElementById("checkA").checked = false;
+        document.getElementById("checkU").checked = false;
     });
+
 </script>
+
+<?php endif; ?>

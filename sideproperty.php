@@ -3,7 +3,6 @@ include_once 'header.php';
 include('dbconfig.php');
 include 'chome.php';
 
-
 // Include pagination library file 
 include_once 'Pagination.class.php';
 
@@ -107,7 +106,7 @@ $query = $connect->query("SELECT * FROM tbl_property WHERE agent_ID= '$var' ORDE
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="sideprofile.php">Profile</a></li>
                         <li><a class="dropdown-item" href="#">Documents</a></li>
-                        <li><a class="dropdown-item" href="#">Change Password</a></li>
+                        <li><a class="dropdown-item" href="sidepassword.php">Change Password</a></li>
                     </ul>
                 </div>
                 <?php if ($_SESSION['enduser'] != 'User') {?>

@@ -54,7 +54,7 @@ include_once 'navbarfresh.php';
                         </div>
                         <div class="col-xs">
                             <label for="inputEmail4" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" name="contact" maxlength="11" placeholder="0987654321" required>
+                            <input type="number" class="form-control" name="contact" maxlength="11" placeholder="0987654321" required>
                         </div>
 
                     </div>
@@ -105,10 +105,12 @@ include_once 'navbarfresh.php';
                         </div>
                     </div>
                 </div>
+                <div class="d-flex col-12 justify-content-center">
+                    <div class="g-recaptcha" $id="g-recaptcha-response" data-sitekey="6LdomzgkAAAAABrqOnT1rX4Mnw59ezebiMQpSNir" aria-required="true"></div>
+                </div>
                 <div class="container-fluid d-flex flex-column px-4">
 
                     <!-- to yung sa recaptcha -->
-                    <div class="g-recaptcha" data-sitekey="6LdomzgkAAAAABrqOnT1rX4Mnw59ezebiMQpSNir" aria-required="true"></div>
 
                     <button type="submit" name="btn_registerAgent" class="btn btn-primary">Sign-Up</button>
                     <a class="text-center" href="login.php">Already have an account? Sign in!</a>

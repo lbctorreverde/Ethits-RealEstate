@@ -13,6 +13,7 @@ if (isset($_SESSION["enduser"])) {
 <style>
     <?php include 'css/index.css' ?>
 </style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <link rel="stylesheet"  href="css/nested.scss">
 <script type="text/javascript">
@@ -97,19 +98,19 @@ if (isset($_SESSION["enduser"])) {
                                         
                                 <div class="d-flex justify-content-center text-center mt-5 mb-2">
                                     <div class="row align-items-start">
-                                        <div class="col mb-3">
+                                        <div>
                                             <?php $numRate = (round(200 * ($res['prate'] / 5))/200)*100?>
-                                            <div style="display: flex;">
+                                            <div style="display: flex; background-color:pink; width: 300ox">
                                                 <div style="font-size: 20px;">User Rating:&nbsp;&nbsp;</div>
-                                                <div class="star-ratings">
-                                                    <p class="fill-ratings" style="width: <?=$numRate?>%;">
-                                                        <span>★★★★★</span>
-                                                    </p>
-                                                    <p class="empty-ratings">
-                                                        <span>★★★★★</span>
-                                                    </p>
+                                                <div class="star-ratings" style="background-color:blue; width: 300px;">
+                                                        <div class="fill-ratings" style="width: <?=$numRate?>%;">
+                                                            <span >★★★★★</span>
+                                                        </div>
+                                                        <div class="empty-ratings">
+                                                            <span >★★★★★</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             <div class="text-muted"><?=$res['prate']?>  average based on <?=$res['total_rate']?> reviews.</div>
                                         </div>
                                     </div>

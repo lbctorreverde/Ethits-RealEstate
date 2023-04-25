@@ -49,7 +49,7 @@ include_once 'navbarfresh.php'
             </div>
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Phone Number</label>
-                <input type="text" class="form-control" name="contact" maxlength="11" placeholder="0987654321" required>
+                <input type="number" class="form-control" name="contact" maxlength="11" placeholder="0987654321" required>
             </div>
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Location</label>
@@ -75,7 +75,9 @@ include_once 'navbarfresh.php'
             <div class="col-6">
                 <input type="text" class="form-control" name="str" placeholder="1234 Main St">
             </div>
-            <div class="g-recaptcha" data-sitekey="6LdomzgkAAAAABrqOnT1rX4Mnw59ezebiMQpSNir"></div> 
+            <div class="d-flex col-12 justify-content-center">
+                <div class="g-recaptcha" $id="g-recaptcha-response" data-sitekey="6LdomzgkAAAAABrqOnT1rX4Mnw59ezebiMQpSNir"></div> 
+            </div>
             <div class="d-flex col-12 justify-content-center">
                 <button type="submit" name="btn_registerUser" class="btn btn-primary">Sign up</button>
             </div>

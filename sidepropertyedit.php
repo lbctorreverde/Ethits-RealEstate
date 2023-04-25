@@ -2,6 +2,8 @@
 include_once 'header.php';
 include('dbconfig.php');
 include 'chome.php';
+define('BASE_URL', 'http://example.com');
+
 ?>
 
 <style>
@@ -50,7 +52,7 @@ include 'chome.php';
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="sideprofile.php">Profile</a></li>
                         <li><a class="dropdown-item" href="#">Documents</a></li>
-                        <li><a class="dropdown-item" href="#">Change Password</a></li>
+                        <li><a class="dropdown-item" href="sidepassword.php">Change Password</a></li>
                     </ul>
                 </div>
                 <?php if ($_SESSION['enduser'] != 'User') {?>
@@ -175,7 +177,7 @@ include 'chome.php';
                                             <div class="d-flex col-29 justify-content-center">
                                                 <input type="hidden" value="<?=$resEdit['property_ID']?>" id="propID" name="propID">
                                                 <button type="submit" name="btn_saveChangesAgent" id="btn_saveChangesAgent" class="btn btn-dark" style="display: block;">Edit</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <button type="submit" name="btn_saveChangesAgent" onclick="window.location.reload();" id="btn_saveChangesAgent" class="btn btn-dark" style="display: block;">Reset</button>
+                                                <button type="submit" onclick="window.location.reload();" class="btn btn-dark" style="display: block;">Reset</button>
                                             </div>
                                         </div>
                                     </div>

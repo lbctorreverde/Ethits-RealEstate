@@ -52,7 +52,7 @@ include 'chome.php';
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="sideprofile.php">Profile</a></li>
                         <li><a class="dropdown-item" href="#">Documents</a></li>
-                        <li><a class="dropdown-item" href="#">Change Password</a></li>
+                        <li><a class="dropdown-item" href="sidepassword.php">Change Password</a></li>
                     </ul>
                 </div>
                 <?php if ($_SESSION['enduser'] != 'User') {?>

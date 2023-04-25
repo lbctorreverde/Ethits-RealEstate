@@ -7,6 +7,7 @@
 <?php
 session_start();
 include('dbconfig.php');
+$getemail = $_GET['email'];
 
 if (isset($_SESSION['status'])) {
     echo "<p class='alert alert-success'>" . $_SESSION['status'] . "</p>";
@@ -23,7 +24,7 @@ if (isset($_POST["verify_email"])) {
 
     if (mysqli_affected_rows($connect) == 0) {
         $_SESSION['status'] = "Verification Failed";
-        header("Location: email-verification.php?email=" . $email);
+        header("Location: email-verification.php?email=".$getemail);
         exit();
     }
 
