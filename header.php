@@ -11,12 +11,19 @@ include('dbconfig.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
     <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <!-- TensorflowJS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+
+    <!-- PapaParse -->
+    <script type="text/javascript" src="./cdn/papaparse.min.js"></script>
 
     <title>CS3 Thesis</title>
 </head>
@@ -50,14 +57,14 @@ include('dbconfig.php');
             </div>
             <?php if (isset($_SESSION['verified_user_id'])) { ?>
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                    <?php 
-                        if ($_SESSION['enduser'] == 'Agent') { ?>
-                                <a class="dealsbtn pt-1 pe-3 text-decoration-none" onclick="window.location.href='propertyall.php'" style='color:white;' href="#"><i class="bi bi-houses-fill"></i> Deals</a>
-                           <?php
-                        }else { ?>
-                                <a class="dealsbtn pt-1 pe-3 text-decoration-none" onclick="window.location.href='propertyalluser.php'" style='color:white;' href="#"><i class="bi bi-houses-fill"></i> Deals</a>
-                            <?php
-                        }
+                    <?php
+                    if ($_SESSION['enduser'] == 'Agent') { ?>
+                        <a class="dealsbtn pt-1 pe-3 text-decoration-none" onclick="window.location.href='propertyall.php'" style='color:white;' href="#"><i class="bi bi-houses-fill"></i> Deals</a>
+                    <?php
+                    } else { ?>
+                        <a class="dealsbtn pt-1 pe-3 text-decoration-none" onclick="window.location.href='propertyalluser.php'" style='color:white;' href="#"><i class="bi bi-houses-fill"></i> Deals</a>
+                    <?php
+                    }
                     ?>
                     <style>
                         .dealsbtn:hover {
@@ -142,7 +149,7 @@ include('dbconfig.php');
                             </li>
                             <li><a class="dropdown-item" href="logout.php">Log-Out</a></li>
                         </ul>
-                        
+
                     </li>
                 <?php } else { ?>
                     <button class="btn btn-dark btn-outline-light float-right me-2" onclick="window.location.href='login.php';">Login/Register</button>
@@ -153,7 +160,7 @@ include('dbconfig.php');
 
     <?php
     if (isset($_SESSION['status'])) {
-        echo "<div class='alert alert-success alert-dismissible fade show' role='alert' tabindex='-1'>" . $_SESSION['status'] . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>" ."</div>";
+        echo "<div class='alert alert-success alert-dismissible fade show' role='alert' tabindex='-1'>" . $_SESSION['status'] . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>" . "</div>";
         unset($_SESSION['status']);
     }
     ?>

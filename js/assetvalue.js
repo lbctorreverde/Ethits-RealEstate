@@ -1,172 +1,142 @@
-document.getElementById('ifResidence').onchange = function () {
-    document.getElementById('floors').disabled = !this.checked;
-    document.getElementById('floors').value = '0';
-    document.getElementById('garage').disabled = !this.checked;
-    document.getElementById('garage').value = '0';
-    document.getElementById('bedroom').disabled = !this.checked;
-    document.getElementById('bedroom').value = '0';
-    document.getElementById('bathroom').disabled = !this.checked;
-    document.getElementById('bathroom').value = '0';
-    document.getElementById('propertytype').disabled = !this.checked;
-    document.getElementById('propertytype').value = 'default';
-}
+window.onload = () => {
 
+    //Init variables
+    let sqmValues = []
+    let priceValues = []
+    let predVariables = []
+    let tarVariables = []
+    let castPredictions = 0;
 
+    let sqmVal = 0;
+    let lotVal = 0;
+    let resultVal = 0;
 
-function calculate() {
-    var sqm = parseInt(document.getElementById('sqm').value);
-    var years = parseInt(document.getElementById('years').value);
-    var garage = parseInt(document.getElementById('garage').value);
-    var bedroom = parseInt(document.getElementById('bedroom').value);
-    var bathroom = parseInt(document.getElementById('bathroom').value);
+    Papa.parse('./data/properties.csv', {
+        download: true,
+        header: false,
+        complete: function (results) {
+            const data = results.data.slice(1)
 
-    var floors = parseInt(document.getElementById('floors').value);
-    var mun = document.getElementById('mun').value;
-    var propertytype = document.getElementById('propertytype').value;
+            sqmValues = data.map(row => row[1]) //sqm column
+            lotValues = data.map(row => row[2]) // lot_size column
+            priceValues = data.map(row => row[0]) //price column
 
-    var garval = 13000;
-    var bathval = 9000;
-    var bedrval = 12500;
+            /* 
+            This will create a 2D array containing the sqmValues
+            and priceValues as elements for each index
+            */
+            for (let i = 0; i < sqmValues.length; i++) {
+                predVariables.push([sqmValues[i], lotValues[i]])
+                tarVariables.push([priceValues[i]])
+            }
 
-    var perfloor = 0.04;
+            const predictorVariables = predVariables
+            const targetVariable = tarVariables
 
-    var depreciation = 0.012;
-
-    var propertytypetotal = 0;
-
-    var solve = 0;
-
-    if (Number.isNaN(sqm) || sqm == null || sqm == '' || sqm == '0' ||
-        Number.isNaN(years) || years == null || years == '' || years == '0' ||
-        Number.isNaN(garage) || garage == null ||
-        Number.isNaN(bedroom) || bedroom == null ||
-        Number.isNaN(bathroom) || bathroom == null ||
-        mun === 'Select Municipality') {
-        var x = document.getElementById("snackbar");
-        x.className = "show";
-        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
-    } else {
-
-        // 10 % of 2, 178, 734 = 217, 863.4
-        // 5 years x 217, 863.4 = 1, 089, 317
-        // 1, 089, 317(yung 10 % increase for 5 years) x 2, 178, 634 = 3, 267, 951
-
-        if (mun === 'Abucay') {
-            var perc = 0.072;
-            var present = sqm * 10893.17;
-            var percIncrease = perc * present;
-            var increaseYear = years * percIncrease;
-
-            solve = present + increaseYear;
-        } else if (mun === 'Bagac') {
-            var perc = 0.066;
-            var present = sqm * 11382.17;
-            var percIncrease = perc * present;
-            var increaseYear = years * percIncrease;
-
-            solve = present + increaseYear;
-        } else if (mun === 'Balanga') {
-            var perc = 0.11;
-            var present = sqm * 12293.16;
-            var percIncrease = perc * present;
-            var increaseYear = years * percIncrease;
-
-            solve = present + increaseYear;
-        } else if (mun === 'Dinalupihan') {
-            var perc = 0.083;
-            var present = sqm * 11893.17;
-            var percIncrease = perc * present;
-            var increaseYear = years * percIncrease;
-
-            solve = present + increaseYear;
-        } else if (mun === 'Hermosa') {
-            var perc = 0.078;
-            var present = sqm * 10663.17;
-            var percIncrease = perc * present;
-            var increaseYear = years * percIncrease;
-
-            solve = present + increaseYear;
-        } else if (mun === 'Limay') {
-            var perc = 0.089;
-            var present = sqm * 11493.17;
-            var percIncrease = perc * present;
-            var increaseYear = years * percIncrease;
-
-            solve = present + increaseYear;
-        } else if (mun === 'Mariveles') {
-            var perc = 0.087;
-            var present = sqm * 11685.17;
-            var percIncrease = perc * present;
-            var increaseYear = years * percIncrease;
-
-            solve = present + increaseYear;
-        } else if (mun === 'Morong') {
-            var perc = 0.068;
-            var present = sqm * 11893.17;
-            var percIncrease = perc * present;
-            var increaseYear = years * percIncrease;
-
-            solve = present + increaseYear;
-        } else if (mun === 'Orani') {
-            var perc = 0.076;
-            var present = sqm * 10893.17;
-            var percIncrease = perc * present;
-            var increaseYear = years * percIncrease;
-
-            solve = present + increaseYear;
-        } else if (mun === 'Pilar') {
-            var perc = 0.074;
-            var present = sqm * 10893.17;
-            var percIncrease = perc * present;
-            var increaseYear = years * percIncrease;
-
-            solve = present + increaseYear;
-        } else if (mun === 'Samal') {
-            var perc = 0.071;
-            var present = sqm * 10893.17;
-            var percIncrease = perc * present;
-            var increaseYear = years * percIncrease;
-
-            solve = present + increaseYear;
-        } else if (mun === 'Orion') {
-            var perc = 0.072;
-            var present = sqm * 10893.17;
-            var percIncrease = perc * present;
-            var increaseYear = years * percIncrease;
-
-            solve = present + increaseYear;
         }
+    })
 
-        console.log(solve);
+    document.getElementById("calcBtn").addEventListener("click", printit)
+    document.getElementById("resetBtn").addEventListener("click", resetVal)
 
+    function printit() {
 
-        if (propertytype === 'Bungalow') {
-            propertytypetotal = solve * 0.05;
-        } else if (propertytype === 'Single-attached') {
-            propertytypetotal = solve * 0.058;
-        } else if (propertytype === 'Duplex') {
-            propertytypetotal = solve * 0.07;
-        }
-
-        var totalMisc = ((garval * garage) + (bathval * bathroom) + (bedrval * bedroom)) * years;
-        var perunitfloor = ((perfloor * solve) * floors);
-        var totaldepreciation = (solve * depreciation) * years;
-        solve = solve + propertytypetotal + totalMisc + perunitfloor;
+        let sqmtxt = document.getElementById("sqmtxt").value;
+        let lottxt = document.getElementById("lottxt").value;
 
 
-        var res = document.getElementById('result').textContent = "₱ " + solve.toLocaleString("en-US") + "\nis the value of your property";
+        const model = tf.sequential();
+        model.add(tf.layers.dense({
+            inputShape: [2],
+            units: 1
+        }));
+        model.compile({
+            loss: 'meanSquaredError',
+            optimizer: 'sgd'
+        });
+        let predictions = tf.tensor2d([
+            [parseInt(sqmtxt), parseInt(lottxt)]
+        ]);
+        predictions = predictions.dot(tf.tensor2d([[20000], [5000]])).add(tf.scalar(-100000));
+        predictions.print();
 
+        castPredictions = predictions.arraySync()[0][0];
+
+        const formattedResult = castPredictions.toLocaleString("en-US")
+
+        document.getElementById("resulta").innerHTML = "₱" + formattedResult
+
+    }
+
+    function resetVal() {
+        document.getElementById("resulta").innerHTML = ""
     }
 
 }
 
-function duplex(e) {
-    var propertytype = document.getElementById('propertytype').value;
-    if (propertytype === 'Bungalow') {
-        document.getElementById('floors').value = 1;
-    }
-    document.getElementById('floors').value = 1;
-    document.getElementById('units').value = 1;
 
-}
 
+
+// BASE CODE
+//
+//
+// const predictorVariables = [
+//     [1000, 2],
+//     [2000, 3],
+//     [1500, 2],
+//     [3000, 4],
+//     [1200, 2],
+//     [3200, 5],
+//     [2100, 3],
+//     [1700, 2],
+//     [2500, 4],
+//     [2200, 3],
+//     [3000, 5],
+//     [1500, 1],
+//     [2000, 3],
+//     [2400, 4],
+//     [1900, 3],
+//     [2800, 5]
+// ];
+
+// const targetVariable = [
+//     200000,
+//     400000,
+//     250000,
+//     500000,
+//     175000,
+//     550000,
+//     200000,
+//     150000,
+//     300000,
+//     220000,
+//     400000,
+//     120000,
+//     180000,
+//     280000,
+//     210000,
+//     380000
+// ];
+
+// const model = tf.sequential();
+
+// model.add(tf.layers.dense({
+//     inputShape: [2],
+//     units: 1
+// }));
+
+// model.compile({
+//     loss: 'meanSquaredError',
+//     optimizer: 'sgd'
+// });
+
+
+// let predictions = tf.tensor2d([
+//     [5000, 3]
+
+
+// ]);
+
+// predictions = predictions.dot(tf.tensor2d([[100], [50]])).add(tf.scalar(-100000));
+
+// predictions.print();

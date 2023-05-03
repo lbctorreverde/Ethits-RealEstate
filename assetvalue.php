@@ -21,26 +21,27 @@ include_once 'header.php';
                         <form>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <label for="" class="form-label">Square Footage (m²):</label>
+                                    <label for="" class="form-label">Floor Area (m²):</label>
                                 </div>
                                 <div class="col">
-                                    <input type="number" id="sqm" class="form-control" aria-label="Square Footage" value="0">
+                                    <input type="number" id="sqmtxt" class="form-control" aria-label="Floor Size" value="0">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <label for="" class="form-label">Years:</label>
+                                    <label for="" class="form-label">Lot Size (m²)</label>
                                 </div>
                                 <div class="col">
-                                    <input type="number" id="years" class="form-control" aria-label="First name" value="0">
+                                    <input type="number" id="lottxt" class="form-control" aria-label="Lot Size" value="0">
                                 </div>
                             </div>
 
                             <hr>
 
-                            <div class="row mb-2">
+                            <!-- <div class="row mb-2">
                                 <div class="form-check form-switch d-flex justify-content-center">
                                     <input class="form-check-input me-2" type="checkbox" id="ifResidence">
+                                    
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Residence</label>
                                 </div>
                             </div>
@@ -101,11 +102,11 @@ include_once 'header.php';
                                     <option value="Pilar">Pilar</option>
                                     <option value="Samal">Samal</option>
                                 </select>
-                            </div>
+                            </div> -->
 
                             <hr>
-                            <button type="button" class="btn btn-dark w-100 mb-2" onclick="calculate()">Calculate</button>
-                            <button type="reset" class="btn btn-outline-dark w-100" onclick="">Reset</button>
+                            <button type="button" class="btn btn-dark w-100 mb-2" id="calcBtn">Calculate</button>
+                            <button type="reset" class="btn btn-outline-dark w-100" id="resetBtn">Reset</button>
                         </form>
                     </div>
 
@@ -120,7 +121,7 @@ include_once 'header.php';
         <div class="d-flex justify-content-center align-items-center">
             <div class="card shadow rounded-0">
                 <div class="card-body text-center">
-                    <span class="fs-2" id="result">&nbsp;</span>
+                    <span class="fs-2" id="resulta">&nbsp;</span>
                 </div>
             </div>
         </div>
