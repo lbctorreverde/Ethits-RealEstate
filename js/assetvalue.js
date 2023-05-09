@@ -60,56 +60,71 @@ window.onload = () => {
         let bedroomtxt = document.getElementById("bedroomtxt").value;
         let bathroomtxt = document.getElementById("bathroomtxt").value;
 
-        //Training and Testing Sets
-        let xTrain = tf.tensor2d(predVariables, [predVariables.length, 6]);
-        let yTrain = tf.tensor2d(tarVariables, [tarVariables.length, 1]);
-        let xTest = tf.tensor2d([], [0, 6]);
-        let yTest = tf.tensor2d([], [0, 1]);
+        if (
+            Number.isNaN(sqmtxt) || sqmtxt == null || sqmtxt == '' || sqmtxt == '0' ||
+            Number.isNaN(lottxt) || lottxt == null || lottxt == '' || lottxt == '0' ||
+            Number.isNaN(floorstxt) || floorstxt == null || floorstxt == '' || floorstxt == '0' ||
+            Number.isNaN(car_spacetxt) || car_spacetxt == null || car_spacetxt == '' || car_spacetxt == '0' ||
+            Number.isNaN(bedroomtxt) || bedroomtxt == null || bedroomtxt == '' || bedroomtxt == '0' ||
+            Number.isNaN(bathroomtxt) || bathroomtxt == null || bathroomtxt == '' || bathroomtxt == '0'
+        ) {
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        } else {
+            //Training and Testing Sets
+            let xTrain = tf.tensor2d(predVariables, [predVariables.length, 6]);
+            let yTrain = tf.tensor2d(tarVariables, [tarVariables.length, 1]);
+            let xTest = tf.tensor2d([], [0, 6]);
+            let yTest = tf.tensor2d([], [0, 1]);
 
 
-        //Define Model
-        const model = tf.sequential();
-        model.add(tf.layers.dense({
-            inputShape: [6],
-            units: 1
-        }));
-        model.compile({
-            loss: 'meanSquaredError',
-            optimizer: 'sgd'
-        });
+            //Define Model
+            const model = tf.sequential();
+            model.add(tf.layers.dense({
+                inputShape: [6],
+                units: 1
+            }));
+            model.compile({
+                loss: 'meanSquaredError',
+                optimizer: 'sgd'
+            });
 
 
-        let predictions = tf.tensor2d([
-            [parseInt(sqmtxt), parseInt(lottxt), parseInt(floorstxt), parseInt(car_spacetxt), parseInt(bedroomtxt), parseInt(bathroomtxt)]
-        ]);
+            let predictions = tf.tensor2d([
+                [parseInt(sqmtxt), parseInt(lottxt), parseInt(floorstxt), parseInt(car_spacetxt), parseInt(bedroomtxt), parseInt(bathroomtxt)]
+            ]);
 
-        function weighter(min, max) {
-            let d = max - min;
-            let r = Math.random();
-            r = Math.floor(r * d);
-            r = r + min;
-            return r;
+            function weighter(min, max) {
+                let d = max - min;
+                let r = Math.random();
+                r = Math.floor(r * d);
+                r = r + min;
+                return r;
+            }
+
+
+
+            predictions = predictions.dot(tf.tensor2d([[20000], [10000], [weighter(2189, 2934)], [weighter(3825, 4731)], [weighter(3552, 3896)], [weighter(4432, 5324)]])).add(tf.scalar(-100000));
+            predictions.print();
+
+            castPredictions = predictions.arraySync()[0][0];
+
+            const formattedResult = castPredictions.toLocaleString("en-US")
+
+            document.getElementById('loader').hidden = false
+
+            setTimeout(() => {
+                document.getElementById('loader').hidden = true
+            }), 3000
+
+            setTimeout(() => {
+                document.getElementById("resulta").innerHTML = "₱" + formattedResult
+            }), 10000
+            //document.getElementById("resulta").innerHTML = "₱" + formattedResult
         }
 
 
-
-        predictions = predictions.dot(tf.tensor2d([[20000], [10000], [weighter(2189, 2934)], [weighter(3825, 4731)], [weighter(3552, 3896)], [weighter(4432, 5324)]])).add(tf.scalar(-100000));
-        predictions.print();
-
-        castPredictions = predictions.arraySync()[0][0];
-
-        const formattedResult = castPredictions.toLocaleString("en-US")
-
-        document.getElementById('loader').hidden = false
-        
-        setTimeout(() => {
-            document.getElementById('loader').hidden = true
-        }), 3000
-
-        setTimeout(() => {
-            document.getElementById("resulta").innerHTML = "₱" + formattedResult
-        }), 10000
-        //document.getElementById("resulta").innerHTML = "₱" + formattedResult
 
     }
 

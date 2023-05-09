@@ -43,7 +43,7 @@ include_once 'header.php';
                                     <label for="" class="form-label">Floor(s):</label>
                                 </div>
                                 <div class="col">
-                                    <input type="number" id="floorstxt" class="form-control" aria-label="Floors" value="0">
+                                    <input type="number" id="floorstxt" class="form-control" aria-label="Floors" value="1">
                                 </div>
                             </div>
 
@@ -61,7 +61,7 @@ include_once 'header.php';
                                     <label for="" class="form-label">Bedroom(s):</label>
                                 </div>
                                 <div class="col">
-                                    <input type="number" id="bedroomtxt" class="form-control" aria-label="Bedrooms" value="0">
+                                    <input type="number" id="bedroomtxt" class="form-control" aria-label="Bedrooms" value="1">
                                 </div>
                             </div>
 
@@ -70,7 +70,7 @@ include_once 'header.php';
                                     <label for="" class="form-label">Bathroom(s):</label>
                                 </div>
                                 <div class="col">
-                                    <input type="number" id="bathroomtxt" class="form-control" aria-label="Bathrooms" value="0">
+                                    <input type="number" id="bathroomtxt" class="form-control" aria-label="Bathrooms" value="1">
                                 </div>
                             </div>
 
