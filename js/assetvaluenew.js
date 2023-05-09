@@ -22,14 +22,14 @@ window.onload = () => {
         complete: function (results) {
             const data = results.data.slice(1)
 
-            sqmValues = data.map(row => parseInt(row[1])) //sqm column
-            lotValues = data.map(row => parseInt(row[2])) // lot_size column
-            carspaceValues = data.map(row => parseInt([3])) // car_spaces column
-            bedroomValues = data.map(row => parseInt(row[4])) // bedrooms column
-            bathroomValues = data.map(row => parseInt([5])) // bathrooms column
-            floorValues = data.map(row => parseInt([6])) // floors column
+            sqmValues = data.map(row => row[1]) //sqm column
+            lotValues = data.map(row => row[2]) // lot_size column
+            carspaceValues = data.map(row => row[3]) // car_spaces column
+            bedroomValues = data.map(row => row[4]) // bedrooms column
+            bathroomValues = data.map(row => row[5]) // bathrooms column
+            floorValues = data.map(row => row[6]) // floors column
 
-            priceValues = data.map(row => parseInt([0])) //price column
+            priceValues = data.map(row => row[0]) //price column
 
             /* 
             This will create a 2D array containing the sqmValues
@@ -43,7 +43,7 @@ window.onload = () => {
             const predictorVariables = predVariables
             const targetVariable = tarVariables
 
-
+            
         }
     })
 
@@ -60,14 +60,6 @@ window.onload = () => {
         let bedroomtxt = document.getElementById("bedroomtxt").value;
         let bathroomtxt = document.getElementById("bathroomtxt").value;
 
-        //Training and Testing Sets
-        let xTrain = tf.tensor2d(predVariables, [predVariables.length, 6]);
-        let yTrain = tf.tensor2d(tarVariables, [tarVariables.length, 1]);
-        let xTest = tf.tensor2d([], [0, 6]);
-        let yTest = tf.tensor2d([], [0, 1]);
-
-
-        //Define Model
         const model = tf.sequential();
         model.add(tf.layers.dense({
             inputShape: [6],
@@ -77,23 +69,11 @@ window.onload = () => {
             loss: 'meanSquaredError',
             optimizer: 'sgd'
         });
-
-
+        
         let predictions = tf.tensor2d([
             [parseInt(sqmtxt), parseInt(lottxt), parseInt(floorstxt), parseInt(car_spacetxt), parseInt(bedroomtxt), parseInt(bathroomtxt)]
         ]);
-
-        function weighter(min, max) {
-            let d = max - min;
-            let r = Math.random();
-            r = Math.floor(r * d);
-            r = r + min;
-            return r;
-        }
-
-
-
-        predictions = predictions.dot(tf.tensor2d([[20000], [10000], [weighter(2189, 2934)], [weighter(3825, 4731)], [weighter(3552, 3896)], [weighter(4432, 5324)]])).add(tf.scalar(-100000));
+        predictions = predictions.dot(tf.tensor2d([[10000], [10000], [100], [100], [100], [100],])).add(tf.scalar(-100000));
         predictions.print();
 
         castPredictions = predictions.arraySync()[0][0];
@@ -101,20 +81,17 @@ window.onload = () => {
         const formattedResult = castPredictions.toLocaleString("en-US")
 
         document.getElementById('loader').hidden = false
-        
         setTimeout(() => {
             document.getElementById('loader').hidden = true
-        }), 3000
-
-        setTimeout(() => {
             document.getElementById("resulta").innerHTML = "₱" + formattedResult
-        }), 10000
-        //document.getElementById("resulta").innerHTML = "₱" + formattedResult
+        })
+
+        
 
     }
 
     function resetVal() {
-        document.getElementById("resulta").innerHTML = "­"
+        document.getElementById("resulta").innerHTML = ""
     }
 
 }

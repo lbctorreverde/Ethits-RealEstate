@@ -1,18 +1,79 @@
-﻿price,sqm,lot_size,car_spaces,bedrooms,bathrooms,yr_built,municipality,brgy,location
-3463000,192,251,1,,,,Balanga,Cupang Proper,
-3600000,40,44,,3,2,,Balanga,Cupang Proper,
-5424600,240,282,,,,,Balanga,Cupang North,
-2300000,104,110,,,,,Limay,Duale,Emerald Coast Executive Village
-1665200,62,80,,1,,,Limay,Duale,Emerald Coast Executive Village
-1673365,42,110,,,,,Limay,Duale,Emerald Coast Executive Village
-1826085,60,110,,,,,Limay,Duale,Emerald Coast Executive Village
-2626000,40,42,,2,1,2016,Balanga,Cupang Proper,Camella Balanga Heights
-9951000,142,176,1,5,3,2016,Balanga,Cupang Proper,Camella Balanga Heights
-2712850,111,129,,,,,Limay,Duale,Emerald Coast Executive Village
-3239400,150,159,,,,,Limay,Duale,JAD Farmville
-5808000,66,110,,3,2,2016,Balanga,Cupang Proper,Camella Balanga Heights
-1665200,62,80,,1,,,Limay,Duale,Emerald Coast Executive Village
-1995250,62,80,,1,,,Limay,Duale,Emerald Coast Executive Village
-3370000,46,63,,2,1,2016,Balanga,Cupang Proper,Camella Balanga Heights
-3564000,46,63,,2,1,2016,Balanga,Cupang Proper,Camella Balanga Heights
-1665200,62,80,,1,,,Limay,Duale,Emerald Coast Executive Village
+﻿price,sqm,lot_size,car_spaces,bedrooms,bathrooms,floors,yr_built,municipality,brgy,location,lotunitnumber,extras,property_type,fully_furnished,foreclosure
+3463000,192,251,1,,,,,Balanga,Cupang Proper,,,,,,
+3600000,40,44,,3,2,,,Balanga,Cupang Proper,,,,,,
+5424600,240,282,,,,,,Balanga,Cupang North,,,,,,
+2300000,104,110,,,,,,Limay,Duale,Emerald Coast Executive Village,,,,,
+1665200,62,80,,1,,,,Limay,Duale,Emerald Coast Executive Village,,,,,
+1673365,42,110,,,,,,Limay,Duale,Emerald Coast Executive Village,,,,,
+1826085,60,110,,,,,,Limay,Duale,Emerald Coast Executive Village,,,,,
+2626000,40,42,,2,1,,2016,Balanga,Cupang Proper,Camella Balanga Heights,,,,,
+9951000,142,176,1,5,3,,2016,Balanga,Cupang Proper,Camella Balanga Heights,,,,,
+2712850,111,129,,,,,,Limay,Duale,Emerald Coast Executive Village,,,,,
+3239400,150,159,,,,,,Limay,Duale,JAD Farmville,,,,,
+5808000,66,110,,3,2,,2016,Balanga,Cupang Proper,Camella Balanga Heights,,,,,
+1665200,62,80,,1,,,,Limay,Duale,Emerald Coast Executive Village,,,,,
+1995250,62,80,,1,,,,Limay,Duale,Emerald Coast Executive Village,,,,,
+3370000,46,63,,2,1,,2016,Balanga,Cupang Proper,Camella Balanga Heights,,,,,
+3564000,46,63,,2,1,,2016,Balanga,Cupang Proper,Camella Balanga Heights,,,,,
+1665200,62,80,,1,,,,Limay,Duale,Emerald Coast Executive Village,,,,,
+4189000,243,290,,,,,,Pilar,Panilao,Josefaville Subdivision,,,,,
+2210000,115.77,140,1,3,2,1,,Balanga,Tuyo,Monark Village Subdivision,,,,,
+2210000,115.77,140,1,3,3,2,,Balanga,Tuyo,Monark Village Subdivision,,,,,
+2000000,52.78,140,1,3,3,2,,Balanga,Upper Tuyo,Tierra Feliza Residential Estates,,,,,
+2100000,94,107,1,3,2,2,,Limay,Duale,Silverland Homes,,,,,
+2700000,106.5,120,1,3,2,2,,Balanga,Tuyo,Don Pepe Subdivision,,,,,
+3060000,210,303,1,3,2,2,,Orion,Balagtas,Mel-Luz Subdivision,,,,,
+4050000,292.6,500,1,4,2,2,,Limay,Reformista,Reyes Subdivision,,,,,
+3500000,180,246,1,4,3,2,,Balanga,Dona Francisca,Phase 3,,,,,
+2000000,100,107.4,1,3,3,2,,Samal,Lalawigan,Dominican Hills,,,,,
+3939000,196,337,1,4,3,2,,Orion,BalagtasSt. Michael Village,,,,,,
+3387700,192.2,251,1,4,3,1,,Balanga,Cupang Proper,Maria Lourdes Subdivision,,,,,
+3892500,169,184,1,3,3,2,,Abucay,Capitangan,Santis Ville 1,,,,,
+9500000,254,282,1,4,3,2,,Balanga,Tuyo,Fourlane Downtown,,,,,
+2130000,200,226.95,1,4,4,1,,Mariveles,Mountain View,Polaris Subdivision,,,,,
+1770000,70.08,96,1,2,1,1,,Balanga,Cupang Central,Silverland Place 2,,,,,
+5637200,260,305,1,3,2,2,,Limay,Reformista,Reyes Subdivision,,,,,
+4937000,80,150,1,3,2,2,,Balanga,Upper Tuyo,Tierra Feliza Residential Estates,Block 19 Lot 10,,,,
+1733000,54,84,0,2,2,2,,Mariveles,Mountain View,Vinyl Road Polaris,Block 8 Lot 18 # 1,,,,
+4782800,85,160,1,3,2,2,,Balanga,Upper Tuyo,Tierra Feliza Residential Estates,,,,,
+2699600,42,120,1,2,1,1,,Balanga,Upper Tuyo,Tierra Feliza Residential Estates,,,,,
+3524600,54,120,1,3,1,1,,Orion,Daang Pare,Paseo Padre Residential Estates,Block 15 Lot 18,,,,
+11000000,280,280,2,5,4,2,,Abucay,Capitangan,Santisville 2,,w/ Roof Deck,,Yes,
+5000000,329,400,5,4,4,2,,Samal,Maube,Sta. Lucia,,,,Yes,
+2900000,40,66,1,2,1,2,,Balanga,Upper Tuyo,Camella Homes Bataan,,,Single-attached,,
+4800000,144,180,2,3,2,1,,Balanga,Tuyo,Monark Village Subdivision,Mabolo Street,,Bungalow,,
+5600000,98,100,1,3,3,1,,Balanga,Tenejero,Canyon Ridge Subdivision,,Include All Furniture and Appliances,Single-detached,Yes,
+4800000,110,150,2,4,2,2,,Balanga,Upper Tuyo,Camella Homes Bataan,,,Single-attached,Yes,
+5100000,110,120,1,4,2,2,,Balanga,Tuyo,Earthfield Subdivision,Block 8 Lot 5,,Single-detached,Yes,
+1800000,113,352,3,4,1,,,Samal,Calaguiman,Sapa,,,Bungalow,,
+4000000,169,184,2,4,4,2,,Abucay,Capitangan,Santisville 1,Block 31 Lot 3 Garner St.,,Single-detached,,Yes
+4563432,271.29,321,1,4,1,2,,Abucay,Capitangan,Taglesville Subdivision,# 256 Lot 5 Block 4,,Single-detached,,Yes
+4163500,114,121,1,5,3,2,,Balanga,Upper Tuyo,Camella,Block 8 Lot 21 Road Lot 10,,Single-detached,,Yes
+2070000,115.77,140,1,3,1,1,,Balanga,Tuyo,Monark Village Subdivision,#192 Avocado St.,,Single-detached,,Yes
+1589000,40,66,1,2,2,2,,Balanga,Upper Tuyo,Camella Homes Bataan,Block 1 Lot 5,,Single-attached,,Yes
+4384400,118,121,1,3,3,2,,Balanga,Upper Tuyo,Camella Bataan,Lot 3 Block 4 Road Lot 6,,Single-detached,,Yes
+5424600,282,240,1,4,2,2,,Balanga,Cupang North,Venzon Subdivision,Lot 4 Block 6 Magnolia St.,,Single-attached,,Yes
+4361500,118,121,1,5,3,2,,Balanga,Upper Tuyo,Camella Bataan,Lot 7 Block 6 Road Lot 4,,Single-detached,,Yes
+3387700,192.2,251,1,3,4,1,,Balanga,Cupang Proper,Maria Lourdes Subdivision,Lot 14 Block 6 Road Lot 5,,Bungalow,,Yes
+3892500,169,184,1,4,4,2,,Abucay,Capitangan,Santis Ville 1,Lot 31 Block 3 Garnet St.,,Single-detached,,Yes
+2290000,226.95,200,1,3,2,1,,Mariveles,Mountain View,Polaris Subdivision,Lot 34 Block 3 Road Lot 4,,Single-detached,,Yes
+3900000,337,196,1,4,2,2,,Orion,Balagtas,St. Michael Village,# 310 Block 4 Lot 3 Third Street,,Single-detached,,Yes
+2731135,104,110,2,3,3,2,,Limay,Duale,Emerald Coast Executive Village,Lot 2 Block 22,,Single-attached,,Yes
+2997695,97,256,1,3,2,1,,Limay,Duale,Emerald Coast Executive Village,Block 4 Lot 23 & 25,,Bungalow,,Yes
+2712850,111,129,1,3,2,2,,Limay,Duale,Emerald Coast Executive Village,Block 10 Lot 8,,Single-detached,,Yes
+2966080,141,126,1,3,2,2,,Limay,Duale,Emerald Coast Executive Village,"Block 24 Lot 1, Corner of Emerald Avenue",,Single-detached,,Yes
+2233070,80,129,1,2,2,2,,Limay,Duale,Emerald Coast Executive Village,Block 7 Lot 13,,Single-detached,,Yes
+1614140,74,62,1,1,2,2,,Limay,Duale,Emerald Coast Executive Village,Unit 11-A Ruby Street,,Single-attached,,Yes
+2233070,80,62,1,1,2,2,,Limay,Duale,Emerald Coast Executive Village,Unit 9-A Ruby Street,,Single-attached,,Yes
+1600000,63,110,1,2,1,1,,Limay,Duale,Emerald Coast Executive Village,Lot 30 Block 1,,Bungalow,,Yes
+1395000,64,110,1,,,1,,Limay,Duale,Emerald Coast Executive Village,Block 1 Lot 27 Diamond Street,,Bungalow,,Yes
+1826085,60,110,1,2,2,1,,Limay,Duale,Emerald Coast Executive Village,Block 1 Lot 8,,Bungalow,,Yes
+1673365,42,110,1,1,1,1,,Limay,Duale,Emerald Coast Executive Village,Block 1 Lot 17,,Bungalow,,Yes
+5401500,260,305,3,5,2,2,,Limay,Reformista,Reyes Subdivision,# 0732 Lot 1 Block 2,,,,Yes
+3019000,203,258,2,3,2,2,,Limay,Duale,Emerald Coast Executive Village,Block 8 Lot 9 & 10,,Single-detached,,Yes
+2384000,155,113,1,3,2,1,,Limay,Duale,Emerald Coast Executive Village,Block 8 Lot 24,,Single-attached,,Yes
+2085000,147,129,1,,,1,,Limay,Duale,Emerald Coast Executive Village,Block 9 Lot 6 Emerald Avenue,,Single-detached,,Yes
+1614140,74,62,1,1,1,2,,Limay,Duale,Emerald Coast Executive Village,Unit 11-B Ruby Street,,Single-attached,,Yes
+1995250,80,62,1,1,2,1,,Limay,Duale,Emerald Coast Executive Village,Unit 9-B Ruby Street,,Single-attached,,Yes
+2234220,104,110,1,3,3,2,,Limay,Duale,Emerald Coast Executive Village,Block 2 Lot 21,,Single-attached,,Yes
+1614140,74,62,1,1,2,2,,Limay,Duale,Emerald Coast Executive Village,Unit 13-A Ruby Street,,Single-attached,Yes,Yes

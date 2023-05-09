@@ -21,22 +21,59 @@ include_once 'header.php';
                         <form>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <label for="" class="form-label">Floor Area (m²):</label>
+                                    <label for="" class="form-label">Lot Size (m²):</label>
                                 </div>
                                 <div class="col">
-                                    <input type="number" id="sqmtxt" class="form-control" aria-label="Floor Size" value="0">
+                                    <input type="number" id="lottxt" class="form-control" aria-label="Floor Size" value="0">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <label for="" class="form-label">Lot Size (m²)</label>
+                                    <label for="" class="form-label">Floor Area (m²):</label>
                                 </div>
                                 <div class="col">
-                                    <input type="number" id="lottxt" class="form-control" aria-label="Lot Size" value="0">
+                                    <input type="number" id="sqmtxt" class="form-control" aria-label="Lot Size" value="0">
                                 </div>
                             </div>
 
                             <hr>
+
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="" class="form-label">Floor(s):</label>
+                                </div>
+                                <div class="col">
+                                    <input type="number" id="floorstxt" class="form-control" aria-label="Floors" value="0">
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="" class="form-label">Car Space(s):</label>
+                                </div>
+                                <div class="col">
+                                    <input type="number" id="car_spacetxt" class="form-control" aria-label="Car Spaces" value="0">
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="" class="form-label">Bedroom(s):</label>
+                                </div>
+                                <div class="col">
+                                    <input type="number" id="bedroomtxt" class="form-control" aria-label="Bedrooms" value="0">
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="" class="form-label">Bathroom(s):</label>
+                                </div>
+                                <div class="col">
+                                    <input type="number" id="bathroomtxt" class="form-control" aria-label="Bathrooms" value="0">
+                                </div>
+                            </div>
+
 
                             <!-- <div class="row mb-2">
                                 <div class="form-check form-switch d-flex justify-content-center">
@@ -121,6 +158,7 @@ include_once 'header.php';
         <div class="d-flex justify-content-center align-items-center">
             <div class="card shadow rounded-0">
                 <div class="card-body text-center">
+                    <div id="loader" hidden></div>
                     <span class="fs-2" id="resulta">&nbsp;</span>
                 </div>
             </div>
