@@ -140,7 +140,24 @@ include_once 'header.php';
                                     <option value="Samal">Samal</option>
                                 </select>
                             </div> -->
-
+                            <hr>
+                            <div class="municipality">
+                                <select id="mun" class="form-select">
+                                    <option value="default" selected>Select Municipality</option>
+                                    <option value="Abucay">Abucay</option>
+                                    <option value="Bagac">Bagac</option>
+                                    <option value="Balanga">Balanga</option>
+                                    <option value="Dinalupihan">Dinalupihan</option>
+                                    <option value="Hermosa">Hermosa</option>
+                                    <option value="Limay">Limay</option>
+                                    <option value="Mariveles">Mariveles</option>
+                                    <option value="Morong">Morong</option>
+                                    <option value="Orani">Orani</option>
+                                    <option value="Orion">Orion</option>
+                                    <option value="Pilar">Pilar</option>
+                                    <option value="Samal">Samal</option>
+                                </select>
+                            </div>
                             <hr>
                             <button type="button" class="btn btn-dark w-100 mb-2" id="calcBtn">Calculate</button>
                             <button type="reset" class="btn btn-outline-dark w-100" id="resetBtn">Reset</button>
@@ -159,6 +176,9 @@ include_once 'header.php';
             <div class="card shadow rounded-0">
                 <div class="card-body text-center">
                     <div id="loader" hidden></div>
+                    <div id="infogads">
+
+                    </div>
                     <span class="fs-2" id="resulta">&nbsp;</span>
                 </div>
             </div>
